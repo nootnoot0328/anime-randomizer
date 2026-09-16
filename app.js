@@ -25,7 +25,12 @@ const I18N = {
     done:"Done", cancel:"Cancel", imagePrompt:"Image Generator Prompt",
     traits:"Traits",allSeries:"All selected series",needSeries:"Choose at least one series.",
     needTrait:"Choose at least one trait.",needCharacters:"This selection needs at least 2 characters.",
-    roster:"Roster",rename:"Rename",remove:"Remove"
+    roster:"Roster",rename:"Rename",remove:"Remove",
+    gender:"Gender Filter",all:"All",maleOnly:"Male only",femaleOnly:"Female only",
+    initializeImages:"Initialize Images",imageLibrary:"Character Library",downloadImages:"Download & Store Portraits",
+    initializing:"Initializing portraits",initialized:"Portraits initialized",poolCount:"Pool",
+    browseCharacters:"Browse Characters",downloaded:"downloaded",failed:"failed",resetImages:"Reset Local Images",
+    storageNote:"Portraits are downloaded into this browser's local storage. Clearing website data may remove them."
   },
   zh:{
     home:"主页",packs:"角色包",history:"记录",settings:"设置",
@@ -52,7 +57,12 @@ const I18N = {
     done:"完成",cancel:"取消",imagePrompt:"生图提示词",
     traits:"特质",allSeries:"所有已选系列",needSeries:"请至少选择一个系列。",
     needTrait:"请至少选择一个特质。",needCharacters:"当前选择至少需要2个角色。",
-    roster:"角色列表",rename:"改名",remove:"移除"
+    roster:"角色列表",rename:"改名",remove:"移除",
+    gender:"性别筛选",all:"全部",maleOnly:"仅男性",femaleOnly:"仅女性",
+    initializeImages:"初始化图片",imageLibrary:"角色图库",downloadImages:"下载并保存角色图片",
+    initializing:"正在初始化角色图片",initialized:"角色图片已初始化",poolCount:"角色池",
+    browseCharacters:"浏览角色",downloaded:"已下载",failed:"失败",resetImages:"清除本地图片",
+    storageNote:"角色图片会下载并保存在当前浏览器本地。清除网站数据可能会删除这些图片。"
   },
   ja:{
     home:"ホーム",packs:"パック",history:"履歴",settings:"設定",
@@ -79,17 +89,40 @@ const I18N = {
     done:"完了",cancel:"キャンセル",imagePrompt:"画像生成プロンプト",
     traits:"特性",allSeries:"選択中の全シリーズ",needSeries:"シリーズを1つ以上選んでください。",
     needTrait:"特性を1つ以上選んでください。",needCharacters:"2人以上のキャラクターが必要です。",
-    roster:"キャラ一覧",rename:"名前変更",remove:"削除"
+    roster:"キャラ一覧",rename:"名前変更",remove:"削除",
+    gender:"性別フィルター",all:"すべて",maleOnly:"男性のみ",femaleOnly:"女性のみ",
+    initializeImages:"画像を初期化",imageLibrary:"キャラクターライブラリ",downloadImages:"画像をダウンロードして保存",
+    initializing:"キャラクター画像を初期化中",initialized:"画像を初期化しました",poolCount:"プール",
+    browseCharacters:"キャラクターを見る",downloaded:"保存済み",failed:"失敗",resetImages:"ローカル画像をリセット",
+    storageNote:"画像はこのブラウザのローカルストレージに保存されます。サイトデータを消すと削除される場合があります。"
   }
 };
 
 const BUILTIN = [
-  {id:"onepiece",name:"One Piece", chars:["Monkey D. Luffy","Roronoa Zoro","Nami","Sanji","Nico Robin","Trafalgar Law","Portgas D. Ace","Shanks","Boa Hancock","Sabo","Yamato","Jinbe"]},
-  {id:"naruto",name:"Naruto", chars:["Naruto Uzumaki","Sasuke Uchiha","Sakura Haruno","Kakashi Hatake","Itachi Uchiha","Hinata Hyuga","Madara Uchiha","Minato Namikaze","Tsunade","Jiraiya","Gaara","Shikamaru Nara"]},
-  {id:"jjk",name:"Jujutsu Kaisen", chars:["Satoru Gojo","Yuji Itadori","Megumi Fushiguro","Nobara Kugisaki","Ryomen Sukuna","Kento Nanami","Yuta Okkotsu","Maki Zenin","Suguru Geto","Aoi Todo","Toji Fushiguro","Choso"]},
-  {id:"bleach",name:"Bleach", chars:["Ichigo Kurosaki","Rukia Kuchiki","Byakuya Kuchiki","Renji Abarai","Sosuke Aizen","Toshiro Hitsugaya","Yoruichi Shihouin","Kisuke Urahara","Orihime Inoue","Kenpachi Zaraki","Grimmjow Jaegerjaquez","Ulquiorra Cifer"]},
-  {id:"demonslayer",name:"Demon Slayer", chars:["Tanjiro Kamado","Nezuko Kamado","Zenitsu Agatsuma","Inosuke Hashibira","Giyu Tomioka","Shinobu Kocho","Kyojuro Rengoku","Tengen Uzui","Mitsuri Kanroji","Muichiro Tokito","Sanemi Shinazugawa","Muzan Kibutsuji"]}
-].map(s=>({...s, chars:s.chars.map((name,i)=>({id:`${s.id}-${i}`,name,series:s.name,image:null}))}));
+  {id:"onepiece",name:"One Piece", chars:[{"name": "Monkey D. Luffy", "gender": "male"},{"name": "Roronoa Zoro", "gender": "male"},{"name": "Nami", "gender": "female"},{"name": "Sanji", "gender": "male"},{"name": "Nico Robin", "gender": "female"},{"name": "Tony Tony Chopper", "gender": "male"},{"name": "Usopp", "gender": "male"},{"name": "Franky", "gender": "male"},{"name": "Brook", "gender": "male"},{"name": "Jinbe", "gender": "male"},{"name": "Portgas D. Ace", "gender": "male"},{"name": "Sabo", "gender": "male"},{"name": "Trafalgar Law", "gender": "male"},{"name": "Boa Hancock", "gender": "female"},{"name": "Shanks", "gender": "male"},{"name": "Yamato", "gender": "female"},{"name": "Eustass Kid", "gender": "male"},{"name": "Buggy", "gender": "male"},{"name": "Crocodile", "gender": "male"},{"name": "Donquixote Doflamingo", "gender": "male"},{"name": "Charlotte Katakuri", "gender": "male"},{"name": "Marco", "gender": "male"},{"name": "Perona", "gender": "female"},{"name": "Vinsmoke Reiju", "gender": "female"},{"name": "Carrot", "gender": "female"},{"name": "Koala", "gender": "female"}]},
+  {id:"naruto",name:"Naruto", chars:[{"name": "Naruto Uzumaki", "gender": "male"},{"name": "Sasuke Uchiha", "gender": "male"},{"name": "Sakura Haruno", "gender": "female"},{"name": "Kakashi Hatake", "gender": "male"},{"name": "Hinata Hyuga", "gender": "female"},{"name": "Itachi Uchiha", "gender": "male"},{"name": "Madara Uchiha", "gender": "male"},{"name": "Minato Namikaze", "gender": "male"},{"name": "Tsunade", "gender": "female"},{"name": "Jiraiya", "gender": "male"},{"name": "Gaara", "gender": "male"},{"name": "Shikamaru Nara", "gender": "male"},{"name": "Ino Yamanaka", "gender": "female"},{"name": "Temari", "gender": "female"},{"name": "Neji Hyuga", "gender": "male"},{"name": "Rock Lee", "gender": "male"},{"name": "Might Guy", "gender": "male"},{"name": "Orochimaru", "gender": "male"},{"name": "Killer B", "gender": "male"},{"name": "Konan", "gender": "female"},{"name": "Pain", "gender": "male"},{"name": "Obito Uchiha", "gender": "male"},{"name": "Kushina Uzumaki", "gender": "female"},{"name": "Sai", "gender": "male"},{"name": "Sarada Uchiha", "gender": "female"},{"name": "Boruto Uzumaki", "gender": "male"}]},
+  {id:"jjk",name:"Jujutsu Kaisen", chars:[{"name": "Satoru Gojo", "gender": "male"},{"name": "Yuji Itadori", "gender": "male"},{"name": "Megumi Fushiguro", "gender": "male"},{"name": "Nobara Kugisaki", "gender": "female"},{"name": "Ryomen Sukuna", "gender": "male"},{"name": "Kento Nanami", "gender": "male"},{"name": "Yuta Okkotsu", "gender": "male"},{"name": "Maki Zenin", "gender": "female"},{"name": "Suguru Geto", "gender": "male"},{"name": "Aoi Todo", "gender": "male"},{"name": "Toji Fushiguro", "gender": "male"},{"name": "Choso", "gender": "male"},{"name": "Mai Zenin", "gender": "female"},{"name": "Kasumi Miwa", "gender": "female"},{"name": "Utahime Iori", "gender": "female"},{"name": "Mei Mei", "gender": "female"},{"name": "Panda", "gender": "male"},{"name": "Toge Inumaki", "gender": "male"},{"name": "Mahito", "gender": "male"},{"name": "Jogo", "gender": "male"},{"name": "Shoko Ieiri", "gender": "female"},{"name": "Kirara Hoshi", "gender": "female"}]},
+  {id:"bleach",name:"Bleach", chars:[{"name": "Ichigo Kurosaki", "gender": "male"},{"name": "Rukia Kuchiki", "gender": "female"},{"name": "Byakuya Kuchiki", "gender": "male"},{"name": "Renji Abarai", "gender": "male"},{"name": "Sosuke Aizen", "gender": "male"},{"name": "Toshiro Hitsugaya", "gender": "male"},{"name": "Yoruichi Shihouin", "gender": "female"},{"name": "Kisuke Urahara", "gender": "male"},{"name": "Orihime Inoue", "gender": "female"},{"name": "Kenpachi Zaraki", "gender": "male"},{"name": "Grimmjow Jaegerjaquez", "gender": "male"},{"name": "Ulquiorra Cifer", "gender": "male"},{"name": "Rangiku Matsumoto", "gender": "female"},{"name": "Soi Fon", "gender": "female"},{"name": "Retsu Unohana", "gender": "female"},{"name": "Mayuri Kurotsuchi", "gender": "male"},{"name": "Shunsui Kyoraku", "gender": "male"},{"name": "Jushiro Ukitake", "gender": "male"},{"name": "Nelliel Tu Odelschwanck", "gender": "female"},{"name": "Tier Harribel", "gender": "female"},{"name": "Gin Ichimaru", "gender": "male"},{"name": "Nnoitra Gilga", "gender": "male"},{"name": "Shinji Hirako", "gender": "male"},{"name": "Uryu Ishida", "gender": "male"}]},
+  {id:"demonslayer",name:"Demon Slayer", chars:[{"name": "Tanjiro Kamado", "gender": "male"},{"name": "Nezuko Kamado", "gender": "female"},{"name": "Zenitsu Agatsuma", "gender": "male"},{"name": "Inosuke Hashibira", "gender": "male"},{"name": "Giyu Tomioka", "gender": "male"},{"name": "Shinobu Kocho", "gender": "female"},{"name": "Kyojuro Rengoku", "gender": "male"},{"name": "Tengen Uzui", "gender": "male"},{"name": "Mitsuri Kanroji", "gender": "female"},{"name": "Muichiro Tokito", "gender": "male"},{"name": "Sanemi Shinazugawa", "gender": "male"},{"name": "Muzan Kibutsuji", "gender": "male"},{"name": "Kanao Tsuyuri", "gender": "female"},{"name": "Genya Shinazugawa", "gender": "male"},{"name": "Gyomei Himejima", "gender": "male"},{"name": "Obanai Iguro", "gender": "male"},{"name": "Kanae Kocho", "gender": "female"},{"name": "Aoi Kanzaki", "gender": "female"},{"name": "Daki", "gender": "female"},{"name": "Gyutaro", "gender": "male"},{"name": "Akaza", "gender": "male"},{"name": "Doma", "gender": "male"}]},
+  {id:"chainsawman",name:"Chainsaw Man", chars:[{"name": "Denji", "gender": "male"},{"name": "Power", "gender": "female"},{"name": "Makima", "gender": "female"},{"name": "Aki Hayakawa", "gender": "male"},{"name": "Kobeni Higashiyama", "gender": "female"},{"name": "Himeno", "gender": "female"},{"name": "Reze", "gender": "female"},{"name": "Angel Devil", "gender": "male"},{"name": "Kishibe", "gender": "male"},{"name": "Quanxi", "gender": "female"},{"name": "Beam", "gender": "male"},{"name": "Asa Mitaka", "gender": "female"},{"name": "Yoru", "gender": "female"},{"name": "Fami", "gender": "female"},{"name": "Nayuta", "gender": "female"},{"name": "Katana Man", "gender": "male"}]},
+  {id:"spyfamily",name:"SPY x FAMILY", chars:[{"name": "Loid Forger", "gender": "male"},{"name": "Yor Forger", "gender": "female"},{"name": "Anya Forger", "gender": "female"},{"name": "Damian Desmond", "gender": "male"},{"name": "Becky Blackbell", "gender": "female"},{"name": "Fiona Frost", "gender": "female"},{"name": "Yuri Briar", "gender": "male"},{"name": "Franky Franklin", "gender": "male"},{"name": "Sylvia Sherwood", "gender": "female"},{"name": "Henry Henderson", "gender": "male"},{"name": "Melinda Desmond", "gender": "female"},{"name": "Bond Forger", "gender": "male"}]},
+  {id:"frieren",name:"Frieren: Beyond Journey's End", chars:[{"name": "Frieren", "gender": "female"},{"name": "Fern", "gender": "female"},{"name": "Stark", "gender": "male"},{"name": "Himmel", "gender": "male"},{"name": "Heiter", "gender": "male"},{"name": "Eisen", "gender": "male"},{"name": "Serie", "gender": "female"},{"name": "Flamme", "gender": "female"},{"name": "Übel", "gender": "female"},{"name": "Land", "gender": "male"},{"name": "Denken", "gender": "male"},{"name": "Methode", "gender": "female"},{"name": "Wirbel", "gender": "male"},{"name": "Laufen", "gender": "female"},{"name": "Kanne", "gender": "female"},{"name": "Lawine", "gender": "female"}]},
+  {id:"aot",name:"Attack on Titan", chars:[{"name": "Eren Yeager", "gender": "male"},{"name": "Mikasa Ackerman", "gender": "female"},{"name": "Armin Arlert", "gender": "male"},{"name": "Levi Ackerman", "gender": "male"},{"name": "Erwin Smith", "gender": "male"},{"name": "Hange Zoe", "gender": "female"},{"name": "Jean Kirstein", "gender": "male"},{"name": "Connie Springer", "gender": "male"},{"name": "Sasha Blouse", "gender": "female"},{"name": "Reiner Braun", "gender": "male"},{"name": "Annie Leonhart", "gender": "female"},{"name": "Historia Reiss", "gender": "female"},{"name": "Zeke Yeager", "gender": "male"},{"name": "Pieck Finger", "gender": "female"},{"name": "Porco Galliard", "gender": "male"},{"name": "Ymir", "gender": "female"},{"name": "Gabi Braun", "gender": "female"},{"name": "Falco Grice", "gender": "male"}]},
+  {id:"mha",name:"My Hero Academia", chars:[{"name": "Izuku Midoriya", "gender": "male"},{"name": "Katsuki Bakugo", "gender": "male"},{"name": "Shoto Todoroki", "gender": "male"},{"name": "Ochaco Uraraka", "gender": "female"},{"name": "Tenya Iida", "gender": "male"},{"name": "Tsuyu Asui", "gender": "female"},{"name": "Momo Yaoyorozu", "gender": "female"},{"name": "Eijiro Kirishima", "gender": "male"},{"name": "Denki Kaminari", "gender": "male"},{"name": "Kyoka Jiro", "gender": "female"},{"name": "Fumikage Tokoyami", "gender": "male"},{"name": "Shota Aizawa", "gender": "male"},{"name": "All Might", "gender": "male"},{"name": "Endeavor", "gender": "male"},{"name": "Hawks", "gender": "male"},{"name": "Mirko", "gender": "female"},{"name": "Tomura Shigaraki", "gender": "male"},{"name": "Dabi", "gender": "male"},{"name": "Himiko Toga", "gender": "female"},{"name": "Nejire Hado", "gender": "female"}]},
+  {id:"hunterxhunter",name:"Hunter x Hunter", chars:[{"name": "Gon Freecss", "gender": "male"},{"name": "Killua Zoldyck", "gender": "male"},{"name": "Kurapika", "gender": "male"},{"name": "Leorio Paradinight", "gender": "male"},{"name": "Hisoka Morow", "gender": "male"},{"name": "Chrollo Lucilfer", "gender": "male"},{"name": "Biscuit Krueger", "gender": "female"},{"name": "Kite", "gender": "male"},{"name": "Isaac Netero", "gender": "male"},{"name": "Meruem", "gender": "male"},{"name": "Neferpitou", "gender": "female"},{"name": "Machi Komacine", "gender": "female"},{"name": "Illumi Zoldyck", "gender": "male"},{"name": "Feitan Portor", "gender": "male"},{"name": "Shizuku Murasaki", "gender": "female"},{"name": "Palm Siberia", "gender": "female"}]},
+  {id:"fma",name:"Fullmetal Alchemist: Brotherhood", chars:[{"name": "Edward Elric", "gender": "male"},{"name": "Alphonse Elric", "gender": "male"},{"name": "Roy Mustang", "gender": "male"},{"name": "Riza Hawkeye", "gender": "female"},{"name": "Winry Rockbell", "gender": "female"},{"name": "Maes Hughes", "gender": "male"},{"name": "Alex Louis Armstrong", "gender": "male"},{"name": "Olivier Mira Armstrong", "gender": "female"},{"name": "Ling Yao", "gender": "male"},{"name": "Lan Fan", "gender": "female"},{"name": "Scar", "gender": "male"},{"name": "Greed", "gender": "male"},{"name": "Lust", "gender": "female"},{"name": "Envy", "gender": "male"},{"name": "Izumi Curtis", "gender": "female"},{"name": "Van Hohenheim", "gender": "male"}]},
+  {id:"blackclover",name:"Black Clover", chars:[{"name": "Asta", "gender": "male"},{"name": "Yuno", "gender": "male"},{"name": "Noelle Silva", "gender": "female"},{"name": "Yami Sukehiro", "gender": "male"},{"name": "Mereoleona Vermillion", "gender": "female"},{"name": "Fuegoleon Vermillion", "gender": "male"},{"name": "Luck Voltia", "gender": "male"},{"name": "Magna Swing", "gender": "male"},{"name": "Vanessa Enoteca", "gender": "female"},{"name": "Finral Roulacase", "gender": "male"},{"name": "Charmy Pappitson", "gender": "female"},{"name": "Nacht Faust", "gender": "male"},{"name": "Julius Novachrono", "gender": "male"},{"name": "Charlotte Roselei", "gender": "female"},{"name": "Secre Swallowtail", "gender": "female"},{"name": "Mimosa Vermillion", "gender": "female"}]},
+  {id:"onepunchman",name:"One-Punch Man", chars:[{"name": "Saitama", "gender": "male"},{"name": "Genos", "gender": "male"},{"name": "Tatsumaki", "gender": "female"},{"name": "Fubuki", "gender": "female"},{"name": "Bang", "gender": "male"},{"name": "King", "gender": "male"},{"name": "Atomic Samurai", "gender": "male"},{"name": "Speed-o'-Sound Sonic", "gender": "male"},{"name": "Mumen Rider", "gender": "male"},{"name": "Garou", "gender": "male"},{"name": "Metal Bat", "gender": "male"},{"name": "Child Emperor", "gender": "male"},{"name": "Puri-Puri Prisoner", "gender": "male"},{"name": "Zombieman", "gender": "male"}]},
+  {id:"dragonball",name:"Dragon Ball", chars:[{"name": "Goku", "gender": "male"},{"name": "Vegeta", "gender": "male"},{"name": "Bulma", "gender": "female"},{"name": "Gohan", "gender": "male"},{"name": "Piccolo", "gender": "male"},{"name": "Trunks", "gender": "male"},{"name": "Future Trunks", "gender": "male"},{"name": "Android 18", "gender": "female"},{"name": "Android 17", "gender": "male"},{"name": "Frieza", "gender": "male"},{"name": "Beerus", "gender": "male"},{"name": "Whis", "gender": "male"},{"name": "Chi-Chi", "gender": "female"},{"name": "Videl", "gender": "female"},{"name": "Broly", "gender": "male"},{"name": "Krillin", "gender": "male"},{"name": "Master Roshi", "gender": "male"},{"name": "Majin Buu", "gender": "male"}]},
+  {id:"sao",name:"Sword Art Online", chars:[{"name": "Kirito", "gender": "male"},{"name": "Asuna", "gender": "female"},{"name": "Sinon", "gender": "female"},{"name": "Leafa", "gender": "female"},{"name": "Alice Zuberg", "gender": "female"},{"name": "Eugeo", "gender": "male"},{"name": "Yuuki Konno", "gender": "female"},{"name": "Klein", "gender": "male"},{"name": "Agil", "gender": "male"},{"name": "Silica", "gender": "female"},{"name": "Lisbeth", "gender": "female"},{"name": "Administrator", "gender": "female"}]},
+].map(s=>({...s, chars:s.chars.map((c,i)=>({
+  id:`${s.id}-${i}`,
+  name:c.name,
+  gender:c.gender,
+  series:s.name,
+  seriesId:s.id,
+  image:null
+}))}));
 
 const MODES = {
   partner:["Appearance","Hair","Body","Personality","Intelligence","Humour","Romance","Loyalty","Cooking","Wealth","Occupation","Power"],
@@ -105,6 +138,7 @@ const STATE = {
   selectedSeries:new Set(),
   selectedMode:"partner",
   selectedTraits:new Set(MODES.partner),
+  genderFilter:"all",
   game:null,
   pk:null,
   packs:[],
@@ -123,13 +157,19 @@ function toast(msg){const el=document.getElementById("toast");el.textContent=msg
 function setScreen(s,back=null){STATE.back=back;STATE.screen=s;render()}
 function allSeries(){return [...BUILTIN,...STATE.packs]}
 function getSeries(id){return allSeries().find(s=>s.id===id)}
-function selectedPool(ids=STATE.selectedSeries){return [...ids].flatMap(id=>(getSeries(id)?.chars||[]))}
+function applyGenderFilter(chars){
+  if(STATE.genderFilter==="male") return chars.filter(c=>c.gender==="male" || !c.gender);
+  if(STATE.genderFilter==="female") return chars.filter(c=>c.gender==="female" || !c.gender);
+  return chars;
+}
+function selectedPool(ids=STATE.selectedSeries){return applyGenderFilter([...ids].flatMap(id=>(getSeries(id)?.chars||[])))}
 function initials(name){return name.split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()}
 
 function imageCacheKey(c){return `${c.series}::${c.name}`}
 function getCharacterImage(c){
   if(c.image) return c.image;
-  return STATE.imageCache[imageCacheKey(c)] || null;
+  const key=imageCacheKey(c);
+  return (STATE.localImageData&&STATE.localImageData[key]) || STATE.imageCache[key] || null;
 }
 function queueCharacterImage(c){
   if(c.image) return;
@@ -199,6 +239,11 @@ function home(){
       <div class="mode-icon">⚔</div><strong>${t("pk")}</strong><small>${t("pkDesc")}</small>
     </button>
   </div>
+  <div class="section-head"><div><h2>${t("imageLibrary")}</h2><p>${t("storageNote")}</p></div></div>
+  <div class="cta-row">
+    <button class="primary" onclick="openInitializeImages()">${t("initializeImages")}</button>
+    <button class="secondary" onclick="setScreen('library','home')">${t("browseCharacters")}</button>
+  </div>
   <div class="section-head"><div><h2>${t("privatePacks")}</h2><p>${t("localOnly")}</p></div><button class="secondary" onclick="setScreen('packs','home')">${t("packs")} →</button></div>
   ${packPreview()}
   `;
@@ -218,8 +263,14 @@ function setup(kind){
   <div class="series-list">
     ${series.map(s=>`<button class="series-card ${STATE.selectedSeries.has(s.id)?'selected':''}" onclick="toggleSeries('${s.id}')">
       <div class="check">${STATE.selectedSeries.has(s.id)?"✓":""}</div>
-      <strong>${esc(s.name)}</strong><div class="count">${s.chars.length} ${t("characters")}</div>
+      <strong>${esc(s.name)}</strong><div class="count">${applyGenderFilter(s.chars).length} ${t("characters")}</div>
     </button>`).join("")}
+  </div>
+  <div class="section-head"><div><h2>${t("gender")}</h2><p>${t("poolCount")}: ${selectedPool().length}</p></div></div>
+  <div class="chips">
+    <button class="chip ${STATE.genderFilter==="all"?"selected":""}" onclick="setGenderFilter('all')">${t("all")}</button>
+    <button class="chip ${STATE.genderFilter==="male"?"selected":""}" onclick="setGenderFilter('male')">${t("maleOnly")}</button>
+    <button class="chip ${STATE.genderFilter==="female"?"selected":""}" onclick="setGenderFilter('female')">${t("femaleOnly")}</button>
   </div>
   <div class="section-head"><div><h2>${t("chooseMode")}</h2></div></div>
   <div class="chips">${modeButtons}</div>
@@ -246,6 +297,7 @@ function toggleSeries(id){
   render();
 }
 function selectMode(m){STATE.selectedMode=m;STATE.selectedTraits=new Set(MODES[m]);render()}
+function setGenderFilter(g){STATE.genderFilter=g;render()}
 function toggleTrait(tr){STATE.selectedTraits.has(tr)?STATE.selectedTraits.delete(tr):STATE.selectedTraits.add(tr);render()}
 
 function startDraft(){
@@ -263,7 +315,6 @@ function drawPair(){
   do{g.right=pick(g.pool)}while(g.pool.length>1 && g.right.id===g.left.id);
 }
 function charCard(c,side){
-  queueCharacterImage(c);
   const img=getCharacterImage(c);
   return `<button class="character-card" onclick="chooseCharacter('${side}')">
     ${img?`<img class="character-image" src="${img}" alt="${esc(c.name)}" referrerpolicy="no-referrer">`:`<div class="character-fallback">${initials(c.name)}<div class="small" style="margin-top:10px">loading image…</div></div>`}
@@ -393,9 +444,15 @@ function roleSet(seriesId){
 }
 function openPKSetup(){setScreen("pksetup","home")}
 function pkSetup(){
-  const opts=allSeries().filter(s=>s.chars.length>=2).map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("");
+  const opts=allSeries().filter(s=>applyGenderFilter(s.chars).length>=2).map(s=>`<option value="${s.id}">${esc(s.name)} (${applyGenderFilter(s.chars).length})</option>`).join("");
   return `<div class="section-head"><div><h2>${t("pkSetup")}</h2><p>${t("pkDesc")}</p></div></div>
-  <div class="grid">
+  <div class="section-head"><div><h3>${t("gender")}</h3></div></div>
+  <div class="chips">
+    <button class="chip ${STATE.genderFilter==="all"?"selected":""}" onclick="setGenderFilter('all')">${t("all")}</button>
+    <button class="chip ${STATE.genderFilter==="male"?"selected":""}" onclick="setGenderFilter('male')">${t("maleOnly")}</button>
+    <button class="chip ${STATE.genderFilter==="female"?"selected":""}" onclick="setGenderFilter('female')">${t("femaleOnly")}</button>
+  </div>
+  <div class="grid" style="margin-top:16px">
     <div class="panel"><h3>${t("player1")}</h3><div class="form-group"><label>${t("series")}</label><select id="p1Series">${opts}</select></div></div>
     <div class="panel"><h3>${t("player2")}</h3><div class="form-group"><label>${t("series")}</label><select id="p2Series">${opts}</select></div></div>
   </div>
@@ -417,7 +474,7 @@ function startPK(){
 function pkPool(player){
   const pk=STATE.pk;
   const ids=pk.shared?[pk.p1.seriesId]:[player===1?pk.p1.seriesId:pk.p2.seriesId];
-  return ids.flatMap(id=>getSeries(id).chars).filter(c=>!pk.used.has(c.id));
+  return applyGenderFilter(ids.flatMap(id=>getSeries(id).chars)).filter(c=>!pk.used.has(c.id));
 }
 function drawPKPair(){
   const pool=pkPool(STATE.pk.turn);
@@ -443,7 +500,6 @@ function pkTeam(n){
   </div>`;
 }
 function pkCharCard(c,i){
-  queueCharacterImage(c);
   const img=getCharacterImage(c);
   return `<button class="character-card" onclick="pickPK(${i})">${img?`<img class="character-image" src="${img}" referrerpolicy="no-referrer">`:`<div class="character-fallback">${initials(c.name)}<div class="small" style="margin-top:10px">loading image…</div></div>`}<div class="character-meta"><strong>${esc(c.name)}</strong><span>${esc(c.series)}</span></div></button>`
 }
@@ -533,6 +589,107 @@ async function importPackFile(file){
   }catch{toast("Invalid pack file")}
 }
 
+
+function libraryView(){
+  const rows=allSeries().map(s=>{
+    const chars=applyGenderFilter(s.chars);
+    const stored=chars.filter(c=>!!getCharacterImage(c)).length;
+    return `<div class="panel">
+      <div class="row between"><div><strong>${esc(s.name)}</strong><div class="small">${chars.length} ${t("characters")} · ${stored} ${t("downloaded")}</div></div>
+      <button class="secondary" onclick="openSeriesLibrary('${s.id}')">${t("browseCharacters")}</button></div>
+    </div>`;
+  }).join("");
+  return `<div class="section-head"><div><h2>${t("imageLibrary")}</h2><p>${t("storageNote")}</p></div><button class="danger" onclick="clearLocalImages()">${t("resetImages")}</button></div>
+  <div class="grid">${rows}</div>`;
+}
+function openSeriesLibrary(id){
+  STATE.librarySeriesId=id;
+  setScreen("serieslibrary","library");
+}
+function seriesLibraryView(){
+  const s=getSeries(STATE.librarySeriesId);
+  const chars=applyGenderFilter(s.chars);
+  return `<div class="section-head"><div><div class="eyebrow">${esc(s.name)}</div><h2>${t("roster")}</h2><p>${chars.length} ${t("characters")}</p></div>
+  <button class="primary" onclick="initializeSeriesImages('${s.id}')">${t("downloadImages")}</button></div>
+  <div class="character-browser">${chars.map(c=>{
+    const img=getCharacterImage(c);
+    return `<div class="mini-character-card">
+      ${img?`<img src="${img}" referrerpolicy="no-referrer">`:`<div class="mini-fallback">${initials(c.name)}</div>`}
+      <div class="mini-meta"><strong>${esc(c.name)}</strong><span>${esc(c.gender||"")}</span></div>
+    </div>`;
+  }).join("")}</div>`;
+}
+function openInitializeImages(){
+  const series=BUILTIN.map(s=>`<label class="init-row"><input type="checkbox" class="init-series" value="${s.id}" checked> <span>${esc(s.name)}</span><span class="small">${s.chars.length}</span></label>`).join("");
+  modal(`<div class="modal-head"><div><h2>${t("initializeImages")}</h2><p>${t("storageNote")}</p></div><button class="icon-btn" onclick="closeModal()">×</button></div>
+  <div class="init-list">${series}</div>
+  <div id="initProgressWrap" class="progress-wrap" style="display:none"><div class="progress-top"><span id="initStatus">${t("initializing")}</span><span id="initCount"></span></div><div class="progress"><div id="initBar" style="width:0%"></div></div></div>
+  <div class="cta-row"><button class="primary" onclick="initializeSelectedImages()">${t("downloadImages")}</button></div>`);
+}
+async function lookupCharacterPortrait(c){
+  const q=encodeURIComponent(c.name);
+  const r=await fetch(`https://api.jikan.moe/v4/characters?q=${q}&limit=10`);
+  if(!r.ok) throw new Error(`Jikan ${r.status}`);
+  const data=await r.json();
+  const rows=data.data||[];
+  const norm=x=>(x||"").toLowerCase().replace(/[^a-z0-9]+/g," ");
+  let hit=rows.find(x=>{
+    const anime=(x.anime||[]).map(a=>a.anime?.title||"").join(" ");
+    return norm(anime).includes(norm(c.series).split(" ")[0]);
+  }) || rows[0];
+  return hit?.images?.jpg?.image_url || hit?.images?.webp?.image_url || null;
+}
+async function downloadAsDataURL(url){
+  try{
+    const r=await fetch(url,{mode:"cors"});
+    if(!r.ok) throw new Error("image fetch failed");
+    const blob=await r.blob();
+    return await new Promise((res,rej)=>{
+      const fr=new FileReader();
+      fr.onload=()=>res(fr.result);fr.onerror=rej;fr.readAsDataURL(blob);
+    });
+  }catch(e){
+    // If the remote host blocks CORS, keep the URL as a fallback so cards still display.
+    return url;
+  }
+}
+async function initializeSeriesImages(id){return initializeImageList(getSeries(id).chars)}
+async function initializeSelectedImages(){
+  const ids=[...document.querySelectorAll(".init-series:checked")].map(x=>x.value);
+  const chars=ids.flatMap(id=>getSeries(id).chars);
+  return initializeImageList(chars,true);
+}
+async function initializeImageList(chars,insideModal=false){
+  STATE.localImageData=STATE.localImageData||{};
+  const pending=chars.filter(c=>!STATE.localImageData[imageCacheKey(c)]);
+  let done=0, failed=0;
+  const wrap=document.getElementById("initProgressWrap");
+  if(wrap)wrap.style.display="block";
+  for(const c of pending){
+    try{
+      const portrait=await lookupCharacterPortrait(c);
+      if(portrait){
+        const data=await downloadAsDataURL(portrait);
+        STATE.localImageData[imageCacheKey(c)]=data;
+      }else failed++;
+    }catch(e){
+      console.warn("Initialize failed",c.name,e);
+      failed++;
+    }
+    done++;
+    if(done%5===0 || done===pending.length) await saveImageStore(STATE.localImageData);
+    const count=document.getElementById("initCount"),bar=document.getElementById("initBar");
+    if(count)count.textContent=`${done}/${pending.length} · ${failed} ${t("failed")}`;
+    if(bar)bar.style.width=(pending.length?done/pending.length*100:100)+"%";
+    // Stay below Jikan's public rate limit.
+    await new Promise(r=>setTimeout(r,420));
+  }
+  await saveImageStore(STATE.localImageData);
+  if(insideModal)closeModal();
+  toast(`${t("initialized")} · ${done-failed} ${t("downloaded")}`);
+  render();
+}
+
 function settings(){
   modal(`<div class="modal-head"><h2>${t("settings")}</h2><button class="icon-btn" onclick="closeModal()">×</button></div>
   <label>${t("language")}</label>
@@ -573,12 +730,47 @@ async function loadPacks(){
   catch(e){console.warn(e);STATE.packs=[]}
 }
 
+async function saveImageStore(store){
+  try{
+    const db=await openDB();
+    await new Promise((res,rej)=>{
+      const tx=db.transaction("state","readwrite");
+      tx.objectStore("state").put(store,"builtinImageData");
+      tx.oncomplete=res; tx.onerror=()=>rej(tx.error);
+    });
+  }catch(e){console.warn("Image store save failed",e)}
+}
+async function loadImageStore(){
+  try{
+    const db=await openDB();
+    const store=await new Promise((res,rej)=>{
+      const tx=db.transaction("state","readonly");
+      const q=tx.objectStore("state").get("builtinImageData");
+      q.onsuccess=()=>res(q.result||{});
+      q.onerror=()=>rej(q.error);
+    });
+    STATE.localImageData=store||{};
+  }catch(e){STATE.localImageData={};}
+}
+async function clearLocalImages(){
+  STATE.localImageData={};
+  await saveImageStore({});
+  STATE.imageCache={};
+  localStorage.removeItem("af_image_cache");
+  toast(t("resetImages"));
+  render();
+}
+
 function render(){
   const screen=document.getElementById("screen");
-  const map={home,setup:()=>setup(STATE.setupKind),draft,result,packs:packsView,packedit:packEdit,history:historyView,pksetup:pkSetup,pk:pkView};
+  const map={home,setup:()=>setup(STATE.setupKind),draft,result,packs:packsView,packedit:packEdit,history:historyView,pksetup:pkSetup,pk:pkView,library:libraryView,serieslibrary:seriesLibraryView};
   screen.innerHTML=(map[STATE.screen]||home)();
   document.getElementById("homeBtn").classList.toggle("hidden",STATE.screen==="home");
-  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.nav===STATE.screen || (STATE.screen==="packedit"&&b.dataset.nav==="packs")));
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",
+    b.dataset.nav===STATE.screen ||
+    (STATE.screen==="packedit"&&b.dataset.nav==="packs") ||
+    ((STATE.screen==="library"||STATE.screen==="serieslibrary")&&b.dataset.nav==="home")
+  ));
   i18nStatic();
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -588,4 +780,4 @@ document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>setScreen(b.datas
 document.getElementById("imagePicker").addEventListener("change",e=>{handleImages(e.target.files);e.target.value=""});
 document.getElementById("packImporter").addEventListener("change",e=>{if(e.target.files[0])importPackFile(e.target.files[0]);e.target.value=""});
 
-(async()=>{await loadPacks();render()})();
+(async()=>{await loadPacks();await loadImageStore();render()})();
