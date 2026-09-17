@@ -28,6 +28,18 @@ async function fetchCharacter(id){
   const q=`query($id:Int!){Character(id:$id){id name{full native alternative} image{large medium}}}`;
   return (await gql(q,{id}))?.Character||null;
 }
+async function searchCharacters(search){
+  const q=`query($search:String!){Page(page:1,perPage:10){characters(search:$search,sort:[SEARCH_MATCH,RELEVANCE,ID]){id name{full native alternative} image{large medium} media(page:1,perPage:50,type:ANIME){nodes{id}}}}}`;
+  return (await gql(q,{search}))?.Page?.characters||[];
+}
+function altMatchScore(c,node){
+  let best=matchScore(c,node);
+  for(const alt of node?.name?.alternative||[])best=Math.max(best,matchScore(c,{name:{full:alt,native:node?.name?.native||''}}));
+  return best;
+}
+function belongsToSeries(node,mediaIds){
+  return (node?.media?.nodes||[]).some(m=>mediaIds.includes(m.id));
+}
 const output={generatedAt:new Date().toISOString(),series:{},chars:{}};
 const unmatched=[],low=[];
 for(const series of roster){
@@ -44,9 +56,17 @@ for(const series of roster){
     if(ov?.anilistCharacterId){
       try{const hit=candidateMap.get(ov.anilistCharacterId)||await fetchCharacter(ov.anilistCharacterId);if(hit?.image?.large||hit?.image?.medium){output.chars[c.id]={anilistId:hit.id,url:hit.image.large||hit.image.medium,score:100};continue;}}catch(e){console.error(`override ${c.id}: ${e.message}`);}
     }
-    const ranked=candidates.map(n=>({n,score:matchScore(c,n)})).sort((a,b)=>b.score-a.score);const best=ranked[0];
+    const ranked=candidates.map(n=>({n,score:altMatchScore(c,n),source:'series'})).sort((a,b)=>b.score-a.score);let best=ranked[0];
+    if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){
+      try{
+        const global=await searchCharacters(c.name_en);
+        const globalRanked=global.map(n=>({n,score:altMatchScore(c,n),source:'global'})).sort((a,b)=>b.score-a.score);
+        const candidate=globalRanked.find(x=>x.score>=70&&(belongsToSeries(x.n,mediaIds)||x.score===100)&&(x.n.image?.large||x.n.image?.medium));
+        if(candidate)best=candidate;
+      }catch(e){console.error(`global ${c.id}: ${e.message}`);}
+    }
     if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){unmatched.push(`${c.id} (${c.name_en})`);continue;}
-    output.chars[c.id]={anilistId:best.n.id,url:best.n.image.large||best.n.image.medium,score:Number(best.score.toFixed(2))};
+    output.chars[c.id]={anilistId:best.n.id,url:best.n.image.large||best.n.image.medium,score:Number(best.score.toFixed(2)),source:best.source};
     if(best.score<70)low.push(`${c.id} (${c.name_en}) -> ${best.n.name.full} [${best.score.toFixed(1)}]`);
   }
 }
