@@ -1,0 +1,36 @@
+name: Resolve portraits
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - data/roster.json
+      - data/portrait-overrides.json
+      - scripts/resolve-portraits.mjs
+      - logic.js
+      - .github/workflows/resolve-portraits.yml
+permissions:
+  contents: write
+jobs:
+  resolve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Resolve portraits
+        run: node scripts/resolve-portraits.mjs | tee portrait-report.md
+      - name: Add report to job summary
+        if: always()
+        run: cat portrait-report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit portrait manifest if changed
+        run: |
+          if git diff --quiet -- data/portraits.json; then
+            echo "No portrait changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/portraits.json
+          git commit -m "chore: refresh portrait manifest"
+          git push
