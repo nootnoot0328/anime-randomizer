@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T03:55:38.703Z",
+  "generatedAt": "2026-09-17T05:22:03.188Z",
   "series": {
     "onepiece": {
       "mediaIds": [
@@ -170,11 +170,41 @@
       "score": 100,
       "source": "series"
     },
+    "onepiece-sabo": {
+      "anilistId": 32893,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b32893-3weZS61cdwLD.png",
+      "score": 100,
+      "source": "global"
+    },
+    "onepiece-trafalgar-law": {
+      "anilistId": 13767,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b13767-U604OJN9dxCn.jpg",
+      "score": 100,
+      "source": "global"
+    },
+    "onepiece-boa-hancock": {
+      "anilistId": 16342,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b16342-kVOF6V5Q94go.png",
+      "score": 100,
+      "source": "global"
+    },
     "onepiece-shanks": {
       "anilistId": 727,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b727-wUJx7M1z5xON.png",
       "score": 100,
       "source": "series"
+    },
+    "onepiece-yamato": {
+      "anilistId": 176840,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b176840-8KRqXXLJeLOg.png",
+      "score": 100,
+      "source": "global"
+    },
+    "onepiece-eustass-kid": {
+      "anilistId": 14989,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b14989-uykLqnBTdAc2.jpg",
+      "score": 100,
+      "source": "global"
     },
     "onepiece-buggy": {
       "anilistId": 725,
@@ -194,6 +224,12 @@
       "score": 100,
       "source": "series"
     },
+    "onepiece-charlotte-katakuri": {
+      "anilistId": 124077,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b124077-TODX2ThCdyx2.png",
+      "score": 100,
+      "source": "global"
+    },
     "onepiece-marco": {
       "anilistId": 9323,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b9323-tGArly93xBZv.png",
@@ -205,6 +241,24 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b7467-0xxnaxQGfhkY.jpg",
       "score": 100,
       "source": "series"
+    },
+    "onepiece-vinsmoke-reiju": {
+      "anilistId": 127891,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b127891-FSRMoIQeDyV8.png",
+      "score": 100,
+      "source": "global"
+    },
+    "onepiece-carrot": {
+      "anilistId": 126179,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b126179-bxjxEfrqtiuN.png",
+      "score": 100,
+      "source": "global"
+    },
+    "onepiece-koala": {
+      "anilistId": 43093,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b43093-STjuKaQk68Ex.jpg",
+      "score": 100,
+      "source": "global"
     },
     "naruto-naruto-uzumaki": {
       "anilistId": 17,
@@ -241,6 +295,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b14-9Kb1E5oel1ke.png",
       "score": 100,
       "source": "series"
+    },
+    "naruto-madara-uchiha": {
+      "anilistId": 53901,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b53901-HnRKSoHMG5Vg.png",
+      "score": 100,
+      "source": "global"
     },
     "naruto-minato-namikaze": {
       "anilistId": 2535,
@@ -337,6 +397,18 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1901-vJRGRONNpaiG.jpg",
       "score": 100,
       "source": "series"
+    },
+    "naruto-sarada-uchiha": {
+      "anilistId": 121440,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b121440-gaUIBrChR9Wo.png",
+      "score": 100,
+      "source": "global"
+    },
+    "naruto-boruto-uzumaki": {
+      "anilistId": 121439,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b121439-0XY8buCyFI94.png",
+      "score": 100,
+      "source": "global"
     },
     "jjk-satoru-gojo": {
       "anilistId": 127691,
@@ -463,6 +535,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b158154-UCqbiULli62P.png",
       "score": 100,
       "source": "series"
+    },
+    "jjk-kirara-hoshi": {
+      "anilistId": 243828,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b243828-YGzd637cKhDp.png",
+      "score": 100,
+      "source": "global"
     },
     "bleach-ichigo-kurosaki": {
       "anilistId": 5,
@@ -788,11 +866,41 @@
       "score": 100,
       "source": "series"
     },
+    "chainsawman-quanxi": {
+      "anilistId": 162123,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b162123-GmQLb9p2iWxQ.jpg",
+      "score": 100,
+      "source": "global"
+    },
     "chainsawman-beam": {
       "anilistId": 157232,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b157232-5GuWeqoFN9Kq.jpg",
       "score": 100,
       "source": "series"
+    },
+    "chainsawman-asa-mitaka": {
+      "anilistId": 282389,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b282389-Mr4vAa8Du2Jx.jpg",
+      "score": 100,
+      "source": "global"
+    },
+    "chainsawman-yoru": {
+      "anilistId": 84769,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b84769-NaLHptr4KXKd.png",
+      "score": 100,
+      "source": "global"
+    },
+    "chainsawman-fami": {
+      "anilistId": 294475,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b294475-3DOVtMBudU9f.jpg",
+      "score": 100,
+      "source": "global"
+    },
+    "chainsawman-nayuta": {
+      "anilistId": 199767,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b199767-VU8RyHRj9MVY.png",
+      "score": 100,
+      "source": "global"
     },
     "chainsawman-katana-man": {
       "anilistId": 157241,
@@ -860,6 +968,12 @@
       "score": 100,
       "source": "series"
     },
+    "spyfamily-melinda-desmond": {
+      "anilistId": 283261,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b283261-9kCWtabrte3z.jpg",
+      "score": 100,
+      "source": "global"
+    },
     "spyfamily-bond-forger": {
       "anilistId": 169679,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b169679-EFPubVtZFYom.jpg",
@@ -901,6 +1015,66 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b184312-kxd5H6iOHIq4.png",
       "score": 100,
       "source": "series"
+    },
+    "frieren-serie": {
+      "anilistId": 219734,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b219734-aS4UMAb16DGd.jpg",
+      "score": 100,
+      "source": "global"
+    },
+    "frieren-flamme": {
+      "anilistId": 219733,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b219733-FgXseEhMdDE9.png",
+      "score": 100,
+      "source": "global"
+    },
+    "frieren-ubel": {
+      "anilistId": 246057,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b246057-ixvDfpng6I1S.png",
+      "score": 100,
+      "source": "global"
+    },
+    "frieren-land": {
+      "anilistId": 321719,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b321719-GUHhBOb81K9H.png",
+      "score": 100,
+      "source": "global"
+    },
+    "frieren-denken": {
+      "anilistId": 246058,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b246058-FOtuSIUBQ4WJ.png",
+      "score": 100,
+      "source": "global"
+    },
+    "frieren-methode": {
+      "anilistId": 246054,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b246054-TKwFFWVGISUd.png",
+      "score": 100,
+      "source": "global"
+    },
+    "frieren-wirbel": {
+      "anilistId": 321716,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b321716-ORxrJOHaI4H4.png",
+      "score": 100,
+      "source": "global"
+    },
+    "frieren-laufen": {
+      "anilistId": 246056,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b246056-erQexxLtGHVU.png",
+      "score": 100,
+      "source": "global"
+    },
+    "frieren-kanne": {
+      "anilistId": 293728,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b293728-0ylNRoIOORcD.png",
+      "score": 100,
+      "source": "global"
+    },
+    "frieren-lawine": {
+      "anilistId": 293727,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b293727-Jaf2eiNfINWx.png",
+      "score": 100,
+      "source": "global"
     },
     "aot-eren-yeager": {
       "anilistId": 40882,
@@ -1382,6 +1556,12 @@
       "score": 100,
       "source": "series"
     },
+    "blackclover-nacht-faust": {
+      "anilistId": 187268,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b187268-vkcrcTvjNSrA.png",
+      "score": 100,
+      "source": "global"
+    },
     "blackclover-julius-novachrono": {
       "anilistId": 124435,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b124435-gXFVXWrCcieK.jpg",
@@ -1493,7 +1673,8 @@
     "dragonball-vegeta": {
       "anilistId": 913,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b913-NIFkKazWM8VO.png",
-      "score": 100
+      "score": 100,
+      "source": "override"
     },
     "dragonball-bulma": {
       "anilistId": 678,
@@ -1516,7 +1697,8 @@
     "dragonball-trunks": {
       "anilistId": 2707,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b2707-YKWmn4q87oF8.png",
-      "score": 100
+      "score": 100,
+      "source": "override"
     },
     "dragonball-future-trunks": {
       "anilistId": 2707,
@@ -1565,6 +1747,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b2111-9XqkV0tpjRPB.png",
       "score": 100,
       "source": "series"
+    },
+    "dragonball-broly": {
+      "anilistId": 4945,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b4945-iE59qIP7TxPu.png",
+      "score": 100,
+      "source": "global"
     },
     "dragonball-krillin": {
       "anilistId": 2159,
