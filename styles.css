@@ -95,8 +95,14 @@ p{color:var(--muted);line-height:1.6}
 .team{background:var(--panel);border-radius:20px;padding:15px;border:1px solid var(--border)}
 .team.active{outline:2px solid var(--accent)}
 .team h3{margin-bottom:8px}
-.role-line{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);gap:8px}
-.role-line span:first-child{color:var(--muted)}
+.role-line{display:flex;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);gap:10px;min-width:0}
+.role-thumb{width:44px;height:44px;border-radius:10px;object-fit:cover;object-position:center top;flex:0 0 44px;background:var(--panel2);border:1px solid var(--border)}
+.role-thumb-fallback,.role-thumb-empty{display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--muted)}
+.role-thumb-empty{font-size:16px;opacity:.55}
+.role-copy{display:flex;flex-direction:column;min-width:0;gap:2px}
+.role-copy span{color:var(--muted);font-size:12px;line-height:1.2}
+.role-copy strong{font-size:14px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.role-line-empty .role-copy strong{color:var(--muted);font-weight:600}
 .pack-card{padding:16px}
 .pack-thumb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:12px 0}
 .pack-thumb{aspect-ratio:1;border-radius:10px;background:var(--panel-3);overflow:hidden}

@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "0.5.0";
+const VERSION = "0.5.1";
 const L = window.AnimeFusionLogic;
 
 const I18N = {
@@ -208,7 +208,7 @@ async function decodeAndDownscale(source){
 async function loadBootData(){
   document.getElementById("screen").innerHTML=`<div class="loading-state"><div><div class="loading-spinner"></div><p>${esc(t("loading"))}</p></div></div>`;
   try{
-    const [rr,pr]=await Promise.all([fetch("data/roster.json?v=0.5.0",{cache:"no-store"}),fetch("data/portraits.json?v=0.5.0",{cache:"no-store"})]);
+    const [rr,pr]=await Promise.all([fetch("data/roster.json?v=0.5.1",{cache:"no-store"}),fetch("data/portraits.json?v=0.5.1",{cache:"no-store"})]);
     if(!rr.ok||!pr.ok)throw new Error("data fetch failed");const roster=await rr.json();STATE.portraits=await pr.json();
     STATE.builtin=roster.map(s=>({...s,name:s.name_en,chars:(s.chars||[]).map(c=>({...c,name:c.name_en,series:s.name_en,series_en:s.name_en,series_ja:s.name_ja,series_zh:s.name_zh,seriesId:s.id}))}));
     await openDB();STATE.packs=await migrateStorageV2();
@@ -275,7 +275,16 @@ function pkSetupView(){const eligible=allSeries().filter(s=>s.chars?.length);if(
 function startPK(){const p1=STATE.pkSetup.p1,p2=STATE.pkSetup.p2,s1=getSeries(p1),s2=getSeries(p2);if(!s1||!s2)return;const pool1=applyGenderFilter(s1.chars),pool2=applyGenderFilter(s2.chars),roles1=roleSet(p1),roles2=roleSet(p2),shared=p1===p2,req=L.pkRequirement(pool1,pool2,roles1.length,roles2.length,shared);if(!req.ok)return;STATE.pk={p1:{seriesId:p1,roles:roles1,team:[]},p2:{seriesId:p2,roles:roles2,team:[]},turn:1,shared,used:new Set(),pair:[],revealing:false,revealTimer:null,selected:null,ended:false};setScreen("pk","pksetup");rollPKPair();}
 function pkPool(player){const pk=STATE.pk,ids=pk.shared?[pk.p1.seriesId]:[player===1?pk.p1.seriesId:pk.p2.seriesId];return applyGenderFilter(ids.flatMap(id=>getSeries(id)?.chars||[])).filter(c=>!pk.used.has(c.id));}
 function rollPKPair(){const pk=STATE.pk;if(!pk)return;const pool=pkPool(pk.turn);if(pk.revealTimer)clearInterval(pk.revealTimer);if(pool.length<=1){pk.pair=[...pool];pk.revealing=false;render();return;}pk.revealing=true;let ticks=0;pk.revealTimer=setInterval(()=>{if(STATE.screen!=="pk"||STATE.pk!==pk){clearInterval(pk.revealTimer);return;}pk.pair=L.shuffle(pool).slice(0,2);ticks++;render();if(ticks>=12){clearInterval(pk.revealTimer);pk.revealTimer=null;pk.pair=L.shuffle(pool).slice(0,2);pk.revealing=false;render();}},85);}
-function pkTeam(n){const p=STATE.pk[`p${n}`],s=getSeries(p.seriesId);return `<div class="team${STATE.pk.turn===n&&!STATE.pk.ended?" active":""}"><div class="row between"><h3>${esc(t(`player${n}`))}</h3><span class="badge">${esc(displaySeries(s))}</span></div>${p.roles.map(role=>{const hit=p.team.find(x=>x.role===role);return `<div class="role-line"><span>${esc(roleLabel(role))}</span><strong>${hit?esc(displayName(hit.character)):"—"}</strong></div>`;}).join("")}</div>`;}
+function pkTeam(n){
+  const p=STATE.pk[`p${n}`],s=getSeries(p.seriesId);
+  return `<div class="team${STATE.pk.turn===n&&!STATE.pk.ended?" active":""}"><div class="row between"><h3>${esc(t(`player${n}`))}</h3><span class="badge">${esc(displaySeries(s))}</span></div>${p.roles.map(role=>{
+    const hit=p.team.find(x=>x.role===role);
+    if(!hit)return `<div class="role-line role-line-empty"><div class="role-thumb role-thumb-empty">—</div><div class="role-copy"><span>${esc(roleLabel(role))}</span><strong>—</strong></div></div>`;
+    const c=hit.character,url=characterImageUrl(c),name=displayName(c);
+    const thumb=url?`<img class="role-thumb" src="${esc(url)}" alt="${esc(name)}" referrerpolicy="no-referrer">`:`<div class="role-thumb role-thumb-fallback">${esc(initials(name))}</div>`;
+    return `<div class="role-line">${thumb}<div class="role-copy"><span>${esc(roleLabel(role))}</span><strong>${esc(name)}</strong></div></div>`;
+  }).join("")}</div>`;
+}
 function pkView(){const pk=STATE.pk;if(!pk)return home();const allDone=pk.p1.team.length>=pk.p1.roles.length&&pk.p2.team.length>=pk.p2.roles.length;if(allDone||pk.ended)return pkResult();const pair=pk.pair||[],empty=pair.length===0;return `<div class="team-board">${pkTeam(1)}${pkTeam(2)}</div><div class="section-head"><div><div class="eyebrow">${esc(`${t(`player${pk.turn}`)} · ${t("turn")}`)}</div><h2>${esc(pk.revealing?t("revealing"):t("pickCharacter"))}</h2></div></div>${pair.length===2?`<div class="duel">${pkCharCard(pair[0],0,pk.revealing)}<div class="vs">${pk.revealing?"⋯":"VS"}</div>${pkCharCard(pair[1],1,pk.revealing)}</div>`:pair.length===1?`<div class="single-duel">${pkCharCard(pair[0],0,false)}</div>`:`<div class="panel empty"><p>${esc(t("emptyPool"))}</p><button class="danger" onclick="endPKEarly()">${esc(t("endMatch"))}</button></div>`}`;}
 function pickPK(i){const pk=STATE.pk;if(!pk||pk.revealing||!pk.pair[i])return;pk.selected=pk.pair[i];const p=pk[`p${pk.turn}`],open=p.roles.filter(r=>!p.team.some(x=>x.role===r));modal(`<div class="modal-head"><div><div class="eyebrow">${esc(displayName(pk.selected))}</div><h2>${esc(t("assignRole"))}</h2></div><button class="icon-btn" onclick="closeModal()">×</button></div><div class="trait-grid">${open.map(r=>`<button class="trait-btn" onclick="assignPKRole(${jsarg(r)})">${esc(roleLabel(r))}</button>`).join("")}</div>`);}
 function assignPKRole(role){const pk=STATE.pk,c=pk.selected,p=pk[`p${pk.turn}`];p.team.push({role,character:c});pk.used.add(c.id);closeModal();const other=pk.turn===1?2:1,op=pk[`p${other}`];if(op.team.length<op.roles.length)pk.turn=other;render();rollPKPair();}

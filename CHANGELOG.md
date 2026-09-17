@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.5.1 — Visual PK teams and expanded roster
+
+### PK
+- Added portrait thumbnails beside every drafted team role for faster at-a-glance team reading.
+- Added initials and empty-slot fallbacks so the team board stays readable while portraits are unavailable.
+
+### Roster
+- Expanded from 16 to 24 built-in anime series and from 294 to 527 characters.
+- Added JoJo's Bizarre Adventure, Fairy Tail, Solo Leveling, Mob Psycho 100, Tokyo Ghoul, DAN DA DAN, Kaiju No. 8, and Fire Force.
+- Deepened every existing series with more supporting characters, rivals, villains, and late-series fighters.
+
 ## v0.5.0 — Stabilization release
 
 ### Security
