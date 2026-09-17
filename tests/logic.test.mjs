@@ -15,7 +15,7 @@ test('validatePack rejects oversized name',()=>assert.equal(validatePack({name:'
 test('validatePack rejects wrong types',()=>assert.equal(validatePack({name:'x',chars:'no'}).ok,false));
 test('validatePack rejects non-image data URL',()=>assert.equal(validatePack({name:'x',chars:[{name:'A',image:'data:text/html;base64,PGgxPg=='}]}).ok,false));
 
-test('compareVersions equal/greater/lesser/malformed',()=>{assert.equal(compareVersions('0.5.1','0.5.1'),0);assert.equal(compareVersions('0.5.1','0.5.1'),1);assert.equal(compareVersions('0.4.9','0.5.1'),-1);assert.equal(compareVersions('wat','0.5.1'),null);});
+test('compareVersions equal/greater/lesser/malformed',()=>{assert.equal(compareVersions('0.5.1','0.5.1'),0);assert.equal(compareVersions('0.5.2','0.5.1'),1);assert.equal(compareVersions('0.4.9','0.5.1'),-1);assert.equal(compareVersions('wat','0.5.1'),null);});
 
 test('pkRequirement separate boundary and below',()=>{assert.equal(pkRequirement(6,6,6,6,false).ok,true);assert.equal(pkRequirement(5,6,6,6,false).ok,false);});
 test('pkRequirement shared boundary and below',()=>{const a=Array.from({length:12},(_,i)=>({id:String(i)}));assert.equal(pkRequirement(a,a,6,6,true).ok,true);assert.equal(pkRequirement(a.slice(0,11),a.slice(0,11),6,6,true).ok,false);});
