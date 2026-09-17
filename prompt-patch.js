@@ -70,6 +70,14 @@ Object.assign(MODES,{
   roommate:["Appearance","Personality","Intelligence","Humour","Reliability","Social Skills","Chaos Level","Hobbies","Loyalty","Cooking","Wealth","Occupation"]
 });
 
+// enhancements.js restores saved settings before these extra modes exist, so finish
+// restoring a previously selected scenario after extending MODES.
+if(typeof AF_CUSTOMIZER!=="undefined"&&AF_CUSTOMIZER.mode&&MODES[AF_CUSTOMIZER.mode]){
+  STATE.selectedMode=AF_CUSTOMIZER.mode;
+  const savedScenarioTraits=AF_CUSTOMIZER.traitsByMode?.[STATE.selectedMode];
+  STATE.selectedTraits=new Set(Array.isArray(savedScenarioTraits)?savedScenarioTraits.filter(x=>MODES[STATE.selectedMode].includes(x)):MODES[STATE.selectedMode]);
+}
+
 const PROMPT_SCENARIOS={
   partner:[
     {en:"A quiet evening cooking together at home after a dangerous mission.",zh:"危险任务结束后，两人在家一起做晚餐，享受安静的夜晚。",ja:"危険な任務を終えた二人が、家で一緒に夕食を作る静かな夜。"},
@@ -174,16 +182,70 @@ buildPKJudgePrompt=function(){
   if(!base)return base;
   const scene=pkBattleScenario();
   if(STATE.lang==="zh"){
-    const setup="全明星战斗场景："+scene.zh+"\n场景只负责提供电影感舞台，不得让任何作品自动获得主场优势。\n\n内鬼规则：内鬼、叛忍、叛徒、诅咒师或鬼方叛徒不是忠诚的第六位队员。请根据正史性格和能力，判断其最合理的背叛时机，例如保留支援、误导、破坏或倒戈。即使没有改变胜负，也必须比较两队内鬼位对己方造成的影响。\n\n";
+    const setup="全明星战斗场景："+scene.zh+"\n场景只负责提供电影感舞台，不得让任何作品自动获得主场优势。\n\n内鬼规则：内鬼、叛忍、叛徒、诅咒师或鬼方叛徒是强制生效的对局规则，不是忠诚的第六位队员。该角色必须在合理的关键时刻背叛自己被分配的队伍；正史性格与能力只决定其保留支援、误导、破坏或倒戈的方式与时机。即使没有改变胜负，也必须比较两队内鬼位对己方造成的影响。\n\n";
     base=base.replace("不要虚构能力。\n\n","不要虚构能力。\n\n"+setup);
     return base.replace("理由：2～4句，说明胜负关键。","理由：2～4句，说明胜负关键；其中至少一句必须比较两队内鬼位的影响。");
   }
   if(STATE.lang==="ja"){
-    const setup="オールスターバトルの舞台："+scene.ja+"\n舞台は演出のための中立フィールドとし、特定作品に自動的なホームアドバンテージを与えないでください。\n\n裏切り枠のルール：裏切り者、抜け忍、離反者、呪詛師、鬼側の裏切り者は、忠実な6人目ではなくチーム内部のリスクです。原作の性格と能力に沿って、支援拒否、誤誘導、妨害、寝返りなど最も自然なタイミングを判定してください。勝敗が変わらなくても、両チームの裏切り枠が味方へ与える影響を必ず比較してください。\n\n";
+    const setup="オールスターバトルの舞台："+scene.ja+"\n舞台は演出のための中立フィールドとし、特定作品に自動的なホームアドバンテージを与えないでください。\n\n裏切り枠のルール：裏切り者、抜け忍、離反者、呪詛師、鬼側の裏切り者は必ず発動する対戦ルールであり、忠実な6人目ではありません。そのキャラは合理的な決定的瞬間に、ドラフトされた自チームを必ず裏切ります。原作の性格と能力は、支援拒否、誤誘導、妨害、寝返りの方法とタイミングを決めるために使ってください。勝敗が変わらなくても、両チームの裏切り枠が味方へ与える影響を必ず比較してください。\n\n";
     base=base.replace("存在しない能力は追加しないでください。\n\n","存在しない能力は追加しないでください。\n\n"+setup);
     return base.replace("理由：2〜4文で勝敗の要点を説明。","理由：2〜4文で勝敗の要点を説明し、少なくとも1文で両チームの裏切り枠の影響を比較する。");
   }
-  const setup="ALL-STAR BATTLE SCENE: "+scene.en+"\nTreat the setting as a neutral cinematic arena; it must not grant either franchise an automatic home-field advantage.\n\nTRAITOR RULE: A Traitor, Rogue Ninja, Defector, Curse User or Demon Traitor is an internal liability, not a normal loyal sixth fighter. Using canon personality and abilities, judge a plausible moment to withhold support, misdirect, sabotage or defect. Compare how both teams' betrayal slots hurt their own side even when neither changes the winner.\n\n";
+  const setup="ALL-STAR BATTLE SCENE: "+scene.en+"\nTreat the setting as a neutral cinematic arena; it must not grant either franchise an automatic home-field advantage.\n\nTRAITOR RULE: Traitor, Rogue Ninja, Defector, Curse User and Demon Traitor are mandatory match roles, not loyal sixth fighters. Each must betray their own drafted team at a plausible decisive moment. Canon personality and abilities determine how and when they withhold support, misdirect, sabotage or defect—not whether betrayal occurs. Compare how both teams' betrayal slots hurt their own side even when neither changes the winner.\n\n";
   base=base.replace("do not invent abilities.\n\n","do not invent abilities.\n\n"+setup);
   return base.replace("WHY: 2–4 short sentences explaining the key matchup.","WHY: 2–4 short sentences explaining the key matchup. At least one sentence must compare the impact of both teams' betrayal slots.");
+};
+
+
+Object.assign(I18N.en,{
+  pkBattleImage:"Copy All-Star Battle Image Prompt",
+  pkBattleImageCopied:"All-Star battle image prompt copied",
+  pkBattleImageTitle:"All-Star Battle Image Prompt"
+});
+Object.assign(I18N.zh,{
+  pkBattleImage:"复制全明星战斗生图提示词",
+  pkBattleImageCopied:"全明星战斗生图提示词已复制",
+  pkBattleImageTitle:"全明星战斗生图提示词"
+});
+Object.assign(I18N.ja,{
+  pkBattleImage:"オールスター戦闘画像プロンプトをコピー",
+  pkBattleImageCopied:"オールスター戦闘画像プロンプトをコピーしました",
+  pkBattleImageTitle:"オールスター戦闘画像プロンプト"
+});
+
+function pkImageTeamBlock(n){
+  const p=STATE.pk["p"+n];
+  const series=getSeries(p.seriesId);
+  const heading=STATE.lang==="zh"?"队伍"+n:STATE.lang==="ja"?"チーム"+n:"TEAM "+n;
+  const rows=p.roles.map(role=>{
+    const slot=p.team.find(x=>x.role===role);
+    if(!slot)return"- "+roleLabel(role)+": "+(STATE.lang==="zh"?"空缺":STATE.lang==="ja"?"空き":"[empty]");
+    const c=slot.character;
+    return"- "+roleLabel(role)+": "+promptCharacterName(c)+" ("+(promptSeriesName(c)||displaySeries(series))+")";
+  });
+  return heading+" — "+displaySeries(series)+"\n"+rows.join("\n");
+}
+
+function buildPKBattleImagePrompt(){
+  if(!STATE.pk)return"";
+  const scene=pkBattleScenario();
+  const teams=pkImageTeamBlock(1)+"\n\n"+pkImageTeamBlock(2);
+  if(STATE.lang==="zh")return"创作一幅高品质、电影感的动漫全明星团队大战插画。\n\n战斗舞台："+scene.zh+"\n\n"+teams+"\n\n构图：横向16:9，两队从画面两侧正面交锋。队长位于视觉中心，前锋与肉盾在前景，治疗与策略角色处于受保护位置。内鬼位必须通过可读但不过度剧透的动作，表现正在准备背叛自己被分配的队伍。\n\n重要：每位列出的角色恰好出现一次；严格采用角色名称中指定的时期或形态；保留可辨认的正史外观、服装、武器、体型与能力效果；不要融合角色、不要重复人物、不要添加名单外角色。\n\n风格：顶级现代动漫电影海报，动态镜头，清晰战斗层次，强烈光影与能力碰撞，同时确保所有角色都能辨认。\n\n不要加入文字、Logo、水印、UI、边框或角色姓名标签。";
+  if(STATE.lang==="ja")return"高品質で映画的な、アニメ・オールスターチームバトルの一枚絵を制作してください。\n\n戦闘舞台："+scene.ja+"\n\n"+teams+"\n\n構図：横長16:9。両チームが左右から正面衝突する。リーダーは視線の中心、前衛とタンクは手前、回復役と戦略役は守られた位置に配置する。裏切り枠は、ドラフトされた自チームへの裏切りを準備していることが読み取れる、ただし露骨すぎない動きを見せる。\n\n重要：リストの全キャラを一人ずつ、必ず一度だけ登場させる。名前に指定された時期・形態を厳密に使用し、原作で判別できる顔、衣装、武器、体格、能力演出を保つ。キャラ同士を融合しない、重複させない、リスト外の人物を追加しない。\n\n画風：最高品質の現代アニメ映画ポスター、ダイナミックなカメラ、読みやすい戦闘レイヤー、強いライティングと能力の衝突。全員を識別できるようにする。\n\n文字、ロゴ、透かし、UI、枠、キャラ名ラベルは入れない。";
+  return"Create a premium cinematic anime all-star team battle illustration.\n\nBATTLEFIELD: "+scene.en+"\n\n"+teams+"\n\nCOMPOSITION: wide 16:9. The teams collide from opposite sides. Place leaders at the visual center, frontliners and tankers in the foreground, and healers or strategists in protected positions. Show each betrayal-role character subtly but clearly preparing to turn against their own drafted team.\n\nIMPORTANT: show every listed character exactly once. Use the exact era or form stated in the character name. Preserve recognizable canon faces, outfits, weapons, physiques and power effects. Do not fuse characters, duplicate anyone, or add unlisted fighters.\n\nSTYLE: premium modern anime movie poster, dynamic camera, readable battle layers, dramatic lighting and colliding power effects while keeping every fighter identifiable.\n\nDo not include text, franchise logos, watermarks, UI, borders or character-name labels.";
+}
+
+async function copyPKBattleImagePrompt(){
+  const prompt=buildPKBattleImagePrompt();
+  if(!prompt)return;
+  try{
+    await navigator.clipboard.writeText(prompt);
+    toast(t("pkBattleImageCopied"));
+  }catch{
+    modal('<div class="modal-head"><h2>'+esc(t("pkBattleImageTitle"))+'</h2><button class="icon-btn" onclick="closeModal()">×</button></div><textarea>'+esc(prompt)+'</textarea>');
+  }
+}
+
+pkResult=function(){
+  return'<div class="result-title"><div class="eyebrow">PK</div><div class="big">'+esc(t("teamComplete"))+'</div></div><div class="team-board">'+pkTeam(1)+pkTeam(2)+'</div><div class="cta-row"><button class="primary" onclick="copyPKJudgePrompt()">'+esc(t("pkJudge"))+'</button><button class="secondary" onclick="copyPKBattleImagePrompt()">'+esc(t("pkBattleImage"))+'</button><button class="secondary" onclick="openPKSetup()">'+esc(t("playAgain"))+'</button></div>';
 };
