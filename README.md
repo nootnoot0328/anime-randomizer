@@ -1,120 +1,89 @@
-# Anime Fusion Web MVP
+# Anime Fusion v0.5.0
 
-Static HTML/CSS/JS version of the Anime Fusion prototype.
-
-## Features
-
-- Standard two-card trait draft
-- Quick randomizer
-- Two-player PK team draft
-- English / Simplified Chinese / Japanese
-- Built-in demo anime rosters
-- Automatic character portrait lookup for built-in rosters via Jikan/MyAnimeList
-- Private local character packs
-- Bulk image import
-- Bulk name assignment
-- `.fusionpack` import/export
-- Result history
-- Copy-ready AI image generator prompt
-- No server required
+Anime Fusion is a static vanilla HTML/CSS/JS character draft/randomizer designed for GitHub Pages. It has no backend, no runtime npm dependencies, and no API keys in the browser.
 
 ## Run locally
-
-Just open `index.html` in a browser.
-
-For the most reliable behavior, run a tiny local server:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then open:
+Open `http://localhost:8000`.
 
-`http://localhost:8000`
+## GitHub Pages deployment
 
-## GitHub Pages
+Commit the complete repository structure:
 
-1. Create a GitHub repository.
-2. Upload `index.html`, `styles.css`, and `app.js` to the repository root.
-3. Open **Settings → Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Select your `main` branch and `/ (root)`.
-6. Save.
-7. GitHub will provide the public Pages URL.
+```text
+index.html
+styles.css
+app.js
+logic.js
+version.json
+data/
+  roster.json
+  portraits.json
+  portrait-overrides.json
+scripts/
+  resolve-portraits.mjs
+.github/workflows/
+  resolve-portraits.yml
+  test.yml
+tests/
+  logic.test.mjs
+package.json
+CHANGELOG.md
+README.md
+```
 
-## Private pack storage
+Then enable **Settings → Pages → Deploy from a branch → main → / (root)**.
 
-Private packs and imported images are stored in the browser using IndexedDB.
+## Portrait workflow
 
-That means:
+Runtime fuzzy matching was removed in v0.5. Built-in portrait URLs are generated ahead of time:
 
-- GitHub never receives the user's imported images.
-- Packs remain on that browser/device unless exported.
-- Clearing site data may delete local packs.
-- Use **Export** to back up a pack as a `.fusionpack` file.
+1. `data/roster.json` contains the built-in roster, stable character IDs, translations, gender, and each series' `anilistSearch` titles.
+2. `scripts/resolve-portraits.mjs` resolves those series and characters through AniList using Node 20's built-in `fetch`.
+3. The script writes URL/ID metadata only to `data/portraits.json`.
+4. The GitHub workflow runs automatically when the roster or overrides change, or manually through **Actions → Resolve portraits → Run workflow**.
+5. The browser loads `roster.json` and `portraits.json` before its first render. No AniList API call is made while playing.
 
-## Adding more built-in demo series
+### Portrait overrides
 
-Edit the `BUILTIN` constant near the top of `app.js`.
+`data/portrait-overrides.json` is hand-maintained and keyed by stable character ID:
 
-## Image generation
+```json
+{
+  "dragonball-vegeta": { "anilistCharacterId": 123 },
+  "example-character": { "url": "https://example.com/portrait.jpg" },
+  "character-to-skip": { "skip": true }
+}
+```
 
-This MVP intentionally does not call any AI API.
+Overrides are applied before fuzzy matching. The resolver prints unmatched characters and scores below 70 for review.
 
-After completing a character, press **Copy Image Prompt** and paste the generated prompt into your preferred image generator.
+**Never commit portrait image files to this repository.** Only URLs and AniList IDs belong in the generated portrait manifest/overrides.
 
-A later version can connect this button to an API/backend.
+## Private packs and Safari storage
 
-## Notes
+Private pack images are resized and stored as Blobs in IndexedDB. v0.5 upgrades the database to version 2 and migrates existing v0.4.1 inline data URLs non-destructively.
 
-Because this is a static GitHub Pages app, secret API keys should **not** be placed directly in `app.js`. Use a backend/serverless function if AI generation is later automated.
+Safari/iOS can clear website storage under storage pressure. Anime Fusion requests persistent storage when the first pack is created, but persistence is not guaranteed on every browser. Export your private packs regularly. If no export has been recorded for 14 days, the Packs screen displays a backup reminder.
 
+`.fusionpack` exports remain self-contained and backward compatible with v0.4.1 using:
 
-## Built-in character portraits
+```json
+{ "format": "animefusion-pack-v1", "pack": { "name": "...", "chars": [] } }
+```
 
-The built-in demo roster now automatically looks up character portrait URLs from the public Jikan API (which exposes MyAnimeList character data).
+## Optional offline built-in portraits
 
-- Images are fetched only as needed.
-- The resolved image URLs are cached in `localStorage`.
-- Private pack images continue to live locally in IndexedDB.
-- If a portrait is wrong or stale, use **Settings → Refresh character images**.
-- The first load of a series can take a few seconds because requests are deliberately throttled.
+Built-in cards use the URLs in `data/portraits.json` immediately. The Character Library/Settings can optionally fetch those URLs and store Blob copies under `builtin:<charId>` in IndexedDB. If CORS prevents a Blob download, the app continues to use the remote URL.
 
-This is best suited to a personal/non-commercial prototype. If you later publish the app publicly, review the image provider's current terms and the rights status of third-party character artwork.
+## Development tests
 
+```bash
+npm test
+```
 
-## v0.3 additions
-
-- Male / female / all-character filtering for normal games and PK.
-- Larger built-in rosters (roughly 250+ characters).
-- Added Chainsaw Man, SPY x FAMILY, Frieren, Attack on Titan, My Hero Academia,
-  Hunter x Hunter, Fullmetal Alchemist: Brotherhood, Black Clover,
-  One-Punch Man, Dragon Ball, and Sword Art Online.
-- Character Library screen with visible pool counts.
-- Manual **Initialize Images** workflow.
-- Initialization resolves portraits through Jikan, then tries to save the image data
-  into IndexedDB on the user's device.
-- If an image host blocks browser CORS, the app stores the remote image URL as a fallback.
-- PK setup displays filtered pool counts so insufficient pools are obvious before a match.
-
-### About image initialization
-
-Because this is a static GitHub Pages app, downloading and permanently caching third-party
-images is subject to the remote image host's CORS policy and the browser's storage quota.
-The app first tries to download each portrait into IndexedDB. If the host refuses a cross-origin
-download, it keeps the portrait URL as a fallback.
-
-For a robust public release, use your own licensed image CDN or a small backend image proxy/cache.
-
-
-## v0.4 additions
-
-- Built-in multilingual series/character names:
-  - English
-  - 简体中文
-  - 日本語
-- Settings now show a version box and check `version.json` for update availability.
-- Standard draft card pairs now use roulette-style reveal animation before settling.
-- PK draft card pairs also use the same roulette reveal animation.
-- Quick Randomizer now animates trait-by-trait reveals before showing the final result.
-- Added curated localized names to the built-in roster. Private/custom pack names continue to use the user-entered name.
+The project intentionally has no runtime npm dependencies. Node is used only for tests and portrait-resolution tooling.

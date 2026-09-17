@@ -1,0 +1,2258 @@
+[
+  {
+    "id": "onepiece",
+    "name_en": "One Piece",
+    "name_ja": "ワンピース",
+    "name_zh": "海贼王",
+    "anilistSearch": [
+      "One Piece"
+    ],
+    "chars": [
+      {
+        "id": "onepiece-monkey-d-luffy",
+        "name_en": "Monkey D. Luffy",
+        "name_ja": "モンキー・D・ルフィ",
+        "name_zh": "蒙奇·D·路飞",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-roronoa-zoro",
+        "name_en": "Roronoa Zoro",
+        "name_ja": "ロロノア・ゾロ",
+        "name_zh": "罗罗诺亚·索隆",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-nami",
+        "name_en": "Nami",
+        "name_ja": "ナミ",
+        "name_zh": "娜美",
+        "gender": "female"
+      },
+      {
+        "id": "onepiece-sanji",
+        "name_en": "Sanji",
+        "name_ja": "サンジ",
+        "name_zh": "山治",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-nico-robin",
+        "name_en": "Nico Robin",
+        "name_ja": "ニコ・ロビン",
+        "name_zh": "妮可·罗宾",
+        "gender": "female"
+      },
+      {
+        "id": "onepiece-tony-tony-chopper",
+        "name_en": "Tony Tony Chopper",
+        "name_ja": "トニートニー・チョッパー",
+        "name_zh": "托尼托尼·乔巴",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-usopp",
+        "name_en": "Usopp",
+        "name_ja": "ウソップ",
+        "name_zh": "乌索普",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-franky",
+        "name_en": "Franky",
+        "name_ja": "フランキー",
+        "name_zh": "弗兰奇",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-brook",
+        "name_en": "Brook",
+        "name_ja": "ブルック",
+        "name_zh": "布鲁克",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-jinbe",
+        "name_en": "Jinbe",
+        "name_ja": "ジンベエ",
+        "name_zh": "甚平",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-portgas-d-ace",
+        "name_en": "Portgas D. Ace",
+        "name_ja": "ポートガス・D・エース",
+        "name_zh": "波特卡斯·D·艾斯",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-sabo",
+        "name_en": "Sabo",
+        "name_ja": "サボ",
+        "name_zh": "萨博",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-trafalgar-law",
+        "name_en": "Trafalgar Law",
+        "name_ja": "トラファルガー・ロー",
+        "name_zh": "特拉法尔加·罗",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-boa-hancock",
+        "name_en": "Boa Hancock",
+        "name_ja": "ボア・ハンコック",
+        "name_zh": "波雅·汉库克",
+        "gender": "female"
+      },
+      {
+        "id": "onepiece-shanks",
+        "name_en": "Shanks",
+        "name_ja": "シャンクス",
+        "name_zh": "香克斯",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-yamato",
+        "name_en": "Yamato",
+        "name_ja": "ヤマト",
+        "name_zh": "大和",
+        "gender": "female"
+      },
+      {
+        "id": "onepiece-eustass-kid",
+        "name_en": "Eustass Kid",
+        "name_ja": "ユースタス・キッド",
+        "name_zh": "尤斯塔斯·基德",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-buggy",
+        "name_en": "Buggy",
+        "name_ja": "バギー",
+        "name_zh": "巴基",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-crocodile",
+        "name_en": "Crocodile",
+        "name_ja": "クロコダイル",
+        "name_zh": "克洛克达尔",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-donquixote-doflamingo",
+        "name_en": "Donquixote Doflamingo",
+        "name_ja": "ドンキホーテ・ドフラミンゴ",
+        "name_zh": "唐吉诃德·多弗朗明哥",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-charlotte-katakuri",
+        "name_en": "Charlotte Katakuri",
+        "name_ja": "シャーロット・カタクリ",
+        "name_zh": "夏洛特·卡塔库栗",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-marco",
+        "name_en": "Marco",
+        "name_ja": "マルコ",
+        "name_zh": "马尔科",
+        "gender": "male"
+      },
+      {
+        "id": "onepiece-perona",
+        "name_en": "Perona",
+        "name_ja": "ペローナ",
+        "name_zh": "佩罗娜",
+        "gender": "female"
+      },
+      {
+        "id": "onepiece-vinsmoke-reiju",
+        "name_en": "Vinsmoke Reiju",
+        "name_ja": "ヴィンスモーク・レイジュ",
+        "name_zh": "文斯莫克·蕾玖",
+        "gender": "female"
+      },
+      {
+        "id": "onepiece-carrot",
+        "name_en": "Carrot",
+        "name_ja": "キャロット",
+        "name_zh": "加洛特",
+        "gender": "female"
+      },
+      {
+        "id": "onepiece-koala",
+        "name_en": "Koala",
+        "name_ja": "コアラ",
+        "name_zh": "克尔拉",
+        "gender": "female"
+      }
+    ]
+  },
+  {
+    "id": "naruto",
+    "name_en": "Naruto",
+    "name_ja": "NARUTO -ナルト-",
+    "name_zh": "火影忍者",
+    "anilistSearch": [
+      "Naruto",
+      "Naruto: Shippuden"
+    ],
+    "chars": [
+      {
+        "id": "naruto-naruto-uzumaki",
+        "name_en": "Naruto Uzumaki",
+        "name_ja": "うずまきナルト",
+        "name_zh": "漩涡鸣人",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-sasuke-uchiha",
+        "name_en": "Sasuke Uchiha",
+        "name_ja": "うちはサスケ",
+        "name_zh": "宇智波佐助",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-sakura-haruno",
+        "name_en": "Sakura Haruno",
+        "name_ja": "春野サクラ",
+        "name_zh": "春野樱",
+        "gender": "female"
+      },
+      {
+        "id": "naruto-kakashi-hatake",
+        "name_en": "Kakashi Hatake",
+        "name_ja": "はたけカカシ",
+        "name_zh": "旗木卡卡西",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-hinata-hyuga",
+        "name_en": "Hinata Hyuga",
+        "name_ja": "日向ヒナタ",
+        "name_zh": "日向雏田",
+        "gender": "female"
+      },
+      {
+        "id": "naruto-itachi-uchiha",
+        "name_en": "Itachi Uchiha",
+        "name_ja": "うちはイタチ",
+        "name_zh": "宇智波鼬",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-madara-uchiha",
+        "name_en": "Madara Uchiha",
+        "name_ja": "うちはマダラ",
+        "name_zh": "宇智波斑",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-minato-namikaze",
+        "name_en": "Minato Namikaze",
+        "name_ja": "波風ミナト",
+        "name_zh": "波风水门",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-tsunade",
+        "name_en": "Tsunade",
+        "name_ja": "綱手",
+        "name_zh": "纲手",
+        "gender": "female"
+      },
+      {
+        "id": "naruto-jiraiya",
+        "name_en": "Jiraiya",
+        "name_ja": "自来也",
+        "name_zh": "自来也",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-gaara",
+        "name_en": "Gaara",
+        "name_ja": "我愛羅",
+        "name_zh": "我爱罗",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-shikamaru-nara",
+        "name_en": "Shikamaru Nara",
+        "name_ja": "奈良シカマル",
+        "name_zh": "奈良鹿丸",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-ino-yamanaka",
+        "name_en": "Ino Yamanaka",
+        "name_ja": "山中いの",
+        "name_zh": "山中井野",
+        "gender": "female"
+      },
+      {
+        "id": "naruto-temari",
+        "name_en": "Temari",
+        "name_ja": "テマリ",
+        "name_zh": "手鞠",
+        "gender": "female"
+      },
+      {
+        "id": "naruto-neji-hyuga",
+        "name_en": "Neji Hyuga",
+        "name_ja": "日向ネジ",
+        "name_zh": "日向宁次",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-rock-lee",
+        "name_en": "Rock Lee",
+        "name_ja": "ロック・リー",
+        "name_zh": "洛克·李",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-might-guy",
+        "name_en": "Might Guy",
+        "name_ja": "マイト・ガイ",
+        "name_zh": "迈特凯",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-orochimaru",
+        "name_en": "Orochimaru",
+        "name_ja": "大蛇丸",
+        "name_zh": "大蛇丸",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-killer-b",
+        "name_en": "Killer B",
+        "name_ja": "キラービー",
+        "name_zh": "奇拉比",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-konan",
+        "name_en": "Konan",
+        "name_ja": "小南",
+        "name_zh": "小南",
+        "gender": "female"
+      },
+      {
+        "id": "naruto-pain",
+        "name_en": "Pain",
+        "name_ja": "ペイン",
+        "name_zh": "佩恩",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-obito-uchiha",
+        "name_en": "Obito Uchiha",
+        "name_ja": "うちはオビト",
+        "name_zh": "宇智波带土",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-kushina-uzumaki",
+        "name_en": "Kushina Uzumaki",
+        "name_ja": "うずまきクシナ",
+        "name_zh": "漩涡玖辛奈",
+        "gender": "female"
+      },
+      {
+        "id": "naruto-sai",
+        "name_en": "Sai",
+        "name_ja": "サイ",
+        "name_zh": "佐井",
+        "gender": "male"
+      },
+      {
+        "id": "naruto-sarada-uchiha",
+        "name_en": "Sarada Uchiha",
+        "name_ja": "うちはサラダ",
+        "name_zh": "宇智波佐良娜",
+        "gender": "female"
+      },
+      {
+        "id": "naruto-boruto-uzumaki",
+        "name_en": "Boruto Uzumaki",
+        "name_ja": "うずまきボルト",
+        "name_zh": "漩涡博人",
+        "gender": "male"
+      }
+    ]
+  },
+  {
+    "id": "jjk",
+    "name_en": "Jujutsu Kaisen",
+    "name_ja": "呪術廻戦",
+    "name_zh": "咒术回战",
+    "anilistSearch": [
+      "Jujutsu Kaisen",
+      "Jujutsu Kaisen 2nd Season"
+    ],
+    "chars": [
+      {
+        "id": "jjk-satoru-gojo",
+        "name_en": "Satoru Gojo",
+        "name_ja": "五条悟",
+        "name_zh": "五条悟",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-yuji-itadori",
+        "name_en": "Yuji Itadori",
+        "name_ja": "虎杖悠仁",
+        "name_zh": "虎杖悠仁",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-megumi-fushiguro",
+        "name_en": "Megumi Fushiguro",
+        "name_ja": "伏黒恵",
+        "name_zh": "伏黑惠",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-nobara-kugisaki",
+        "name_en": "Nobara Kugisaki",
+        "name_ja": "釘崎野薔薇",
+        "name_zh": "钉崎野蔷薇",
+        "gender": "female"
+      },
+      {
+        "id": "jjk-ryomen-sukuna",
+        "name_en": "Ryomen Sukuna",
+        "name_ja": "両面宿儺",
+        "name_zh": "两面宿傩",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-kento-nanami",
+        "name_en": "Kento Nanami",
+        "name_ja": "七海建人",
+        "name_zh": "七海建人",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-yuta-okkotsu",
+        "name_en": "Yuta Okkotsu",
+        "name_ja": "乙骨憂太",
+        "name_zh": "乙骨忧太",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-maki-zenin",
+        "name_en": "Maki Zenin",
+        "name_ja": "禪院真希",
+        "name_zh": "禅院真希",
+        "gender": "female"
+      },
+      {
+        "id": "jjk-suguru-geto",
+        "name_en": "Suguru Geto",
+        "name_ja": "夏油傑",
+        "name_zh": "夏油杰",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-aoi-todo",
+        "name_en": "Aoi Todo",
+        "name_ja": "東堂葵",
+        "name_zh": "东堂葵",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-toji-fushiguro",
+        "name_en": "Toji Fushiguro",
+        "name_ja": "伏黒甚爾",
+        "name_zh": "伏黑甚尔",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-choso",
+        "name_en": "Choso",
+        "name_ja": "脹相",
+        "name_zh": "胀相",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-mai-zenin",
+        "name_en": "Mai Zenin",
+        "name_ja": "禪院真依",
+        "name_zh": "禅院真依",
+        "gender": "female"
+      },
+      {
+        "id": "jjk-kasumi-miwa",
+        "name_en": "Kasumi Miwa",
+        "name_ja": "三輪霞",
+        "name_zh": "三轮霞",
+        "gender": "female"
+      },
+      {
+        "id": "jjk-utahime-iori",
+        "name_en": "Utahime Iori",
+        "name_ja": "庵歌姫",
+        "name_zh": "庵歌姬",
+        "gender": "female"
+      },
+      {
+        "id": "jjk-mei-mei",
+        "name_en": "Mei Mei",
+        "name_ja": "冥冥",
+        "name_zh": "冥冥",
+        "gender": "female"
+      },
+      {
+        "id": "jjk-panda",
+        "name_en": "Panda",
+        "name_ja": "パンダ",
+        "name_zh": "熊猫",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-toge-inumaki",
+        "name_en": "Toge Inumaki",
+        "name_ja": "狗巻棘",
+        "name_zh": "狗卷棘",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-mahito",
+        "name_en": "Mahito",
+        "name_ja": "真人",
+        "name_zh": "真人",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-jogo",
+        "name_en": "Jogo",
+        "name_ja": "漏瑚",
+        "name_zh": "漏瑚",
+        "gender": "male"
+      },
+      {
+        "id": "jjk-shoko-ieiri",
+        "name_en": "Shoko Ieiri",
+        "name_ja": "家入硝子",
+        "name_zh": "家入硝子",
+        "gender": "female"
+      },
+      {
+        "id": "jjk-kirara-hoshi",
+        "name_en": "Kirara Hoshi",
+        "name_ja": "星綺羅羅",
+        "name_zh": "星绮罗罗",
+        "gender": "female"
+      }
+    ]
+  },
+  {
+    "id": "bleach",
+    "name_en": "Bleach",
+    "name_ja": "BLEACH",
+    "name_zh": "死神",
+    "anilistSearch": [
+      "Bleach",
+      "Bleach: Thousand-Year Blood War"
+    ],
+    "chars": [
+      {
+        "id": "bleach-ichigo-kurosaki",
+        "name_en": "Ichigo Kurosaki",
+        "name_ja": "黒崎一護",
+        "name_zh": "黑崎一护",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-rukia-kuchiki",
+        "name_en": "Rukia Kuchiki",
+        "name_ja": "朽木ルキア",
+        "name_zh": "朽木露琪亚",
+        "gender": "female"
+      },
+      {
+        "id": "bleach-byakuya-kuchiki",
+        "name_en": "Byakuya Kuchiki",
+        "name_ja": "朽木白哉",
+        "name_zh": "朽木白哉",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-renji-abarai",
+        "name_en": "Renji Abarai",
+        "name_ja": "阿散井恋次",
+        "name_zh": "阿散井恋次",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-sosuke-aizen",
+        "name_en": "Sosuke Aizen",
+        "name_ja": "藍染惣右介",
+        "name_zh": "蓝染惣右介",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-toshiro-hitsugaya",
+        "name_en": "Toshiro Hitsugaya",
+        "name_ja": "日番谷冬獅郎",
+        "name_zh": "日番谷冬狮郎",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-yoruichi-shihouin",
+        "name_en": "Yoruichi Shihouin",
+        "name_ja": "四楓院夜一",
+        "name_zh": "四枫院夜一",
+        "gender": "female"
+      },
+      {
+        "id": "bleach-kisuke-urahara",
+        "name_en": "Kisuke Urahara",
+        "name_ja": "浦原喜助",
+        "name_zh": "浦原喜助",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-orihime-inoue",
+        "name_en": "Orihime Inoue",
+        "name_ja": "井上織姫",
+        "name_zh": "井上织姬",
+        "gender": "female"
+      },
+      {
+        "id": "bleach-kenpachi-zaraki",
+        "name_en": "Kenpachi Zaraki",
+        "name_ja": "更木剣八",
+        "name_zh": "更木剑八",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-grimmjow-jaegerjaquez",
+        "name_en": "Grimmjow Jaegerjaquez",
+        "name_ja": "グリムジョー・ジャガージャック",
+        "name_zh": "葛力姆乔·贾卡杰克",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-ulquiorra-cifer",
+        "name_en": "Ulquiorra Cifer",
+        "name_ja": "ウルキオラ・シファー",
+        "name_zh": "乌尔奇奥拉·西法",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-rangiku-matsumoto",
+        "name_en": "Rangiku Matsumoto",
+        "name_ja": "松本乱菊",
+        "name_zh": "松本乱菊",
+        "gender": "female"
+      },
+      {
+        "id": "bleach-soi-fon",
+        "name_en": "Soi Fon",
+        "name_ja": "砕蜂",
+        "name_zh": "碎蜂",
+        "gender": "female"
+      },
+      {
+        "id": "bleach-retsu-unohana",
+        "name_en": "Retsu Unohana",
+        "name_ja": "卯ノ花烈",
+        "name_zh": "卯之花烈",
+        "gender": "female"
+      },
+      {
+        "id": "bleach-mayuri-kurotsuchi",
+        "name_en": "Mayuri Kurotsuchi",
+        "name_ja": "涅マユリ",
+        "name_zh": "涅茧利",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-shunsui-kyoraku",
+        "name_en": "Shunsui Kyoraku",
+        "name_ja": "京楽春水",
+        "name_zh": "京乐春水",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-jushiro-ukitake",
+        "name_en": "Jushiro Ukitake",
+        "name_ja": "浮竹十四郎",
+        "name_zh": "浮竹十四郎",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-nelliel-tu-odelschwanck",
+        "name_en": "Nelliel Tu Odelschwanck",
+        "name_ja": "ネリエル・トゥ・オーデルシュヴァンク",
+        "name_zh": "妮露艾露·杜·欧德修凡克",
+        "gender": "female"
+      },
+      {
+        "id": "bleach-tier-harribel",
+        "name_en": "Tier Harribel",
+        "name_ja": "ティア・ハリベル",
+        "name_zh": "缇雅·赫丽贝尔",
+        "gender": "female"
+      },
+      {
+        "id": "bleach-gin-ichimaru",
+        "name_en": "Gin Ichimaru",
+        "name_ja": "市丸ギン",
+        "name_zh": "市丸银",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-nnoitra-gilga",
+        "name_en": "Nnoitra Gilga",
+        "name_ja": "ノイトラ・ジルガ",
+        "name_zh": "诺伊特拉·吉尔加",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-shinji-hirako",
+        "name_en": "Shinji Hirako",
+        "name_ja": "平子真子",
+        "name_zh": "平子真子",
+        "gender": "male"
+      },
+      {
+        "id": "bleach-uryu-ishida",
+        "name_en": "Uryu Ishida",
+        "name_ja": "石田雨竜",
+        "name_zh": "石田雨龙",
+        "gender": "male"
+      }
+    ]
+  },
+  {
+    "id": "demonslayer",
+    "name_en": "Demon Slayer",
+    "name_ja": "鬼滅の刃",
+    "name_zh": "鬼灭之刃",
+    "anilistSearch": [
+      "Demon Slayer: Kimetsu no Yaiba",
+      "Demon Slayer: Entertainment District Arc",
+      "Demon Slayer: Swordsmith Village Arc",
+      "Demon Slayer: Hashira Training Arc"
+    ],
+    "chars": [
+      {
+        "id": "demonslayer-tanjiro-kamado",
+        "name_en": "Tanjiro Kamado",
+        "name_ja": "竈門炭治郎",
+        "name_zh": "灶门炭治郎",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-nezuko-kamado",
+        "name_en": "Nezuko Kamado",
+        "name_ja": "竈門禰豆子",
+        "name_zh": "灶门祢豆子",
+        "gender": "female"
+      },
+      {
+        "id": "demonslayer-zenitsu-agatsuma",
+        "name_en": "Zenitsu Agatsuma",
+        "name_ja": "我妻善逸",
+        "name_zh": "我妻善逸",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-inosuke-hashibira",
+        "name_en": "Inosuke Hashibira",
+        "name_ja": "嘴平伊之助",
+        "name_zh": "嘴平伊之助",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-giyu-tomioka",
+        "name_en": "Giyu Tomioka",
+        "name_ja": "冨岡義勇",
+        "name_zh": "富冈义勇",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-shinobu-kocho",
+        "name_en": "Shinobu Kocho",
+        "name_ja": "胡蝶しのぶ",
+        "name_zh": "蝴蝶忍",
+        "gender": "female"
+      },
+      {
+        "id": "demonslayer-kyojuro-rengoku",
+        "name_en": "Kyojuro Rengoku",
+        "name_ja": "煉獄杏寿郎",
+        "name_zh": "炼狱杏寿郎",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-tengen-uzui",
+        "name_en": "Tengen Uzui",
+        "name_ja": "宇髄天元",
+        "name_zh": "宇髓天元",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-mitsuri-kanroji",
+        "name_en": "Mitsuri Kanroji",
+        "name_ja": "甘露寺蜜璃",
+        "name_zh": "甘露寺蜜璃",
+        "gender": "female"
+      },
+      {
+        "id": "demonslayer-muichiro-tokito",
+        "name_en": "Muichiro Tokito",
+        "name_ja": "時透無一郎",
+        "name_zh": "时透无一郎",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-sanemi-shinazugawa",
+        "name_en": "Sanemi Shinazugawa",
+        "name_ja": "不死川実弥",
+        "name_zh": "不死川实弥",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-muzan-kibutsuji",
+        "name_en": "Muzan Kibutsuji",
+        "name_ja": "鬼舞辻無惨",
+        "name_zh": "鬼舞辻无惨",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-kanao-tsuyuri",
+        "name_en": "Kanao Tsuyuri",
+        "name_ja": "栗花落カナヲ",
+        "name_zh": "栗花落香奈乎",
+        "gender": "female"
+      },
+      {
+        "id": "demonslayer-genya-shinazugawa",
+        "name_en": "Genya Shinazugawa",
+        "name_ja": "不死川玄弥",
+        "name_zh": "不死川玄弥",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-gyomei-himejima",
+        "name_en": "Gyomei Himejima",
+        "name_ja": "悲鳴嶼行冥",
+        "name_zh": "悲鸣屿行冥",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-obanai-iguro",
+        "name_en": "Obanai Iguro",
+        "name_ja": "伊黒小芭内",
+        "name_zh": "伊黑小芭内",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-kanae-kocho",
+        "name_en": "Kanae Kocho",
+        "name_ja": "胡蝶カナエ",
+        "name_zh": "蝴蝶香奈惠",
+        "gender": "female"
+      },
+      {
+        "id": "demonslayer-aoi-kanzaki",
+        "name_en": "Aoi Kanzaki",
+        "name_ja": "神崎アオイ",
+        "name_zh": "神崎葵",
+        "gender": "female"
+      },
+      {
+        "id": "demonslayer-daki",
+        "name_en": "Daki",
+        "name_ja": "堕姫",
+        "name_zh": "堕姬",
+        "gender": "female"
+      },
+      {
+        "id": "demonslayer-gyutaro",
+        "name_en": "Gyutaro",
+        "name_ja": "妓夫太郎",
+        "name_zh": "妓夫太郎",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-akaza",
+        "name_en": "Akaza",
+        "name_ja": "猗窩座",
+        "name_zh": "猗窝座",
+        "gender": "male"
+      },
+      {
+        "id": "demonslayer-doma",
+        "name_en": "Doma",
+        "name_ja": "童磨",
+        "name_zh": "童磨",
+        "gender": "male"
+      }
+    ]
+  },
+  {
+    "id": "chainsawman",
+    "name_en": "Chainsaw Man",
+    "name_ja": "チェンソーマン",
+    "name_zh": "电锯人",
+    "anilistSearch": [
+      "Chainsaw Man"
+    ],
+    "chars": [
+      {
+        "id": "chainsawman-denji",
+        "name_en": "Denji",
+        "name_ja": "デンジ",
+        "name_zh": "电次",
+        "gender": "male"
+      },
+      {
+        "id": "chainsawman-power",
+        "name_en": "Power",
+        "name_ja": "パワー",
+        "name_zh": "帕瓦",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-makima",
+        "name_en": "Makima",
+        "name_ja": "マキマ",
+        "name_zh": "真纪真",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-aki-hayakawa",
+        "name_en": "Aki Hayakawa",
+        "name_ja": "早川アキ",
+        "name_zh": "早川秋",
+        "gender": "male"
+      },
+      {
+        "id": "chainsawman-kobeni-higashiyama",
+        "name_en": "Kobeni Higashiyama",
+        "name_ja": "東山コベニ",
+        "name_zh": "东山小红",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-himeno",
+        "name_en": "Himeno",
+        "name_ja": "姫野",
+        "name_zh": "姬野",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-reze",
+        "name_en": "Reze",
+        "name_ja": "レゼ",
+        "name_zh": "蕾塞",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-angel-devil",
+        "name_en": "Angel Devil",
+        "name_ja": "天使の悪魔",
+        "name_zh": "天使恶魔",
+        "gender": "male"
+      },
+      {
+        "id": "chainsawman-kishibe",
+        "name_en": "Kishibe",
+        "name_ja": "岸辺",
+        "name_zh": "岸边",
+        "gender": "male"
+      },
+      {
+        "id": "chainsawman-quanxi",
+        "name_en": "Quanxi",
+        "name_ja": "クァンシ",
+        "name_zh": "光熙",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-beam",
+        "name_en": "Beam",
+        "name_ja": "ビーム",
+        "name_zh": "毕姆",
+        "gender": "male"
+      },
+      {
+        "id": "chainsawman-asa-mitaka",
+        "name_en": "Asa Mitaka",
+        "name_ja": "三鷹アサ",
+        "name_zh": "三鹰朝",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-yoru",
+        "name_en": "Yoru",
+        "name_ja": "ヨル",
+        "name_zh": "夜",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-fami",
+        "name_en": "Fami",
+        "name_ja": "キガ",
+        "name_zh": "饥饿",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-nayuta",
+        "name_en": "Nayuta",
+        "name_ja": "ナユタ",
+        "name_zh": "那由多",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-katana-man",
+        "name_en": "Katana Man",
+        "name_ja": "サムライソード",
+        "name_zh": "武士刀",
+        "gender": "male"
+      }
+    ]
+  },
+  {
+    "id": "spyfamily",
+    "name_en": "SPY x FAMILY",
+    "name_ja": "SPY×FAMILY",
+    "name_zh": "间谍过家家",
+    "anilistSearch": [
+      "SPY x FAMILY",
+      "SPY x FAMILY Part 2",
+      "SPY x FAMILY Season 2"
+    ],
+    "chars": [
+      {
+        "id": "spyfamily-loid-forger",
+        "name_en": "Loid Forger",
+        "name_ja": "ロイド・フォージャー",
+        "name_zh": "劳埃德·福杰",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-yor-forger",
+        "name_en": "Yor Forger",
+        "name_ja": "ヨル・フォージャー",
+        "name_zh": "约尔·福杰",
+        "gender": "female"
+      },
+      {
+        "id": "spyfamily-anya-forger",
+        "name_en": "Anya Forger",
+        "name_ja": "アーニャ・フォージャー",
+        "name_zh": "阿尼亚·福杰",
+        "gender": "female"
+      },
+      {
+        "id": "spyfamily-damian-desmond",
+        "name_en": "Damian Desmond",
+        "name_ja": "ダミアン・デズモンド",
+        "name_zh": "达米安·戴斯蒙德",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-becky-blackbell",
+        "name_en": "Becky Blackbell",
+        "name_ja": "ベッキー・ブラックベル",
+        "name_zh": "贝姬·布莱克贝尔",
+        "gender": "female"
+      },
+      {
+        "id": "spyfamily-fiona-frost",
+        "name_en": "Fiona Frost",
+        "name_ja": "フィオナ・フロスト",
+        "name_zh": "菲奥娜·弗罗斯特",
+        "gender": "female"
+      },
+      {
+        "id": "spyfamily-yuri-briar",
+        "name_en": "Yuri Briar",
+        "name_ja": "ユーリ・ブライア",
+        "name_zh": "尤里·布莱尔",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-franky-franklin",
+        "name_en": "Franky Franklin",
+        "name_ja": "フランキー・フランクリン",
+        "name_zh": "弗兰基·富兰克林",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-sylvia-sherwood",
+        "name_en": "Sylvia Sherwood",
+        "name_ja": "シルヴィア・シャーウッド",
+        "name_zh": "希尔维娅·舍伍德",
+        "gender": "female"
+      },
+      {
+        "id": "spyfamily-henry-henderson",
+        "name_en": "Henry Henderson",
+        "name_ja": "ヘンリー・ヘンダーソン",
+        "name_zh": "亨利·亨德森",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-melinda-desmond",
+        "name_en": "Melinda Desmond",
+        "name_ja": "メリンダ・デズモンド",
+        "name_zh": "梅琳达·戴斯蒙德",
+        "gender": "female"
+      },
+      {
+        "id": "spyfamily-bond-forger",
+        "name_en": "Bond Forger",
+        "name_ja": "ボンド・フォージャー",
+        "name_zh": "邦德·福杰",
+        "gender": "male"
+      }
+    ]
+  },
+  {
+    "id": "frieren",
+    "name_en": "Frieren: Beyond Journey's End",
+    "name_ja": "葬送のフリーレン",
+    "name_zh": "葬送的芙莉莲",
+    "anilistSearch": [
+      "Frieren: Beyond Journey's End"
+    ],
+    "chars": [
+      {
+        "id": "frieren-frieren",
+        "name_en": "Frieren",
+        "name_ja": "フリーレン",
+        "name_zh": "芙莉莲",
+        "gender": "female"
+      },
+      {
+        "id": "frieren-fern",
+        "name_en": "Fern",
+        "name_ja": "フェルン",
+        "name_zh": "菲伦",
+        "gender": "female"
+      },
+      {
+        "id": "frieren-stark",
+        "name_en": "Stark",
+        "name_ja": "シュタルク",
+        "name_zh": "修塔尔克",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-himmel",
+        "name_en": "Himmel",
+        "name_ja": "ヒンメル",
+        "name_zh": "辛美尔",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-heiter",
+        "name_en": "Heiter",
+        "name_ja": "ハイター",
+        "name_zh": "海塔",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-eisen",
+        "name_en": "Eisen",
+        "name_ja": "アイゼン",
+        "name_zh": "艾泽",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-serie",
+        "name_en": "Serie",
+        "name_ja": "ゼーリエ",
+        "name_zh": "赛丽艾",
+        "gender": "female"
+      },
+      {
+        "id": "frieren-flamme",
+        "name_en": "Flamme",
+        "name_ja": "フランメ",
+        "name_zh": "芙兰梅",
+        "gender": "female"
+      },
+      {
+        "id": "frieren-ubel",
+        "name_en": "Übel",
+        "name_ja": "ユーベル",
+        "name_zh": "尤贝尔",
+        "gender": "female"
+      },
+      {
+        "id": "frieren-land",
+        "name_en": "Land",
+        "name_ja": "ラント",
+        "name_zh": "兰特",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-denken",
+        "name_en": "Denken",
+        "name_ja": "デンケン",
+        "name_zh": "邓肯",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-methode",
+        "name_en": "Methode",
+        "name_ja": "メトーデ",
+        "name_zh": "梅托黛",
+        "gender": "female"
+      },
+      {
+        "id": "frieren-wirbel",
+        "name_en": "Wirbel",
+        "name_ja": "ヴィアベル",
+        "name_zh": "维亚贝尔",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-laufen",
+        "name_en": "Laufen",
+        "name_ja": "ラオフェン",
+        "name_zh": "劳芬",
+        "gender": "female"
+      },
+      {
+        "id": "frieren-kanne",
+        "name_en": "Kanne",
+        "name_ja": "カンネ",
+        "name_zh": "康涅",
+        "gender": "female"
+      },
+      {
+        "id": "frieren-lawine",
+        "name_en": "Lawine",
+        "name_ja": "ラヴィーネ",
+        "name_zh": "拉维涅",
+        "gender": "female"
+      }
+    ]
+  },
+  {
+    "id": "aot",
+    "name_en": "Attack on Titan",
+    "name_ja": "進撃の巨人",
+    "name_zh": "进击的巨人",
+    "anilistSearch": [
+      "Attack on Titan",
+      "Attack on Titan Season 2",
+      "Attack on Titan Season 3",
+      "Attack on Titan Final Season"
+    ],
+    "chars": [
+      {
+        "id": "aot-eren-yeager",
+        "name_en": "Eren Yeager",
+        "name_ja": "エレン・イェーガー",
+        "name_zh": "艾伦·耶格尔",
+        "gender": "male"
+      },
+      {
+        "id": "aot-mikasa-ackerman",
+        "name_en": "Mikasa Ackerman",
+        "name_ja": "ミカサ・アッカーマン",
+        "name_zh": "三笠·阿克曼",
+        "gender": "female"
+      },
+      {
+        "id": "aot-armin-arlert",
+        "name_en": "Armin Arlert",
+        "name_ja": "アルミン・アルレルト",
+        "name_zh": "阿尔敏·阿诺德",
+        "gender": "male"
+      },
+      {
+        "id": "aot-levi-ackerman",
+        "name_en": "Levi Ackerman",
+        "name_ja": "リヴァイ・アッカーマン",
+        "name_zh": "利威尔·阿克曼",
+        "gender": "male"
+      },
+      {
+        "id": "aot-erwin-smith",
+        "name_en": "Erwin Smith",
+        "name_ja": "エルヴィン・スミス",
+        "name_zh": "埃尔文·史密斯",
+        "gender": "male"
+      },
+      {
+        "id": "aot-hange-zoe",
+        "name_en": "Hange Zoe",
+        "name_ja": "ハンジ・ゾエ",
+        "name_zh": "韩吉·佐耶",
+        "gender": "female"
+      },
+      {
+        "id": "aot-jean-kirstein",
+        "name_en": "Jean Kirstein",
+        "name_ja": "ジャン・キルシュタイン",
+        "name_zh": "让·基尔希斯坦",
+        "gender": "male"
+      },
+      {
+        "id": "aot-connie-springer",
+        "name_en": "Connie Springer",
+        "name_ja": "コニー・スプリンガー",
+        "name_zh": "柯尼·斯普林格",
+        "gender": "male"
+      },
+      {
+        "id": "aot-sasha-blouse",
+        "name_en": "Sasha Blouse",
+        "name_ja": "サシャ・ブラウス",
+        "name_zh": "萨莎·布劳斯",
+        "gender": "female"
+      },
+      {
+        "id": "aot-reiner-braun",
+        "name_en": "Reiner Braun",
+        "name_ja": "ライナー・ブラウン",
+        "name_zh": "莱纳·布朗",
+        "gender": "male"
+      },
+      {
+        "id": "aot-annie-leonhart",
+        "name_en": "Annie Leonhart",
+        "name_ja": "アニ・レオンハート",
+        "name_zh": "阿尼·利昂纳德",
+        "gender": "female"
+      },
+      {
+        "id": "aot-historia-reiss",
+        "name_en": "Historia Reiss",
+        "name_ja": "ヒストリア・レイス",
+        "name_zh": "希斯特利亚·雷斯",
+        "gender": "female"
+      },
+      {
+        "id": "aot-zeke-yeager",
+        "name_en": "Zeke Yeager",
+        "name_ja": "ジーク・イェーガー",
+        "name_zh": "吉克·耶格尔",
+        "gender": "male"
+      },
+      {
+        "id": "aot-pieck-finger",
+        "name_en": "Pieck Finger",
+        "name_ja": "ピーク・フィンガー",
+        "name_zh": "皮克·芬格尔",
+        "gender": "female"
+      },
+      {
+        "id": "aot-porco-galliard",
+        "name_en": "Porco Galliard",
+        "name_ja": "ポルコ・ガリアード",
+        "name_zh": "波尔可·贾利亚德",
+        "gender": "male"
+      },
+      {
+        "id": "aot-ymir",
+        "name_en": "Ymir",
+        "name_ja": "ユミル",
+        "name_zh": "尤弥尔",
+        "gender": "female"
+      },
+      {
+        "id": "aot-gabi-braun",
+        "name_en": "Gabi Braun",
+        "name_ja": "ガビ・ブラウン",
+        "name_zh": "贾碧·布劳恩",
+        "gender": "female"
+      },
+      {
+        "id": "aot-falco-grice",
+        "name_en": "Falco Grice",
+        "name_ja": "ファルコ・グライス",
+        "name_zh": "法尔科·格莱斯",
+        "gender": "male"
+      }
+    ]
+  },
+  {
+    "id": "mha",
+    "name_en": "My Hero Academia",
+    "name_ja": "僕のヒーローアカデミア",
+    "name_zh": "我的英雄学院",
+    "anilistSearch": [
+      "My Hero Academia",
+      "My Hero Academia 2",
+      "My Hero Academia 3",
+      "My Hero Academia 4",
+      "My Hero Academia Season 5",
+      "My Hero Academia Season 6",
+      "My Hero Academia Season 7"
+    ],
+    "chars": [
+      {
+        "id": "mha-izuku-midoriya",
+        "name_en": "Izuku Midoriya",
+        "name_ja": "緑谷出久",
+        "name_zh": "绿谷出久",
+        "gender": "male"
+      },
+      {
+        "id": "mha-katsuki-bakugo",
+        "name_en": "Katsuki Bakugo",
+        "name_ja": "爆豪勝己",
+        "name_zh": "爆豪胜己",
+        "gender": "male"
+      },
+      {
+        "id": "mha-shoto-todoroki",
+        "name_en": "Shoto Todoroki",
+        "name_ja": "轟焦凍",
+        "name_zh": "轰焦冻",
+        "gender": "male"
+      },
+      {
+        "id": "mha-ochaco-uraraka",
+        "name_en": "Ochaco Uraraka",
+        "name_ja": "麗日お茶子",
+        "name_zh": "丽日御茶子",
+        "gender": "female"
+      },
+      {
+        "id": "mha-tenya-iida",
+        "name_en": "Tenya Iida",
+        "name_ja": "飯田天哉",
+        "name_zh": "饭田天哉",
+        "gender": "male"
+      },
+      {
+        "id": "mha-tsuyu-asui",
+        "name_en": "Tsuyu Asui",
+        "name_ja": "蛙吹梅雨",
+        "name_zh": "蛙吹梅雨",
+        "gender": "female"
+      },
+      {
+        "id": "mha-momo-yaoyorozu",
+        "name_en": "Momo Yaoyorozu",
+        "name_ja": "八百万百",
+        "name_zh": "八百万百",
+        "gender": "female"
+      },
+      {
+        "id": "mha-eijiro-kirishima",
+        "name_en": "Eijiro Kirishima",
+        "name_ja": "切島鋭児郎",
+        "name_zh": "切岛锐儿郎",
+        "gender": "male"
+      },
+      {
+        "id": "mha-denki-kaminari",
+        "name_en": "Denki Kaminari",
+        "name_ja": "上鳴電気",
+        "name_zh": "上鸣电气",
+        "gender": "male"
+      },
+      {
+        "id": "mha-kyoka-jiro",
+        "name_en": "Kyoka Jiro",
+        "name_ja": "耳郎響香",
+        "name_zh": "耳郎响香",
+        "gender": "female"
+      },
+      {
+        "id": "mha-fumikage-tokoyami",
+        "name_en": "Fumikage Tokoyami",
+        "name_ja": "常闇踏陰",
+        "name_zh": "常暗踏阴",
+        "gender": "male"
+      },
+      {
+        "id": "mha-shota-aizawa",
+        "name_en": "Shota Aizawa",
+        "name_ja": "相澤消太",
+        "name_zh": "相泽消太",
+        "gender": "male"
+      },
+      {
+        "id": "mha-all-might",
+        "name_en": "All Might",
+        "name_ja": "オールマイト",
+        "name_zh": "欧尔麦特",
+        "gender": "male"
+      },
+      {
+        "id": "mha-endeavor",
+        "name_en": "Endeavor",
+        "name_ja": "エンデヴァー",
+        "name_zh": "安德瓦",
+        "gender": "male"
+      },
+      {
+        "id": "mha-hawks",
+        "name_en": "Hawks",
+        "name_ja": "ホークス",
+        "name_zh": "霍克斯",
+        "gender": "male"
+      },
+      {
+        "id": "mha-mirko",
+        "name_en": "Mirko",
+        "name_ja": "ミルコ",
+        "name_zh": "米尔可",
+        "gender": "female"
+      },
+      {
+        "id": "mha-tomura-shigaraki",
+        "name_en": "Tomura Shigaraki",
+        "name_ja": "死柄木弔",
+        "name_zh": "死柄木吊",
+        "gender": "male"
+      },
+      {
+        "id": "mha-dabi",
+        "name_en": "Dabi",
+        "name_ja": "荼毘",
+        "name_zh": "荼毘",
+        "gender": "male"
+      },
+      {
+        "id": "mha-himiko-toga",
+        "name_en": "Himiko Toga",
+        "name_ja": "渡我被身子",
+        "name_zh": "渡我被身子",
+        "gender": "female"
+      },
+      {
+        "id": "mha-nejire-hado",
+        "name_en": "Nejire Hado",
+        "name_ja": "波動ねじれ",
+        "name_zh": "波动捻丽",
+        "gender": "female"
+      }
+    ]
+  },
+  {
+    "id": "hunterxhunter",
+    "name_en": "Hunter x Hunter",
+    "name_ja": "HUNTER×HUNTER",
+    "name_zh": "全职猎人",
+    "anilistSearch": [
+      "Hunter x Hunter (2011)"
+    ],
+    "chars": [
+      {
+        "id": "hunterxhunter-gon-freecss",
+        "name_en": "Gon Freecss",
+        "name_ja": "ゴン＝フリークス",
+        "name_zh": "小杰·富力士",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-killua-zoldyck",
+        "name_en": "Killua Zoldyck",
+        "name_ja": "キルア＝ゾルディック",
+        "name_zh": "奇犽·揍敌客",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-kurapika",
+        "name_en": "Kurapika",
+        "name_ja": "クラピカ",
+        "name_zh": "酷拉皮卡",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-leorio-paradinight",
+        "name_en": "Leorio Paradinight",
+        "name_ja": "レオリオ＝パラディナイト",
+        "name_zh": "雷欧力·帕拉丁奈特",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-hisoka-morow",
+        "name_en": "Hisoka Morow",
+        "name_ja": "ヒソカ＝モロウ",
+        "name_zh": "西索·莫罗",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-chrollo-lucilfer",
+        "name_en": "Chrollo Lucilfer",
+        "name_ja": "クロロ＝ルシルフル",
+        "name_zh": "库洛洛·鲁西鲁",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-biscuit-krueger",
+        "name_en": "Biscuit Krueger",
+        "name_ja": "ビスケット＝クルーガー",
+        "name_zh": "比司吉·酷露佳",
+        "gender": "female"
+      },
+      {
+        "id": "hunterxhunter-kite",
+        "name_en": "Kite",
+        "name_ja": "カイト",
+        "name_zh": "凯特",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-isaac-netero",
+        "name_en": "Isaac Netero",
+        "name_ja": "アイザック＝ネテロ",
+        "name_zh": "艾萨克·尼特罗",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-meruem",
+        "name_en": "Meruem",
+        "name_ja": "メルエム",
+        "name_zh": "梅路艾姆",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-neferpitou",
+        "name_en": "Neferpitou",
+        "name_ja": "ネフェルピトー",
+        "name_zh": "尼飞彼多",
+        "gender": "female"
+      },
+      {
+        "id": "hunterxhunter-machi-komacine",
+        "name_en": "Machi Komacine",
+        "name_ja": "マチ＝コマチネ",
+        "name_zh": "玛奇·克马奇",
+        "gender": "female"
+      },
+      {
+        "id": "hunterxhunter-illumi-zoldyck",
+        "name_en": "Illumi Zoldyck",
+        "name_ja": "イルミ＝ゾルディック",
+        "name_zh": "伊路米·揍敌客",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-feitan-portor",
+        "name_en": "Feitan Portor",
+        "name_ja": "フェイタン＝ポートオ",
+        "name_zh": "飞坦·波特欧",
+        "gender": "male"
+      },
+      {
+        "id": "hunterxhunter-shizuku-murasaki",
+        "name_en": "Shizuku Murasaki",
+        "name_ja": "シズク＝ムラサキ",
+        "name_zh": "小滴",
+        "gender": "female"
+      },
+      {
+        "id": "hunterxhunter-palm-siberia",
+        "name_en": "Palm Siberia",
+        "name_ja": "パーム＝シベリア",
+        "name_zh": "棕榈·西伯利亚",
+        "gender": "female"
+      }
+    ]
+  },
+  {
+    "id": "fma",
+    "name_en": "Fullmetal Alchemist: Brotherhood",
+    "name_ja": "鋼の錬金術師 FULLMETAL ALCHEMIST",
+    "name_zh": "钢之炼金术师FA",
+    "anilistSearch": [
+      "Fullmetal Alchemist: Brotherhood"
+    ],
+    "chars": [
+      {
+        "id": "fma-edward-elric",
+        "name_en": "Edward Elric",
+        "name_ja": "エドワード・エルリック",
+        "name_zh": "爱德华·艾尔利克",
+        "gender": "male"
+      },
+      {
+        "id": "fma-alphonse-elric",
+        "name_en": "Alphonse Elric",
+        "name_ja": "アルフォンス・エルリック",
+        "name_zh": "阿尔冯斯·艾尔利克",
+        "gender": "male"
+      },
+      {
+        "id": "fma-roy-mustang",
+        "name_en": "Roy Mustang",
+        "name_ja": "ロイ・マスタング",
+        "name_zh": "罗伊·马斯坦古",
+        "gender": "male"
+      },
+      {
+        "id": "fma-riza-hawkeye",
+        "name_en": "Riza Hawkeye",
+        "name_ja": "リザ・ホークアイ",
+        "name_zh": "莉莎·霍克爱",
+        "gender": "female"
+      },
+      {
+        "id": "fma-winry-rockbell",
+        "name_en": "Winry Rockbell",
+        "name_ja": "ウィンリィ・ロックベル",
+        "name_zh": "温莉·洛克贝尔",
+        "gender": "female"
+      },
+      {
+        "id": "fma-maes-hughes",
+        "name_en": "Maes Hughes",
+        "name_ja": "マース・ヒューズ",
+        "name_zh": "休斯",
+        "gender": "male"
+      },
+      {
+        "id": "fma-alex-louis-armstrong",
+        "name_en": "Alex Louis Armstrong",
+        "name_ja": "アレックス・ルイ・アームストロング",
+        "name_zh": "阿历克斯·路易·阿姆斯特朗",
+        "gender": "male"
+      },
+      {
+        "id": "fma-olivier-mira-armstrong",
+        "name_en": "Olivier Mira Armstrong",
+        "name_ja": "オリヴィエ・ミラ・アームストロング",
+        "name_zh": "奥莉薇·米拉·阿姆斯特朗",
+        "gender": "female"
+      },
+      {
+        "id": "fma-ling-yao",
+        "name_en": "Ling Yao",
+        "name_ja": "リン・ヤオ",
+        "name_zh": "姚麟",
+        "gender": "male"
+      },
+      {
+        "id": "fma-lan-fan",
+        "name_en": "Lan Fan",
+        "name_ja": "ランファン",
+        "name_zh": "兰芳",
+        "gender": "female"
+      },
+      {
+        "id": "fma-scar",
+        "name_en": "Scar",
+        "name_ja": "スカー",
+        "name_zh": "斯卡",
+        "gender": "male"
+      },
+      {
+        "id": "fma-greed",
+        "name_en": "Greed",
+        "name_ja": "グリード",
+        "name_zh": "贪婪",
+        "gender": "male"
+      },
+      {
+        "id": "fma-lust",
+        "name_en": "Lust",
+        "name_ja": "ラスト",
+        "name_zh": "拉斯特",
+        "gender": "female"
+      },
+      {
+        "id": "fma-envy",
+        "name_en": "Envy",
+        "name_ja": "エンヴィー",
+        "name_zh": "恩维",
+        "gender": "male"
+      },
+      {
+        "id": "fma-izumi-curtis",
+        "name_en": "Izumi Curtis",
+        "name_ja": "イズミ・カーティス",
+        "name_zh": "伊兹米·卡迪斯",
+        "gender": "female"
+      },
+      {
+        "id": "fma-van-hohenheim",
+        "name_en": "Van Hohenheim",
+        "name_ja": "ヴァン・ホーエンハイム",
+        "name_zh": "冯·霍恩海姆",
+        "gender": "male"
+      }
+    ]
+  },
+  {
+    "id": "blackclover",
+    "name_en": "Black Clover",
+    "name_ja": "ブラッククローバー",
+    "name_zh": "黑色五叶草",
+    "anilistSearch": [
+      "Black Clover"
+    ],
+    "chars": [
+      {
+        "id": "blackclover-asta",
+        "name_en": "Asta",
+        "name_ja": "アスタ",
+        "name_zh": "亚斯塔",
+        "gender": "male"
+      },
+      {
+        "id": "blackclover-yuno",
+        "name_en": "Yuno",
+        "name_ja": "ユノ",
+        "name_zh": "尤诺",
+        "gender": "male"
+      },
+      {
+        "id": "blackclover-noelle-silva",
+        "name_en": "Noelle Silva",
+        "name_ja": "ノエル・シルヴァ",
+        "name_zh": "诺艾尔·希尔巴",
+        "gender": "female"
+      },
+      {
+        "id": "blackclover-yami-sukehiro",
+        "name_en": "Yami Sukehiro",
+        "name_ja": "ヤミ・スケヒロ",
+        "name_zh": "夜见介大",
+        "gender": "male"
+      },
+      {
+        "id": "blackclover-mereoleona-vermillion",
+        "name_en": "Mereoleona Vermillion",
+        "name_ja": "メレオレオナ・ヴァーミリオン",
+        "name_zh": "梅列欧蕾欧娜·凡米利欧",
+        "gender": "female"
+      },
+      {
+        "id": "blackclover-fuegoleon-vermillion",
+        "name_en": "Fuegoleon Vermillion",
+        "name_ja": "フエゴレオン・ヴァーミリオン",
+        "name_zh": "费格莱恩·凡米利欧",
+        "gender": "male"
+      },
+      {
+        "id": "blackclover-luck-voltia",
+        "name_en": "Luck Voltia",
+        "name_ja": "ラック・ボルティア",
+        "name_zh": "拉克·波提亚",
+        "gender": "male"
+      },
+      {
+        "id": "blackclover-magna-swing",
+        "name_en": "Magna Swing",
+        "name_ja": "マグナ・スウィング",
+        "name_zh": "玛格纳·斯温",
+        "gender": "male"
+      },
+      {
+        "id": "blackclover-vanessa-enoteca",
+        "name_en": "Vanessa Enoteca",
+        "name_ja": "バネッサ・エノテーカ",
+        "name_zh": "凡妮莎·艾诺泰卡",
+        "gender": "female"
+      },
+      {
+        "id": "blackclover-finral-roulacase",
+        "name_en": "Finral Roulacase",
+        "name_ja": "フィンラル・ルーラケイス",
+        "name_zh": "芬拉尔·鲁拉凯斯",
+        "gender": "male"
+      },
+      {
+        "id": "blackclover-charmy-pappitson",
+        "name_en": "Charmy Pappitson",
+        "name_ja": "チャーミー・パピットソン",
+        "name_zh": "恰米·帕比森",
+        "gender": "female"
+      },
+      {
+        "id": "blackclover-nacht-faust",
+        "name_en": "Nacht Faust",
+        "name_ja": "ナハト・ファウスト",
+        "name_zh": "纳哈特·浮士德",
+        "gender": "male"
+      },
+      {
+        "id": "blackclover-julius-novachrono",
+        "name_en": "Julius Novachrono",
+        "name_ja": "ユリウス・ノヴァクロノ",
+        "name_zh": "尤里乌斯·诺凡克罗诺",
+        "gender": "male"
+      },
+      {
+        "id": "blackclover-charlotte-roselei",
+        "name_en": "Charlotte Roselei",
+        "name_ja": "シャーロット・ローズレイ",
+        "name_zh": "夏洛特·罗丝莱",
+        "gender": "female"
+      },
+      {
+        "id": "blackclover-secre-swallowtail",
+        "name_en": "Secre Swallowtail",
+        "name_ja": "セクレ・スワロウテイル",
+        "name_zh": "赛克雷·斯瓦罗泰尔",
+        "gender": "female"
+      },
+      {
+        "id": "blackclover-mimosa-vermillion",
+        "name_en": "Mimosa Vermillion",
+        "name_ja": "ミモザ・ヴァーミリオン",
+        "name_zh": "米莫萨·凡米利欧",
+        "gender": "female"
+      }
+    ]
+  },
+  {
+    "id": "onepunchman",
+    "name_en": "One-Punch Man",
+    "name_ja": "ワンパンマン",
+    "name_zh": "一拳超人",
+    "anilistSearch": [
+      "One Punch Man",
+      "One Punch Man 2"
+    ],
+    "chars": [
+      {
+        "id": "onepunchman-saitama",
+        "name_en": "Saitama",
+        "name_ja": "サイタマ",
+        "name_zh": "埼玉",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-genos",
+        "name_en": "Genos",
+        "name_ja": "ジェノス",
+        "name_zh": "杰诺斯",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-tatsumaki",
+        "name_en": "Tatsumaki",
+        "name_ja": "タツマキ",
+        "name_zh": "龙卷",
+        "gender": "female"
+      },
+      {
+        "id": "onepunchman-fubuki",
+        "name_en": "Fubuki",
+        "name_ja": "フブキ",
+        "name_zh": "吹雪",
+        "gender": "female"
+      },
+      {
+        "id": "onepunchman-bang",
+        "name_en": "Bang",
+        "name_ja": "シルバーファング",
+        "name_zh": "邦古",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-king",
+        "name_en": "King",
+        "name_ja": "キング",
+        "name_zh": "KING",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-atomic-samurai",
+        "name_en": "Atomic Samurai",
+        "name_ja": "アトミック侍",
+        "name_zh": "原子武士",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-speed-o-sound-sonic",
+        "name_en": "Speed-o'-Sound Sonic",
+        "name_ja": "音速のソニック",
+        "name_zh": "音速索尼克",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-mumen-rider",
+        "name_en": "Mumen Rider",
+        "name_ja": "無免ライダー",
+        "name_zh": "无证骑士",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-garou",
+        "name_en": "Garou",
+        "name_ja": "ガロウ",
+        "name_zh": "饿狼",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-metal-bat",
+        "name_en": "Metal Bat",
+        "name_ja": "金属バット",
+        "name_zh": "金属球棒",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-child-emperor",
+        "name_en": "Child Emperor",
+        "name_ja": "童帝",
+        "name_zh": "童帝",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-puri-puri-prisoner",
+        "name_en": "Puri-Puri Prisoner",
+        "name_ja": "ぷりぷりプリズナー",
+        "name_zh": "性感囚犯",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-zombieman",
+        "name_en": "Zombieman",
+        "name_ja": "ゾンビマン",
+        "name_zh": "僵尸男",
+        "gender": "male"
+      }
+    ]
+  },
+  {
+    "id": "dragonball",
+    "name_en": "Dragon Ball",
+    "name_ja": "ドラゴンボール",
+    "name_zh": "龙珠",
+    "anilistSearch": [
+      "Dragon Ball",
+      "Dragon Ball Z",
+      "Dragon Ball Super"
+    ],
+    "chars": [
+      {
+        "id": "dragonball-goku",
+        "name_en": "Goku",
+        "name_ja": "孫悟空",
+        "name_zh": "孙悟空",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-vegeta",
+        "name_en": "Vegeta",
+        "name_ja": "ベジータ",
+        "name_zh": "贝吉塔",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-bulma",
+        "name_en": "Bulma",
+        "name_ja": "ブルマ",
+        "name_zh": "布尔玛",
+        "gender": "female"
+      },
+      {
+        "id": "dragonball-gohan",
+        "name_en": "Gohan",
+        "name_ja": "孫悟飯",
+        "name_zh": "孙悟饭",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-piccolo",
+        "name_en": "Piccolo",
+        "name_ja": "ピッコロ",
+        "name_zh": "比克",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-trunks",
+        "name_en": "Trunks",
+        "name_ja": "トランクス",
+        "name_zh": "特兰克斯",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-future-trunks",
+        "name_en": "Future Trunks",
+        "name_ja": "未来トランクス",
+        "name_zh": "未来特兰克斯",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-android-18",
+        "name_en": "Android 18",
+        "name_ja": "人造人間18号",
+        "name_zh": "人造人18号",
+        "gender": "female"
+      },
+      {
+        "id": "dragonball-android-17",
+        "name_en": "Android 17",
+        "name_ja": "人造人間17号",
+        "name_zh": "人造人17号",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-frieza",
+        "name_en": "Frieza",
+        "name_ja": "フリーザ",
+        "name_zh": "弗利萨",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-beerus",
+        "name_en": "Beerus",
+        "name_ja": "ビルス",
+        "name_zh": "比鲁斯",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-whis",
+        "name_en": "Whis",
+        "name_ja": "ウイス",
+        "name_zh": "维斯",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-chi-chi",
+        "name_en": "Chi-Chi",
+        "name_ja": "チチ",
+        "name_zh": "琪琪",
+        "gender": "female"
+      },
+      {
+        "id": "dragonball-videl",
+        "name_en": "Videl",
+        "name_ja": "ビーデル",
+        "name_zh": "比迪丽",
+        "gender": "female"
+      },
+      {
+        "id": "dragonball-broly",
+        "name_en": "Broly",
+        "name_ja": "ブロリー",
+        "name_zh": "布罗利",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-krillin",
+        "name_en": "Krillin",
+        "name_ja": "クリリン",
+        "name_zh": "克林",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-master-roshi",
+        "name_en": "Master Roshi",
+        "name_ja": "亀仙人",
+        "name_zh": "龟仙人",
+        "gender": "male"
+      },
+      {
+        "id": "dragonball-majin-buu",
+        "name_en": "Majin Buu",
+        "name_ja": "魔人ブウ",
+        "name_zh": "魔人布欧",
+        "gender": "male"
+      }
+    ]
+  },
+  {
+    "id": "sao",
+    "name_en": "Sword Art Online",
+    "name_ja": "ソードアート・オンライン",
+    "name_zh": "刀剑神域",
+    "anilistSearch": [
+      "Sword Art Online",
+      "Sword Art Online II",
+      "Sword Art Online: Alicization"
+    ],
+    "chars": [
+      {
+        "id": "sao-kirito",
+        "name_en": "Kirito",
+        "name_ja": "キリト",
+        "name_zh": "桐人",
+        "gender": "male"
+      },
+      {
+        "id": "sao-asuna",
+        "name_en": "Asuna",
+        "name_ja": "アスナ",
+        "name_zh": "亚丝娜",
+        "gender": "female"
+      },
+      {
+        "id": "sao-sinon",
+        "name_en": "Sinon",
+        "name_ja": "シノン",
+        "name_zh": "诗乃",
+        "gender": "female"
+      },
+      {
+        "id": "sao-leafa",
+        "name_en": "Leafa",
+        "name_ja": "リーファ",
+        "name_zh": "莉法",
+        "gender": "female"
+      },
+      {
+        "id": "sao-alice-zuberg",
+        "name_en": "Alice Zuberg",
+        "name_ja": "アリス・ツーベルク",
+        "name_zh": "爱丽丝·滋贝鲁库",
+        "gender": "female"
+      },
+      {
+        "id": "sao-eugeo",
+        "name_en": "Eugeo",
+        "name_ja": "ユージオ",
+        "name_zh": "尤吉欧",
+        "gender": "male"
+      },
+      {
+        "id": "sao-yuuki-konno",
+        "name_en": "Yuuki Konno",
+        "name_ja": "紺野木綿季",
+        "name_zh": "绀野木棉季",
+        "gender": "female"
+      },
+      {
+        "id": "sao-klein",
+        "name_en": "Klein",
+        "name_ja": "クライン",
+        "name_zh": "克莱因",
+        "gender": "male"
+      },
+      {
+        "id": "sao-agil",
+        "name_en": "Agil",
+        "name_ja": "エギル",
+        "name_zh": "艾基尔",
+        "gender": "male"
+      },
+      {
+        "id": "sao-silica",
+        "name_en": "Silica",
+        "name_ja": "シリカ",
+        "name_zh": "西莉卡",
+        "gender": "female"
+      },
+      {
+        "id": "sao-lisbeth",
+        "name_en": "Lisbeth",
+        "name_ja": "リズベット",
+        "name_zh": "莉兹贝特",
+        "gender": "female"
+      },
+      {
+        "id": "sao-administrator",
+        "name_en": "Administrator",
+        "name_ja": "アドミニストレータ",
+        "name_zh": "管理员",
+        "gender": "female"
+      }
+    ]
+  }
+]
