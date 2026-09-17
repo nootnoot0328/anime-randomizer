@@ -10,6 +10,9 @@ on:
       - .github/workflows/resolve-portraits.yml
 permissions:
   contents: write
+concurrency:
+  group: resolve-portraits
+  cancel-in-progress: true
 jobs:
   resolve:
     runs-on: ubuntu-latest
@@ -33,4 +36,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/portraits.json
           git commit -m "chore: refresh portrait manifest"
-          git push
+          git pull --rebase origin main
+          git push origin HEAD:main
