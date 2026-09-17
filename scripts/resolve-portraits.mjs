@@ -13,8 +13,13 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function gql(query,variables,attempt=0){
   const wait=Math.max(0,1000-(Date.now()-lastRequest));if(wait)await sleep(wait);lastRequest=Date.now();
   const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify({query,variables})});
-  if(r.status===429){if(attempt>=5)throw new Error('AniList 429 after retries');const retry=Number(r.headers.get('retry-after')||0)*1000||Math.min(30000,2000*(2**attempt));await sleep(retry);return gql(query,variables,attempt+1);}
-  if(!r.ok)throw new Error(`AniList HTTP ${r.status}`);const data=await r.json();if(data.errors?.length)throw new Error(data.errors.map(x=>x.message).join('; '));return data.data;
+  if(r.status===429||r.status>=500){
+    if(attempt>=5)throw new Error(`AniList HTTP ${r.status} after retries`);
+    const retry=Number(r.headers.get('retry-after')||0)*1000||Math.min(30000,2000*(2**attempt));
+    await sleep(retry);return gql(query,variables,attempt+1);
+  }
+  if(!r.ok)throw new Error(`AniList HTTP ${r.status}`);
+  const data=await r.json();if(data.errors?.length)throw new Error(data.errors.map(x=>x.message).join('; '));return data.data;
 }
 async function resolveMedia(search){
   const q=`query($search:String!){Media(search:$search,type:ANIME){id title{romaji english native}}}`;
@@ -28,9 +33,9 @@ async function fetchCharacter(id){
   const q=`query($id:Int!){Character(id:$id){id name{full native alternative} image{large medium}}}`;
   return (await gql(q,{id}))?.Character||null;
 }
-async function searchCharacters(search){
-  const q=`query($search:String!){Page(page:1,perPage:10){characters(search:$search,sort:[SEARCH_MATCH,RELEVANCE,ID]){id name{full native alternative} image{large medium} media(page:1,perPage:50,type:ANIME){nodes{id}}}}}`;
-  return (await gql(q,{search}))?.Page?.characters||[];
+async function searchCharacter(search){
+  const q=`query($search:String!){Character(search:$search){id name{full native alternative} image{large medium} media(page:1,perPage:50){nodes{id type}}}}`;
+  return (await gql(q,{search}))?.Character||null;
 }
 function altMatchScore(c,node){
   let best=matchScore(c,node);
@@ -38,7 +43,21 @@ function altMatchScore(c,node){
   return best;
 }
 function belongsToSeries(node,mediaIds){
-  return (node?.media?.nodes||[]).some(m=>mediaIds.includes(m.id));
+  return (node?.media?.nodes||[]).some(m=>m?.type==='ANIME'&&mediaIds.includes(m.id));
+}
+async function fallbackCharacter(c,mediaIds){
+  const searches=[c.name_en,c.name_ja].filter((x,i,a)=>x&&a.indexOf(x)===i);
+  let best=null;
+  for(const search of searches){
+    try{
+      const hit=await searchCharacter(search);if(!hit)continue;
+      const score=altMatchScore(c,hit);
+      if((score>=70&&(belongsToSeries(hit,mediaIds)||score===100))&&(hit.image?.large||hit.image?.medium)){
+        if(!best||score>best.score)best={n:hit,score,source:'global'};
+      }
+    }catch(e){console.error(`global ${c.id} (${search}): ${e.message}`);}
+  }
+  return best;
 }
 const output={generatedAt:new Date().toISOString(),series:{},chars:{}};
 const unmatched=[],low=[];
@@ -51,20 +70,13 @@ for(const series of roster){
   const candidates=[...candidateMap.values()];
   for(const c of series.chars){
     const ov=overrides[c.id];
-    if(ov?.skip){continue;}
-    if(ov?.url){output.chars[c.id]={anilistId:ov.anilistCharacterId??null,url:ov.url,score:100};continue;}
+    if(ov?.skip)continue;
+    if(ov?.url){output.chars[c.id]={anilistId:ov.anilistCharacterId??null,url:ov.url,score:100,source:'override'};continue;}
     if(ov?.anilistCharacterId){
-      try{const hit=candidateMap.get(ov.anilistCharacterId)||await fetchCharacter(ov.anilistCharacterId);if(hit?.image?.large||hit?.image?.medium){output.chars[c.id]={anilistId:hit.id,url:hit.image.large||hit.image.medium,score:100};continue;}}catch(e){console.error(`override ${c.id}: ${e.message}`);}
+      try{const hit=candidateMap.get(ov.anilistCharacterId)||await fetchCharacter(ov.anilistCharacterId);if(hit?.image?.large||hit?.image?.medium){output.chars[c.id]={anilistId:hit.id,url:hit.image.large||hit.image.medium,score:100,source:'override'};continue;}}catch(e){console.error(`override ${c.id}: ${e.message}`);}
     }
     const ranked=candidates.map(n=>({n,score:altMatchScore(c,n),source:'series'})).sort((a,b)=>b.score-a.score);let best=ranked[0];
-    if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){
-      try{
-        const global=await searchCharacters(c.name_en);
-        const globalRanked=global.map(n=>({n,score:altMatchScore(c,n),source:'global'})).sort((a,b)=>b.score-a.score);
-        const candidate=globalRanked.find(x=>x.score>=70&&(belongsToSeries(x.n,mediaIds)||x.score===100)&&(x.n.image?.large||x.n.image?.medium));
-        if(candidate)best=candidate;
-      }catch(e){console.error(`global ${c.id}: ${e.message}`);}
-    }
+    if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){const fb=await fallbackCharacter(c,mediaIds);if(fb)best=fb;}
     if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){unmatched.push(`${c.id} (${c.name_en})`);continue;}
     output.chars[c.id]={anilistId:best.n.id,url:best.n.image.large||best.n.image.medium,score:Number(best.score.toFixed(2)),source:best.source};
     if(best.score<70)low.push(`${c.id} (${c.name_en}) -> ${best.n.name.full} [${best.score.toFixed(1)}]`);
