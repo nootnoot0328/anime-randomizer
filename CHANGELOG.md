@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.5.2 — Scenario prompts and roster expansion
+
+### Trait Draft and Quick Randomizer
+- Added Rival, Mentor, Final Boss, Isekai Reincarnation, Adventure Party Member, and Roommate scenarios.
+- Added three localized scene presets to every scenario; one is selected per completed fusion and remains stable when copied again.
+- Renamed theme selection to scenario selection and preserved custom choices across reloads.
+
+### PK Team Draft
+- Added a localized All-Star Battle image prompt with three neutral battlefields.
+- Made Traitor, Rogue Ninja, Defector, Curse User, and Demon Traitor mandatory betrayal roles in judge prompts.
+- Required verdict reasoning to compare how both betrayal slots affect their own teams.
+
+### Roster and portraits
+- Expanded from 527 to 628 characters; every built-in anime now has at least 25 characters.
+- Increased verified portrait coverage to 627 of 628 characters.
+- Added franchise-checked AniList overrides and corrected cross-series portrait mismatches.
+- Kept Kefla unresolved because no verified AniList character entry was available.
+
+### Tooling
+- Made portrait workflow commits stay on the triggering branch.
+- Reused existing verified portraits so resolver runs only process new or overridden entries.
+- Added tests enforcing minimum roster size and unique character IDs.
+
 ## v0.5.1 — Visual PK teams and expanded roster
 
 ### PK

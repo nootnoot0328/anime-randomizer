@@ -37,10 +37,10 @@ test('every built-in series has at least 25 characters and unique IDs',()=>{
   assert.equal(new Set(ids).size,ids.length);
 });
 
-test('version consistency is 0.5.1',()=>{
+test('version consistency is 0.5.2',()=>{
   const version=JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).version;
   const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
   const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-  const m=app.match(/const VERSION = "([^"]+)"/);assert.ok(m);assert.equal(version,'0.5.1');assert.equal(m[1],'0.5.1');
-  for(const asset of ['styles.css','logic.js','app.js'])assert.match(html,new RegExp(asset.replace('.','\\.')+'\\?v=0\\.5\\.1'));
+  const m=app.match(/const VERSION = "([^"]+)"/);assert.ok(m);assert.equal(version,'0.5.2');assert.equal(m[1],'0.5.2');
+  for(const asset of ['styles.css','logic.js','app.js'])assert.match(html,new RegExp(asset.replace('.','\\.')+'\\?v=0\\.5\\.2'));
 });
