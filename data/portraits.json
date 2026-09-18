@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T00:28:22.652Z",
+  "generatedAt": "2026-09-18T00:35:50.900Z",
   "series": {
     "onepiece": {
       "mediaIds": [
@@ -3154,10 +3154,10 @@
       "source": "override"
     },
     "sololeveling-kim-chul": {
-      "anilistId": 135934,
-      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b135934-4jRjw5KtJuQ4.jpg",
+      "anilistId": 241284,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b241284-K1Xc1ZU8dIhQ.png",
       "score": 100,
-      "source": "global"
+      "source": "override"
     },
     "sololeveling-lim-taegyu": {
       "anilistId": 306512,
@@ -3880,10 +3880,10 @@
       "source": "series"
     },
     "fireforce-yu": {
-      "anilistId": 67327,
-      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b67327-zQb1dlC7joPb.jpg",
+      "anilistId": 150321,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b150321-VYRI5Ls9dPgX.jpg",
       "score": 100,
-      "source": "global"
+      "source": "override"
     },
     "fireforce-giovanni": {
       "anilistId": 150692,
