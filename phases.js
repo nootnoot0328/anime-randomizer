@@ -82,13 +82,16 @@ const CHARACTER_PHASES={
   ]
 };
 
-Object.assign(I18N.en,{characterPhases:"Character versions",characterPhasesDesc:"Choose the era/form used when these characters appear.",phase:"Version"});
-Object.assign(I18N.zh,{characterPhases:"角色时期",characterPhasesDesc:"这些角色登场时，会使用你选定的时期或形态。",phase:"时期 / 形态"});
-Object.assign(I18N.ja,{characterPhases:"キャラの時期・形態",characterPhasesDesc:"対象キャラが登場するときの時期・形態を選べます。",phase:"時期・形態"});
+Object.assign(I18N.en,{characterPhases:"Character versions",characterPhasesDesc:"Choose the era/form used when these characters appear.",phase:"Version",formPortraits:"Form portraits",formPortraitsDesc:"When reviewed art for a selected form is unavailable, choose whether to show the character's regular portrait or an initials placeholder.",portraitFallback:"Use character portrait",portraitStrict:"Strict form artwork"});
+Object.assign(I18N.zh,{characterPhases:"角色时期",characterPhasesDesc:"这些角色登场时，会使用你选定的时期或形态。",phase:"时期 / 形态",formPortraits:"形态肖像",formPortraitsDesc:"所选形态暂无已核对图片时，可显示该角色的普通肖像，或保留首字占位图。",portraitFallback:"使用角色肖像",portraitStrict:"仅用已核对形态图"});
+Object.assign(I18N.ja,{characterPhases:"キャラの時期・形態",characterPhasesDesc:"対象キャラが登場するときの時期・形態を選べます。",phase:"時期・形態",formPortraits:"形態画像",formPortraitsDesc:"選択した形態の確認済み画像がない場合、通常のキャラ画像かイニシャル表示を選べます。",portraitFallback:"通常画像を使用",portraitStrict:"確認済み形態画像のみ"});
 
 const AF_PHASE_KEY="af_character_phases_v1";
+const AF_PHASE_PORTRAIT_KEY="af_phase_portrait_fallback_v1";
 let AF_PHASE_SELECTION={};
 try{AF_PHASE_SELECTION=JSON.parse(localStorage.getItem(AF_PHASE_KEY)||"{}")||{};}catch{}
+let AF_PHASE_PORTRAIT_FALLBACK=true;
+try{AF_PHASE_PORTRAIT_FALLBACK=localStorage.getItem(AF_PHASE_PORTRAIT_KEY)!=="strict";}catch{}
 function savePhaseSelection(){try{localStorage.setItem(AF_PHASE_KEY,JSON.stringify(AF_PHASE_SELECTION));}catch{}}
 function phaseOptionsFor(c){return CHARACTER_PHASES[c?.id]||null;}
 function selectedPhaseFor(c){
@@ -100,6 +103,11 @@ function setCharacterPhase(charId,key){
   const opts=CHARACTER_PHASES[charId];if(!opts?.some(x=>x.key===key))return;
   AF_PHASE_SELECTION[charId]=key;savePhaseSelection();render();
 }
+function setPhasePortraitFallback(enabled){
+  AF_PHASE_PORTRAIT_FALLBACK=Boolean(enabled);
+  try{localStorage.setItem(AF_PHASE_PORTRAIT_KEY,AF_PHASE_PORTRAIT_FALLBACK?"fallback":"strict");}catch{}
+  render();
+}
 function withSelectedPhase(c){
   const ph=selectedPhaseFor(c);if(!ph)return c;
   const out={...c,phaseKey:ph.key,phase_en:ph.en,phase_zh:ph.zh,phase_ja:ph.ja,phasePortraitVerified:ph.portrait==="default"};
@@ -109,14 +117,20 @@ function withSelectedPhase(c){
   return out;
 }
 
-// A generic character portrait must not be presented as a different era/form.
-// Until a phase has reviewed artwork, use the initials fallback instead.
+// Reviewed form art wins. Gallery users can opt into the normal character portrait
+// when a selected form does not yet have its own approved image.
 const _phaseCharacterImageUrl=characterImageUrl;
-characterImageUrl=function(c){if(c?.phaseKey&&!c.phasePortraitVerified)return null;return _phaseCharacterImageUrl(c);};
+characterImageUrl=function(c){if(c?.phaseKey&&!c.phasePortraitVerified&&!AF_PHASE_PORTRAIT_FALLBACK)return null;return _phaseCharacterImageUrl(c);};
 
-// Apply the chosen version everywhere pools are built, including PK.
+// Keep version selection independent from Trait Draft's gender filter so PK can
+// use every character while still respecting the chosen form.
+function applyCharacterPhases(chars){return (chars||[]).map(withSelectedPhase);}
 const _phaseApplyGenderFilter=applyGenderFilter;
-applyGenderFilter=function(chars){return _phaseApplyGenderFilter(chars).map(withSelectedPhase);};
+applyGenderFilter=function(chars){return applyCharacterPhases(_phaseApplyGenderFilter(chars));};
+
+function phasePortraitFallbackBlock(){
+  return `<div class="panel phase-portrait-panel"><div><strong>${esc(t("formPortraits"))}</strong><p class="small">${esc(t("formPortraitsDesc"))}</p></div><div class="chips"><button class="chip${AF_PHASE_PORTRAIT_FALLBACK?" selected":""}" onclick="setPhasePortraitFallback(true)">${esc(t("portraitFallback"))}</button><button class="chip${AF_PHASE_PORTRAIT_FALLBACK?"":" selected"}" onclick="setPhasePortraitFallback(false)">${esc(t("portraitStrict"))}</button></div></div>`;
+}
 
 function phaseSelectorBlock(seriesIds){
   const ids=new Set(seriesIds||[]);
@@ -159,3 +173,9 @@ historyView=function(){
   if(!STATE.history.length)return _phaseHistoryView();
   return `<div class="section-head"><h2>${esc(t("history"))}</h2></div><div class="grid">${STATE.history.map(h=>`<div class="result-card"><div class="row between"><strong>${esc(t(h.mode))}</strong><span class="small">${esc(new Date(h.date).toLocaleString())}</span></div><div class="assignment-list" style="margin-top:10px">${h.assignments.map(a=>{let name=a.name;if(STATE.lang==="zh"&&a.name_zh)name=a.name_zh;if(STATE.lang==="ja"&&a.name_ja)name=a.name_ja;if(!a.phaseKey){const c=a.charId?getCharacter(a.charId):null;if(c)name=displayName(c);}return `<div class="assignment"><span class="key">${esc(traitLabel(a.trait))}</span><span class="val">${esc(name)}</span></div>`;}).join("")}</div></div>`).join("")}</div>`;
 };
+
+// Put the form-image policy in Gallery where missing artwork is easiest to audit.
+const _phaseLibraryView=libraryView;
+libraryView=function(){return phasePortraitFallbackBlock()+_phaseLibraryView();};
+const _phaseSeriesLibraryView=seriesLibraryView;
+seriesLibraryView=function(){return phasePortraitFallbackBlock()+_phaseSeriesLibraryView();};
