@@ -62,6 +62,7 @@ const AF_PRICE_TIERS={
   5:new Set(["spyfamily-bond-forger","chainsawman-kobeni-higashiyama","aot-marcel-galliard","dragonball-master-roshi","dandadan-taro","dandadan-hana"])
 };
 function characterPrice(c){for(const [price,ids] of Object.entries(AF_PRICE_TIERS))if(ids.has(c.id))return Number(price);return 15;}
+function pkCharacters(chars){return typeof applyCharacterPhases==="function"?applyCharacterPhases(chars):(chars||[]);}
 
 function updatePKSetup(which,value){STATE.pkSetup[which]=value;render();}
 function openPKSetup(kind="random"){
@@ -74,14 +75,14 @@ function openPKSetup(kind="random"){
 function pkSetupView(){
   const eligible=STATE.builtin.filter(s=>s.chars?.length);if(!eligible.length)return `<div class="panel empty">${esc(t("notEnough"))}</div>`;
   const kind=STATE.pkSetup.kind||"random";
-  const opts=selected=>eligible.map(s=>`<option value="${esc(s.id)}" ${s.id===selected?"selected":""}>${esc(displaySeries(s))} (${esc(String(applyGenderFilter(s.chars).length))})</option>`).join("");
+  const opts=selected=>eligible.map(s=>`<option value="${esc(s.id)}" ${s.id===selected?"selected":""}>${esc(displaySeries(s))} (${esc(String(pkCharacters(s.chars).length))})</option>`).join("");
   const style=`<div class="chips"><button class="chip${kind==="random"?" selected":""}" onclick="openPKSetup('random')">${esc(t("randomPK"))}</button><button class="chip${kind==="budget"?" selected":""}" onclick="openPKSetup('budget')">${esc(t("budgetPK"))}</button></div>`;
   if(kind==="budget"){
-    const pool=getSeries(STATE.pkSetup.pool)||eligible[0];STATE.pkSetup.pool=pool.id;const chars=applyGenderFilter(pool.chars),ok=chars.length>=12;
+    const pool=getSeries(STATE.pkSetup.pool)||eligible[0];STATE.pkSetup.pool=pool.id;const chars=pkCharacters(pool.chars),ok=chars.length>=12;
     return `<div class="section-head"><div><h2>${esc(t("budgetPK"))}</h2><p>${esc(t("budgetPKDesc"))}</p></div></div>${style}<div class="panel" style="margin-top:16px"><div class="form-group"><label>${esc(t("sharedRoster"))}</label><select onchange="updatePKSetup('pool',this.value)">${opts(pool.id)}</select><div class="requirement ${ok?"good":"bad"}">${esc(t("sharedPool"))}: ${chars.length} ${esc(t("available"))} / 12 ${esc(t("required"))}</div></div></div><div class="cta-row"><button class="primary" onclick="startBudgetPK()" ${ok?"":"disabled"}>${esc(t("beginPK"))}</button></div>`;
   }
   if(!getSeries(STATE.pkSetup.p1))STATE.pkSetup.p1=eligible[0].id;if(!getSeries(STATE.pkSetup.p2))STATE.pkSetup.p2=eligible[Math.min(1,eligible.length-1)].id;
-  const s1=getSeries(STATE.pkSetup.p1),s2=getSeries(STATE.pkSetup.p2),p1=applyGenderFilter(s1.chars),p2=applyGenderFilter(s2.chars),shared=s1.id===s2.id,req=L.pkRequirement(p1,p2,6,6,shared);
+  const s1=getSeries(STATE.pkSetup.p1),s2=getSeries(STATE.pkSetup.p2),p1=pkCharacters(s1.chars),p2=pkCharacters(s2.chars),shared=s1.id===s2.id,req=L.pkRequirement(p1,p2,6,6,shared);
   return `<div class="section-head"><div><h2>${esc(t("pkSetup"))}</h2><p>${esc(t("pkDesc"))}</p></div></div>${style}<div class="grid" style="margin-top:16px"><div class="panel"><h3>${esc(t("player1"))}</h3><div class="form-group"><label>${esc(t("series"))}</label><select onchange="updatePKSetup('p1',this.value)">${opts(s1.id)}</select></div></div><div class="panel"><h3>${esc(t("player2"))}</h3><div class="form-group"><label>${esc(t("series"))}</label><select onchange="updatePKSetup('p2',this.value)">${opts(s2.id)}</select></div></div></div><div class="requirement ${req.ok?"good":"bad"}">${esc(shared?`${t("sharedPool")}: ${req.availableShared} / ${req.requiredShared}`:`${t("player1")}: ${req.availableP1}/6 · ${t("player2")}: ${req.availableP2}/6`)}</div><div class="cta-row"><button class="primary" onclick="startPK()" ${req.ok?"":"disabled"}>${esc(t("beginPK"))}</button></div>`;
 }
 const _afPKV2SetupView=pkSetupView;
@@ -89,17 +90,17 @@ pkSetupView=function(){const html=_afPKV2SetupView();const ids=STATE.pkSetup.kin
 
 function startPK(){
   const p1=STATE.pkSetup.p1,p2=STATE.pkSetup.p2,s1=getSeries(p1),s2=getSeries(p2);if(!s1||!s2)return;
-  const pool1=applyGenderFilter(s1.chars),pool2=applyGenderFilter(s2.chars),shared=p1===p2,req=L.pkRequirement(pool1,pool2,6,6,shared);if(!req.ok)return;
+  const pool1=pkCharacters(s1.chars),pool2=pkCharacters(s2.chars),shared=p1===p2,req=L.pkRequirement(pool1,pool2,6,6,shared);if(!req.ok)return;
   STATE.pk={kind:"random",p1:{seriesId:p1,roles:roleSet(p1),team:[]},p2:{seriesId:p2,roles:roleSet(p2),team:[]},turn:1,shared,used:new Set(),pair:[],revealing:false,revealTimer:null,selectedIndex:null,skips:{1:1,2:1},ended:false};
   setScreen("pk","pksetup");rollPKPair();
 }
 function startBudgetPK(){
-  const id=STATE.pkSetup.pool,s=getSeries(id),pool=applyGenderFilter(s?.chars||[]);if(!s||pool.length<12)return;
+  const id=STATE.pkSetup.pool,s=getSeries(id),pool=pkCharacters(s?.chars||[]);if(!s||pool.length<12)return;
   STATE.pk={kind:"budget",p1:{seriesId:id,roles:roleSet(id),team:[],budget:100},p2:{seriesId:id,roles:roleSet(id),team:[],budget:100},turn:1,shared:true,used:new Set(),selectedIndex:null,ended:false};
   setScreen("pk","pksetup");
 }
 
-function pkPool(player){const pk=STATE.pk,p=pk[`p${player}`];return applyGenderFilter(getSeries(p.seriesId)?.chars||[]).filter(c=>!pk.used.has(c.id));}
+function pkPool(player){const pk=STATE.pk,p=pk[`p${player}`];return pkCharacters(getSeries(p.seriesId)?.chars||[]).filter(c=>!pk.used.has(c.id));}
 function rollPKPair(){
   const pk=STATE.pk;if(!pk||pk.kind!=="random")return;const pool=pkPool(pk.turn);if(pk.revealTimer)clearInterval(pk.revealTimer);
   if(pool.length<=1){pk.pair=[...pool];pk.revealing=false;render();return;}pk.revealing=true;pk.selectedIndex=null;let ticks=0;
