@@ -110,7 +110,11 @@ function setPhasePortraitFallback(enabled){
 }
 function withSelectedPhase(c){
   const ph=selectedPhaseFor(c);if(!ph)return c;
+  return withCharacterPhase(c,ph);
+}
+function withCharacterPhase(c,ph){
   const out={...c,phaseKey:ph.key,phase_en:ph.en,phase_zh:ph.zh,phase_ja:ph.ja,phasePortraitVerified:ph.portrait==="default"};
+  out.variantKey=`${c.id}::${ph.key}`;
   out.name_en=`${c.name_en||c.name} — ${ph.en}`;
   if(c.name_zh)out.name_zh=`${c.name_zh} · ${ph.zh}`;
   if(c.name_ja)out.name_ja=`${c.name_ja}・${ph.ja}`;
@@ -122,9 +126,11 @@ function withSelectedPhase(c){
 const _phaseCharacterImageUrl=characterImageUrl;
 characterImageUrl=function(c){if(c?.phaseKey&&!c.phasePortraitVerified&&!AF_PHASE_PORTRAIT_FALLBACK)return null;return _phaseCharacterImageUrl(c);};
 
-// Keep version selection independent from Trait Draft's gender filter so PK can
-// use every character while still respecting the chosen form.
-function applyCharacterPhases(chars){return (chars||[]).map(withSelectedPhase);}
+// Forms are hidden variants of one character. They can be drawn separately, but
+// intentionally keep the same base id so discard/PK removes every sibling form.
+function characterPhaseVariants(c){const opts=phaseOptionsFor(c);return opts?.length?opts.map(ph=>withCharacterPhase(c,ph)):[c];}
+function applyCharacterPhases(chars){return (chars||[]).flatMap(characterPhaseVariants);}
+function characterIdentityCount(chars){return new Set((chars||[]).map(c=>c.id)).size;}
 const _phaseApplyGenderFilter=applyGenderFilter;
 applyGenderFilter=function(chars){return applyCharacterPhases(_phaseApplyGenderFilter(chars));};
 
@@ -133,10 +139,7 @@ function phasePortraitFallbackBlock(){
 }
 
 function phaseSelectorBlock(seriesIds){
-  const ids=new Set(seriesIds||[]);
-  const chars=[...ids].flatMap(id=>getSeries(id)?.chars||[]).filter(c=>CHARACTER_PHASES[c.id]);
-  if(!chars.length)return"";
-  return `<details class="panel" style="margin-top:16px"><summary><strong>${esc(t("characterPhases"))}</strong></summary><p class="small">${esc(t("characterPhasesDesc"))}</p><div class="phase-select-list">${chars.map(c=>{const opts=CHARACTER_PHASES[c.id],selected=selectedPhaseFor(c);return `<div class="form-group"><label>${esc(displayName(c))}</label><select onchange="setCharacterPhase(${jsarg(c.id)},this.value)">${opts.map(o=>`<option value="${esc(o.key)}" ${o.key===selected.key?"selected":""}>${esc(STATE.lang==="zh"?o.zh:STATE.lang==="ja"?o.ja:o.en)}</option>`).join("")}</select></div>`;}).join("")}</div></details>`;
+  return"";
 }
 
 // Add phase controls to Trait Draft / Quick setup without replacing the existing customizer logic.
@@ -160,6 +163,7 @@ pkSetupView=function(){
 
 // Keep history faithful to the selected version at the time the result was saved.
 const _phaseSaveResult=saveResult;
+resultSignature=function(assigns){return assigns.map(a=>`${a.trait}:${a.character.id}:${a.character.phaseKey||"base"}`).join("|");};
 saveResult=function(){
   if(!STATE.game)return;
   const sig=resultSignature(STATE.game.assignments);
