@@ -8,6 +8,8 @@ const __dirname=path.dirname(fileURLToPath(import.meta.url));
 const root=path.resolve(__dirname,'..');
 const roster=JSON.parse(await fs.readFile(path.join(root,'data/roster.json'),'utf8'));
 const overrides=JSON.parse(await fs.readFile(path.join(root,'data/portrait-overrides.json'),'utf8'));
+let existing={series:{},chars:{}};
+try{existing=JSON.parse(await fs.readFile(path.join(root,'data/portraits.json'),'utf8'));}catch{}
 let lastRequest=0;
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function gql(query,variables,attempt=0){
@@ -63,8 +65,16 @@ const output={generatedAt:new Date().toISOString(),series:{},chars:{}};
 const unmatched=[],low=[];
 for(const series of roster){
   const mediaIds=[],candidateMap=new Map();
-  for(const title of series.anilistSearch||[series.name_en]){
-    try{const media=await resolveMedia(title);if(!media)continue;if(!mediaIds.includes(media.id))mediaIds.push(media.id);for(const c of await fetchMediaCharacters(media.id))candidateMap.set(c.id,c);}catch(e){console.error(`[${series.id}] ${title}: ${e.message}`);}
+  const needsCandidates=series.chars.some(c=>{
+    const ov=overrides[c.id];
+    return !ov?.skip&&!ov?.url&&!ov?.anilistCharacterId&&!existing.chars?.[c.id];
+  });
+  if(needsCandidates){
+    for(const title of series.anilistSearch||[series.name_en]){
+      try{const media=await resolveMedia(title);if(!media)continue;if(!mediaIds.includes(media.id))mediaIds.push(media.id);for(const c of await fetchMediaCharacters(media.id))candidateMap.set(c.id,c);}catch(e){console.error(`[${series.id}] ${title}: ${e.message}`);}
+    }
+  }else{
+    mediaIds.push(...(existing.series?.[series.id]?.mediaIds||[]));
   }
   output.series[series.id]={mediaIds};
   const candidates=[...candidateMap.values()];
@@ -75,6 +85,7 @@ for(const series of roster){
     if(ov?.anilistCharacterId){
       try{const hit=candidateMap.get(ov.anilistCharacterId)||await fetchCharacter(ov.anilistCharacterId);if(hit?.image?.large||hit?.image?.medium){output.chars[c.id]={anilistId:hit.id,url:hit.image.large||hit.image.medium,score:100,source:'override'};continue;}}catch(e){console.error(`override ${c.id}: ${e.message}`);}
     }
+    if(existing.chars?.[c.id]){output.chars[c.id]=existing.chars[c.id];continue;}
     const ranked=candidates.map(n=>({n,score:altMatchScore(c,n),source:'series'})).sort((a,b)=>b.score-a.score);let best=ranked[0];
     if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){const fb=await fallbackCharacter(c,mediaIds);if(fb)best=fb;}
     if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){unmatched.push(`${c.id} (${c.name_en})`);continue;}

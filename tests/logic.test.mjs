@@ -30,6 +30,13 @@ test('normalizeName and matchScore matching behavior',()=>{
   assert.ok(matchScore({name_en:'Monkey D. Luffy'},{name:{full:'Monkey D. Garp',native:''}})<55);
 });
 
+test('every built-in series has at least 25 characters and unique IDs',()=>{
+  const roster=JSON.parse(fs.readFileSync(path.join(root,'data/roster.json'),'utf8'));
+  const ids=roster.flatMap(series=>series.chars.map(character=>character.id));
+  for(const series of roster)assert.ok(series.chars.length>=25,`${series.id} has only ${series.chars.length} characters`);
+  assert.equal(new Set(ids).size,ids.length);
+});
+
 test('version consistency is 0.5.1',()=>{
   const version=JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).version;
   const app=fs.readFileSync(path.join(root,'app.js'),'utf8');

@@ -1204,6 +1204,21 @@
         "id": "chainsawman-violence-fiend",
         "name_en": "Violence Fiend",
         "gender": "male"
+      },
+      {
+        "id": "chainsawman-princi",
+        "name_en": "Princi",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-cosmo",
+        "name_en": "Cosmo",
+        "gender": "female"
+      },
+      {
+        "id": "chainsawman-long",
+        "name_en": "Long",
+        "gender": "female"
       }
     ]
   },
@@ -1330,6 +1345,41 @@
       {
         "id": "spyfamily-dominic",
         "name_en": "Dominic",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-martha-marriott",
+        "name_en": "Martha Marriott",
+        "gender": "female"
+      },
+      {
+        "id": "spyfamily-bill-watkins",
+        "name_en": "Bill Watkins",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-george-glooman",
+        "name_en": "George Glooman",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-murdoch-swan",
+        "name_en": "Murdoch Swan",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-shopkeeper",
+        "name_en": "Shopkeeper",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-matthew-mcmahon",
+        "name_en": "Matthew McMahon",
+        "gender": "male"
+      },
+      {
+        "id": "spyfamily-wheeler",
+        "name_en": "Wheeler",
         "gender": "male"
       }
     ]
@@ -1483,6 +1533,21 @@
       {
         "id": "frieren-genau",
         "name_en": "Genau",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-kraft",
+        "name_en": "Kraft",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-sein",
+        "name_en": "Sein",
+        "gender": "male"
+      },
+      {
+        "id": "frieren-lugner",
+        "name_en": "Lügner",
         "gender": "male"
       }
     ]
@@ -1654,6 +1719,11 @@
         "id": "aot-onyankopon",
         "name_en": "Onyankopon",
         "gender": "male"
+      },
+      {
+        "id": "aot-yelena",
+        "name_en": "Yelena",
+        "gender": "female"
       }
     ]
   },
@@ -2004,6 +2074,11 @@
         "id": "hunterxhunter-pakunoda",
         "name_en": "Pakunoda",
         "gender": "female"
+      },
+      {
+        "id": "hunterxhunter-komugi",
+        "name_en": "Komugi",
+        "gender": "female"
       }
     ]
   },
@@ -2156,6 +2231,21 @@
       {
         "id": "fma-solf-j-kimblee",
         "name_en": "Solf J. Kimblee",
+        "gender": "male"
+      },
+      {
+        "id": "fma-father",
+        "name_en": "Father",
+        "gender": "male"
+      },
+      {
+        "id": "fma-buccaneer",
+        "name_en": "Buccaneer",
+        "gender": "male"
+      },
+      {
+        "id": "fma-jean-havoc",
+        "name_en": "Jean Havoc",
         "gender": "male"
       }
     ]
@@ -2320,6 +2410,11 @@
         "id": "blackclover-dorothy-unsworth",
         "name_en": "Dorothy Unsworth",
         "gender": "female"
+      },
+      {
+        "id": "blackclover-william-vangeance",
+        "name_en": "William Vangeance",
+        "gender": "male"
       }
     ]
   },
@@ -2469,6 +2564,21 @@
       {
         "id": "onepunchman-pig-god",
         "name_en": "Pig God",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-superalloy-darkshine",
+        "name_en": "Superalloy Darkshine",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-lord-boros",
+        "name_en": "Lord Boros",
+        "gender": "male"
+      },
+      {
+        "id": "onepunchman-carnage-kabuto",
+        "name_en": "Carnage Kabuto",
         "gender": "male"
       }
     ]
@@ -2786,6 +2896,31 @@
         "id": "sao-eiji",
         "name_en": "Eiji",
         "gender": "male"
+      },
+      {
+        "id": "sao-argo",
+        "name_en": "Argo",
+        "gender": "female"
+      },
+      {
+        "id": "sao-gabriel-miller",
+        "name_en": "Gabriel Miller",
+        "gender": "male"
+      },
+      {
+        "id": "sao-vassago-casals",
+        "name_en": "Vassago Casals",
+        "gender": "male"
+      },
+      {
+        "id": "sao-sheyta-synthesis-twelve",
+        "name_en": "Sheyta Synthesis Twelve",
+        "gender": "female"
+      },
+      {
+        "id": "sao-iskahn",
+        "name_en": "Iskahn",
+        "gender": "male"
       }
     ]
   },
@@ -2901,6 +3036,31 @@
         "id": "jojo-weather-report",
         "name_en": "Weather Report",
         "gender": "male"
+      },
+      {
+        "id": "jojo-enrico-pucci",
+        "name_en": "Enrico Pucci",
+        "gender": "male"
+      },
+      {
+        "id": "jojo-narciso-anasui",
+        "name_en": "Narciso Anasui",
+        "gender": "male"
+      },
+      {
+        "id": "jojo-ermes-costello",
+        "name_en": "Ermes Costello",
+        "gender": "female"
+      },
+      {
+        "id": "jojo-foo-fighters",
+        "name_en": "Foo Fighters",
+        "gender": "female"
+      },
+      {
+        "id": "jojo-yoshikage-kira",
+        "name_en": "Yoshikage Kira",
+        "gender": "male"
       }
     ]
   },
@@ -3004,6 +3164,41 @@
         "id": "fairytail-rogue-cheney",
         "name_en": "Rogue Cheney",
         "gender": "male"
+      },
+      {
+        "id": "fairytail-elfman-strauss",
+        "name_en": "Elfman Strauss",
+        "gender": "male"
+      },
+      {
+        "id": "fairytail-lisanna-strauss",
+        "name_en": "Lisanna Strauss",
+        "gender": "female"
+      },
+      {
+        "id": "fairytail-freed-justine",
+        "name_en": "Freed Justine",
+        "gender": "male"
+      },
+      {
+        "id": "fairytail-gildarts-clive",
+        "name_en": "Gildarts Clive",
+        "gender": "male"
+      },
+      {
+        "id": "fairytail-ultear-milkovich",
+        "name_en": "Ultear Milkovich",
+        "gender": "female"
+      },
+      {
+        "id": "fairytail-minerva-orland",
+        "name_en": "Minerva Orland",
+        "gender": "female"
+      },
+      {
+        "id": "fairytail-kagura-mikazuchi",
+        "name_en": "Kagura Mikazuchi",
+        "gender": "female"
       }
     ]
   },
@@ -3096,6 +3291,51 @@
         "id": "sololeveling-ashborn",
         "name_en": "Ashborn",
         "gender": "male"
+      },
+      {
+        "id": "sololeveling-park-heejin",
+        "name_en": "Park Heejin",
+        "gender": "female"
+      },
+      {
+        "id": "sololeveling-lee-joohee",
+        "name_en": "Lee Joohee",
+        "gender": "female"
+      },
+      {
+        "id": "sololeveling-song-chiyul",
+        "name_en": "Song Chiyul",
+        "gender": "male"
+      },
+      {
+        "id": "sololeveling-kang-taeshik",
+        "name_en": "Kang Taeshik",
+        "gender": "male"
+      },
+      {
+        "id": "sololeveling-hwang-dongsoo",
+        "name_en": "Hwang Dongsoo",
+        "gender": "male"
+      },
+      {
+        "id": "sololeveling-hwang-dongsuk",
+        "name_en": "Hwang Dongsuk",
+        "gender": "male"
+      },
+      {
+        "id": "sololeveling-kim-chul",
+        "name_en": "Kim Chul",
+        "gender": "male"
+      },
+      {
+        "id": "sololeveling-lim-taegyu",
+        "name_en": "Lim Taegyu",
+        "gender": "male"
+      },
+      {
+        "id": "sololeveling-ma-dongwook",
+        "name_en": "Ma Dongwook",
+        "gender": "male"
       }
     ]
   },
@@ -3178,6 +3418,61 @@
       {
         "id": "mobpsycho-mogami-keiji",
         "name_en": "Mogami Keiji",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-tenga-onigawara",
+        "name_en": "Tenga Onigawara",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-emi",
+        "name_en": "Emi",
+        "gender": "female"
+      },
+      {
+        "id": "mobpsycho-shinji-kamuro",
+        "name_en": "Shinji Kamuro",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-mameta-inukawa",
+        "name_en": "Mameta Inukawa",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-haruto-kijibayashi",
+        "name_en": "Haruto Kijibayashi",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-shirihiko-saruta",
+        "name_en": "Shirihiko Saruta",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-ryo-shimazaki",
+        "name_en": "Ryo Shimazaki",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-toshiki-minegishi",
+        "name_en": "Toshiki Minegishi",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-yusuke-sakurai",
+        "name_en": "Yusuke Sakurai",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-matsuo",
+        "name_en": "Matsuo",
+        "gender": "male"
+      },
+      {
+        "id": "mobpsycho-ishiguro",
+        "name_en": "Ishiguro",
         "gender": "male"
       }
     ]
@@ -3272,6 +3567,51 @@
         "id": "tokyoghoul-renji-yomo",
         "name_en": "Renji Yomo",
         "gender": "male"
+      },
+      {
+        "id": "tokyoghoul-yoshimura",
+        "name_en": "Yoshimura",
+        "gender": "male"
+      },
+      {
+        "id": "tokyoghoul-tatara",
+        "name_en": "Tatara",
+        "gender": "male"
+      },
+      {
+        "id": "tokyoghoul-yakumo-oomori",
+        "name_en": "Yakumo Oomori",
+        "gender": "male"
+      },
+      {
+        "id": "tokyoghoul-kureo-mado",
+        "name_en": "Kureo Mado",
+        "gender": "male"
+      },
+      {
+        "id": "tokyoghoul-seidou-takizawa",
+        "name_en": "Seidou Takizawa",
+        "gender": "male"
+      },
+      {
+        "id": "tokyoghoul-kurona-yasuhisa",
+        "name_en": "Kurona Yasuhisa",
+        "gender": "female"
+      },
+      {
+        "id": "tokyoghoul-nashiro-yasuhisa",
+        "name_en": "Nashiro Yasuhisa",
+        "gender": "female"
+      },
+      {
+        "id": "tokyoghoul-karren-von-rosewald",
+        "name_en": "Karren von Rosewald",
+        "gender": "female"
+      },
+      {
+        "id": "tokyoghoul-nimura-furuta",
+        "name_en": "Nimura Furuta",
+        "gender": "male"
       }
     ]
   },
@@ -3343,6 +3683,71 @@
       {
         "id": "dandadan-count-saint-germain",
         "name_en": "Count Saint-Germain",
+        "gender": "male"
+      },
+      {
+        "id": "dandadan-acrobatic-silky",
+        "name_en": "Acrobatic Silky",
+        "gender": "female"
+      },
+      {
+        "id": "dandadan-serpo-alien",
+        "name_en": "Serpo Alien",
+        "gender": "male"
+      },
+      {
+        "id": "dandadan-flatwoods-monster",
+        "name_en": "Flatwoods Monster",
+        "gender": "male"
+      },
+      {
+        "id": "dandadan-mr-mantis-shrimp",
+        "name_en": "Mr. Mantis Shrimp",
+        "gender": "male"
+      },
+      {
+        "id": "dandadan-chiquitita",
+        "name_en": "Chiquitita",
+        "gender": "male"
+      },
+      {
+        "id": "dandadan-taro",
+        "name_en": "Taro",
+        "gender": "male"
+      },
+      {
+        "id": "dandadan-hana",
+        "name_en": "Hana",
+        "gender": "female"
+      },
+      {
+        "id": "dandadan-rokuro-serpo",
+        "name_en": "Rokuro Serpo",
+        "gender": "male"
+      },
+      {
+        "id": "dandadan-ludris",
+        "name_en": "Ludris",
+        "gender": "male"
+      },
+      {
+        "id": "dandadan-naki-kito",
+        "name_en": "Naki Kito",
+        "gender": "female"
+      },
+      {
+        "id": "dandadan-banga",
+        "name_en": "Banga",
+        "gender": "female"
+      },
+      {
+        "id": "dandadan-payase",
+        "name_en": "Payase",
+        "gender": "male"
+      },
+      {
+        "id": "dandadan-kashimoto",
+        "name_en": "Kashimoto",
         "gender": "male"
       }
     ]
@@ -3426,6 +3831,61 @@
         "id": "kaijuno8-akari-minase",
         "name_en": "Akari Minase",
         "gender": "female"
+      },
+      {
+        "id": "kaijuno8-eiji-hasegawa",
+        "name_en": "Eiji Hasegawa",
+        "gender": "male"
+      },
+      {
+        "id": "kaijuno8-keiji-itami",
+        "name_en": "Keiji Itami",
+        "gender": "male"
+      },
+      {
+        "id": "kaijuno8-tae-nakanoshima",
+        "name_en": "Tae Nakanoshima",
+        "gender": "female"
+      },
+      {
+        "id": "kaijuno8-hakua-igarashi",
+        "name_en": "Hakua Igarashi",
+        "gender": "female"
+      },
+      {
+        "id": "kaijuno8-ryo-ikaruga",
+        "name_en": "Ryo Ikaruga",
+        "gender": "male"
+      },
+      {
+        "id": "kaijuno8-soichiro-hoshina",
+        "name_en": "Soichiro Hoshina",
+        "gender": "male"
+      },
+      {
+        "id": "kaijuno8-jugo-ogata",
+        "name_en": "Jugo Ogata",
+        "gender": "male"
+      },
+      {
+        "id": "kaijuno8-jura-igarashi",
+        "name_en": "Jura Igarashi",
+        "gender": "male"
+      },
+      {
+        "id": "kaijuno8-kaiju-no-10",
+        "name_en": "Kaiju No. 10",
+        "gender": "male"
+      },
+      {
+        "id": "kaijuno8-kaiju-no-11",
+        "name_en": "Kaiju No. 11",
+        "gender": "male"
+      },
+      {
+        "id": "kaijuno8-kaiju-no-12",
+        "name_en": "Kaiju No. 12",
+        "gender": "male"
       }
     ]
   },
@@ -3518,6 +3978,51 @@
       {
         "id": "fireforce-viktor-licht",
         "name_en": "Viktor Licht",
+        "gender": "male"
+      },
+      {
+        "id": "fireforce-vulcan-joseph",
+        "name_en": "Vulcan Joseph",
+        "gender": "male"
+      },
+      {
+        "id": "fireforce-lisa-isaribi",
+        "name_en": "Lisa Isaribi",
+        "gender": "female"
+      },
+      {
+        "id": "fireforce-yu",
+        "name_en": "Yu",
+        "gender": "male"
+      },
+      {
+        "id": "fireforce-giovanni",
+        "name_en": "Giovanni",
+        "gender": "male"
+      },
+      {
+        "id": "fireforce-arrow",
+        "name_en": "Arrow",
+        "gender": "female"
+      },
+      {
+        "id": "fireforce-assault",
+        "name_en": "Assault",
+        "gender": "male"
+      },
+      {
+        "id": "fireforce-ogun-montgomery",
+        "name_en": "Ogun Montgomery",
+        "gender": "male"
+      },
+      {
+        "id": "fireforce-karim-flam",
+        "name_en": "Karim Flam",
+        "gender": "male"
+      },
+      {
+        "id": "fireforce-konro-sagamiya",
+        "name_en": "Konro Sagamiya",
         "gender": "male"
       }
     ]
