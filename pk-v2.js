@@ -5,19 +5,19 @@
 Object.assign(I18N.en,{
   randomPK:"Random PK",budgetPK:"$100 Budget PK",budgetPKDesc:"Share one roster and build a six-role team without spending over $100.",
   pkStyle:"Draft style",sharedRoster:"Shared roster",budget:"Budget",cost:"Cost",affordable:"Affordable",sold:"Drafted",
-  dragHint:"Drag a card to an open role, or tap the card then the role.",skipPair:"Skip pair",skipUsed:"Skip used",remainingBudget:"remaining",
+  dragHint:"Drag a card to an open role, or tap the card then the role.",dragHandle:"Drag",skipPair:"Skip pair",skipUsed:"Skip used",remainingBudget:"remaining",
   directMatchups:"Direct matchups",budgetRule:"Keep enough budget to fill every remaining role.",gallery:"Gallery"
 });
 Object.assign(I18N.zh,{
   randomPK:"随机阵容对决",budgetPK:"$100 预算对决",budgetPKDesc:"双方共用同一个角色池，以100元预算组建六人阵容。",
   pkStyle:"选角方式",sharedRoster:"共享角色池",budget:"预算",cost:"价格",affordable:"可购买",sold:"已被选走",
-  dragHint:"把角色卡拖到空缺定位；也可以先点角色，再点定位。",skipPair:"跳过本轮",skipUsed:"已使用跳过",remainingBudget:"剩余",
+  dragHint:"把角色卡拖到空缺定位；也可以先点角色，再点定位。",dragHandle:"拖动",skipPair:"跳过本轮",skipUsed:"已使用跳过",remainingBudget:"剩余",
   directMatchups:"对应单挑",budgetRule:"必须预留足够预算填满所有剩余定位。",gallery:"角色图库"
 });
 Object.assign(I18N.ja,{
   randomPK:"ランダム対決",budgetPK:"$100 予算対決",budgetPKDesc:"1つの共有キャラプールから、100ドル以内で6つの役割を編成します。",
   pkStyle:"ドラフト方式",sharedRoster:"共有キャラプール",budget:"予算",cost:"価格",affordable:"獲得可能",sold:"ドラフト済み",
-  dragHint:"キャラカードを空き役職へドラッグ。カードをタップしてから役職を選んでもOK。",skipPair:"候補をスキップ",skipUsed:"スキップ使用済み",remainingBudget:"残り",
+  dragHint:"キャラカードを空き役職へドラッグ。カードをタップしてから役職を選んでもOK。",dragHandle:"ドラッグ",skipPair:"候補をスキップ",skipUsed:"スキップ使用済み",remainingBudget:"残り",
   directMatchups:"一対一の組み合わせ",budgetRule:"残りの全役職を埋められる予算を確保してください。",gallery:"キャラ図鑑"
 });
 
@@ -114,8 +114,10 @@ function pkTeam(n){
 }
 
 function pkCandidateCard(c,i,{compact=false,disabled=false}={}){
-  const url=characterImageUrl(c),name=displayName(c),selected=STATE.pk?.selectedIndex===i,price=characterPrice(c);
-  return `<button class="pk-candidate${compact?" compact":""}${selected?" selected":""}${disabled?" disabled":""}" data-index="${i}" ${disabled?"disabled":""} onpointerdown="beginPKDrag(${i},event)" onclick="selectPKCandidate(${i})">${url?`<img src="${esc(url)}" alt="${esc(name)}" referrerpolicy="no-referrer">`:`<div class="pk-candidate-fallback">${esc(initials(name))}</div>`}<div><strong>${esc(name)}</strong>${STATE.pk?.kind==="budget"?`<span class="price">$${price}</span>`:""}</div></button>`;
+  const url=characterImageUrl(c),name=displayName(c),selected=STATE.pk?.selectedIndex===i,price=characterPrice(c),budget=STATE.pk?.kind==="budget";
+  const dragStart=budget?"":`onpointerdown="beginPKDrag(${i},event)"`;
+  const handle=budget?`<span class="pk-drag-handle" aria-label="${esc(t("dragHandle"))}" onpointerdown="beginPKDrag(${i},event)">⠿</span>`:"";
+  return `<button class="pk-candidate${compact?" compact":""}${selected?" selected":""}${disabled?" disabled":""}" data-index="${i}" ${disabled?"disabled":""} ${dragStart} onclick="selectPKCandidate(${i})">${handle}${url?`<img src="${esc(url)}" alt="${esc(name)}" referrerpolicy="no-referrer">`:`<div class="pk-candidate-fallback">${esc(initials(name))}</div>`}<div><strong title="${esc(name)}">${esc(name)}</strong>${budget?`<span class="price">$${price}</span>`:""}</div></button>`;
 }
 function selectPKCandidate(i){const pk=STATE.pk;if(!pk||pk.revealing)return;pk.selectedIndex=pk.selectedIndex===i?null:i;render();}
 function selectedPKCharacter(){const pk=STATE.pk;if(!pk||pk.selectedIndex===null)return null;if(pk.kind==="random")return pk.pair[pk.selectedIndex]||null;return budgetPool()[pk.selectedIndex]||null;}
@@ -141,7 +143,7 @@ let AF_PK_DRAG=null,AF_PK_SUPPRESS_CLICK=0;
 const _afSelectPKCandidate=selectPKCandidate;
 selectPKCandidate=function(i){if(Date.now()<AF_PK_SUPPRESS_CLICK)return;_afSelectPKCandidate(i);};
 function beginPKDrag(i,event){
-  const pk=STATE.pk;if(!pk||pk.revealing||event.button>0)return;const source=event.currentTarget,startX=event.clientX,startY=event.clientY;let moved=false,ghost=null;
+  const pk=STATE.pk;if(!pk||pk.revealing||event.button>0)return;event.stopPropagation();const source=event.currentTarget.closest(".pk-candidate"),startX=event.clientX,startY=event.clientY;let moved=false,ghost=null;
   function move(e){if(Math.hypot(e.clientX-startX,e.clientY-startY)<7&&!moved)return;moved=true;e.preventDefault();if(!ghost){ghost=source.cloneNode(true);ghost.className="pk-drag-ghost";document.body.appendChild(ghost);}ghost.style.transform=`translate(${e.clientX+12}px,${e.clientY+12}px)`;document.querySelectorAll(".pk-role-slot.drag-over").forEach(x=>x.classList.remove("drag-over"));document.elementFromPoint(e.clientX,e.clientY)?.closest(`.pk-role-slot.droppable[data-player="${pk.turn}"]`)?.classList.add("drag-over");}
   function end(e){window.removeEventListener("pointermove",move);window.removeEventListener("pointerup",end);window.removeEventListener("pointercancel",end);ghost?.remove();document.querySelectorAll(".pk-role-slot.drag-over").forEach(x=>x.classList.remove("drag-over"));AF_PK_SUPPRESS_CLICK=Date.now()+350;pk.selectedIndex=i;if(moved){const slot=document.elementFromPoint(e.clientX,e.clientY)?.closest(`.pk-role-slot.droppable[data-player="${pk.turn}"]`);if(slot){assignSelectedPKRole(pk.turn,slot.dataset.role);return;}}render();}
   window.addEventListener("pointermove",move,{passive:false});window.addEventListener("pointerup",end,{once:true});window.addEventListener("pointercancel",end,{once:true});AF_PK_DRAG={i};
