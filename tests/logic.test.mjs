@@ -48,7 +48,7 @@ test('reviewed portrait and gender corrections stay intact',()=>{
   assert.equal(overrides['dragonball-kid-trunks'].skip,true);
   assert.equal(chars['onepiece-yamato'].gender,'male');
   assert.equal(chars['kaijuno8-jura-igarashi'].gender,'female');
-  for(const id of ['aot-hange-zoe','hunterxhunter-neferpitou','fma-envy','jojo-foo-fighters'])assert.equal(chars[id].gender,undefined);
+  for(const id of ['jjk-kirara-hoshi','aot-hange-zoe','hunterxhunter-neferpitou','fma-envy','jojo-foo-fighters'])assert.equal(chars[id].gender,undefined);
 });
 
 test('version consistency is 0.5.2',()=>{
