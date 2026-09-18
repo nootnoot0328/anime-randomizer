@@ -56,6 +56,16 @@ test('every series has six localized PK roles and a dedicated battlefield',()=>{
   }
 });
 
+test('mobile PK keeps budget scrolling separate from dragging',()=>{
+  const script=fs.readFileSync(path.join(root,'pk-v2.js'),'utf8');
+  const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
+  assert.match(script,/class="pk-drag-handle"/);
+  assert.match(script,/const dragStart=budget\?""/);
+  assert.match(css,/\.pk-budget-tray \.pk-candidate\{[^}]*touch-action:pan-x/);
+  assert.match(css,/\.pk-drag-ghost img/);
+  assert.match(css,/\.pk-role-grid\{[^}]*repeat\(2,minmax\(0,1fr\)\)[^}]*repeat\(3,minmax\(0,1fr\)\)/);
+});
+
 test('reviewed portrait and gender corrections stay intact',()=>{
   const roster=JSON.parse(fs.readFileSync(path.join(root,'data/roster.json'),'utf8'));
   const overrides=JSON.parse(fs.readFileSync(path.join(root,'data/portrait-overrides.json'),'utf8'));
