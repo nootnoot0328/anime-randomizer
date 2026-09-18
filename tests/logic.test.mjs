@@ -66,6 +66,22 @@ test('mobile PK keeps budget scrolling separate from dragging',()=>{
   assert.match(css,/\.pk-role-grid\{[^}]*repeat\(2,minmax\(0,1fr\)\)[^}]*repeat\(3,minmax\(0,1fr\)\)/);
 });
 
+test('PK ignores the Trait Draft gender filter but keeps selected character phases',()=>{
+  const script=fs.readFileSync(path.join(root,'pk-v2.js'),'utf8');
+  assert.doesNotMatch(script,/applyGenderFilter\(/);
+  assert.match(script,/function pkCharacters\(chars\).*applyCharacterPhases/);
+  assert.match(script,/function pkPool\(player\).*pkCharacters/);
+});
+
+test('Gallery exposes a persistent strict-or-fallback form portrait toggle',()=>{
+  const script=fs.readFileSync(path.join(root,'phases.js'),'utf8');
+  assert.match(script,/AF_PHASE_PORTRAIT_KEY/);
+  assert.match(script,/function setPhasePortraitFallback/);
+  assert.match(script,/portraitFallback/);
+  assert.match(script,/portraitStrict/);
+  assert.match(script,/libraryView=function\(\)\{return phasePortraitFallbackBlock\(\)/);
+});
+
 test('reviewed portrait and gender corrections stay intact',()=>{
   const roster=JSON.parse(fs.readFileSync(path.join(root,'data/roster.json'),'utf8'));
   const overrides=JSON.parse(fs.readFileSync(path.join(root,'data/portrait-overrides.json'),'utf8'));
