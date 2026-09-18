@@ -37,6 +37,20 @@ test('every built-in series has at least 25 characters and unique IDs',()=>{
   assert.equal(new Set(ids).size,ids.length);
 });
 
+test('reviewed portrait and gender corrections stay intact',()=>{
+  const roster=JSON.parse(fs.readFileSync(path.join(root,'data/roster.json'),'utf8'));
+  const overrides=JSON.parse(fs.readFileSync(path.join(root,'data/portrait-overrides.json'),'utf8'));
+  const chars=Object.fromEntries(roster.flatMap(series=>series.chars.map(character=>[character.id,character])));
+  assert.equal(overrides['chainsawman-yoru'].anilistCharacterId,282872);
+  assert.equal(overrides['chainsawman-santa-claus'].anilistCharacterId,174268);
+  assert.equal(overrides['tokyoghoul-eto-yoshimura'].anilistCharacterId,90231);
+  assert.equal(overrides['naruto-nagato'].skip,true);
+  assert.equal(overrides['dragonball-kid-trunks'].skip,true);
+  assert.equal(chars['onepiece-yamato'].gender,'male');
+  assert.equal(chars['kaijuno8-jura-igarashi'].gender,'female');
+  for(const id of ['aot-hange-zoe','hunterxhunter-neferpitou','fma-envy','jojo-foo-fighters'])assert.equal(chars[id].gender,undefined);
+});
+
 test('version consistency is 0.5.2',()=>{
   const version=JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).version;
   const app=fs.readFileSync(path.join(root,'app.js'),'utf8');

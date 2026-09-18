@@ -12,7 +12,7 @@
     "anilistCharacterId": 3149
   },
   "naruto-nagato": {
-    "anilistCharacterId": 3180
+    "skip": true
   },
   "jjk-kokichi-muta": {
     "anilistCharacterId": 210154
@@ -101,6 +101,12 @@
   "chainsawman-long": {
     "anilistCharacterId": 172889
   },
+  "chainsawman-yoru": {
+    "anilistCharacterId": 282872
+  },
+  "chainsawman-santa-claus": {
+    "anilistCharacterId": 174268
+  },
   "spyfamily-wheeler": {
     "anilistCharacterId": 383162
   },
@@ -148,6 +154,12 @@
   },
   "sololeveling-kim-chul": {
     "anilistCharacterId": 241284
+  },
+  "tokyoghoul-eto-yoshimura": {
+    "anilistCharacterId": 90231
+  },
+  "dragonball-kid-trunks": {
+    "skip": true
   },
   "fireforce-yu": {
     "anilistCharacterId": 150321

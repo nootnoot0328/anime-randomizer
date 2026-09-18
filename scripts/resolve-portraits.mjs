@@ -54,7 +54,11 @@ async function fallbackCharacter(c,mediaIds){
     try{
       const hit=await searchCharacter(search);if(!hit)continue;
       const score=altMatchScore(c,hit);
-      if((score>=70&&(belongsToSeries(hit,mediaIds)||score===100))&&(hit.image?.large||hit.image?.medium)){
+      // A matching alias alone is unsafe: unrelated characters can share the same
+      // name (for example, Chainsaw Man's Yoru and Tower of God's "Yoru" alias).
+      // Require an anime from the selected franchise; manga-only characters need
+      // an explicit, reviewed override.
+      if(score>=70&&belongsToSeries(hit,mediaIds)&&(hit.image?.large||hit.image?.medium)){
         if(!best||score>best.score)best={n:hit,score,source:'global'};
       }
     }catch(e){console.error(`global ${c.id} (${search}): ${e.message}`);}

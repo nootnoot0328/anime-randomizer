@@ -118,7 +118,7 @@
         "name_en": "Yamato",
         "name_ja": "ヤマト",
         "name_zh": "大和",
-        "gender": "female"
+        "gender": "male"
       },
       {
         "id": "onepiece-eustass-kid",
@@ -1603,8 +1603,7 @@
         "id": "aot-hange-zoe",
         "name_en": "Hange Zoe",
         "name_ja": "ハンジ・ゾエ",
-        "name_zh": "韩吉·佐耶",
-        "gender": "female"
+        "name_zh": "韩吉·佐耶"
       },
       {
         "id": "aot-jean-kirstein",
@@ -1997,8 +1996,7 @@
         "id": "hunterxhunter-neferpitou",
         "name_en": "Neferpitou",
         "name_ja": "ネフェルピトー",
-        "name_zh": "尼飞彼多",
-        "gender": "female"
+        "name_zh": "尼飞彼多"
       },
       {
         "id": "hunterxhunter-machi-komacine",
@@ -2186,8 +2184,7 @@
         "id": "fma-envy",
         "name_en": "Envy",
         "name_ja": "エンヴィー",
-        "name_zh": "恩维",
-        "gender": "male"
+        "name_zh": "恩维"
       },
       {
         "id": "fma-izumi-curtis",
@@ -3054,8 +3051,7 @@
       },
       {
         "id": "jojo-foo-fighters",
-        "name_en": "Foo Fighters",
-        "gender": "female"
+        "name_en": "Foo Fighters"
       },
       {
         "id": "jojo-yoshikage-kira",
@@ -3870,7 +3866,7 @@
       {
         "id": "kaijuno8-jura-igarashi",
         "name_en": "Jura Igarashi",
-        "gender": "male"
+        "gender": "female"
       },
       {
         "id": "kaijuno8-kaiju-no-10",

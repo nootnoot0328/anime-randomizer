@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T05:28:26.403Z",
+  "generatedAt": "2026-09-18T06:02:22.194Z",
   "series": {
     "onepiece": {
       "mediaIds": [
@@ -548,12 +548,6 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1900-Dpd9wVWtlvIx.png",
       "score": 100,
       "source": "series"
-    },
-    "naruto-nagato": {
-      "anilistId": 3180,
-      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b3180-ITMGBLWNBOgV.png",
-      "score": 100,
-      "source": "override"
     },
     "jjk-satoru-gojo": {
       "anilistId": 127691,
@@ -1138,10 +1132,10 @@
       "source": "global"
     },
     "chainsawman-yoru": {
-      "anilistId": 84769,
-      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b84769-NaLHptr4KXKd.png",
+      "anilistId": 282872,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b282872-taoHfD0JGiZG.jpg",
       "score": 100,
-      "source": "global"
+      "source": "override"
     },
     "chainsawman-fami": {
       "anilistId": 294475,
@@ -1168,10 +1162,10 @@
       "source": "global"
     },
     "chainsawman-santa-claus": {
-      "anilistId": 221260,
-      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b221260-rmhvt0ZnS4iy.png",
+      "anilistId": 174268,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b174268-6hOGseNoWTsA.png",
       "score": 100,
-      "source": "global"
+      "source": "override"
     },
     "chainsawman-akane-sawatari": {
       "anilistId": 174264,
@@ -2541,12 +2535,6 @@
       "score": 65,
       "source": "series"
     },
-    "dragonball-kid-trunks": {
-      "anilistId": 2707,
-      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b2707-YKWmn4q87oF8.png",
-      "score": 100,
-      "source": "series"
-    },
     "dragonball-jiren": {
       "anilistId": 126257,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b126257-nGjgbsnxZkUB.png",
@@ -3364,10 +3352,10 @@
       "source": "series"
     },
     "tokyoghoul-eto-yoshimura": {
-      "anilistId": 136024,
-      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b136024-cSFppR7s21xh.png",
-      "score": 65,
-      "source": "series"
+      "anilistId": 90231,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90231-7ZeFK1DbrAxw.jpg",
+      "score": 100,
+      "source": "override"
     },
     "tokyoghoul-rize-kamishiro": {
       "anilistId": 88413,
