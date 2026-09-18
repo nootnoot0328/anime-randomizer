@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T00:16:18.469Z",
+  "generatedAt": "2026-09-18T00:28:22.652Z",
   "series": {
     "onepiece": {
       "mediaIds": [
@@ -1209,6 +1209,12 @@
       "score": 100,
       "source": "global"
     },
+    "chainsawman-long": {
+      "anilistId": 172889,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b172889-v5ZoNSOVVTcp.png",
+      "score": 100,
+      "source": "override"
+    },
     "spyfamily-loid-forger": {
       "anilistId": 138101,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b138101-7NCB0Md8zA6G.png",
@@ -1353,6 +1359,12 @@
       "score": 100,
       "source": "series"
     },
+    "spyfamily-wheeler": {
+      "anilistId": 383162,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b383162-vf1lW8i8WBku.png",
+      "score": 100,
+      "source": "override"
+    },
     "frieren-frieren": {
       "anilistId": 176754,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b176754-PCnpqIOkjhFk.png",
@@ -1484,6 +1496,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b246055-3eoVNiZu3bTy.png",
       "score": 100,
       "source": "global"
+    },
+    "frieren-kraft": {
+      "anilistId": 219732,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b219732-GKmSY9oTm6cR.jpg",
+      "score": 100,
+      "source": "override"
     },
     "frieren-sein": {
       "anilistId": 205177,
@@ -2691,6 +2709,12 @@
       "score": 100,
       "source": "series"
     },
+    "sao-sheyta-synthesis-twelve": {
+      "anilistId": 171679,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b171679-YBgNp87TURZv.jpg",
+      "score": 100,
+      "source": "override"
+    },
     "sao-iskahn": {
       "anilistId": 155761,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b155761-Ty9hqxrtP9aQ.png",
@@ -2828,6 +2852,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b24327-NQg6L5c2gaOK.png",
       "score": 100,
       "source": "series"
+    },
+    "jojo-ermes-costello": {
+      "anilistId": 13369,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b13369-7lNj3c1ohOVz.png",
+      "score": 100,
+      "source": "override"
     },
     "jojo-foo-fighters": {
       "anilistId": 32507,
@@ -3099,17 +3129,47 @@
       "score": 100,
       "source": "series"
     },
+    "sololeveling-song-chiyul": {
+      "anilistId": 136073,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b136073-0hZNgsWB9ZLH.png",
+      "score": 100,
+      "source": "override"
+    },
+    "sololeveling-kang-taeshik": {
+      "anilistId": 181155,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b181155-IkXnHuzG6he9.png",
+      "score": 100,
+      "source": "override"
+    },
     "sololeveling-hwang-dongsoo": {
       "anilistId": 136075,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b136075-M6VRrZyHpaI5.png",
       "score": 100,
       "source": "series"
     },
+    "sololeveling-hwang-dongsuk": {
+      "anilistId": 306666,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b306666-k7s0nluzaWod.png",
+      "score": 100,
+      "source": "override"
+    },
     "sololeveling-kim-chul": {
       "anilistId": 135934,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b135934-4jRjw5KtJuQ4.jpg",
       "score": 100,
       "source": "global"
+    },
+    "sololeveling-lim-taegyu": {
+      "anilistId": 306512,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b306512-A5Lr0OJQWuLG.png",
+      "score": 100,
+      "source": "override"
+    },
+    "sololeveling-ma-dongwook": {
+      "anilistId": 184555,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b184555-NMCZb01p2Aqp.png",
+      "score": 100,
+      "source": "override"
     },
     "mobpsycho-shigeo-kageyama": {
       "anilistId": 89616,
@@ -3230,6 +3290,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/n133398-mEXR6X175mm2.jpg",
       "score": 100,
       "source": "series"
+    },
+    "mobpsycho-ryo-shimazaki": {
+      "anilistId": 137015,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b137015-l7xlZzKdo6R2.png",
+      "score": 100,
+      "source": "override"
     },
     "mobpsycho-toshiki-minegishi": {
       "anilistId": 137013,
@@ -3531,6 +3597,12 @@
       "score": 100,
       "source": "series"
     },
+    "dandadan-naki-kito": {
+      "anilistId": 270700,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b270700-j44U9thDeoXZ.png",
+      "score": 100,
+      "source": "override"
+    },
     "dandadan-banga": {
       "anilistId": 330190,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b330190-JpHWVdjezS3u.png",
@@ -3657,11 +3729,35 @@
       "score": 100,
       "source": "series"
     },
+    "kaijuno8-ryo-ikaruga": {
+      "anilistId": 308030,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b308030-dsdiqSzhJjy2.png",
+      "score": 100,
+      "source": "override"
+    },
+    "kaijuno8-soichiro-hoshina": {
+      "anilistId": 311258,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b311258-Hyd6VtR6nhKc.png",
+      "score": 100,
+      "source": "override"
+    },
+    "kaijuno8-jugo-ogata": {
+      "anilistId": 311254,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b311254-PnXyBUK9gtE5.png",
+      "score": 100,
+      "source": "override"
+    },
     "kaijuno8-jura-igarashi": {
       "anilistId": 305765,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b305765-WjaXwlheFk5k.png",
       "score": 100,
       "source": "series"
+    },
+    "kaijuno8-kaiju-no-10": {
+      "anilistId": 308033,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b308033-tORB6LC1JvNf.png",
+      "score": 100,
+      "source": "override"
     },
     "kaijuno8-kaiju-no-11": {
       "anilistId": 311283,
