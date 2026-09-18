@@ -5,63 +5,57 @@ const L = window.AnimeFusionLogic;
 
 const I18N = {
   en:{
-    home:"Home",packs:"Packs",history:"History",settings:"Settings",loading:"Loading Anime Fusion…",loadFailed:"Could not load app data.",
+    home:"Home",gallery:"Gallery",history:"History",settings:"Settings",loading:"Loading Anime Fusion…",loadFailed:"Could not load app data.",
     heroTitle:"Build someone impossible.",subtitle:"Build impossible anime characters, one bad decision at a time.",
     standard:"Trait Draft",standardDesc:"Choose between two characters, then decide which trait to inherit.",
     quick:"Quick Randomizer",quickDesc:"One tap. Every trait is revealed by roulette.",pk:"PK Team Draft",pkDesc:"Two players draft non-repeatable characters into team roles.",
-    chooseSeries:"Choose Series",chooseSeriesDesc:"Mix as many series or private packs as you like.",chooseMode:"Choose Game",start:"Start Draft",quickStart:"Randomize All",
+    chooseSeries:"Choose Series",chooseSeriesDesc:"Mix as many built-in series as you like.",chooseMode:"Choose Game",start:"Start Draft",quickStart:"Randomize All",
     partner:"Anime Partner",protagonist:"Protagonist",villain:"Villain",bestfriend:"Best Friend",selectTraits:"Choose Traits",selected:"selected",chooseOne:"Choose one",remaining:"Remaining Traits",
     skip:"Skip",skipsLeft:"skips left",takeFrom:"What do you want from",complete:"Character Complete",copyPrompt:"Copy Image Prompt",playAgain:"Play Again",saveHistory:"Save Result",saved:"Saved",noHistory:"No completed games yet.",
-    privatePacks:"Private Character Packs",newPack:"New Pack",importPack:"Import Pack",export:"Export",delete:"Delete",addImages:"Add Images",edit:"Edit",packName:"Pack Name",characters:"characters",characterNames:"Character names (one per line)",applyNames:"Apply Names in Order",addPack:"Create Pack",
     language:"Language",close:"Close",pkSetup:"PK Setup",player1:"Player 1",player2:"Player 2",series:"Series",beginPK:"Begin PK",turn:"Turn",pickCharacter:"Pick a character",assignRole:"Assign a role",teamComplete:"PK Complete",endMatch:"End match",
-    noPacks:"No private packs yet.",localOnly:"Stored only in this browser on this device.",importInfo:"Images are stored locally in your browser using IndexedDB.",done:"Done",cancel:"Cancel",imagePrompt:"Image Generator Prompt",traits:"Traits",allSeries:"All selected series",needSeries:"Choose at least one series.",needTrait:"Choose at least one trait.",needCharacters:"This selection needs at least 2 characters.",
-    roster:"Roster",rename:"Rename",remove:"Remove",gender:"Gender Filter",all:"All",maleOnly:"Male only",femaleOnly:"Female only",unspecified:"Unspecified",male:"Male",female:"Female",genderExcluded:"{n} characters without gender excluded",
+    done:"Done",cancel:"Cancel",imagePrompt:"Image Generator Prompt",traits:"Traits",allSeries:"All selected series",needSeries:"Choose at least one series.",needTrait:"Choose at least one trait.",needCharacters:"This selection needs at least 2 characters.",
+    roster:"Roster",characters:"characters",rename:"Rename",remove:"Remove",gender:"Gender Filter",all:"All",maleOnly:"Male only",femaleOnly:"Female only",unspecified:"Unspecified",male:"Male",female:"Female",genderExcluded:"{n} characters without gender excluded",
     imageLibrary:"Character Library",saveOffline:"Save portraits for offline",savingOffline:"Saving portraits",savedLocal:"saved locally",usingRemote:"using remote URL",failed:"failed",resetOffline:"Reset offline portraits",browseCharacters:"Browse Characters",noImage:"No image",
-    storageNote:"Built-in portraits come from the generated portrait manifest. Offline saving is optional. Private pack images remain on this device.",
+    storageNote:"Built-in portraits come from the generated portrait manifest. Offline saving is optional.",
     version:"Version",currentVersion:"Current version",latestVersion:"Latest version",checkingVersion:"Checking…",updateAvailable:"Update available",upToDate:"Up to date",unknown:"Unknown",refreshApp:"Refresh app",status:"Status",
     quickReveal:"Quick Reveal",revealing:"Revealing",pool:"Pool",required:"required",available:"available",sharedPool:"Shared pool",notEnough:"Not enough characters remaining.",
-    imported:"Imported",invalidPack:"Invalid pack file",imageCacheCleared:"Offline portraits cleared",storageError:"Storage error",deletePackConfirm:"Delete this pack?",filesSkipped:"{n} files skipped (50-file limit).",packCreated:"Pack created",exported:"Exported",copyDone:"Prompt copied",
-    backupTitle:"Back up your packs",backupText:"Safari may clear website data. Export your packs regularly so your images are safe.",dismiss:"Dismiss",storageUsage:"Storage usage",persistentStorage:"Persistent storage",requested:"Requested",notSupported:"Not supported",
-    importRejected:"Import rejected: invalid pack data.",selectGender:"Gender",offlineReady:"Offline",remoteReady:"Remote",none:"None",resultSaved:"Result already saved",setupRequirement:"{available} available / {required} required",
+    imageCacheCleared:"Offline portraits cleared",storageError:"Storage error",copyDone:"Prompt copied",dismiss:"Dismiss",storageUsage:"Storage usage",persistentStorage:"Persistent storage",requested:"Requested",notSupported:"Not supported",
+    selectGender:"Gender",offlineReady:"Offline",remoteReady:"Remote",none:"None",resultSaved:"Result already saved",setupRequirement:"{available} available / {required} required",
     settingsAniListNote:"Portrait URLs are resolved at build time with AniList. The app does not call AniList while you play.",
     emptyPool:"No characters are left in the pool.",refreshImages:"Refresh image view"
   },
   zh:{
-    home:"主页",packs:"角色包",history:"记录",settings:"设置",loading:"正在载入 Anime Fusion…",loadFailed:"无法载入应用数据。",
+    home:"主页",gallery:"角色图库",history:"记录",settings:"设置",loading:"正在载入 Anime Fusion…",loadFailed:"无法载入应用数据。",
     heroTitle:"创造一个不可能存在的角色。",subtitle:"把动漫角色的不同特质拼成一个全新的角色。",
     standard:"特质选择",standardDesc:"每轮二选一，再决定继承这个角色的哪项特质。",quick:"一键随机",quickDesc:"一键开始，用轮盘逐项揭晓特质。",pk:"PK组队",pkDesc:"两位玩家轮流从不重复角色池中选人并分配职位。",
-    chooseSeries:"选择动漫系列",chooseSeriesDesc:"可同时混合多个系列或私人角色包。",chooseMode:"选择玩法",start:"开始",quickStart:"一键随机",partner:"动漫伴侣",protagonist:"主角",villain:"反派",bestfriend:"挚友",selectTraits:"选择特质",selected:"已选择",chooseOne:"二选一",remaining:"剩余特质",
+    chooseSeries:"选择动漫系列",chooseSeriesDesc:"可同时混合多个内置系列。",chooseMode:"选择玩法",start:"开始",quickStart:"一键随机",partner:"动漫伴侣",protagonist:"主角",villain:"反派",bestfriend:"挚友",selectTraits:"选择特质",selected:"已选择",chooseOne:"二选一",remaining:"剩余特质",
     skip:"跳过",skipsLeft:"次跳过机会",takeFrom:"你想从TA身上继承什么",complete:"角色完成",copyPrompt:"复制生图提示词",playAgain:"再来一局",saveHistory:"保存结果",saved:"已保存",noHistory:"还没有完成的游戏。",
-    privatePacks:"私人角色包",newPack:"新建角色包",importPack:"导入角色包",export:"导出",delete:"删除",addImages:"添加图片",edit:"编辑",packName:"角色包名称",characters:"个角色",characterNames:"角色名字（每行一个）",applyNames:"按顺序套用名字",addPack:"建立角色包",
     language:"语言",close:"关闭",pkSetup:"PK设置",player1:"玩家1",player2:"玩家2",series:"系列",beginPK:"开始PK",turn:"回合",pickCharacter:"选择角色",assignRole:"分配职位",teamComplete:"PK完成",endMatch:"结束对局",
-    noPacks:"还没有私人角色包。",localOnly:"数据只保存在此设备的浏览器中。",importInfo:"图片会使用 IndexedDB 保存在浏览器本地。",done:"完成",cancel:"取消",imagePrompt:"生图提示词",traits:"特质",allSeries:"所有已选系列",needSeries:"请至少选择一个系列。",needTrait:"请至少选择一个特质。",needCharacters:"当前选择至少需要2个角色。",
-    roster:"角色列表",rename:"改名",remove:"移除",gender:"性别筛选",all:"全部",maleOnly:"仅男性",femaleOnly:"仅女性",unspecified:"未指定",male:"男性",female:"女性",genderExcluded:"已排除 {n} 个未指定性别的角色",
+    done:"完成",cancel:"取消",imagePrompt:"生图提示词",traits:"特质",allSeries:"所有已选系列",needSeries:"请至少选择一个系列。",needTrait:"请至少选择一个特质。",needCharacters:"当前选择至少需要2个角色。",
+    roster:"角色列表",characters:"个角色",rename:"改名",remove:"移除",gender:"性别筛选",all:"全部",maleOnly:"仅男性",femaleOnly:"仅女性",unspecified:"未指定",male:"男性",female:"女性",genderExcluded:"已排除 {n} 个未指定性别的角色",
     imageLibrary:"角色图库",saveOffline:"保存肖像供离线使用",savingOffline:"正在保存肖像",savedLocal:"已保存到本地",usingRemote:"使用远程图片",failed:"失败",resetOffline:"清除离线肖像",browseCharacters:"浏览角色",noImage:"无图片",
-    storageNote:"内置角色肖像来自预先生成的肖像清单。离线保存是可选的。私人角色包图片只保留在此设备。",
+    storageNote:"内置角色肖像来自预先生成的肖像清单。离线保存是可选的。",
     version:"版本",currentVersion:"当前版本",latestVersion:"最新版本",checkingVersion:"检查中…",updateAvailable:"有新版本可用",upToDate:"已是最新版本",unknown:"未知",refreshApp:"刷新应用",status:"状态",
     quickReveal:"快速揭晓",revealing:"揭晓中",pool:"角色池",required:"需要",available:"可用",sharedPool:"共享角色池",notEnough:"剩余角色不足。",
-    imported:"导入完成",invalidPack:"角色包文件无效",imageCacheCleared:"离线肖像已清除",storageError:"存储错误",deletePackConfirm:"确定删除这个角色包吗？",filesSkipped:"因50张上限跳过了 {n} 个文件。",packCreated:"角色包已建立",exported:"已导出",copyDone:"提示词已复制",
-    backupTitle:"备份你的角色包",backupText:"Safari 可能会清除网站数据。请定期导出角色包，避免图片丢失。",dismiss:"关闭提醒",storageUsage:"存储用量",persistentStorage:"持久存储",requested:"已请求",notSupported:"不支持",
-    importRejected:"导入被拒绝：角色包数据无效。",selectGender:"性别",offlineReady:"离线",remoteReady:"远程",none:"无",resultSaved:"该结果已经保存",setupRequirement:"可用 {available} / 需要 {required}",
+    imageCacheCleared:"离线肖像已清除",storageError:"存储错误",copyDone:"提示词已复制",dismiss:"关闭提醒",storageUsage:"存储用量",persistentStorage:"持久存储",requested:"已请求",notSupported:"不支持",
+    selectGender:"性别",offlineReady:"离线",remoteReady:"远程",none:"无",resultSaved:"该结果已经保存",setupRequirement:"可用 {available} / 需要 {required}",
     settingsAniListNote:"角色肖像网址在构建阶段通过 AniList 解析。游戏运行时不会调用 AniList。",emptyPool:"角色池已经没有角色。",refreshImages:"刷新图片显示"
   },
   ja:{
-    home:"ホーム",packs:"パック",history:"履歴",settings:"設定",loading:"Anime Fusion を読み込み中…",loadFailed:"アプリデータを読み込めませんでした。",
+    home:"ホーム",gallery:"キャラ図鑑",history:"履歴",settings:"設定",loading:"Anime Fusion を読み込み中…",loadFailed:"アプリデータを読み込めませんでした。",
     heroTitle:"ありえないキャラクターを作ろう。",subtitle:"アニメキャラの特徴を組み合わせて、新しいキャラクターを作ろう。",
     standard:"特性ドラフト",standardDesc:"2人から1人を選び、どの特性を受け継ぐか決めます。",quick:"一括ランダム",quickDesc:"ワンタップで開始し、ルーレットで特性を順番に公開します。",pk:"PKチームドラフト",pkDesc:"2人で交互に重複なしのキャラを選び、役割を割り当てます。",
-    chooseSeries:"シリーズを選択",chooseSeriesDesc:"複数シリーズやプライベートパックを混ぜられます。",chooseMode:"ゲームを選択",start:"ドラフト開始",quickStart:"一括ランダム",partner:"アニメパートナー",protagonist:"主人公",villain:"悪役",bestfriend:"親友",selectTraits:"特性を選択",selected:"選択中",chooseOne:"1人を選ぶ",remaining:"残りの特性",
+    chooseSeries:"シリーズを選択",chooseSeriesDesc:"複数の内蔵シリーズを自由に組み合わせられます。",chooseMode:"ゲームを選択",start:"ドラフト開始",quickStart:"一括ランダム",partner:"アニメパートナー",protagonist:"主人公",villain:"悪役",bestfriend:"親友",selectTraits:"特性を選択",selected:"選択中",chooseOne:"1人を選ぶ",remaining:"残りの特性",
     skip:"スキップ",skipsLeft:"回残り",takeFrom:"このキャラから何を受け継ぐ？",complete:"キャラクター完成",copyPrompt:"画像プロンプトをコピー",playAgain:"もう一度",saveHistory:"結果を保存",saved:"保存済み",noHistory:"まだ完成したゲームはありません。",
-    privatePacks:"プライベートキャラパック",newPack:"新規パック",importPack:"パックをインポート",export:"エクスポート",delete:"削除",addImages:"画像追加",edit:"編集",packName:"パック名",characters:"キャラ",characterNames:"キャラ名（1行に1人）",applyNames:"順番に名前を適用",addPack:"パック作成",
     language:"言語",close:"閉じる",pkSetup:"PK設定",player1:"プレイヤー1",player2:"プレイヤー2",series:"シリーズ",beginPK:"PK開始",turn:"ターン",pickCharacter:"キャラを選択",assignRole:"役割を割り当て",teamComplete:"PK完了",endMatch:"対戦終了",
-    noPacks:"プライベートパックはまだありません。",localOnly:"このブラウザ、この端末だけに保存されます。",importInfo:"画像は IndexedDB を使ってブラウザ内に保存されます。",done:"完了",cancel:"キャンセル",imagePrompt:"画像生成プロンプト",traits:"特性",allSeries:"選択中の全シリーズ",needSeries:"シリーズを1つ以上選んでください。",needTrait:"特性を1つ以上選んでください。",needCharacters:"2人以上のキャラクターが必要です。",
-    roster:"キャラ一覧",rename:"名前変更",remove:"削除",gender:"性別フィルター",all:"すべて",maleOnly:"男性のみ",femaleOnly:"女性のみ",unspecified:"未指定",male:"男性",female:"女性",genderExcluded:"性別未指定の {n} 人を除外しました",
+    done:"完了",cancel:"キャンセル",imagePrompt:"画像生成プロンプト",traits:"特性",allSeries:"選択中の全シリーズ",needSeries:"シリーズを1つ以上選んでください。",needTrait:"特性を1つ以上選んでください。",needCharacters:"2人以上のキャラクターが必要です。",
+    roster:"キャラ一覧",characters:"キャラ",rename:"名前変更",remove:"削除",gender:"性別フィルター",all:"すべて",maleOnly:"男性のみ",femaleOnly:"女性のみ",unspecified:"未指定",male:"男性",female:"女性",genderExcluded:"性別未指定の {n} 人を除外しました",
     imageLibrary:"キャラクターライブラリ",saveOffline:"画像をオフライン保存",savingOffline:"画像を保存中",savedLocal:"ローカル保存",usingRemote:"リモート画像を使用",failed:"失敗",resetOffline:"オフライン画像をリセット",browseCharacters:"キャラクターを見る",noImage:"画像なし",
-    storageNote:"内蔵ポートレートは生成済みの画像マニフェストから読み込みます。オフライン保存は任意です。プライベートパック画像はこの端末だけに保存されます。",
+    storageNote:"内蔵ポートレートは生成済みの画像マニフェストから読み込みます。オフライン保存は任意です。",
     version:"バージョン",currentVersion:"現在のバージョン",latestVersion:"最新バージョン",checkingVersion:"確認中…",updateAvailable:"更新があります",upToDate:"最新です",unknown:"不明",refreshApp:"アプリを更新",status:"状態",
     quickReveal:"クイック公開",revealing:"公開中",pool:"プール",required:"必要",available:"利用可能",sharedPool:"共有プール",notEnough:"残りのキャラクターが足りません。",
-    imported:"インポート完了",invalidPack:"無効なパックファイル",imageCacheCleared:"オフライン画像を削除しました",storageError:"ストレージエラー",deletePackConfirm:"このパックを削除しますか？",filesSkipped:"50ファイル上限のため {n} 件をスキップしました。",packCreated:"パックを作成しました",exported:"エクスポートしました",copyDone:"プロンプトをコピーしました",
-    backupTitle:"パックをバックアップ",backupText:"Safari はサイトデータを削除することがあります。画像を守るため、定期的にパックをエクスポートしてください。",dismiss:"閉じる",storageUsage:"ストレージ使用量",persistentStorage:"永続ストレージ",requested:"要求済み",notSupported:"未対応",
-    importRejected:"インポート拒否：パックデータが無効です。",selectGender:"性別",offlineReady:"オフライン",remoteReady:"リモート",none:"なし",resultSaved:"この結果は保存済みです",setupRequirement:"利用可能 {available} / 必要 {required}",
+    imageCacheCleared:"オフライン画像を削除しました",storageError:"ストレージエラー",copyDone:"プロンプトをコピーしました",dismiss:"閉じる",storageUsage:"ストレージ使用量",persistentStorage:"永続ストレージ",requested:"要求済み",notSupported:"未対応",
+    selectGender:"性別",offlineReady:"オフライン",remoteReady:"リモート",none:"なし",resultSaved:"この結果は保存済みです",setupRequirement:"利用可能 {available} / 必要 {required}",
     settingsAniListNote:"キャラクター画像URLはビルド時に AniList から解決します。プレイ中に AniList API は呼び出しません。",emptyPool:"キャラクタープールが空です。",refreshImages:"画像表示を更新"
   }
 };
@@ -94,7 +88,7 @@ const ROLE_LABELS={
 };
 
 const STATE={
-  lang:localStorage.getItem("af_lang")||"en",screen:"home",back:null,builtin:[],portraits:{generatedAt:null,series:{},chars:{}},packs:[],history:[],selectedSeries:new Set(),selectedMode:"partner",selectedTraits:new Set(MODES.partner),genderFilter:"all",setupKind:"standard",game:null,pk:null,pkSetup:{p1:null,p2:null},quickReveal:null,quickRunId:0,editPackId:null,librarySeriesId:null,resultSaved:false,versionInfo:{current:VERSION,latest:null,status:"unknown"},storageInfo:null,ready:false
+  lang:localStorage.getItem("af_lang")||"en",screen:"home",back:null,builtin:[],portraits:{generatedAt:null,series:{},chars:{}},history:[],selectedSeries:new Set(),selectedMode:"partner",selectedTraits:new Set(MODES.partner),genderFilter:"all",setupKind:"standard",game:null,pk:null,pkSetup:{kind:"random",p1:null,p2:null,pool:null},quickReveal:null,quickRunId:0,librarySeriesId:null,resultSaved:false,versionInfo:{current:VERSION,latest:null,status:"unknown"},storageInfo:null,ready:false
 };
 const OBJECT_URLS=new Map();
 const IMAGE_URL_PENDING=new Set();
@@ -117,7 +111,7 @@ function modal(html){document.getElementById("modalRoot").innerHTML=`<div class=
 function closeModal(){document.getElementById("modalRoot").innerHTML="";}
 function i18nStatic(){document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));document.getElementById("homeBtn")?.setAttribute("aria-label",t("home"));document.getElementById("settingsBtn")?.setAttribute("aria-label",t("settings"));}
 function roleSet(seriesId){return ROLE_SETS[seriesId]||["Leader","Co-Leader","Tanker","Healer","Strategist","Traitor"];}
-function allSeries(){return [...STATE.builtin,...STATE.packs];}
+function allSeries(){return STATE.builtin;}
 function getSeries(id){return allSeries().find(s=>s.id===id);}
 function allCharacters(){return allSeries().flatMap(s=>s.chars||[]);}
 function getCharacter(id){return allCharacters().find(c=>c.id===id);}
@@ -141,69 +135,34 @@ function setScreen(s,back=null){
 function openDB(){
   if(DB_PROMISE)return DB_PROMISE;
   DB_PROMISE=new Promise((resolve,reject)=>{
-    const req=indexedDB.open("AnimeFusionDB",2);
+    const req=indexedDB.open("AnimeFusionDB",3);
     req.onupgradeneeded=()=>{
       const db=req.result;
-      if(!db.objectStoreNames.contains("state"))db.createObjectStore("state");
+      if(db.objectStoreNames.contains("state"))db.deleteObjectStore("state");
       if(!db.objectStoreNames.contains("images"))db.createObjectStore("images");
-      try{localStorage.setItem("af_idb_v2_upgrade","1");}catch{}
     };
     req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);
   });
   return DB_PROMISE;
 }
-async function stateGet(key){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction("state","readonly"),q=tx.objectStore("state").get(key);q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error);});}
-async function statePut(key,val){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction("state","readwrite");tx.objectStore("state").put(val,key);tx.oncomplete=res;tx.onerror=()=>rej(tx.error);});}
-async function stateDelete(key){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction("state","readwrite");tx.objectStore("state").delete(key);tx.oncomplete=res;tx.onerror=()=>rej(tx.error);});}
 async function imageGet(key){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction("images","readonly"),q=tx.objectStore("images").get(key);q.onsuccess=()=>res(q.result||null);q.onerror=()=>rej(q.error);});}
 async function imagePut(key,blob){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction("images","readwrite");tx.objectStore("images").put(blob,key);tx.oncomplete=res;tx.onerror=()=>rej(tx.error);});}
 async function imageDelete(key){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction("images","readwrite");tx.objectStore("images").delete(key);tx.oncomplete=res;tx.onerror=()=>rej(tx.error);});}
 async function imageKeys(){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction("images","readonly"),q=tx.objectStore("images").getAllKeys();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>rej(q.error);});}
-function dataUrlToBlob(dataUrl){const [head,b64]=dataUrl.split(",");const mime=(head.match(/^data:([^;]+)/)||[])[1]||"application/octet-stream";const bin=atob(b64);const u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);return new Blob([u8],{type:mime});}
-function blobToDataUrl(blob){return new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=rej;fr.readAsDataURL(blob);});}
-async function migrateStorageV2(){
-  if(!localStorage.getItem("af_v050_cleanup_done")){
-    localStorage.removeItem("af_image_cache");
-    localStorage.setItem("af_v050_cleanup_done","1");
-  }
-  let packs=(await stateGet("packs"))||[];let changed=false;
-  for(const p of packs){for(const c of (p.chars||[])){if(typeof c.image==="string"&&c.image.startsWith("data:image/")&&!c.imageKey){try{const key=`pack:${c.id||uuid()}`;await imagePut(key,dataUrlToBlob(c.image));c.imageKey=key;delete c.image;changed=true;}catch(e){console.warn("Pack image migration kept legacy data URL",e);}}}}
-  if(changed){try{await statePut("packs",packs);}catch(e){console.warn("Could not persist v2 pack migration; legacy records remain available for retry.",e);}}
-  try{const old=await stateGet("builtinImageData");if(old!==undefined){await stateDelete("builtinImageData");console.info("Discarded v0.4.1 builtinImageData cache; v0.5 uses stable character IDs.");}}catch(e){console.warn("Could not discard old builtin image cache",e);}
-  localStorage.removeItem("af_idb_v2_upgrade");return packs;
-}
-async function requestPersistentStorage(){if(localStorage.getItem("af_persist_requested"))return;localStorage.setItem("af_persist_requested","1");if(navigator.storage?.persist)try{await navigator.storage.persist();}catch{}}
+async function purgeLegacyPackImages(){const keys=(await imageKeys()).filter(k=>String(k).startsWith("pack:"));for(const key of keys)await imageDelete(key);}
 async function refreshStorageEstimate(){if(!navigator.storage?.estimate){STATE.storageInfo=null;return;}try{STATE.storageInfo=await navigator.storage.estimate();}catch{STATE.storageInfo=null;}}
 
 function revokeImageUrl(key){const url=OBJECT_URLS.get(key);if(url){URL.revokeObjectURL(url);OBJECT_URLS.delete(key);}}
 async function ensureObjectUrl(key){if(!key||OBJECT_URLS.has(key)||IMAGE_URL_PENDING.has(key))return;IMAGE_URL_PENDING.add(key);try{const b=await imageGet(key);if(b){OBJECT_URLS.set(key,URL.createObjectURL(b));render();}}catch(e){console.warn(e);}finally{IMAGE_URL_PENDING.delete(key);}}
 function characterImageUrl(c){
   if(!c)return null;
-  const key=c.imageKey||(c.seriesId&&STATE.portraits.chars?.[c.id]?.url?`builtin:${c.id}`:null);
+  const key=c.seriesId&&STATE.portraits.chars?.[c.id]?.url?`builtin:${c.id}`:null;
   if(key&&OBJECT_URLS.has(key))return OBJECT_URLS.get(key);
   if(key)ensureObjectUrl(key);
-  if(c.image&&typeof c.image==="string")return c.image; // legacy-only until migration succeeds
   return STATE.portraits.chars?.[c.id]?.url||null;
 }
 async function deleteImageKey(key){if(!key)return;revokeImageUrl(key);await imageDelete(key);}
 async function resetBuiltinPortraits(){const keys=(await imageKeys()).filter(k=>String(k).startsWith("builtin:"));for(const k of keys){await deleteImageKey(k);}toast(t("imageCacheCleared"));render();}
-
-async function decodeAndDownscale(source){
-  let bmp=null,width=0,height=0;
-  try{bmp=await createImageBitmap(source);width=bmp.width;height=bmp.height;}catch{
-    const url=URL.createObjectURL(source);try{const img=await new Promise((res,rej)=>{const x=new Image();x.onload=()=>res(x);x.onerror=rej;x.src=url;});width=img.naturalWidth;height=img.naturalHeight;bmp=img;}finally{URL.revokeObjectURL(url);}
-  }
-  const maxEdge=512,scale=Math.min(1,maxEdge/Math.max(width,height));let w=Math.max(1,Math.round(width*scale)),h=Math.max(1,Math.round(height*scale));
-  const canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;canvas.getContext("2d",{alpha:false}).drawImage(bmp,0,0,w,h);if(bmp.close)bmp.close();
-  async function enc(type,q){return new Promise(r=>canvas.toBlob(r,type,q));}
-  let blob=await enc("image/webp",.85);if(!blob||blob.type!=="image/webp")blob=await enc("image/jpeg",.85);
-  let q=.78;
-  while(blob&&blob.size>150000&&q>=.42){blob=await enc(blob.type==="image/webp"?"image/webp":"image/jpeg",q);q-=.09;}
-  while(blob&&blob.size>150000&&Math.max(canvas.width,canvas.height)>320){const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;old.getContext("2d").drawImage(canvas,0,0);canvas.width=Math.max(1,Math.round(canvas.width*.82));canvas.height=Math.max(1,Math.round(canvas.height*.82));canvas.getContext("2d").drawImage(old,0,0,canvas.width,canvas.height);blob=await enc(blob.type==="image/webp"?"image/webp":"image/jpeg",.68);}
-  q=.6;while(blob&&blob.size>150000&&q>=.18){blob=await enc(blob.type==="image/webp"?"image/webp":"image/jpeg",q);q-=.08;}
-  while(blob&&blob.size>150000&&Math.max(canvas.width,canvas.height)>128){const old=document.createElement("canvas");old.width=canvas.width;old.height=canvas.height;old.getContext("2d").drawImage(canvas,0,0);canvas.width=Math.max(1,Math.round(canvas.width*.78));canvas.height=Math.max(1,Math.round(canvas.height*.78));canvas.getContext("2d").drawImage(old,0,0,canvas.width,canvas.height);blob=await enc(blob.type==="image/webp"?"image/webp":"image/jpeg",.45);}
-  if(!blob)throw new Error("encode failed");return blob;
-}
 
 async function loadBootData(){
   document.getElementById("screen").innerHTML=`<div class="loading-state"><div><div class="loading-spinner"></div><p>${esc(t("loading"))}</p></div></div>`;
@@ -211,14 +170,11 @@ async function loadBootData(){
     const [rr,pr]=await Promise.all([fetch("data/roster.json?v=0.5.1",{cache:"no-store"}),fetch("data/portraits.json?v=0.5.1",{cache:"no-store"})]);
     if(!rr.ok||!pr.ok)throw new Error("data fetch failed");const roster=await rr.json();STATE.portraits=await pr.json();
     STATE.builtin=roster.map(s=>({...s,name:s.name_en,chars:(s.chars||[]).map(c=>({...c,name:c.name_en,series:s.name_en,series_en:s.name_en,series_ja:s.name_ja,series_zh:s.name_zh,seriesId:s.id}))}));
-    await openDB();STATE.packs=await migrateStorageV2();
-    STATE.packs=STATE.packs.map(normalizePackForRuntime);STATE.history=JSON.parse(localStorage.getItem("af_history")||"[]");
-    const first=STATE.builtin[0]?.id||null;STATE.pkSetup={p1:first,p2:STATE.builtin[1]?.id||first};
+    await openDB();await purgeLegacyPackImages();STATE.history=JSON.parse(localStorage.getItem("af_history")||"[]");
+    const first=STATE.builtin[0]?.id||null;STATE.pkSetup={kind:"random",p1:first,p2:STATE.builtin[1]?.id||first,pool:first};
     await refreshStorageEstimate();STATE.ready=true;await checkVersion();render();
   }catch(e){console.error(e);document.getElementById("screen").innerHTML=`<div class="panel empty">${esc(t("loadFailed"))}</div>`;}
 }
-function normalizePackForRuntime(p){return {...p,name_en:p.name,chars:(p.chars||[]).map(c=>({...c,name_en:c.name,series:p.name,series_en:p.name,seriesId:p.id}))};}
-async function persistPacks(){try{await statePut("packs",STATE.packs.map(p=>({...p,chars:p.chars.map(c=>{const x={...c};delete x.series;delete x.series_en;delete x.seriesId;delete x.name_en;return x;})})));}catch(e){console.error(e);toast(t("storageError"));}}
 
 function imageTag(c,cls="character-image"){
   const url=characterImageUrl(c),name=displayName(c);return url?`<img class="${esc(cls)}" src="${esc(url)}" alt="${esc(name)}" referrerpolicy="no-referrer">`:`<div class="character-fallback"><span>${esc(initials(name))}</span><span class="no-image">${esc(t("noImage"))}</span></div>`;
@@ -226,13 +182,11 @@ function imageTag(c,cls="character-image"){
 function charCard(c,side,disabled=false){const sub=secondaryName(c);return `<button class="character-card${disabled?" disabled":""}" ${disabled?"disabled":""} onclick="${disabled?"void(0)":`chooseCharacter(${jsarg(side)})`}">${imageTag(c)}<div class="character-meta"><strong>${esc(displayName(c))}</strong><span>${esc(displaySeries(c))}${sub?` · ${esc(sub)}`:""}</span></div></button>`;}
 function pkCharCard(c,i,disabled=false){const url=characterImageUrl(c),name=displayName(c),sub=secondaryName(c);return `<button class="character-card${disabled?" disabled":""}" ${disabled?"disabled":""} onclick="${disabled?"void(0)":`pickPK(${Number(i)})`}">${url?`<img class="character-image" src="${esc(url)}" alt="${esc(name)}" referrerpolicy="no-referrer">`:`<div class="character-fallback"><span>${esc(initials(name))}</span><span class="no-image">${esc(t("noImage"))}</span></div>`}<div class="character-meta"><strong>${esc(name)}</strong><span>${esc(displaySeries(c))}${sub?` · ${esc(sub)}`:""}</span></div></button>`;}
 
-function home(){return `<section class="hero"><div class="eyebrow">ANIME FUSION</div><h1>${esc(t("heroTitle"))}</h1><p>${esc(t("subtitle"))}</p></section><div class="grid three">
+function home(){return `<section class="hero"><div class="eyebrow">ANIME FUSION</div><h1>${esc(t("heroTitle"))}</h1><p>${esc(t("subtitle"))}</p></section><div class="grid">
 <button class="mode-card" style="--glow:#a78bfa" onclick="openSetup('standard')"><div class="mode-icon">◈</div><strong>${esc(t("standard"))}</strong><small>${esc(t("standardDesc"))}</small></button>
 <button class="mode-card" style="--glow:#60a5fa" onclick="openSetup('quick')"><div class="mode-icon">⚡</div><strong>${esc(t("quick"))}</strong><small>${esc(t("quickDesc"))}</small></button>
-<button class="mode-card" style="--glow:#fb7185" onclick="openPKSetup()"><div class="mode-icon">⚔</div><strong>${esc(t("pk"))}</strong><small>${esc(t("pkDesc"))}</small></button></div>
-<div class="section-head"><div><h2>${esc(t("imageLibrary"))}</h2><p>${esc(t("storageNote"))}</p></div><button class="secondary" onclick="setScreen('library','home')">${esc(t("browseCharacters"))} →</button></div>
-<div class="section-head"><div><h2>${esc(t("privatePacks"))}</h2><p>${esc(t("localOnly"))}</p></div><button class="secondary" onclick="setScreen('packs','home')">${esc(t("packs"))} →</button></div>${packPreview()}`;}
-function packPreview(){return STATE.packs.length?`<div class="grid">${STATE.packs.slice(0,4).map(packCard).join("")}</div>`:`<div class="panel empty">${esc(t("noPacks"))}</div>`;}
+<button class="mode-card" style="--glow:#fb7185" onclick="openPKSetup('random')"><div class="mode-icon">⚔</div><strong>${esc(t("pk"))}</strong><small>${esc(t("pkDesc"))}</small></button>
+<button class="mode-card" style="--glow:#34d399" onclick="openPKSetup('budget')"><div class="mode-icon">＄</div><strong>${esc(t("budgetPK"))}</strong><small>${esc(t("budgetPKDesc"))}</small></button></div>`;}
 
 function openSetup(kind){STATE.setupKind=kind;STATE.selectedTraits=new Set(MODES[STATE.selectedMode]);setScreen("setup","home");}
 function toggleSeries(id){STATE.selectedSeries.has(id)?STATE.selectedSeries.delete(id):STATE.selectedSeries.add(id);render();}
@@ -264,7 +218,7 @@ function quickRevealView(){const q=STATE.quickReveal;if(!q)return home();return 
 function resultSignature(assigns){return assigns.map(a=>`${a.trait}:${a.character.id}`).join("|");}
 function isResultSaved(){const sig=resultSignature(STATE.game?.assignments||[]);return STATE.history.some(h=>h.signature===sig);}
 function result(){const g=STATE.game;if(!g)return home();const saved=STATE.resultSaved||isResultSaved();return `<div class="result-card"><div class="result-title"><div class="eyebrow">${esc(t(STATE.selectedMode))}</div><div class="big">${esc(t("complete"))}</div></div>${g.kind==="quick"?`<div class="quick-burst">⚡</div>`:""}<div class="assignment-list">${g.assignments.map(a=>`<div class="assignment"><span class="key">${esc(traitLabel(a.trait))}</span><span class="val">${esc(displayName(a.character))}</span></div>`).join("")}</div><div class="cta-row"><button class="primary" onclick="copyPrompt()">${esc(t("copyPrompt"))}</button>${saved?`<div class="saved-pill">✓ ${esc(t("saved"))}</div>`:`<button class="secondary" onclick="saveResult()">${esc(t("saveHistory"))}</button>`}<button class="ghost" onclick="setScreen('home')">${esc(t("playAgain"))}</button></div></div>`;}
-function buildPrompt(){const lines=STATE.game.assignments.map(a=>`${a.trait}: ${a.character.name_en||a.character.name} (${a.character.series_en||a.character.series||"Custom Pack"})`).join("\n");return `Create a polished anime character showcase based on the following mixed character traits.\n\nIMPORTANT:\n- Create one coherent original character.\n- Blend all selected traits naturally into one believable anime character.\n- Do not make the result look like a collage.\n- Preserve the strongest visual and behavioral qualities of the chosen inspirations.\n- The final character should feel like a new anime protagonist or supporting character.\n\nCHARACTER TRAITS\n${lines}\n\nCOMPOSITION:\nCreate a wide 3:2 landscape showcase.\n\nLEFT SIDE — CHARACTER SHEET\n- full-body neutral standing pose\n- clear hairstyle, face, body, clothing, accessories and weapon\n- optional smaller headshot\n- clean character-design presentation\n\nRIGHT SIDE — CHARACTER IN ACTION\nInvent a natural everyday or cinematic scene that visibly demonstrates several non-visual traits at once, such as personality, humour, romance, intelligence, occupation, cooking ability or power.\n\nVISUAL CONSISTENCY:\nThe character on both sides must clearly be the same person with the same face, hair, eyes, clothing, proportions and accessories.\n\nSTYLE:\nmodern premium anime illustration, polished key visual, expressive acting, cinematic lighting, natural anatomy, sophisticated color palette.\n\nDo not include logos, franchise titles, watermarks or UI text inside the artwork.`;}
+function buildPrompt(){const lines=STATE.game.assignments.map(a=>`${a.trait}: ${a.character.name_en||a.character.name} (${a.character.series_en||a.character.series||"Unknown series"})`).join("\n");return `Create a polished anime character showcase based on the following mixed character traits.\n\nIMPORTANT:\n- Create one coherent original character.\n- Blend all selected traits naturally into one believable anime character.\n- Do not make the result look like a collage.\n- Preserve the strongest visual and behavioral qualities of the chosen inspirations.\n- The final character should feel like a new anime protagonist or supporting character.\n\nCHARACTER TRAITS\n${lines}\n\nCOMPOSITION:\nCreate a wide 3:2 landscape showcase.\n\nLEFT SIDE — CHARACTER SHEET\n- full-body neutral standing pose\n- clear hairstyle, face, body, clothing, accessories and weapon\n- optional smaller headshot\n- clean character-design presentation\n\nRIGHT SIDE — CHARACTER IN ACTION\nInvent a natural everyday or cinematic scene that visibly demonstrates several non-visual traits at once, such as personality, humour, romance, intelligence, occupation, cooking ability or power.\n\nVISUAL CONSISTENCY:\nThe character on both sides must clearly be the same person with the same face, hair, eyes, clothing, proportions and accessories.\n\nSTYLE:\nmodern premium anime illustration, polished key visual, expressive acting, cinematic lighting, natural anatomy, sophisticated color palette.\n\nDo not include logos, franchise titles, watermarks or UI text inside the artwork.`;}
 async function copyPrompt(){const p=buildPrompt();try{await navigator.clipboard.writeText(p);toast(t("copyDone"));}catch{modal(`<div class="modal-head"><h2>${esc(t("imagePrompt"))}</h2><button class="icon-btn" onclick="closeModal()">×</button></div><textarea>${esc(p)}</textarea>`);}}
 function saveResult(){if(!STATE.game)return;const sig=resultSignature(STATE.game.assignments);if(STATE.history.some(h=>h.signature===sig)){STATE.resultSaved=true;toast(t("resultSaved"));render();return;}STATE.history.unshift({id:uuid(),date:new Date().toISOString(),mode:STATE.selectedMode,signature:sig,assignments:STATE.game.assignments.map(a=>({trait:a.trait,charId:a.character.id,name:a.character.name_en||a.character.name,seriesId:a.character.seriesId||null,series:a.character.series_en||a.character.series||""}))});STATE.history=STATE.history.slice(0,50);localStorage.setItem("af_history",JSON.stringify(STATE.history));STATE.resultSaved=true;toast(t("saved"));render();}
 function historyView(){if(!STATE.history.length)return `<div class="section-head"><h2>${esc(t("history"))}</h2></div><div class="panel empty">${esc(t("noHistory"))}</div>`;return `<div class="section-head"><h2>${esc(t("history"))}</h2></div><div class="grid">${STATE.history.map(h=>`<div class="result-card"><div class="row between"><strong>${esc(t(h.mode))}</strong><span class="small">${esc(new Date(h.date).toLocaleString())}</span></div><div class="assignment-list" style="margin-top:10px">${h.assignments.map(a=>{const c=a.charId?getCharacter(a.charId):null;return `<div class="assignment"><span class="key">${esc(traitLabel(a.trait))}</span><span class="val">${esc(c?displayName(c):a.name)}</span></div>`;}).join("")}</div></div>`).join("")}</div>`;}
@@ -291,24 +245,6 @@ function assignPKRole(role){const pk=STATE.pk,c=pk.selected,p=pk[`p${pk.turn}`];
 function endPKEarly(){if(!STATE.pk)return;STATE.pk.ended=true;render();}
 function pkResult(){return `<div class="result-title"><div class="eyebrow">PK</div><div class="big">${esc(t("teamComplete"))}</div></div><div class="team-board">${pkTeam(1)}${pkTeam(2)}</div><div class="cta-row"><button class="primary" onclick="openPKSetup()">${esc(t("playAgain"))}</button></div>`;}
 
-function shouldShowBackupBanner(){if(!STATE.packs.length)return false;const last=Number(localStorage.getItem("af_last_export")||0),dismissed=Number(localStorage.getItem("af_backup_dismissed")||0),now=Date.now();if(dismissed&&now-dismissed<24*3600*1000)return false;return !last||now-last>14*24*3600*1000;}
-function dismissBackup(){localStorage.setItem("af_backup_dismissed",String(Date.now()));render();}
-function backupBanner(){return shouldShowBackupBanner()?`<div class="backup-banner"><div><strong>${esc(t("backupTitle"))}</strong><p>${esc(t("backupText"))}</p></div><button class="banner-x" aria-label="${esc(t("dismiss"))}" onclick="dismissBackup()">×</button></div>`:"";}
-function packsView(){return `${backupBanner()}<div class="section-head"><div><h2>${esc(t("privatePacks"))}</h2><p>${esc(t("localOnly"))}</p></div><div class="row"><button class="secondary" onclick="document.getElementById('packImporter').click()">${esc(t("importPack"))}</button><button class="primary" onclick="newPackModal()">${esc(t("newPack"))}</button></div></div>${STATE.packs.length?`<div class="grid">${STATE.packs.map(packCard).join("")}</div>`:`<div class="panel empty">${esc(t("noPacks"))}</div>`}`;}
-function packCard(p){return `<div class="pack-card"><div class="row between"><strong>${esc(p.name)}</strong><span class="badge">${esc(`${p.chars.length} ${t("characters")}`)}</span></div><div class="pack-thumb-grid">${p.chars.slice(0,4).map(c=>{const u=characterImageUrl(c);return `<div class="pack-thumb">${u?`<img src="${esc(u)}" alt="${esc(displayName(c))}">`:""}</div>`;}).join("")}${Array(Math.max(0,4-Math.min(4,p.chars.length))).fill('<div class="pack-thumb"></div>').join("")}</div><div class="row wrap"><button class="secondary" onclick="editPack(${jsarg(p.id)})">${esc(t("edit"))}</button><button class="ghost" onclick="exportPack(${jsarg(p.id)})">${esc(t("export"))}</button><button class="danger" onclick="deletePack(${jsarg(p.id)})">${esc(t("delete"))}</button></div></div>`;}
-function newPackModal(){modal(`<div class="modal-head"><h2>${esc(t("newPack"))}</h2><button class="icon-btn" onclick="closeModal()">×</button></div><div class="form-group"><label>${esc(t("packName"))}</label><input id="newPackName" type="text" maxlength="80"></div><button class="primary" onclick="createPack()">${esc(t("addPack"))}</button>`);}
-async function createPack(){const name=document.getElementById("newPackName")?.value.trim();if(!name)return;await requestPersistentStorage();const p=normalizePackForRuntime({id:`pack-${uuid()}`,name:name.slice(0,80),chars:[]});STATE.packs.push(p);await persistPacks();closeModal();toast(t("packCreated"));editPack(p.id);}
-function editPack(id){STATE.editPackId=id;setScreen("packedit","packs");}
-function packEdit(){const p=STATE.packs.find(x=>x.id===STATE.editPackId);if(!p)return home();return `<div class="section-head"><div><div class="eyebrow">${esc(t("privatePacks"))}</div><h2>${esc(p.name)}</h2><p>${esc(t("importInfo"))}</p></div><button class="primary" onclick="document.getElementById('imagePicker').click()">${esc(t("addImages"))}</button></div><div class="panel"><div class="form-group"><label>${esc(t("packName"))}</label><input id="packRename" value="${esc(p.name)}" maxlength="80" onchange="renamePack(${jsarg(p.id)},this.value)"></div><div class="form-group"><label>${esc(t("characterNames"))}</label><textarea id="bulkNames"></textarea></div><button class="secondary" onclick="applyNames(${jsarg(p.id)})">${esc(t("applyNames"))}</button></div><div class="section-head"><h3>${esc(t("roster"))}</h3></div>${p.chars.length?`<div class="grid">${p.chars.map(c=>{const u=characterImageUrl(c);return `<div class="pack-card"><div class="pack-thumb" style="aspect-ratio:16/11">${u?`<img src="${esc(u)}" alt="${esc(displayName(c))}">`:""}</div><div class="form-group"><input type="text" maxlength="80" value="${esc(c.name)}" onchange="renameCharacter(${jsarg(p.id)},${jsarg(c.id)},this.value)"></div><div class="form-group"><label>${esc(t("selectGender"))}</label><select class="gender-select" onchange="setCharacterGender(${jsarg(p.id)},${jsarg(c.id)},this.value)"><option value="" ${!c.gender?"selected":""}>${esc(t("unspecified"))}</option><option value="male" ${c.gender==="male"?"selected":""}>${esc(t("male"))}</option><option value="female" ${c.gender==="female"?"selected":""}>${esc(t("female"))}</option></select></div><button class="danger" onclick="removeCharacter(${jsarg(p.id)},${jsarg(c.id)})">${esc(t("remove"))}</button></div>`;}).join("")}</div>`:`<div class="panel empty">${esc(t("addImages"))}</div>`}`;}
-async function handleImages(files){const p=STATE.packs.find(x=>x.id===STATE.editPackId);if(!p)return;const all=[...files],chosen=all.slice(0,50);if(all.length>50)toast(t("filesSkipped",{n:all.length-50}));for(const f of chosen){try{const blob=await decodeAndDownscale(f),id=`c-${uuid()}`,key=`pack:${id}`;await imagePut(key,blob);p.chars.push({id,name:f.name.replace(/\.[^.]+$/," ").replace(/[_-]+/g," ").trim().slice(0,80)||`Character ${p.chars.length+1}`,gender:undefined,imageKey:key,series:p.name,series_en:p.name,seriesId:p.id,name_en:""});}catch(e){console.error(e);toast(t("storageError"));}}await persistPacks();render();}
-async function renamePack(id,name){const p=STATE.packs.find(x=>x.id===id);if(!p)return;p.name=(name||p.name).slice(0,80);p.name_en=p.name;p.chars.forEach(c=>{c.series=p.name;c.series_en=p.name;});await persistPacks();render();}
-async function renameCharacter(pid,cid,name){const p=STATE.packs.find(x=>x.id===pid),c=p?.chars.find(x=>x.id===cid);if(!c)return;c.name=(name||c.name).slice(0,80);c.name_en=c.name;await persistPacks();}
-async function setCharacterGender(pid,cid,g){const p=STATE.packs.find(x=>x.id===pid),c=p?.chars.find(x=>x.id===cid);if(!c)return;c.gender=["male","female"].includes(g)?g:undefined;await persistPacks();}
-async function removeCharacter(pid,cid){const p=STATE.packs.find(x=>x.id===pid),c=p?.chars.find(x=>x.id===cid);if(!p||!c)return;await deleteImageKey(c.imageKey);p.chars=p.chars.filter(x=>x.id!==cid);await persistPacks();render();}
-async function applyNames(pid){const p=STATE.packs.find(x=>x.id===pid);if(!p)return;const names=document.getElementById("bulkNames")?.value.split(/\n/).map(x=>x.trim()).filter(Boolean)||[];names.forEach((n,i)=>{if(p.chars[i]){p.chars[i].name=n.slice(0,80);p.chars[i].name_en=p.chars[i].name;}});await persistPacks();render();}
-async function deletePack(id){if(!confirm(t("deletePackConfirm")))return;const p=STATE.packs.find(x=>x.id===id);if(!p)return;for(const c of p.chars)await deleteImageKey(c.imageKey);STATE.packs=STATE.packs.filter(x=>x.id!==id);await persistPacks();render();}
-async function exportPack(id){const p=STATE.packs.find(x=>x.id===id);if(!p)return;const chars=[];for(const c of p.chars){let blob=c.imageKey?await imageGet(c.imageKey):null;if(!blob&&c.image)blob=dataUrlToBlob(c.image);if(!blob)continue;chars.push({name:c.name,gender:c.gender,image:await blobToDataUrl(blob)});}const payload={format:"animefusion-pack-v1",pack:{name:p.name,chars}};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`${p.name.replace(/[^\w.-]+/g,"_")||"pack"}.fusionpack`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);localStorage.setItem("af_last_export",String(Date.now()));toast(t("exported"));render();}
-async function importPackFile(file){let createdKeys=[];try{const data=JSON.parse(await file.text()),pack=data?.pack||data,check=L.validatePack(pack);if(!check.ok)throw new Error(check.errors.join(", "));await requestPersistentStorage();const pid=`pack-${uuid()}`,chars=[];for(const src of pack.chars){const id=`c-${uuid()}`,key=`pack:${id}`,raw=dataUrlToBlob(src.image),blob=await decodeAndDownscale(raw);await imagePut(key,blob);createdKeys.push(key);chars.push({id,name:src.name,gender:src.gender,imageKey:key,series:pack.name,series_en:pack.name,seriesId:pid,name_en:src.name});}STATE.packs.push(normalizePackForRuntime({id:pid,name:pack.name,chars}));await persistPacks();toast(t("imported"));setScreen("packs","home");}catch(e){console.warn(e);for(const k of createdKeys)try{await deleteImageKey(k);}catch{}toast(t("importRejected"));}}
 
 function libraryView(){const rows=STATE.builtin.map(s=>{const chars=applyGenderFilter(s.chars),remote=chars.filter(c=>STATE.portraits.chars?.[c.id]?.url).length;return `<button class="library-series-card" onclick="openSeriesLibrary(${jsarg(s.id)})"><div><strong>${esc(displaySeries(s))}</strong><div class="small">${esc(`${chars.length} ${t("characters")}`)}</div></div><div class="library-ready"><span>${esc(`${remote}/${chars.length}`)}</span><small>${esc(t("remoteReady"))}</small></div><span class="library-arrow">›</span></button>`;}).join("");return `<div class="library-head"><div><h2>${esc(t("imageLibrary"))}</h2><p>${esc(t("storageNote"))}</p></div><button class="danger compact-danger" onclick="resetBuiltinPortraits()">${esc(t("resetOffline"))}</button></div><div class="library-series-list">${rows}</div>`;}
 function openSeriesLibrary(id){STATE.librarySeriesId=id;setScreen("serieslibrary","library");}
@@ -325,13 +261,11 @@ function refreshAppVersion(){if(!STATE.versionInfo.latest)return;location.replac
 async function settings(){await refreshStorageEstimate();const usage=STATE.storageInfo?.usage||0,quota=STATE.storageInfo?.quota||0,pct=quota?Math.min(100,usage/quota*100):0;modal(`<div class="modal-head"><h2>${esc(t("settings"))}</h2><button class="icon-btn" onclick="closeModal()">×</button></div><label>${esc(t("language"))}</label><div class="lang-list"><button class="lang-btn${STATE.lang==="en"?" selected":""}" onclick="setLang('en')">English</button><button class="lang-btn${STATE.lang==="zh"?" selected":""}" onclick="setLang('zh')">简体中文</button><button class="lang-btn${STATE.lang==="ja"?" selected":""}" onclick="setLang('ja')">日本語</button></div><div class="panel" style="margin-top:16px"><div class="row between"><strong>${esc(t("version"))}</strong><span class="badge">v${esc(VERSION)}</span></div><div id="versionState" style="margin-top:10px"></div></div><div class="panel" style="margin-top:16px"><strong>${esc(t("storageUsage"))}</strong>${STATE.storageInfo?`<div class="small">${esc(`${(usage/1048576).toFixed(1)} MB / ${(quota/1048576).toFixed(1)} MB`)}</div><div class="storage-meter"><div class="progress"><div style="width:${esc(String(pct))}%"></div></div></div>`:`<div class="small">${esc(t("unknown"))}</div>`}</div><div class="panel" style="margin-top:16px"><div class="small">${esc(t("settingsAniListNote"))}</div><div class="cta-row"><button class="secondary" onclick="openOfflineModal()">${esc(t("saveOffline"))}</button><button class="ghost" onclick="resetBuiltinPortraits()">${esc(t("resetOffline"))}</button></div></div>`);updateVersionBox();checkVersion();}
 function setLang(l){STATE.lang=l;localStorage.setItem("af_lang",l);closeModal();render();}
 
-function render(){if(!STATE.ready)return;const map={home,setup,draft,result,quickreveal:quickRevealView,packs:packsView,packedit:packEdit,history:historyView,pksetup:pkSetupView,pk:pkView,library:libraryView,serieslibrary:seriesLibraryView};document.getElementById("screen").innerHTML=(map[STATE.screen]||home)();document.getElementById("homeBtn").classList.toggle("hidden",STATE.screen==="home");document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.nav===STATE.screen||(STATE.screen==="packedit"&&b.dataset.nav==="packs")||(["library","serieslibrary"].includes(STATE.screen)&&b.dataset.nav==="home")));i18nStatic();}
+function render(){if(!STATE.ready)return;const map={home,setup,draft,result,quickreveal:quickRevealView,history:historyView,pksetup:pkSetupView,pk:pkView,library:libraryView,serieslibrary:seriesLibraryView};document.getElementById("screen").innerHTML=(map[STATE.screen]||home)();const drafting=STATE.screen==="pk"&&STATE.pk&&!STATE.pk.ended&&(STATE.pk.p1.team.length<STATE.pk.p1.roles.length||STATE.pk.p2.team.length<STATE.pk.p2.roles.length);document.body.classList.toggle("pk-playing",Boolean(drafting));document.getElementById("homeBtn").classList.toggle("hidden",STATE.screen==="home");document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.nav===STATE.screen||(STATE.screen==="serieslibrary"&&b.dataset.nav==="library")));i18nStatic();}
 
 document.getElementById("settingsBtn").onclick=()=>settings();
 document.getElementById("homeBtn").onclick=()=>{cancelAnimations();setScreen(STATE.back||"home");};
 document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>{cancelAnimations();setScreen(b.dataset.nav,"home");});
-document.getElementById("imagePicker").addEventListener("change",e=>{handleImages(e.target.files);e.target.value="";});
-document.getElementById("packImporter").addEventListener("change",e=>{if(e.target.files[0])importPackFile(e.target.files[0]);e.target.value="";});
 window.addEventListener("beforeunload",()=>{OBJECT_URLS.forEach(u=>URL.revokeObjectURL(u));});
 
 loadBootData();

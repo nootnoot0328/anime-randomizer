@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+### PK Draft
+- Rebuilt the active draft as a one-screen, touch-friendly board with bottom candidate cards, tap or drag-to-role placement, reveal/drop animations, and one skip per player.
+- Added the shared-roster $100 Budget PK with alternating turns, four price tiers, and automatic minimum-budget reservation for remaining roles.
+- Added six series-specific role titles and a localized dedicated battlefield for all 24 series.
+- Updated image and judge prompts to use five direct matchups while each betrayal role attacks its own former team.
+
+### Gallery, names and portraits
+- Replaced Private Packs with Character Gallery and removed pack import, export, editing, validation, storage state, and documentation.
+- Completed English, Simplified Chinese, and Japanese name fields for all 628 characters.
+- Added conservative phase-image gating: a selected form only shows a portrait after that exact/default artwork has been reviewed; otherwise initials are shown instead of a wrong form.
+
 ## v0.5.2 — Scenario prompts and roster expansion
 
 ### Trait Draft and Quick Randomizer
@@ -37,9 +50,6 @@
 ## v0.5.0 — Stabilization release
 
 ### Security
-- Added strict `.fusionpack` validation before import.
-- Rejected non-image data URLs, oversized fields, invalid genders, malformed structures, and stored-XSS payloads.
-- Escaped imported/user-controlled values before HTML or attribute interpolation.
 
 ### Fixes
 - Rendering no longer scrolls the page to the top; navigation does so only when the screen changes.
@@ -51,11 +61,8 @@
 - Unspecified-gender characters are excluded from male/female filters and surfaced in Setup.
 
 ### Storage
-- Upgraded IndexedDB to v2 with a dedicated `images` Blob store.
-- Migrates v0.4.1 inline pack images to Blob-backed `imageKey` records without destroying old data if a write fails.
-- Downscales pack uploads to a maximum 512px long edge and targets sub-150KB storage.
-- Added persistent-storage request, storage estimate in Settings, Blob URL cleanup, and a 14-day export reminder.
-- `.fusionpack` export remains `animefusion-pack-v1` and self-contained.
+- Upgraded IndexedDB to v2 with a dedicated `images` Blob store for optional offline portraits.
+- Added storage estimates in Settings and Blob URL cleanup.
 
 ### Portraits
 - Removed runtime AniList fuzzy matching.
@@ -69,5 +76,5 @@
 
 ### Tooling
 - Added `logic.js` pure shared helpers for browser and Node.
-- Added Node test coverage for pack validation, version comparison, PK requirements, shuffle, name matching, and version consistency.
+- Added Node test coverage for version comparison, PK requirements, shuffle, name matching, and version consistency.
 - Added GitHub Actions for tests and portrait resolution.

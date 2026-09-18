@@ -3,31 +3,31 @@
 // Significant character-era/version selector. Only characters with meaningful visual/power changes are listed.
 const CHARACTER_PHASES={
   "jjk-maki-zenin":[
-    {key:"pre",en:"Pre-awakening",zh:"觉醒前",ja:"覚醒前"},
+    {key:"pre",en:"Pre-awakening",zh:"觉醒前",ja:"覚醒前",portrait:"default"},
     {key:"awakened",en:"Awakened — Heavenly Restriction",zh:"完全觉醒·天与咒缚",ja:"覚醒後・天与呪縛"}
   ],
   "jjk-satoru-gojo":[
     {key:"student",en:"Hidden Inventory — Student",zh:"怀玉·玉折时期",ja:"懐玉・玉折編"},
-    {key:"awakened",en:"Awakened / Adult",zh:"觉醒后·成年",ja:"覚醒後・成人期"}
+    {key:"awakened",en:"Awakened / Adult",zh:"觉醒后·成年",ja:"覚醒後・成人期",portrait:"default"}
   ],
   "jjk-yuta-okkotsu":[
     {key:"zero",en:"Jujutsu Kaisen 0",zh:"咒术回战 0 时期",ja:"劇場版0期"},
-    {key:"sendai",en:"Sendai / Later Yuta",zh:"仙台结界时期",ja:"仙台結界編"}
+    {key:"sendai",en:"Sendai / Later Yuta",zh:"仙台结界时期",ja:"仙台結界編",portrait:"default"}
   ],
   "onepiece-monkey-d-luffy":[
-    {key:"prets",en:"Pre-timeskip",zh:"两年前",ja:"2年前"},
+    {key:"prets",en:"Pre-timeskip",zh:"两年前",ja:"2年前",portrait:"default"},
     {key:"gear5",en:"Gear 5 / Nika",zh:"五档·尼卡",ja:"ギア5・ニカ"}
   ],
   "onepiece-roronoa-zoro":[
-    {key:"prets",en:"Pre-timeskip",zh:"两年前",ja:"2年前"},
+    {key:"prets",en:"Pre-timeskip",zh:"两年前",ja:"2年前",portrait:"default"},
     {key:"koh",en:"King of Hell",zh:"阎王三刀流",ja:"閻王三刀流"}
   ],
   "onepiece-sanji":[
-    {key:"prets",en:"Pre-timeskip",zh:"两年前",ja:"2年前"},
+    {key:"prets",en:"Pre-timeskip",zh:"两年前",ja:"2年前",portrait:"default"},
     {key:"ifrit",en:"Ifrit Jambe",zh:"魔神风脚",ja:"魔神風脚"}
   ],
   "naruto-naruto-uzumaki":[
-    {key:"shippuden",en:"Shippuden",zh:"疾风传时期",ja:"疾風伝期"},
+    {key:"shippuden",en:"Shippuden",zh:"疾风传时期",ja:"疾風伝期",portrait:"default"},
     {key:"sixpaths",en:"Six Paths Sage Mode",zh:"六道仙人模式",ja:"六道仙人モード"}
   ],
   "naruto-sasuke-uchiha":[
@@ -74,10 +74,10 @@ const CHARACTER_PHASES={
   ],
   "dragonball-broly":[
     {key:"base",en:"Base / Wrathful",zh:"常态·怒气形态",ja:"通常・怒り形態"},
-    {key:"fullpower",en:"Full Power Super Saiyan",zh:"全功率超级赛亚人",ja:"超サイヤ人フルパワー"}
+    {key:"fullpower",en:"Full Power Super Saiyan",zh:"全功率超级赛亚人",ja:"超サイヤ人フルパワー",portrait:"default"}
   ],
   "sao-kirito":[
-    {key:"aincrad",en:"Aincrad",zh:"艾恩葛朗特时期",ja:"アインクラッド編"},
+    {key:"aincrad",en:"Aincrad",zh:"艾恩葛朗特时期",ja:"アインクラッド編",portrait:"default"},
     {key:"alicization",en:"Alicization",zh:"Alicization 时期",ja:"アリシゼーション編"}
   ]
 };
@@ -102,12 +102,17 @@ function setCharacterPhase(charId,key){
 }
 function withSelectedPhase(c){
   const ph=selectedPhaseFor(c);if(!ph)return c;
-  const out={...c,phaseKey:ph.key,phase_en:ph.en,phase_zh:ph.zh,phase_ja:ph.ja};
+  const out={...c,phaseKey:ph.key,phase_en:ph.en,phase_zh:ph.zh,phase_ja:ph.ja,phasePortraitVerified:ph.portrait==="default"};
   out.name_en=`${c.name_en||c.name} — ${ph.en}`;
   if(c.name_zh)out.name_zh=`${c.name_zh} · ${ph.zh}`;
   if(c.name_ja)out.name_ja=`${c.name_ja}・${ph.ja}`;
   return out;
 }
+
+// A generic character portrait must not be presented as a different era/form.
+// Until a phase has reviewed artwork, use the initials fallback instead.
+const _phaseCharacterImageUrl=characterImageUrl;
+characterImageUrl=function(c){if(c?.phaseKey&&!c.phasePortraitVerified)return null;return _phaseCharacterImageUrl(c);};
 
 // Apply the chosen version everywhere pools are built, including PK.
 const _phaseApplyGenderFilter=applyGenderFilter;
@@ -134,7 +139,8 @@ setup=function(){
 const _phasePKSetupView=pkSetupView;
 pkSetupView=function(){
   let html=_phasePKSetupView();
-  const block=phaseSelectorBlock([STATE.pkSetup.p1,STATE.pkSetup.p2].filter(Boolean));
+  const ids=STATE.pkSetup.kind==="budget"?[STATE.pkSetup.pool]:[STATE.pkSetup.p1,STATE.pkSetup.p2];
+  const block=phaseSelectorBlock(ids.filter(Boolean));
   return block?html+block:html;
 };
 

@@ -64,18 +64,6 @@ Overrides are applied before fuzzy matching. The resolver prints unmatched chara
 
 **Never commit portrait image files to this repository.** Only URLs and AniList IDs belong in the generated portrait manifest/overrides.
 
-## Private packs and Safari storage
-
-Private pack images are resized and stored as Blobs in IndexedDB. v0.5 upgrades the database to version 2 and migrates existing v0.4.1 inline data URLs non-destructively.
-
-Safari/iOS can clear website storage under storage pressure. Anime Fusion requests persistent storage when the first pack is created, but persistence is not guaranteed on every browser. Export your private packs regularly. If no export has been recorded for 14 days, the Packs screen displays a backup reminder.
-
-`.fusionpack` exports remain self-contained and backward compatible with v0.4.1 using:
-
-```json
-{ "format": "animefusion-pack-v1", "pack": { "name": "...", "chars": [] } }
-```
-
 ## Optional offline built-in portraits
 
 Built-in cards use the URLs in `data/portraits.json` immediately. The Character Library/Settings can optionally fetch those URLs and store Blob copies under `builtin:<charId>` in IndexedDB. If CORS prevents a Blob download, the app continues to use the remote URL.

@@ -1,19 +1,5 @@
 (function(root){
   "use strict";
-  const IMAGE_RE=/^data:image\/(png|jpe?g|webp|gif);base64,[A-Za-z0-9+/=]+$/;
-  function validatePack(obj){
-    const errors=[];
-    if(!obj || typeof obj!=="object" || Array.isArray(obj)) return {ok:false,errors:["pack must be an object"]};
-    if(typeof obj.name!=="string" || !obj.name.trim() || obj.name.length>80) errors.push("invalid pack name");
-    if(!Array.isArray(obj.chars) || obj.chars.length>200) errors.push("invalid chars array");
-    else obj.chars.forEach((c,i)=>{
-      if(!c || typeof c!=="object" || Array.isArray(c)){errors.push(`char ${i} must be an object`);return;}
-      if(typeof c.name!=="string" || c.name.length>80) errors.push(`char ${i} invalid name`);
-      if(c.gender!==undefined && !["male","female"].includes(c.gender)) errors.push(`char ${i} invalid gender`);
-      if(typeof c.image!=="string" || !IMAGE_RE.test(c.image)) errors.push(`char ${i} invalid image`);
-    });
-    return {ok:errors.length===0,errors};
-  }
   function parseVersion(v){
     if(typeof v!=="string") return null;
     const m=v.match(/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z.-]+))?$/);
@@ -47,6 +33,12 @@
     for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
     return a;
   }
+  function canAffordBudgetPick(budget,price,openSlots,minPrice=5){
+    const values=[budget,price,openSlots,minPrice].map(Number);
+    if(values.some(value=>!Number.isFinite(value)))return false;
+    const [cash,cost,slots,floor]=values;
+    return cost>=floor&&slots>=1&&cash-cost>=Math.max(0,slots-1)*floor;
+  }
   function normalizeName(s){
     return String(s??"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9\u3040-\u30ff\u3400-\u9fff]+/g," ").trim();
   }
@@ -66,7 +58,7 @@
     if(aa&&bb&&(aa.includes(bb)||bb.includes(aa)))score+=30;
     return Math.max(0,Math.min(100,score));
   }
-  const api={validatePack,compareVersions,pkRequirement,shuffle,normalizeName,nameTokens,matchScore};
+  const api={compareVersions,pkRequirement,shuffle,canAffordBudgetPick,normalizeName,nameTokens,matchScore};
   root.AnimeFusionLogic=api;
   if(typeof module!=="undefined") module.exports=api;
 })(typeof globalThis!=="undefined"?globalThis:this);

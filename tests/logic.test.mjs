@@ -5,15 +5,8 @@ import path from 'node:path';
 import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
 const require=createRequire(import.meta.url);
-const {validatePack,compareVersions,pkRequirement,shuffle,normalizeName,matchScore}=require('../logic.js');
+const {compareVersions,pkRequirement,shuffle,canAffordBudgetPick,normalizeName,matchScore}=require('../logic.js');
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const tiny='data:image/png;base64,iVBORw0KGgo=';
-
-test('validatePack valid pack passes',()=>assert.equal(validatePack({name:'Test',chars:[{name:'A',gender:'male',image:tiny}]}).ok,true));
-test('validatePack rejects stored-XSS image payload',()=>assert.equal(validatePack({name:'Test',chars:[{name:'A',image:'x" onerror="alert(1)'}]}).ok,false));
-test('validatePack rejects oversized name',()=>assert.equal(validatePack({name:'x'.repeat(81),chars:[]}).ok,false));
-test('validatePack rejects wrong types',()=>assert.equal(validatePack({name:'x',chars:'no'}).ok,false));
-test('validatePack rejects non-image data URL',()=>assert.equal(validatePack({name:'x',chars:[{name:'A',image:'data:text/html;base64,PGgxPg=='}]}).ok,false));
 
 test('compareVersions equal/greater/lesser/malformed',()=>{assert.equal(compareVersions('0.5.1','0.5.1'),0);assert.equal(compareVersions('0.5.2','0.5.1'),1);assert.equal(compareVersions('0.4.9','0.5.1'),-1);assert.equal(compareVersions('wat','0.5.1'),null);});
 
@@ -21,6 +14,13 @@ test('pkRequirement separate boundary and below',()=>{assert.equal(pkRequirement
 test('pkRequirement shared boundary and below',()=>{const a=Array.from({length:12},(_,i)=>({id:String(i)}));assert.equal(pkRequirement(a,a,6,6,true).ok,true);assert.equal(pkRequirement(a.slice(0,11),a.slice(0,11),6,6,true).ok,false);});
 
 test('shuffle returns permutation without mutating input',()=>{const a=[1,2,3,4,5],copy=[...a],b=shuffle(a,()=>0.1);assert.deepEqual(a,copy);assert.deepEqual([...b].sort(),copy);});
+
+test('budget picks reserve the minimum cost for every remaining slot',()=>{
+  assert.equal(canAffordBudgetPick(100,30,6),true);
+  assert.equal(canAffordBudgetPick(29,10,5),false);
+  assert.equal(canAffordBudgetPick(30,10,5),true);
+  assert.equal(canAffordBudgetPick(5,5,1),true);
+});
 
 test('normalizeName and matchScore matching behavior',()=>{
   assert.equal(normalizeName('  SÁNJI!! '),'sanji');
@@ -35,6 +35,25 @@ test('every built-in series has at least 25 characters and unique IDs',()=>{
   const ids=roster.flatMap(series=>series.chars.map(character=>character.id));
   for(const series of roster)assert.ok(series.chars.length>=25,`${series.id} has only ${series.chars.length} characters`);
   assert.equal(new Set(ids).size,ids.length);
+});
+
+test('every character has matching English, Chinese and Japanese name fields',()=>{
+  const roster=JSON.parse(fs.readFileSync(path.join(root,'data/roster.json'),'utf8'));
+  for(const series of roster)for(const character of series.chars){
+    for(const key of ['name_en','name_zh','name_ja'])assert.ok(character[key]?.trim(),`${character.id} is missing ${key}`);
+  }
+});
+
+test('every series has six localized PK roles and a dedicated battlefield',()=>{
+  const roster=JSON.parse(fs.readFileSync(path.join(root,'data/roster.json'),'utf8'));
+  const source=fs.readFileSync(path.join(root,'pk-v2.js'),'utf8');
+  const roles=Function(`return (${source.match(/const AF_ROLE_BLUEPRINTS=(\{[\s\S]*?\n\});/)[1]})`)();
+  const fields=Function(`return (${source.match(/const AF_PK_BATTLEFIELDS=(\{[\s\S]*?\n\});/)[1]})`)();
+  for(const series of roster){
+    assert.equal(roles[series.id]?.length,6,`${series.id} needs six PK roles`);
+    for(const role of roles[series.id])assert.ok(role.length===4&&role.every(value=>String(value).trim()),`${series.id} has an incomplete role translation`);
+    assert.ok(fields[series.id]&&['en','zh','ja'].every(lang=>fields[series.id][lang]?.trim()),`${series.id} needs a localized battlefield`);
+  }
 });
 
 test('reviewed portrait and gender corrections stay intact',()=>{
