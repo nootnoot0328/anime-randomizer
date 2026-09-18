@@ -37,9 +37,10 @@ startDraft=function(){
   const pool=selectedPool();
   if(!STATE.selectedSeries.size)return toast(t("needSeries"));
   if(!STATE.selectedTraits.size)return toast(t("needTrait"));
-  if(pool.length<2)return toast(t("needCharacters"));
+  const identities=typeof characterIdentityCount==="function"?characterIdentityCount(pool):pool.length;
+  if(identities<2)return toast(t("needCharacters"));
   // Trait Draft always presents two choices, so discard mode needs one spare character.
-  if(STATE.poolMode==="discard"&&pool.length<STATE.selectedTraits.size+1)return toast(t("needUniqueCharacters"));
+  if(STATE.poolMode==="discard"&&identities<STATE.selectedTraits.size+1)return toast(t("needUniqueCharacters"));
   STATE.game={kind:"standard",pool:[...pool],poolMode:STATE.poolMode,remaining:[...STATE.selectedTraits],assignments:[],skips:3,left:null,right:null,tempLeft:null,tempRight:null,revealing:false,selected:null,revealTimer:null};
   STATE.resultSaved=false;setScreen("draft","setup");rollDraftPair();
 };
@@ -49,7 +50,10 @@ assignTrait=function(tr){
   const chosen=g.selected;
   g.assignments.push({trait:tr,character:chosen});
   g.remaining=g.remaining.filter(x=>x!==tr);
-  if(g.poolMode==="discard"&&chosen)g.pool=g.pool.filter(c=>c.id!==chosen.id);
+  if(chosen){
+    if(g.poolMode==="discard")g.pool=g.pool.filter(c=>c.id!==chosen.id);
+    else if(chosen.phaseKey)g.pool=g.pool.filter(c=>c.id!==chosen.id||c.phaseKey===chosen.phaseKey);
+  }
   g.selected=null;closeModal();render();if(g.remaining.length)rollDraftPair();
 };
 
@@ -58,7 +62,8 @@ startQuick=function(){
   if(!STATE.selectedSeries.size)return toast(t("needSeries"));
   if(!STATE.selectedTraits.size)return toast(t("needTrait"));
   if(!pool.length)return toast(t("needCharacters"));
-  if(STATE.poolMode==="discard"&&pool.length<STATE.selectedTraits.size)return toast(t("needUniqueCharacters"));
+  const unique=typeof characterIdentityCount==="function"?characterIdentityCount(pool):pool.length;
+  if(STATE.poolMode==="discard"&&unique<STATE.selectedTraits.size)return toast(t("needUniqueCharacters"));
   cancelAnimations();setScreen("quickreveal","setup");
   const runId=++STATE.quickRunId;
   STATE.quickReveal={pool:[...pool],available:[...pool],poolMode:STATE.poolMode,traits:[...STATE.selectedTraits],index:0,current:null,currentDisplay:null,assignments:[]};
@@ -83,6 +88,7 @@ runQuickReveal=async function(runId){
     STATE.quickReveal.currentDisplay=finalChar;
     STATE.quickReveal.assignments.push({trait:STATE.quickReveal.current,character:finalChar});
     if(STATE.quickReveal.poolMode==="discard")STATE.quickReveal.available=STATE.quickReveal.available.filter(c=>c.id!==finalChar.id);
+    else if(finalChar.phaseKey)STATE.quickReveal.pool=STATE.quickReveal.pool.filter(c=>c.id!==finalChar.id||c.phaseKey===finalChar.phaseKey);
     render();await sleep(300);
     if(runId!==STATE.quickRunId)return;
   }
