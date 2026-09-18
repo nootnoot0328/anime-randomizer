@@ -73,20 +73,29 @@ test('PK ignores the Trait Draft gender filter but keeps selected character phas
   assert.match(script,/function pkPool\(player\).*pkCharacters/);
 });
 
-test('Gallery exposes a persistent strict-or-fallback form portrait toggle',()=>{
+test('only manually verified form portraits can enter character pools',()=>{
   const script=fs.readFileSync(path.join(root,'phases.js'),'utf8');
-  assert.match(script,/AF_PHASE_PORTRAIT_KEY/);
-  assert.match(script,/function setPhasePortraitFallback/);
-  assert.match(script,/portraitFallback/);
-  assert.match(script,/portraitStrict/);
+  const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
+  const manifest=JSON.parse(fs.readFileSync(path.join(root,'data/form-portraits.json'),'utf8'));
+  const phases=Function(`return (${script.match(/const CHARACTER_PHASES=(\{[\s\S]*?\n\});/)[1]})`)();
+  const expected=Object.entries(phases).flatMap(([id,forms])=>forms.map(form=>`${id}::${form.key}`)).sort();
+  assert.deepEqual(Object.keys(manifest.variants).sort(),expected);
+  for(const [key,record] of Object.entries(manifest.variants))if(record.verified){
+    assert.ok(record.source==='default'||record.url,`${key} needs a reviewed source`);
+  }
+  const reused={};for(const [key,record] of Object.entries(manifest.variants))if(record.verified&&record.source==='default')reused[key.split('::')[0]]=(reused[key.split('::')[0]]||0)+1;
+  for(const [id,count] of Object.entries(reused))assert.equal(count,1,`${id} reuses its base portrait for multiple forms`);
+  for(const key of ['onepiece-monkey-d-luffy::gear5','onepiece-roronoa-zoro::koh','aot-eren-yeager::founder','dragonball-gohan::beast'])assert.equal(manifest.variants[key].verified,false);
+  assert.match(script,/filter\(x=>x\.phasePortraitVerified\)/);
+  assert.match(app,/fetch\("data\/form-portraits\.json/);
   assert.match(script,/libraryView=function\(\)\{return phasePortraitFallbackBlock\(\)/);
 });
 
 test('character forms are sibling variants and selecting one hides the other form',()=>{
   const phases=fs.readFileSync(path.join(root,'phases.js'),'utf8');
   const patch=fs.readFileSync(path.join(root,'patch.js'),'utf8');
-  assert.match(phases,/function characterPhaseVariants\(c\).*opts\.map\(ph=>withCharacterPhase\(c,ph\)\)/);
-  assert.match(phases,/out\.variantKey=`\$\{c\.id\}::\$\{ph\.key\}`/);
+  assert.match(phases,/const approved=opts\.map\(ph=>withCharacterPhase\(c,ph\)\)\.filter\(x=>x\.phasePortraitVerified\)/);
+  assert.match(phases,/const variantKey=`\$\{c\.id\}::\$\{ph\.key\}`/);
   assert.match(phases,/function characterIdentityCount/);
   assert.match(patch,/c\.id!==chosen\.id\|\|c\.phaseKey===chosen\.phaseKey/);
   assert.match(patch,/c\.id!==finalChar\.id\|\|c\.phaseKey===finalChar\.phaseKey/);
