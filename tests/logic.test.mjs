@@ -82,6 +82,16 @@ test('Gallery exposes a persistent strict-or-fallback form portrait toggle',()=>
   assert.match(script,/libraryView=function\(\)\{return phasePortraitFallbackBlock\(\)/);
 });
 
+test('character forms are sibling variants and selecting one hides the other form',()=>{
+  const phases=fs.readFileSync(path.join(root,'phases.js'),'utf8');
+  const patch=fs.readFileSync(path.join(root,'patch.js'),'utf8');
+  assert.match(phases,/function characterPhaseVariants\(c\).*opts\.map\(ph=>withCharacterPhase\(c,ph\)\)/);
+  assert.match(phases,/out\.variantKey=`\$\{c\.id\}::\$\{ph\.key\}`/);
+  assert.match(phases,/function characterIdentityCount/);
+  assert.match(patch,/c\.id!==chosen\.id\|\|c\.phaseKey===chosen\.phaseKey/);
+  assert.match(patch,/c\.id!==finalChar\.id\|\|c\.phaseKey===finalChar\.phaseKey/);
+});
+
 test('reviewed portrait and gender corrections stay intact',()=>{
   const roster=JSON.parse(fs.readFileSync(path.join(root,'data/roster.json'),'utf8'));
   const overrides=JSON.parse(fs.readFileSync(path.join(root,'data/portrait-overrides.json'),'utf8'));
