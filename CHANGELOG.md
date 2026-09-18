@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.6.0 — PK board and budget draft
 
 ### PK Draft
 - Rebuilt the active draft as a one-screen, touch-friendly board with bottom candidate cards, tap or drag-to-role placement, reveal/drop animations, and one skip per player.
