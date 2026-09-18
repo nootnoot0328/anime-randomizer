@@ -88,7 +88,7 @@ const ROLE_LABELS={
 };
 
 const STATE={
-  lang:localStorage.getItem("af_lang")||"en",screen:"home",back:null,builtin:[],portraits:{generatedAt:null,series:{},chars:{}},history:[],selectedSeries:new Set(),selectedMode:"partner",selectedTraits:new Set(MODES.partner),genderFilter:"all",setupKind:"standard",game:null,pk:null,pkSetup:{kind:"random",p1:null,p2:null,pool:null},quickReveal:null,quickRunId:0,librarySeriesId:null,resultSaved:false,versionInfo:{current:VERSION,latest:null,status:"unknown"},storageInfo:null,ready:false
+  lang:localStorage.getItem("af_lang")||"en",screen:"home",back:null,builtin:[],portraits:{generatedAt:null,series:{},chars:{}},formPortraits:{variants:{}},history:[],selectedSeries:new Set(),selectedMode:"partner",selectedTraits:new Set(MODES.partner),genderFilter:"all",setupKind:"standard",game:null,pk:null,pkSetup:{kind:"random",p1:null,p2:null,pool:null},quickReveal:null,quickRunId:0,librarySeriesId:null,resultSaved:false,versionInfo:{current:VERSION,latest:null,status:"unknown"},storageInfo:null,ready:false
 };
 const OBJECT_URLS=new Map();
 const IMAGE_URL_PENDING=new Set();
@@ -167,8 +167,8 @@ async function resetBuiltinPortraits(){const keys=(await imageKeys()).filter(k=>
 async function loadBootData(){
   document.getElementById("screen").innerHTML=`<div class="loading-state"><div><div class="loading-spinner"></div><p>${esc(t("loading"))}</p></div></div>`;
   try{
-    const [rr,pr]=await Promise.all([fetch("data/roster.json?v=0.6.0",{cache:"no-store"}),fetch("data/portraits.json?v=0.6.0",{cache:"no-store"})]);
-    if(!rr.ok||!pr.ok)throw new Error("data fetch failed");const roster=await rr.json();STATE.portraits=await pr.json();
+    const [rr,pr,fr]=await Promise.all([fetch("data/roster.json?v=0.6.0",{cache:"no-store"}),fetch("data/portraits.json?v=0.6.0",{cache:"no-store"}),fetch("data/form-portraits.json?v=0.6.0",{cache:"no-store"})]);
+    if(!rr.ok||!pr.ok||!fr.ok)throw new Error("data fetch failed");const roster=await rr.json();STATE.portraits=await pr.json();STATE.formPortraits=await fr.json();
     STATE.builtin=roster.map(s=>({...s,name:s.name_en,chars:(s.chars||[]).map(c=>({...c,name:c.name_en,series:s.name_en,series_en:s.name_en,series_ja:s.name_ja,series_zh:s.name_zh,seriesId:s.id}))}));
     await openDB();await purgeLegacyPackImages();STATE.history=JSON.parse(localStorage.getItem("af_history")||"[]");
     const first=STATE.builtin[0]?.id||null;STATE.pkSetup={kind:"random",p1:first,p2:STATE.builtin[1]?.id||first,pool:first};
