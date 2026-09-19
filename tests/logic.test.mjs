@@ -85,7 +85,10 @@ test('only manually verified form portraits can enter character pools',()=>{
   }
   const reused={};for(const [key,record] of Object.entries(manifest.variants))if(record.verified&&record.source==='default')reused[key.split('::')[0]]=(reused[key.split('::')[0]]||0)+1;
   for(const [id,count] of Object.entries(reused))assert.equal(count,1,`${id} reuses its base portrait for multiple forms`);
-  for(const key of ['onepiece-monkey-d-luffy::gear5','onepiece-roronoa-zoro::koh','aot-eren-yeager::founder','dragonball-gohan::beast'])assert.equal(manifest.variants[key].verified,false);
+  for(const [key,record] of Object.entries(manifest.variants)){
+    assert.equal(record.verified,true,`${key} should have reviewed artwork`);
+    if(record.url){assert.match(record.url,/^https:\/\//);assert.match(record.sourcePage,/^https:\/\//,`${key} needs an audit source page`);}
+  }
   assert.match(script,/filter\(x=>x\.phasePortraitVerified\)/);
   assert.match(app,/fetch\("data\/form-portraits\.json/);
   assert.match(script,/libraryView=function\(\)\{return phasePortraitFallbackBlock\(\)/);
