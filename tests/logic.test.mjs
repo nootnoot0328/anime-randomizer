@@ -15,10 +15,10 @@ test('pkRequirement shared boundary and below',()=>{const a=Array.from({length:1
 
 test('shuffle returns permutation without mutating input',()=>{const a=[1,2,3,4,5],copy=[...a],b=shuffle(a,()=>0.1);assert.deepEqual(a,copy);assert.deepEqual([...b].sort(),copy);});
 
-test('budget picks reserve the minimum cost for every remaining slot',()=>{
+test('budget picks may use all remaining funds',()=>{
   assert.equal(canAffordBudgetPick(100,30,6),true);
-  assert.equal(canAffordBudgetPick(29,10,5),false);
-  assert.equal(canAffordBudgetPick(30,10,5),true);
+  assert.equal(canAffordBudgetPick(29,30,5),false);
+  assert.equal(canAffordBudgetPick(30,30,5),true);
   assert.equal(canAffordBudgetPick(5,5,1),true);
 });
 
@@ -87,11 +87,30 @@ test('only manually verified form portraits can enter character pools',()=>{
   for(const [id,count] of Object.entries(reused))assert.equal(count,1,`${id} reuses its base portrait for multiple forms`);
   for(const [key,record] of Object.entries(manifest.variants)){
     assert.equal(record.verified,true,`${key} should have reviewed artwork`);
-    if(record.url){assert.match(record.url,/^https:\/\//);assert.match(record.sourcePage,/^https:\/\//,`${key} needs an audit source page`);}
+    if(record.url){
+      assert.match(record.sourcePage,/^https:\/\//,`${key} needs an audit source page`);
+      if(record.url.startsWith('assets/form-portraits/')){
+        assert.ok(fs.existsSync(path.join(root,record.url)),`${key} needs its cached portrait`);
+        assert.match(record.remoteUrl,/^https:\/\//,`${key} needs its original remote URL`);
+      }else assert.match(record.url,/^https:\/\//);
+    }
   }
   assert.match(script,/filter\(x=>x\.phasePortraitVerified\)/);
   assert.match(app,/fetch\("data\/form-portraits\.json/);
   assert.match(script,/libraryView=function\(\)\{return phasePortraitFallbackBlock\(\)/);
+});
+
+test('$100 PK supports five roles, one sale, and incomplete teams',()=>{
+  const script=fs.readFileSync(path.join(root,'pk-v2.js'),'utf8');
+  const prompts=fs.readFileSync(path.join(root,'prompt-patch.js'),'utf8');
+  assert.match(script,/function budgetRoleSet\(seriesId\).*filter\(role=>!\/:traitor\$\/.test\(role\)\)\.slice\(0,5\)/);
+  assert.match(script,/sellUsed:false,finished:false/);
+  assert.match(script,/function budgetCanBuy\(c\).*characterPrice\(c\)<=p\.budget/);
+  assert.match(script,/function sellBudgetCharacter[\s\S]*p\.budget\+=sold\.price[\s\S]*p\.sellUsed=true/);
+  assert.match(script,/function finishBudgetTeam[\s\S]*p\.finished=true/);
+  assert.match(script,/if\(budgetPlayerDone\(pk\.p1\)&&budgetPlayerDone\(pk\.p2\)\)pk\.ended=true/);
+  assert.match(prompts,/Roles are tactical responsibilities/);
+  assert.match(script,/Budget mode has no betrayal role/);
 });
 
 test('character forms are sibling variants and selecting one hides the other form',()=>{
@@ -118,11 +137,11 @@ test('reviewed portrait and gender corrections stay intact',()=>{
   for(const id of ['jjk-kirara-hoshi','aot-hange-zoe','hunterxhunter-neferpitou','fma-envy','jojo-foo-fighters'])assert.equal(chars[id].gender,undefined);
 });
 
-test('version consistency is 0.6.0',()=>{
+test('version consistency is 0.6.1',()=>{
   const version=JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).version;
   const packageVersion=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).version;
   const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
   const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-  const m=app.match(/const VERSION = "([^"]+)"/);assert.ok(m);assert.equal(version,'0.6.0');assert.equal(packageVersion,version);assert.equal(m[1],version);
-  for(const asset of ['styles.css','logic.js','app.js'])assert.match(html,new RegExp(asset.replace('.','\\.')+'\\?v=0\\.6\\.0'));
+  const m=app.match(/const VERSION = "([^"]+)"/);assert.ok(m);assert.equal(version,'0.6.1');assert.equal(packageVersion,version);assert.equal(m[1],version);
+  for(const asset of ['styles.css','logic.js','app.js'])assert.match(html,new RegExp(asset.replace('.','\\.')+'\\?v=0\\.6\\.1'));
 });

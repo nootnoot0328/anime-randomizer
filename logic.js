@@ -33,11 +33,9 @@
     for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
     return a;
   }
-  function canAffordBudgetPick(budget,price,openSlots,minPrice=5){
-    const values=[budget,price,openSlots,minPrice].map(Number);
-    if(values.some(value=>!Number.isFinite(value)))return false;
-    const [cash,cost,slots,floor]=values;
-    return cost>=floor&&slots>=1&&cash-cost>=Math.max(0,slots-1)*floor;
+  function canAffordBudgetPick(budget,price){
+    const [cash,cost]=[budget,price].map(Number);
+    return Number.isFinite(cash)&&Number.isFinite(cost)&&cost>=0&&cost<=cash;
   }
   function normalizeName(s){
     return String(s??"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9\u3040-\u30ff\u3400-\u9fff]+/g," ").trim();

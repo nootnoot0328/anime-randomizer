@@ -1,0 +1,35 @@
+name: Cache form portraits
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - data/form-portraits.json
+      - scripts/cache-form-portraits.mjs
+      - .github/workflows/cache-form-portraits.yml
+permissions:
+  contents: write
+concurrency:
+  group: cache-form-portraits
+  cancel-in-progress: true
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Download verified form artwork
+        run: node scripts/cache-form-portraits.mjs
+      - name: Commit local form artwork
+        run: |
+          if git diff --quiet -- data/form-portraits.json assets/form-portraits; then
+            echo "Form artwork is already local."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/form-portraits.json assets/form-portraits
+          git commit -m "chore: cache verified form portraits"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

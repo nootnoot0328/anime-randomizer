@@ -3,22 +3,22 @@
 // PK v2: compact one-screen draft, touch drag/drop, skip tokens and budget draft.
 
 Object.assign(I18N.en,{
-  randomPK:"Random PK",budgetPK:"$100 Budget PK",budgetPKDesc:"Share one roster and build a six-role team without spending over $100.",
+  randomPK:"Random PK",budgetPK:"$100 Budget PK",budgetPKDesc:"Share one roster and build a five-role team without spending over $100.",
   pkStyle:"Draft style",sharedRoster:"Shared roster",budget:"Budget",cost:"Cost",affordable:"Affordable",sold:"Drafted",
   dragHint:"Drag a card to an open role, or tap the card then the role.",dragHandle:"Drag",skipPair:"Skip pair",skipUsed:"Skip used",remainingBudget:"remaining",
-  directMatchups:"Direct matchups",budgetRule:"Keep enough budget to fill every remaining role.",gallery:"Gallery"
+  directMatchups:"Direct matchups",budgetRule:"This character costs more than your remaining budget.",sellCharacter:"Sell",sellUsed:"Sell used",finishTeam:"Finish team",finishTeamHint:"Lock this team and continue with empty roles.",pickBeforeFinish:"Pick at least one character first.",gallery:"Gallery"
 });
 Object.assign(I18N.zh,{
-  randomPK:"随机阵容对决",budgetPK:"$100 预算对决",budgetPKDesc:"双方共用同一个角色池，以100元预算组建六人阵容。",
+  randomPK:"随机阵容对决",budgetPK:"$100 预算对决",budgetPKDesc:"双方共用同一个角色池，以100元预算组建五人阵容。",
   pkStyle:"选角方式",sharedRoster:"共享角色池",budget:"预算",cost:"价格",affordable:"可购买",sold:"已被选走",
   dragHint:"把角色卡拖到空缺定位；也可以先点角色，再点定位。",dragHandle:"拖动",skipPair:"跳过本轮",skipUsed:"已使用跳过",remainingBudget:"剩余",
-  directMatchups:"对应单挑",budgetRule:"必须预留足够预算填满所有剩余定位。",gallery:"角色图库"
+  directMatchups:"对应单挑",budgetRule:"该角色价格超过你的剩余预算。",sellCharacter:"卖出",sellUsed:"已使用卖出",finishTeam:"完成阵容",finishTeamHint:"锁定当前阵容，允许保留空缺定位。",pickBeforeFinish:"请先选择至少一名角色。",gallery:"角色图库"
 });
 Object.assign(I18N.ja,{
-  randomPK:"ランダム対決",budgetPK:"$100 予算対決",budgetPKDesc:"1つの共有キャラプールから、100ドル以内で6つの役割を編成します。",
+  randomPK:"ランダム対決",budgetPK:"$100 予算対決",budgetPKDesc:"1つの共有キャラプールから、100ドル以内で5つの役割を編成します。",
   pkStyle:"ドラフト方式",sharedRoster:"共有キャラプール",budget:"予算",cost:"価格",affordable:"獲得可能",sold:"ドラフト済み",
   dragHint:"キャラカードを空き役職へドラッグ。カードをタップしてから役職を選んでもOK。",dragHandle:"ドラッグ",skipPair:"候補をスキップ",skipUsed:"スキップ使用済み",remainingBudget:"残り",
-  directMatchups:"一対一の組み合わせ",budgetRule:"残りの全役職を埋められる予算を確保してください。",gallery:"キャラ図鑑"
+  directMatchups:"一対一の組み合わせ",budgetRule:"このキャラは残り予算を超えています。",sellCharacter:"売却",sellUsed:"売却済み",finishTeam:"編成完了",finishTeamHint:"空き役職を残したまま編成を確定します。",pickBeforeFinish:"先に1人以上選んでください。",gallery:"キャラ図鑑"
 });
 
 const AF_ROLE_BLUEPRINTS={
@@ -63,6 +63,7 @@ const AF_PRICE_TIERS={
 };
 function characterPrice(c){for(const [price,ids] of Object.entries(AF_PRICE_TIERS))if(ids.has(c.id))return Number(price);return 15;}
 function pkCharacters(chars){return typeof applyCharacterPhases==="function"?applyCharacterPhases(chars):(chars||[]);}
+function budgetRoleSet(seriesId){return roleSet(seriesId).filter(role=>!/:traitor$/.test(role)).slice(0,5);}
 
 function updatePKSetup(which,value){STATE.pkSetup[which]=value;render();}
 function openPKSetup(kind="random"){
@@ -78,8 +79,8 @@ function pkSetupView(){
   const opts=selected=>eligible.map(s=>`<option value="${esc(s.id)}" ${s.id===selected?"selected":""}>${esc(displaySeries(s))} (${esc(String(pkCharacters(s.chars).length))})</option>`).join("");
   const style=`<div class="chips"><button class="chip${kind==="random"?" selected":""}" onclick="openPKSetup('random')">${esc(t("randomPK"))}</button><button class="chip${kind==="budget"?" selected":""}" onclick="openPKSetup('budget')">${esc(t("budgetPK"))}</button></div>`;
   if(kind==="budget"){
-    const pool=getSeries(STATE.pkSetup.pool)||eligible[0];STATE.pkSetup.pool=pool.id;const chars=pkCharacters(pool.chars),ok=chars.length>=12;
-    return `<div class="section-head"><div><h2>${esc(t("budgetPK"))}</h2><p>${esc(t("budgetPKDesc"))}</p></div></div>${style}<div class="panel" style="margin-top:16px"><div class="form-group"><label>${esc(t("sharedRoster"))}</label><select onchange="updatePKSetup('pool',this.value)">${opts(pool.id)}</select><div class="requirement ${ok?"good":"bad"}">${esc(t("sharedPool"))}: ${chars.length} ${esc(t("available"))} / 12 ${esc(t("required"))}</div></div></div><div class="cta-row"><button class="primary" onclick="startBudgetPK()" ${ok?"":"disabled"}>${esc(t("beginPK"))}</button></div>`;
+    const pool=getSeries(STATE.pkSetup.pool)||eligible[0];STATE.pkSetup.pool=pool.id;const chars=pkCharacters(pool.chars),ok=chars.length>=10;
+    return `<div class="section-head"><div><h2>${esc(t("budgetPK"))}</h2><p>${esc(t("budgetPKDesc"))}</p></div></div>${style}<div class="panel" style="margin-top:16px"><div class="form-group"><label>${esc(t("sharedRoster"))}</label><select onchange="updatePKSetup('pool',this.value)">${opts(pool.id)}</select><div class="requirement ${ok?"good":"bad"}">${esc(t("sharedPool"))}: ${chars.length} ${esc(t("available"))} / 10 ${esc(t("required"))}</div></div></div><div class="cta-row"><button class="primary" onclick="startBudgetPK()" ${ok?"":"disabled"}>${esc(t("beginPK"))}</button></div>`;
   }
   if(!getSeries(STATE.pkSetup.p1))STATE.pkSetup.p1=eligible[0].id;if(!getSeries(STATE.pkSetup.p2))STATE.pkSetup.p2=eligible[Math.min(1,eligible.length-1)].id;
   const s1=getSeries(STATE.pkSetup.p1),s2=getSeries(STATE.pkSetup.p2),p1=pkCharacters(s1.chars),p2=pkCharacters(s2.chars),shared=s1.id===s2.id,req=L.pkRequirement(p1,p2,6,6,shared);
@@ -95,8 +96,9 @@ function startPK(){
   setScreen("pk","pksetup");rollPKPair();
 }
 function startBudgetPK(){
-  const id=STATE.pkSetup.pool,s=getSeries(id),pool=pkCharacters(s?.chars||[]);if(!s||pool.length<12)return;
-  STATE.pk={kind:"budget",p1:{seriesId:id,roles:roleSet(id),team:[],budget:100},p2:{seriesId:id,roles:roleSet(id),team:[],budget:100},turn:1,shared:true,used:new Set(),selectedIndex:null,ended:false};
+  const id=STATE.pkSetup.pool,s=getSeries(id),pool=pkCharacters(s?.chars||[]);if(!s||pool.length<10)return;
+  const roles=budgetRoleSet(id);
+  STATE.pk={kind:"budget",p1:{seriesId:id,roles:[...roles],team:[],budget:100,sellUsed:false,finished:false},p2:{seriesId:id,roles:[...roles],team:[],budget:100,sellUsed:false,finished:false},turn:1,shared:true,used:new Set(),selectedIndex:null,ended:false};
   setScreen("pk","pksetup");
 }
 
@@ -109,9 +111,9 @@ function rollPKPair(){
 function skipPKPair(){const pk=STATE.pk;if(!pk||pk.kind!=="random"||pk.revealing||!pk.skips[pk.turn])return;const skipped=new Set((pk.pair||[]).map(c=>c.id)),fresh=pkPool(pk.turn).filter(c=>!skipped.has(c.id));pk.skips[pk.turn]=0;pk.pair=[];pk.selectedIndex=null;if(fresh.length>=2){pk.revealing=true;let ticks=0;pk.revealTimer=setInterval(()=>{pk.pair=L.shuffle(fresh).slice(0,2);ticks++;render();if(ticks>=10){clearInterval(pk.revealTimer);pk.revealTimer=null;pk.revealing=false;render();}},70);}else{render();rollPKPair();}}
 
 function pkTeam(n){
-  const pk=STATE.pk,p=pk[`p${n}`],s=getSeries(p.seriesId),active=pk.turn===n&&!pk.ended&&!pkComplete();
+  const pk=STATE.pk,p=pk[`p${n}`],s=getSeries(p.seriesId),active=pk.turn===n&&!pk.ended&&!pkComplete()&&!(pk.kind==="budget"&&budgetPlayerDone(p));
   const money=pk.kind==="budget"?`<span class="pk-money">$${p.budget}</span>`:"";
-  return `<section class="pk-team${active?" active":""}"><header><h3>${esc(t(`player${n}`))}</h3><span>${esc(displaySeries(s))}</span>${money}</header><div class="pk-role-grid">${p.roles.map(role=>{const hit=p.team.find(x=>x.role===role),open=active&&!hit;if(!hit)return `<button class="pk-role-slot empty${open?" droppable":""}" data-player="${n}" data-role="${esc(role)}" onclick="assignSelectedPKRole(${n},${jsarg(role)})"><span>${esc(roleLabel(role))}</span><strong>＋</strong></button>`;const c=hit.character,url=characterImageUrl(c),name=displayName(c);return `<div class="pk-role-slot filled" data-player="${n}" data-role="${esc(role)}"><div class="pk-role-avatar">${url?`<img src="${esc(url)}" alt="${esc(name)}" referrerpolicy="no-referrer">`:`<b>${esc(initials(name))}</b>`}</div><span>${esc(roleLabel(role))}</span><strong>${esc(name)}</strong>${pk.kind==="budget"?`<small>$${hit.price}</small>`:""}</div>`;}).join("")}</div></section>`;
+  return `<section class="pk-team${active?" active":""}"><header><h3>${esc(t(`player${n}`))}</h3><span>${esc(displaySeries(s))}</span>${money}</header><div class="pk-role-grid">${p.roles.map(role=>{const hit=p.team.find(x=>x.role===role),open=active&&!hit;if(!hit)return `<button class="pk-role-slot empty${open?" droppable":""}" data-player="${n}" data-role="${esc(role)}" onclick="assignSelectedPKRole(${n},${jsarg(role)})"><span>${esc(roleLabel(role))}</span><strong>＋</strong></button>`;const c=hit.character,url=characterImageUrl(c),name=displayName(c),canSell=pk.kind==="budget"&&active&&!p.sellUsed;return `<div class="pk-role-slot filled" data-player="${n}" data-role="${esc(role)}"><div class="pk-role-avatar">${url?`<img src="${esc(url)}" alt="${esc(name)}" referrerpolicy="no-referrer">`:`<b>${esc(initials(name))}</b>`}</div><span>${esc(roleLabel(role))}</span><strong>${esc(name)}</strong>${pk.kind==="budget"?`<small>$${hit.price}</small>${canSell?`<button class="pk-sell" onclick="sellBudgetCharacter(${n},${jsarg(role)})">${esc(t("sellCharacter"))}</button>`:""}`:""}</div>`;}).join("")}</div></section>`;
 }
 
 function pkCandidateCard(c,i,{compact=false,disabled=false}={}){
@@ -123,22 +125,36 @@ function pkCandidateCard(c,i,{compact=false,disabled=false}={}){
 function selectPKCandidate(i){const pk=STATE.pk;if(!pk||pk.revealing)return;pk.selectedIndex=pk.selectedIndex===i?null:i;render();}
 function selectedPKCharacter(){const pk=STATE.pk;if(!pk||pk.selectedIndex===null)return null;if(pk.kind==="random")return pk.pair[pk.selectedIndex]||null;return budgetPool()[pk.selectedIndex]||null;}
 function budgetPool(){return pkPool(STATE.pk?.turn||1);}
-function budgetCanBuy(c){const pk=STATE.pk,p=pk[`p${pk.turn}`],remaining=p.roles.length-p.team.length;return L.canAffordBudgetPick(p.budget,characterPrice(c),remaining);}
+function budgetCanBuy(c){const pk=STATE.pk,p=pk[`p${pk.turn}`];return characterPrice(c)<=p.budget;}
+function budgetPlayerDone(p){return Boolean(p.finished||p.team.length>=p.roles.length);}
 
 function assignSelectedPKRole(player,role){const pk=STATE.pk;if(!pk||player!==pk.turn)return;const c=selectedPKCharacter();if(!c)return;if(pk.kind==="budget"&&!budgetCanBuy(c))return toast(t("budgetRule"));assignPKCharacter(role,c);}
 function assignPKCharacter(role,c){
   const pk=STATE.pk,p=pk[`p${pk.turn}`];if(!p.roles.includes(role)||p.team.some(x=>x.role===role)||pk.used.has(c.id))return;
   const price=pk.kind==="budget"?characterPrice(c):0;if(pk.kind==="budget"&&!budgetCanBuy(c))return;
   p.team.push({role,character:c,price});if(pk.kind==="budget")p.budget-=price;pk.used.add(c.id);pk.selectedIndex=null;
-  const other=pk.turn===1?2:1;if(pk[`p${other}`].team.length<pk[`p${other}`].roles.length)pk.turn=other;
+  const other=pk.turn===1?2:1;
+  if(pk.kind==="budget"){
+    if(p.team.length>=p.roles.length)p.finished=true;
+    if(!budgetPlayerDone(pk[`p${other}`]))pk.turn=other;
+    if(budgetPlayerDone(pk.p1)&&budgetPlayerDone(pk.p2))pk.ended=true;
+  }else if(pk[`p${other}`].team.length<pk[`p${other}`].roles.length)pk.turn=other;
   render();requestAnimationFrame(()=>document.querySelector(`[data-player="${player}"][data-role="${CSS.escape(role)}"]`)?.classList.add("just-filled"));
   if(pk.kind==="random"&&!pkComplete())rollPKPair();
 }
-function pkComplete(){const pk=STATE.pk;return pk.p1.team.length>=pk.p1.roles.length&&pk.p2.team.length>=pk.p2.roles.length;}
+function sellBudgetCharacter(player,role){
+  const pk=STATE.pk,p=pk?.[`p${player}`];if(!pk||pk.kind!=="budget"||player!==pk.turn||p.sellUsed||p.finished)return;
+  const index=p.team.findIndex(x=>x.role===role);if(index<0)return;const [sold]=p.team.splice(index,1);p.budget+=sold.price;pk.used.delete(sold.character.id);p.sellUsed=true;pk.selectedIndex=null;render();
+}
+function finishBudgetTeam(){
+  const pk=STATE.pk,p=pk?.[`p${pk?.turn}`];if(!pk||pk.kind!=="budget"||!p||budgetPlayerDone(p))return;if(!p.team.length)return toast(t("pickBeforeFinish"));
+  p.finished=true;pk.selectedIndex=null;const other=pk.turn===1?2:1;if(!budgetPlayerDone(pk[`p${other}`]))pk.turn=other;else pk.ended=true;render();
+}
+function pkComplete(){const pk=STATE.pk;if(pk.kind==="budget")return budgetPlayerDone(pk.p1)&&budgetPlayerDone(pk.p2);return pk.p1.team.length>=pk.p1.roles.length&&pk.p2.team.length>=pk.p2.roles.length;}
 
 function pkView(){const pk=STATE.pk;if(!pk)return home();if(pkComplete()||pk.ended)return pkResult();return pk.kind==="budget"?budgetPKView():randomPKView();}
 function randomPKView(){const pk=STATE.pk,pair=pk.pair||[];return `<div class="pk-arena"><div class="pk-teams">${pkTeam(1)}${pkTeam(2)}</div><div class="pk-turnbar"><div><b>${esc(t(`player${pk.turn}`))}</b><span>${esc(t("dragHint"))}</span></div><button class="ghost pk-skip" onclick="skipPKPair()" ${pk.revealing||!pk.skips[pk.turn]?"disabled":""}>${esc(pk.skips[pk.turn]?t("skipPair"):t("skipUsed"))} ↻</button></div><div class="pk-random-tray${pk.revealing?" revealing":""}">${pair.length?pair.map((c,i)=>pkCandidateCard(c,i,{compact:true,disabled:pk.revealing})).join(`<div class="pk-vs">VS</div>`):`<div class="panel empty">${esc(t("emptyPool"))}</div>`}</div></div>`;}
-function budgetPKView(){const pk=STATE.pk,p=pk[`p${pk.turn}`],pool=budgetPool();return `<div class="pk-arena"><div class="pk-teams">${pkTeam(1)}${pkTeam(2)}</div><div class="pk-turnbar"><div><b>${esc(t(`player${pk.turn}`))} · $${p.budget} ${esc(t("remainingBudget"))}</b><span>${esc(t("dragHint"))}</span></div></div><div class="pk-budget-tray">${pool.map((c,i)=>pkCandidateCard(c,i,{compact:true,disabled:!budgetCanBuy(c)})).join("")}</div></div>`;}
+function budgetPKView(){const pk=STATE.pk,p=pk[`p${pk.turn}`],pool=budgetPool();return `<div class="pk-arena"><div class="pk-teams">${pkTeam(1)}${pkTeam(2)}</div><div class="pk-turnbar"><div><b>${esc(t(`player${pk.turn}`))} · $${p.budget} ${esc(t("remainingBudget"))}</b><span>${esc(t("dragHint"))} · ${esc(p.sellUsed?t("sellUsed"):t("finishTeamHint"))}</span></div><button class="ghost pk-finish" onclick="finishBudgetTeam()" ${p.team.length?"":"disabled"}>${esc(t("finishTeam"))}</button></div><div class="pk-budget-tray">${pool.map((c,i)=>pkCandidateCard(c,i,{compact:true,disabled:!budgetCanBuy(c)})).join("")}</div></div>`;}
 
 let AF_PK_DRAG=null,AF_PK_SUPPRESS_CLICK=0;
 const _afSelectPKCandidate=selectPKCandidate;
@@ -186,9 +202,10 @@ pkBattleScenario=function(){
   return AF_PK_BATTLEFIELDS[pk.battlefieldSeriesId]||AF_PK_BATTLEFIELDS.onepiece;
 };
 function pkDirectMatchupText(){
-  const pk=STATE.pk,lines=[];for(let i=0;i<5;i++){const a=pk.p1.team.find(x=>x.role===pk.p1.roles[i]),b=pk.p2.team.find(x=>x.role===pk.p2.roles[i]);if(a&&b)lines.push(`${promptCharacterName(a.character)} vs ${promptCharacterName(b.character)}`);}
+  const pk=STATE.pk,lines=[];for(let i=0;i<Math.min(5,pk.p1.roles.length,pk.p2.roles.length);i++){const a=pk.p1.team.find(x=>x.role===pk.p1.roles[i]),b=pk.p2.team.find(x=>x.role===pk.p2.roles[i]);if(a&&b)lines.push(`${roleLabel(pk.p1.roles[i])}: ${promptCharacterName(a.character)} vs ${promptCharacterName(b.character)}`);}
+  const heading=STATE.lang==="zh"?"对应定位交锋":STATE.lang==="ja"?"役割別の対決":"ROLE MATCHUPS";
+  if(pk.kind==="budget")return `${heading}:\n${lines.length?lines.map((x,i)=>`${i+1}. ${x}`).join("\n"):(STATE.lang==="zh"?"没有完整的对应定位。":STATE.lang==="ja"?"両側が埋まった対応役割はありません。":"No role is filled on both sides.")}`;
   const t1=pk.p1.team.find(x=>x.role===pk.p1.roles[5]),t2=pk.p2.team.find(x=>x.role===pk.p2.roles[5]);
-  const heading=STATE.lang==="zh"?"五组对应单挑":STATE.lang==="ja"?"5組の一対一対決":"FIVE DIRECT DUELS";
   const betrayal=STATE.lang==="zh"?`背叛行动：${t1?promptCharacterName(t1.character):"玩家1内鬼"}转身攻击玩家1原队友；${t2?promptCharacterName(t2.character):"玩家2内鬼"}转身攻击玩家2原队友。`:STATE.lang==="ja"?`裏切り：${t1?promptCharacterName(t1.character):"プレイヤー1の裏切り枠"}はプレイヤー1の元仲間を攻撃し、${t2?promptCharacterName(t2.character):"プレイヤー2の裏切り枠"}はプレイヤー2の元仲間を攻撃する。`:`BETRAYALS: ${t1?promptCharacterName(t1.character):"Player 1's traitor"} turns against Player 1's former teammates; ${t2?promptCharacterName(t2.character):"Player 2's traitor"} turns against Player 2's former teammates.`;
   return `${heading}:\n${lines.map((x,i)=>`${i+1}. ${x}`).join("\n")}\n${betrayal}`;
 }
@@ -196,10 +213,20 @@ function pkDirectMatchupText(){
 const _afPKImagePrompt=buildPKBattleImagePrompt;
 buildPKBattleImagePrompt=function(){
   let base=_afPKImagePrompt();const matchups=pkDirectMatchupText();
+  if(STATE.pk?.kind==="budget"){
+    if(STATE.lang==="zh")return base.replace("\n\n构图：","\n\n"+matchups+"\n\n战斗编排规则：已配对的相同定位分别交战，并以各自定位行动；空缺定位不添加任何角色。\n\n构图：");
+    if(STATE.lang==="ja")return base.replace("\n\n構図：","\n\n"+matchups+"\n\n戦闘配置ルール：両側が埋まった同じ役割同士を対峙させ、各自の役割に沿って行動させる。空き役割には人物を追加しない。\n\n構図：");
+    return base.replace("\n\nCOMPOSITION:","\n\n"+matchups+"\n\nFIGHT CHOREOGRAPHY: pair filled matching roles against each other and show each fighter performing that tactical role. Do not add fighters for empty roles.\n\nCOMPOSITION:");
+  }
   if(STATE.lang==="zh")return base.replace("\n\n构图：","\n\n"+matchups+"\n\n战斗编排规则：前五组必须分别进行清晰的一对一交战，每位角色只锁定自己的对应对手，不要形成混乱群殴。两名内鬼不与对方内鬼决斗，而是各自转身攻击自己原本所属的队伍。\n\n构图：").replace("内鬼位必须通过可读但不过度剧透的动作，表现正在准备背叛自己被分配的队伍。","内鬼位已经完成倒戈，明确面向自己原队伍发动攻击。");
   if(STATE.lang==="ja")return base.replace("\n\n構図：","\n\n"+matchups+"\n\n戦闘配置ルール：最初の5組は明確な一対一で戦い、各キャラは指定された相手だけを攻撃する。乱戦にしない。2人の裏切り枠は互いに戦わず、それぞれ自分が所属していたチームへ攻撃を向ける。\n\n構図：").replace("裏切り枠は、ドラフトされた自チームへの裏切りを準備していることが読み取れる、ただし露骨すぎない動きを見せる。","裏切り枠はすでに寝返っており、元の自チームへ明確に攻撃を向ける。");
   return base.replace("\n\nCOMPOSITION:","\n\n"+matchups+"\n\nFIGHT CHOREOGRAPHY: the first five matchups are five separate, readable one-on-one fights. Every loyal fighter attacks only their listed opponent; do not turn them into a chaotic group melee. The two traitors do not fight each other—they turn inward and attack their own former drafted teams.\n\nCOMPOSITION:").replace("Show each betrayal-role character subtly but clearly preparing to turn against their own drafted team.","Show each betrayal-role character actively attacking their own former drafted team.");
 };
 
 const _afPKJudgePrompt=buildPKJudgePrompt;
-buildPKJudgePrompt=function(){let base=_afPKJudgePrompt(),rules=pkDirectMatchupText();if(STATE.lang==="zh")return base.replace("\n\n回答要短",`\n\n${rules}\n分析时先比较这五组对应单挑，再评估两名内鬼对各自原队伍造成的破坏。\n\n回答要短`);if(STATE.lang==="ja")return base.replace("\n\n短く、",`\n\n${rules}\n判定では5組の一対一を先に比較し、その後に各裏切り枠が元チームへ与える損害を評価する。\n\n短く、`);return base.replace("\n\nKeep the answer short",`\n\n${rules}\nEvaluate the five direct duels first, then the damage each traitor causes to their own former team.\n\nKeep the answer short`);};
+buildPKJudgePrompt=function(){
+  let base=_afPKJudgePrompt(),rules=pkDirectMatchupText(),budget=STATE.pk?.kind==="budget";
+  if(STATE.lang==="zh")return base.replace("\n\n回答要短",`\n\n${rules}\n${budget?"预算模式没有内鬼。必须比较各定位的实际履行、缺员代价与团队胜利条件，不得只按战力排行。":"分析时先比较五组对应定位，再评估两名内鬼对各自原队伍造成的破坏。"}\n\n回答要短`);
+  if(STATE.lang==="ja")return base.replace("\n\n短く、",`\n\n${rules}\n${budget?"予算モードに裏切り枠はありません。各役割の遂行、欠員の代償、チームの勝利条件を比較し、戦闘力順位だけで決めないでください。":"判定では5組の対応役割を先に比較し、その後に各裏切り枠が元チームへ与える損害を評価する。"}\n\n短く、`);
+  return base.replace("\n\nKeep the answer short",`\n\n${rules}\n${budget?"Budget mode has no betrayal role. Compare actual role execution, the cost of missing members, and each team's achievable win condition; do not decide from power rankings alone.":"Evaluate the five role matchups first, then the damage each traitor causes to their own former team."}\n\nKeep the answer short`);
+};

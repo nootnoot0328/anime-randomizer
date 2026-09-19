@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.6.1 — Budget flexibility and reliable form art
+
+### $100 PK
+- Removed the betrayal role from Budget PK, leaving five tactical roles per team.
+- Added one sale per player with a full refund, plus the option to finish with an incomplete team when the remaining budget cannot fill every role.
+- Removed forced budget reservation so players can spend their remaining funds freely.
+
+### Battle judging
+- Made role execution, counters, team synergy, empty-role disadvantages, and achievable win conditions primary judging criteria; raw power is now only one factor.
+- Kept betrayal analysis exclusively in the standard six-role PK mode.
+
+### Form portraits
+- Added an automated cache that downloads reviewed phase/form artwork into the repository so gallery cards no longer depend on fragile third-party hotlinks.
+
 ## v0.6.0 — PK board and budget draft
 
 ### PK Draft
