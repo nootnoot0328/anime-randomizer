@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "0.6.2";
+const VERSION = "0.6.3";
 const L = window.AnimeFusionLogic;
 
 const I18N = {
@@ -167,7 +167,7 @@ async function resetBuiltinPortraits(){const keys=(await imageKeys()).filter(k=>
 async function loadBootData(){
   document.getElementById("screen").innerHTML=`<div class="loading-state"><div><div class="loading-spinner"></div><p>${esc(t("loading"))}</p></div></div>`;
   try{
-    const [rr,pr,fr]=await Promise.all([fetch("data/roster.json?v=0.6.2",{cache:"no-store"}),fetch("data/portraits.json?v=0.6.2",{cache:"no-store"}),fetch("data/form-portraits.json?v=0.6.2",{cache:"no-store"})]);
+    const [rr,pr,fr]=await Promise.all([fetch("data/roster.json?v=0.6.3",{cache:"no-store"}),fetch("data/portraits.json?v=0.6.3",{cache:"no-store"}),fetch("data/form-portraits.json?v=0.6.3",{cache:"no-store"})]);
     if(!rr.ok||!pr.ok||!fr.ok)throw new Error("data fetch failed");const roster=await rr.json();STATE.portraits=await pr.json();STATE.formPortraits=await fr.json();
     STATE.builtin=roster.map(s=>({...s,name:s.name_en,chars:(s.chars||[]).map(c=>({...c,name:c.name_en,series:s.name_en,series_en:s.name_en,series_ja:s.name_ja,series_zh:s.name_zh,seriesId:s.id}))}));
     await openDB();await purgeLegacyPackImages();STATE.history=JSON.parse(localStorage.getItem("af_history")||"[]");
