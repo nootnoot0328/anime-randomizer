@@ -178,8 +178,9 @@
     },
     "dragonball-goku::ui": {
       "verified": true,
-      "url": "https://image.pngaaa.com/647/623647-middle.png",
-      "sourcePage": "https://www.pngaaa.com/detail/623647"
+      "url": "assets/form-portraits/dragonball-goku-ui.png",
+      "sourcePage": "https://www.pngaaa.com/detail/623647",
+      "remoteUrl": "https://image.pngaaa.com/647/623647-middle.png"
     },
     "dragonball-vegeta::base": {
       "verified": true,
@@ -209,8 +210,9 @@
     },
     "dragonball-gohan::beast": {
       "verified": true,
-      "url": "https://jp.dblegends.net/assets/card_arts/0491_GohanSHB_491/0491_GohanSHB_491_Effect_38.png",
-      "sourcePage": "https://jp.dblegends.net/character.php?id=491"
+      "url": "assets/form-portraits/dragonball-gohan-beast.png",
+      "sourcePage": "https://jp.dblegends.net/character.php?id=491",
+      "remoteUrl": "https://jp.dblegends.net/assets/card_arts/0491_GohanSHB_491/0491_GohanSHB_491_Effect_38.png"
     },
     "dragonball-broly::base": {
       "verified": true,
@@ -237,6 +239,6 @@
       "remoteUrl": "https://www.vhv.rs/dpng/d/178-1782539_kirito-dual-wield-alicization-hd-png-download.png"
     }
   },
-  "cachedAt": "2026-09-19T08:31:58.906Z",
+  "cachedAt": "2026-09-19T08:33:03.827Z",
   "cacheFailures": []
 }
