@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.2 — Computer opponents
+
+### PK modes
+- Added Local 2 Players and VS Computer match types to standard PK and $100 Budget PK.
+- Added Casual and Strategic computer difficulties, plus an optional random opponent series in standard PK.
+- Added visible computer turns and selection timing while blocking manual taps and drag actions during the computer's turn.
+- Strategic computer drafting considers curated character value, remaining budget, complete role coverage, skips, its one sale, and early team completion.
+- Localized the complete opponent setup and computer-turn interface in English, Simplified Chinese, and Japanese.
+
 ## v0.6.1 — Budget flexibility and reliable form art
 
 ### $100 PK

@@ -1,4 +1,4 @@
-# Anime Fusion v0.6.1
+# Anime Fusion v0.6.2
 
 Anime Fusion is a static vanilla HTML/CSS/JS character draft/randomizer designed for GitHub Pages. It has no backend, no runtime npm dependencies, and no API keys in the browser.
 
