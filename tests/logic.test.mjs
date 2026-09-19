@@ -110,7 +110,20 @@ test('$100 PK supports five roles, one sale, and incomplete teams',()=>{
   assert.match(script,/function finishBudgetTeam[\s\S]*p\.finished=true/);
   assert.match(script,/if\(budgetPlayerDone\(pk\.p1\)&&budgetPlayerDone\(pk\.p2\)\)pk\.ended=true/);
   assert.match(prompts,/Roles are tactical responsibilities/);
-  assert.match(script,/Budget mode has no betrayal role/);
+  assert.match(script,/const pk=STATE\.pk;if\(pk\.kind==="budget"\)return""/);
+});
+
+test('PK judge prompt uses the full role-first battle framework',()=>{
+  const script=fs.readFileSync(path.join(root,'pk-v2.js'),'utf8');
+  for(const section of ['BATTLE SCENE:','ROLE RULES:','ROLE EXECUTION VS RAW POWER:','SELECTED FORM RULE:','CROSS-SERIES RULE:','BATTLE EVALUATION ORDER:','EMPTY OR MISSING ROLES:','CONSISTENCY RULE:','ROLE MATCHUPS:','MARGIN GUIDE:'])assert.ok(script.includes(section),`missing ${section}`);
+  assert.ok(script.includes('do not invent abilities, transformations, equipment or feats'));
+  assert.ok(script.includes('Do NOT determine the winner by simply counting how many 1v1 matchups each team wins'));
+  assert.ok(script.includes('WHY: 2–4 short sentences explaining which roles, counters, reinforcement interactions and team synergies decide the battle.'));
+  assert.match(script,/function pkJudgeTeamBlock\(n\)/);
+  assert.match(script,/function pkJudgeMatchupRows\(\)/);
+  assert.match(script,/function pkJudgeBetrayalText\(\)/);
+  assert.match(script,/hasBetrayal=pk\.kind!=="budget"/);
+  for(const localized of ['战斗评估顺序','一致性规则','評価順序','一貫性'])assert.ok(script.includes(localized));
 });
 
 test('PK supports local and computer opponents in both draft styles',()=>{
