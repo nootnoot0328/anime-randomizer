@@ -36,6 +36,7 @@ async function download(record,key){
 }
 
 let cached=0;
+const failures=[];
 for(const [key,record] of Object.entries(manifest.variants)){
   if(!record.verified||record.source==="default")continue;
   if(record.url?.startsWith("assets/form-portraits/")){
@@ -43,17 +44,20 @@ for(const [key,record] of Object.entries(manifest.variants)){
     continue;
   }
   if(!/^https:\/\//.test(record.url||""))throw new Error(`${key}: missing HTTPS source image`);
-  const {bytes,ext}=await download(record,key);
-  const filename=`${key.replace(/[^a-z0-9]+/gi,"-").replace(/^-|-$/g,"")}.${ext}`;
-  const relative=`assets/form-portraits/${filename}`;
-  await fs.writeFile(path.resolve(relative),bytes);
-  record.remoteUrl=record.url;
-  record.url=relative;
-  cached++;
-  console.log(`${key} -> ${relative} (${bytes.length} bytes)`);
+  try{
+    const {bytes,ext}=await download(record,key);
+    const filename=`${key.replace(/[^a-z0-9]+/gi,"-").replace(/^-|-$/g,"")}.${ext}`;
+    const relative=`assets/form-portraits/${filename}`;
+    await fs.writeFile(path.resolve(relative),bytes);
+    record.remoteUrl=record.url;
+    record.url=relative;
+    cached++;
+    console.log(`${key} -> ${relative} (${bytes.length} bytes)`);
+  }catch(error){failures.push({key,error:error.message});console.error(`Warning: ${error.message}`);}
 }
 
 manifest.cachedAt=new Date().toISOString();
+manifest.cacheFailures=failures;
 manifest.policy="Only manually verified variants may enter character pools. Dedicated form artwork is stored locally; source=default reuses the audited base AniList portrait.";
 await fs.writeFile(manifestPath,`${JSON.stringify(manifest,null,2)}\n`);
-console.log(`Cached ${cached} form portraits.`);
+console.log(`Cached ${cached} form portraits; ${failures.length} source(s) remain remote.`);
