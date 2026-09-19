@@ -178,8 +178,8 @@
     },
     "dragonball-goku::ui": {
       "verified": true,
-      "url": "https://dragonball-legends.com/assets/characters/0688_gokuuis_688_texture/0688_GokuUIS_688_Chara_00.png",
-      "sourcePage": "https://dragonball-legends.com/character/688"
+      "url": "https://image.pngaaa.com/647/623647-middle.png",
+      "sourcePage": "https://www.pngaaa.com/detail/623647"
     },
     "dragonball-vegeta::base": {
       "verified": true,
@@ -209,8 +209,8 @@
     },
     "dragonball-gohan::beast": {
       "verified": true,
-      "url": "https://dragonball-legends.com/assets/characters/0579_gohanshu_579_texture/0579_GohanSHU_579_Chara_01.png",
-      "sourcePage": "https://dragonball-legends.com/character/579"
+      "url": "https://jp.dblegends.net/assets/card_arts/0491_GohanSHB_491/0491_GohanSHB_491_Effect_38.png",
+      "sourcePage": "https://jp.dblegends.net/character.php?id=491"
     },
     "dragonball-broly::base": {
       "verified": true,
@@ -238,14 +238,5 @@
     }
   },
   "cachedAt": "2026-09-19T08:31:58.906Z",
-  "cacheFailures": [
-    {
-      "key": "dragonball-goku::ui",
-      "error": "dragonball-goku::ui: HTTP 404"
-    },
-    {
-      "key": "dragonball-gohan::beast",
-      "error": "dragonball-gohan::beast: HTTP 404"
-    }
-  ]
+  "cacheFailures": []
 }
