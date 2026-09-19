@@ -113,6 +113,20 @@ test('$100 PK supports five roles, one sale, and incomplete teams',()=>{
   assert.match(script,/Budget mode has no betrayal role/);
 });
 
+test('PK supports local and computer opponents in both draft styles',()=>{
+  const script=fs.readFileSync(path.join(root,'pk-v2.js'),'utf8');
+  assert.match(script,/localPlayers:"Local 2 Players",vsComputer:"VS Computer"/);
+  assert.match(script,/opponent:STATE\.pkSetup\.opponent\|\|"local"/);
+  assert.match(script,/difficulty:STATE\.pkSetup\.difficulty\|\|"strategic"/);
+  assert.match(script,/function isCPUTurn\(\)/);
+  assert.match(script,/function scheduleCPUTurn\(delay=650\)/);
+  assert.match(script,/function cpuTakeTurn\(\)/);
+  assert.match(script,/Math\.max\(\.\.\.pair\.map\(characterPrice\)\)<=10/);
+  assert.match(script,/p\.budget-characterPrice\(c\)>=remaining\*minPrice/);
+  assert.match(script,/cpu\|\|!budgetCanBuy\(c\)/);
+  for(const label of ['对战电脑','电脑正在选择','コンピューター戦','コンピューターが選択中'])assert.ok(script.includes(label));
+});
+
 test('character forms are sibling variants and selecting one hides the other form',()=>{
   const phases=fs.readFileSync(path.join(root,'phases.js'),'utf8');
   const patch=fs.readFileSync(path.join(root,'patch.js'),'utf8');
