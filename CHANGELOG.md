@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.3 — Role-first battle judging
+
+### PK battle judging
+- Rebuilt the generated judge prompt around role execution, canon abilities, selected forms, counters, reinforcement, battle progression, endgame paths, and team synergy.
+- Added explicit role-by-role matchups, conservative cross-series interaction rules, missing-role consequences, and consistency guidance that prevents simple 1v1 win counting.
+- Kept mandatory betrayal analysis in standard PK while automatically removing all traitor instructions from $100 Budget PK.
+- Localized the complete framework and its strict short verdict format in English, Simplified Chinese, and Japanese.
+
 ## v0.6.2 — Computer opponents
 
 ### PK modes
