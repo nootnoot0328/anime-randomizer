@@ -56,6 +56,54 @@ test('every series has six localized PK roles and a dedicated battlefield',()=>{
   }
 });
 
+test('mobile PK keeps budget scrolling separate from dragging',()=>{
+  const script=fs.readFileSync(path.join(root,'pk-v2.js'),'utf8');
+  const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
+  assert.match(script,/class="pk-drag-handle"/);
+  assert.match(script,/const dragStart=budget\?""/);
+  assert.match(css,/\.pk-budget-tray \.pk-candidate\{[^}]*touch-action:pan-x/);
+  assert.match(css,/\.pk-drag-ghost img/);
+  assert.match(css,/\.pk-role-grid\{[^}]*repeat\(2,minmax\(0,1fr\)\)[^}]*repeat\(3,minmax\(0,1fr\)\)/);
+});
+
+test('PK ignores the Trait Draft gender filter but keeps selected character phases',()=>{
+  const script=fs.readFileSync(path.join(root,'pk-v2.js'),'utf8');
+  assert.doesNotMatch(script,/applyGenderFilter\(/);
+  assert.match(script,/function pkCharacters\(chars\).*applyCharacterPhases/);
+  assert.match(script,/function pkPool\(player\).*pkCharacters/);
+});
+
+test('only manually verified form portraits can enter character pools',()=>{
+  const script=fs.readFileSync(path.join(root,'phases.js'),'utf8');
+  const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
+  const manifest=JSON.parse(fs.readFileSync(path.join(root,'data/form-portraits.json'),'utf8'));
+  const phases=Function(`return (${script.match(/const CHARACTER_PHASES=(\{[\s\S]*?\n\});/)[1]})`)();
+  const expected=Object.entries(phases).flatMap(([id,forms])=>forms.map(form=>`${id}::${form.key}`)).sort();
+  assert.deepEqual(Object.keys(manifest.variants).sort(),expected);
+  for(const [key,record] of Object.entries(manifest.variants))if(record.verified){
+    assert.ok(record.source==='default'||record.url,`${key} needs a reviewed source`);
+  }
+  const reused={};for(const [key,record] of Object.entries(manifest.variants))if(record.verified&&record.source==='default')reused[key.split('::')[0]]=(reused[key.split('::')[0]]||0)+1;
+  for(const [id,count] of Object.entries(reused))assert.equal(count,1,`${id} reuses its base portrait for multiple forms`);
+  for(const [key,record] of Object.entries(manifest.variants)){
+    assert.equal(record.verified,true,`${key} should have reviewed artwork`);
+    if(record.url){assert.match(record.url,/^https:\/\//);assert.match(record.sourcePage,/^https:\/\//,`${key} needs an audit source page`);}
+  }
+  assert.match(script,/filter\(x=>x\.phasePortraitVerified\)/);
+  assert.match(app,/fetch\("data\/form-portraits\.json/);
+  assert.match(script,/libraryView=function\(\)\{return phasePortraitFallbackBlock\(\)/);
+});
+
+test('character forms are sibling variants and selecting one hides the other form',()=>{
+  const phases=fs.readFileSync(path.join(root,'phases.js'),'utf8');
+  const patch=fs.readFileSync(path.join(root,'patch.js'),'utf8');
+  assert.match(phases,/const approved=opts\.map\(ph=>withCharacterPhase\(c,ph\)\)\.filter\(x=>x\.phasePortraitVerified\)/);
+  assert.match(phases,/const variantKey=`\$\{c\.id\}::\$\{ph\.key\}`/);
+  assert.match(phases,/function characterIdentityCount/);
+  assert.match(patch,/c\.id!==chosen\.id\|\|c\.phaseKey===chosen\.phaseKey/);
+  assert.match(patch,/c\.id!==finalChar\.id\|\|c\.phaseKey===finalChar\.phaseKey/);
+});
+
 test('reviewed portrait and gender corrections stay intact',()=>{
   const roster=JSON.parse(fs.readFileSync(path.join(root,'data/roster.json'),'utf8'));
   const overrides=JSON.parse(fs.readFileSync(path.join(root,'data/portrait-overrides.json'),'utf8'));
