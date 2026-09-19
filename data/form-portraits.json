@@ -203,13 +203,13 @@
     },
     "dragonball-gohan::ssj2": {
       "verified": true,
-      "url": "https://dragonball-legends.com/assets/characters/0710_gohanteenss2_710_texture/0710_GohanTeenSS2_710_Chara_01.png",
-      "sourcePage": "https://dragonball-legends.com/character/710"
+      "url": "https://www.vhv.rs/dpng/d/604-6044547_ssj2-gohan-db-legends-clipart-png-download-db.png",
+      "sourcePage": "https://www.vhv.rs/viewpic/TTimwxm_ssj2-gohan-db-legends-clipart-png-download-db/"
     },
     "dragonball-gohan::beast": {
       "verified": true,
-      "url": "https://widen-legends.es/img/assets/card_assets/0491_GohanSHB/0491_GohanSHB_491_Chara.png",
-      "sourcePage": "https://widen-legends.es/characters/base/491"
+      "url": "https://dragonball-legends.com/assets/characters/0579_gohanshu_579_texture/0579_GohanSHU_579_Chara_01.png",
+      "sourcePage": "https://dragonball-legends.com/character/579"
     },
     "dragonball-broly::base": {
       "verified": true,
@@ -237,18 +237,5 @@
     }
   },
   "cachedAt": "2026-09-19T08:30:37.179Z",
-  "cacheFailures": [
-    {
-      "key": "dragonball-goku::ui",
-      "error": "dragonball-goku::ui: HTTP 404"
-    },
-    {
-      "key": "dragonball-gohan::ssj2",
-      "error": "dragonball-gohan::ssj2: HTTP 404"
-    },
-    {
-      "key": "dragonball-gohan::beast",
-      "error": "dragonball-gohan::beast: response is not a supported image"
-    }
-  ]
+  "cacheFailures": []
 }
