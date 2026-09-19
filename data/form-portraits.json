@@ -203,8 +203,9 @@
     },
     "dragonball-gohan::ssj2": {
       "verified": true,
-      "url": "https://www.vhv.rs/dpng/d/604-6044547_ssj2-gohan-db-legends-clipart-png-download-db.png",
-      "sourcePage": "https://www.vhv.rs/viewpic/TTimwxm_ssj2-gohan-db-legends-clipart-png-download-db/"
+      "url": "assets/form-portraits/dragonball-gohan-ssj2.png",
+      "sourcePage": "https://www.vhv.rs/viewpic/TTimwxm_ssj2-gohan-db-legends-clipart-png-download-db/",
+      "remoteUrl": "https://www.vhv.rs/dpng/d/604-6044547_ssj2-gohan-db-legends-clipart-png-download-db.png"
     },
     "dragonball-gohan::beast": {
       "verified": true,
@@ -236,6 +237,15 @@
       "remoteUrl": "https://www.vhv.rs/dpng/d/178-1782539_kirito-dual-wield-alicization-hd-png-download.png"
     }
   },
-  "cachedAt": "2026-09-19T08:30:37.179Z",
-  "cacheFailures": []
+  "cachedAt": "2026-09-19T08:31:58.906Z",
+  "cacheFailures": [
+    {
+      "key": "dragonball-goku::ui",
+      "error": "dragonball-goku::ui: HTTP 404"
+    },
+    {
+      "key": "dragonball-gohan::beast",
+      "error": "dragonball-gohan::beast: HTTP 404"
+    }
+  ]
 }
