@@ -161,14 +161,16 @@ test('reviewed portrait and gender corrections stay intact',()=>{
   assert.equal(overrides['dragonball-kid-trunks'].skip,true);
   assert.equal(chars['onepiece-yamato'].gender,'male');
   assert.equal(chars['kaijuno8-jura-igarashi'].gender,'female');
+  assert.equal(chars['fma-father'].name_ja,'お父様');
+  assert.equal(chars['fma-father'].name_zh,'父亲大人');
   for(const id of ['jjk-kirara-hoshi','aot-hange-zoe','hunterxhunter-neferpitou','fma-envy','jojo-foo-fighters'])assert.equal(chars[id].gender,undefined);
 });
 
-test('version consistency is 0.6.3',()=>{
+test('version consistency is 0.6.4',()=>{
   const version=JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).version;
   const packageVersion=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8')).version;
   const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
   const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-  const m=app.match(/const VERSION = "([^"]+)"/);assert.ok(m);assert.equal(version,'0.6.3');assert.equal(packageVersion,version);assert.equal(m[1],version);
+  const m=app.match(/const VERSION = "([^"]+)"/);assert.ok(m);assert.equal(version,'0.6.4');assert.equal(packageVersion,version);assert.equal(m[1],version);
   for(const asset of ['styles.css','logic.js','app.js'])assert.match(html,new RegExp(asset.replace('.','\\.')+'\\?v=0\\.6\\.3'));
 });

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.4 — Father localization hotfix
+
+### Character localization
+- Corrected Father's Japanese gallery name to `お父様`.
+- Corrected Father's Simplified Chinese gallery name to `父亲大人` instead of displaying Japanese text.
+- Added regression coverage for both localized names.
+
 ## v0.6.3 — Role-first battle judging
 
 ### PK battle judging
