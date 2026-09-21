@@ -172,5 +172,5 @@ test('version consistency is 0.6.4',()=>{
   const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
   const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
   const m=app.match(/const VERSION = "([^"]+)"/);assert.ok(m);assert.equal(version,'0.6.4');assert.equal(packageVersion,version);assert.equal(m[1],version);
-  for(const asset of ['styles.css','logic.js','app.js'])assert.match(html,new RegExp(asset.replace('.','\\.')+'\\?v=0\\.6\\.3'));
+  for(const asset of ['styles.css','logic.js','app.js'])assert.match(html,new RegExp(asset.replace('.','\\.')+'\\?v=0\\.6\\.4'));
 });
