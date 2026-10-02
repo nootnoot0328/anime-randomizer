@@ -1,42 +1,47 @@
-# Anime Fusion v0.6.2
+# Anime Fusion v1.0.0
 
-Anime Fusion is a static vanilla HTML/CSS/JS character draft/randomizer designed for GitHub Pages. It has no backend, no runtime npm dependencies, and no API keys in the browser.
+A static anime character game for phones, hosted on GitHub Pages. No build step, no runtime dependencies.
+
+- **Character fusion:** Trait Draft (pick one of two, choose which trait to inherit) and Quick Randomizer, across 10 scenarios. Copies an image-generator prompt for the finished character.
+- **Team battles:** Random PK (six roles, one skip each) and $100 Budget PK (five roles, one sale, may finish early), local 2-player or vs a Casual/Strategic computer.
+- **AI referee:** judges finished battles and adds live commentary through your own Cloudflare Worker (optional; the copy-paste judge prompt still works without it).
+- English, Simplified Chinese and Japanese.
 
 ## Run locally
 
 ```bash
-python -m http.server 8000
+python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-Open `http://localhost:8000`.
-
-## GitHub Pages deployment
-
-Commit the complete repository structure:
+## Code layout
 
 ```text
-index.html
-styles.css
-app.js
-logic.js
-version.json
-data/
-  roster.json
-  portraits.json
-  portrait-overrides.json
-scripts/
-  resolve-portraits.mjs
-.github/workflows/
-  resolve-portraits.yml
-  test.yml
-tests/
-  logic.test.mjs
-package.json
-CHANGELOG.md
-README.md
+index.html            shell + import map (generated, see "Releasing")
+styles.css            all styles; motion respects prefers-reduced-motion
+logic.js              small pure helpers shared with tests (version compare, shuffle, PK pool rules)
+src/main.js           boot: load data, restore state, render
+src/core/             state, i18n, roster/forms/prices, history, portraits, prompt builders
+src/game/             fusion.js (draft + quick), pk.js (random + budget + CPU)
+src/ai/               referee.js (Worker client), format.js (answer contract + parser)
+src/ui/               shell (routing, sheets, toasts), morph (in-place DOM updates), views/*
+src/data/             game data and strings (strings.js = v0.6 set, strings-v1.js = added in v1)
+data/                 roster, portrait manifests
+tests/                node --test suites; fixtures/prompts-v0.6.4.json pins every prompt
 ```
 
-Then enable **Settings → Pages → Deploy from a branch → main → / (root)**.
+Screens re-render by **morphing** the existing DOM rather than replacing it, so transitions run on state changes, entrance animations play once, and inputs keep focus.
+
+## AI referee
+
+GitHub Pages can't keep a secret, so the game never holds an AI provider key. It calls the Setpoint Worker (`nootnoot0328/setpoints`, Worker 1.4.0+) with a separate **`GAME_KEY`** that can only request match verdicts (text only, its own daily cap, `GAME_AI_DAILY_LIMIT`, default 40). It cannot read Setpoint data. Setup steps are in `setpoints/worker/README.md`. In the game: **Settings → AI referee**, paste the Worker address and the game key, tap **Test & save**. The test spends no AI call, and it refuses to save Setpoint's `APP_KEY`.
+
+How a verdict is produced:
+
+1. The prompt is the same role-first judging framework as the copy-paste judge prompt. Only the answer format is swapped for JSON (`src/ai/format.js`).
+2. The reply is validated: winner must be 1, 2 or 0 (draw). A draw is always margin "even", and a win never is. The MVP must be one of the drafted characters. Anything unreadable is rejected and nothing is saved.
+3. A valid verdict is stored with the match in History and shown from then on. **It is final**: there is no re-judge button, so a result can't be re-rolled until someone likes it. A failed call can be retried.
+
+The verdict is still an AI opinion, and the same teams can get a different answer from a fresh call. Storing the first valid verdict is what makes each match's result stable.
 
 ## Portrait workflow
 
@@ -66,12 +71,23 @@ Overrides are applied before fuzzy matching. The resolver prints unmatched chara
 
 ## Optional offline built-in portraits
 
-Built-in cards use the URLs in `data/portraits.json` immediately. The Character Library/Settings can optionally fetch those URLs and store Blob copies under `builtin:<charId>` in IndexedDB. If CORS prevents a Blob download, the app continues to use the remote URL.
+Built-in cards use the URLs in `data/portraits.json` immediately. Settings → Portraits can optionally fetch those URLs and store Blob copies under `builtin:<charId>` in IndexedDB. If CORS prevents a Blob download, the app continues to use the remote URL.
 
-## Development tests
+## Tests
 
 ```bash
 npm test
 ```
 
-The project intentionally has no runtime npm dependencies. Node is used only for tests and portrait-resolution tooling.
+- `tests/prompts.test.mjs`: every fusion, judge and battle-art prompt matches what v0.6.4 produced for 66 captured games (3 languages, random + budget).
+- `tests/game.test.mjs`: draft/budget/CPU rules, referee answer parsing, history, data and string completeness.
+- `tests/logic.test.mjs`: helpers, roster data and version/import-map consistency.
+
+## Releasing
+
+```bash
+node scripts/set-version.mjs 1.0.1   # updates version.json, package.json, VERSION and the import map
+npm test
+```
+
+Every module URL carries `?v=<version>` through the import map, so a phone never mixes cached old modules with new ones after an update.

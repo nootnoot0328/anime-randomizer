@@ -3,31 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0d0f14" />
+  <meta name="theme-color" content="#0a0c12" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Anime Fusion</title>
-  <link rel="stylesheet" href="styles.css?v=0.6.4" />
+  <link rel="stylesheet" href="styles.css?v=1.0.0" />
+  <!-- import-map:start (written by scripts/set-version.mjs: every module URL carries the version so an update never mixes old and new files) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "./src/ai/format.js": "./src/ai/format.js?v=1.0.0",
+      "./src/ai/referee.js": "./src/ai/referee.js?v=1.0.0",
+      "./src/core/app.js": "./src/core/app.js?v=1.0.0",
+      "./src/core/history.js": "./src/core/history.js?v=1.0.0",
+      "./src/core/i18n.js": "./src/core/i18n.js?v=1.0.0",
+      "./src/core/images.js": "./src/core/images.js?v=1.0.0",
+      "./src/core/prompts.js": "./src/core/prompts.js?v=1.0.0",
+      "./src/core/roster.js": "./src/core/roster.js?v=1.0.0",
+      "./src/core/state.js": "./src/core/state.js?v=1.0.0",
+      "./src/core/util.js": "./src/core/util.js?v=1.0.0",
+      "./src/data/game.js": "./src/data/game.js?v=1.0.0",
+      "./src/data/strings-v1.js": "./src/data/strings-v1.js?v=1.0.0",
+      "./src/data/strings.js": "./src/data/strings.js?v=1.0.0",
+      "./src/game/fusion.js": "./src/game/fusion.js?v=1.0.0",
+      "./src/game/pk.js": "./src/game/pk.js?v=1.0.0",
+      "./src/main.js": "./src/main.js?v=1.0.0",
+      "./src/ui/icons.js": "./src/ui/icons.js?v=1.0.0",
+      "./src/ui/morph.js": "./src/ui/morph.js?v=1.0.0",
+      "./src/ui/parts.js": "./src/ui/parts.js?v=1.0.0",
+      "./src/ui/shell.js": "./src/ui/shell.js?v=1.0.0",
+      "./src/ui/version.js": "./src/ui/version.js?v=1.0.0",
+      "./src/ui/views/battle.js": "./src/ui/views/battle.js?v=1.0.0",
+      "./src/ui/views/fusion.js": "./src/ui/views/fusion.js?v=1.0.0",
+      "./src/ui/views/home.js": "./src/ui/views/home.js?v=1.0.0",
+      "./src/ui/views/library.js": "./src/ui/views/library.js?v=1.0.0",
+      "./src/ui/views/pk.js": "./src/ui/views/pk.js?v=1.0.0",
+      "./src/ui/views/settings.js": "./src/ui/views/settings.js?v=1.0.0"
+    }
+  }
+  </script>
+  <!-- import-map:end -->
 </head>
 <body>
   <div id="app">
     <header class="topbar">
-      <button id="homeBtn" class="icon-btn hidden" aria-label="">←</button>
-      <div class="brand"><div class="brand-dot"></div><span>ANIME FUSION</span></div>
-      <button id="settingsBtn" class="icon-btn" aria-label="">⚙</button>
+      <button id="backBtn" class="icon-btn is-hidden" type="button" aria-label="Back"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div id="topTitle" class="top-title"></div>
+      <button id="settingsBtn" class="icon-btn" type="button" aria-label="Settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
     </header>
-    <main id="screen"><div class="panel empty">…</div></main>
-    <nav class="bottom-nav">
-      <button class="nav-btn active" data-nav="home"><span class="nav-icon">◆</span><span data-i18n="home">Home</span></button>
-      <button class="nav-btn" data-nav="library"><span class="nav-icon">▦</span><span data-i18n="gallery">Gallery</span></button>
-      <button class="nav-btn" data-nav="history"><span class="nav-icon">◷</span><span data-i18n="history">History</span></button>
+    <main id="screen" aria-live="polite"></main>
+    <nav class="tabbar" aria-label="Main">
+      <button class="tab on" type="button" data-tab="home"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.4 5.6L20 9.3l-4.3 3.9 1.2 5.8L12 16.1 7.1 19l1.2-5.8L4 9.3l5.6-.7z"/></svg><span data-i18n="play">Play</span></button>
+      <button class="tab" type="button" data-tab="library"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg><span data-i18n="gallery">Gallery</span></button>
+      <button class="tab" type="button" data-tab="history"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3.5 2"/></svg><span data-i18n="history">History</span></button>
     </nav>
   </div>
-  <div id="modalRoot"></div><div id="toast" class="toast"></div>
-  <script src="logic.js?v=0.6.4"></script>
-  <script src="app.js?v=0.6.4"></script>
-  <script src="patch.js?v=0.6.4"></script>
-  <script src="enhancements.js?v=0.6.4"></script>
-  <script src="phases.js?v=0.6.4"></script>
-  <script src="prompt-patch.js?v=0.6.4"></script>
-  <script src="pk-v2.js?v=0.6.4"></script>
+  <div id="sheetRoot"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <noscript>Anime Fusion needs JavaScript.</noscript>
+  <script src="logic.js?v=1.0.0"></script>
+  <script type="module" src="src/main.js?v=1.0.0"></script>
 </body>
 </html>

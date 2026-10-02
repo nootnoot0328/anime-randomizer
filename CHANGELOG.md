@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.0.0 — AI referee, app redesign, rebuilt codebase
+
+### AI referee and commentator
+- Finished PK battles are judged in-app through the Setpoint Worker with a game-only key: winner, margin, reasons, biggest factor, MVP, role-by-role edges and 4–6 beats of live commentary in the app language.
+- The referee steps in automatically when a match ends (if connected). The first valid verdict is saved with the match and is final.
+- Without a Worker the report offers the copy-paste judge prompt, unchanged from v0.6.4.
+
+### Redesign
+- PK board fits a phone: teams stack (side by side on wide screens), team name and series always visible, role names wrap, and portraits fill the slots. Fixes cut-off team names and titles in every language.
+- Tap a character to assign a role from a sheet; dragging still works in Random PK. Budget roster is a price-sorted grid; tap your own slot to sell.
+- New Home with Continue card for an unfinished draft or battle; setup screens with a sticky start bar; full-screen Settings (language, AI referee, portraits, version); History now keeps battles with their verdicts, with filters; Gallery search across all three languages and a character card.
+- Motion: screen transitions, sliding segmented controls, bottom sheets with swipe-to-close, slot pop-ins, shuffle blur and settle, staggered commentary and verdict reveal. Everything is off with Reduce Motion.
+- Portraits that fail to load fall back to coloured initials instead of broken images.
+
+### Fixes
+- Strategic CPU no longer freezes when it decides to skip a cheap pair (v0.6.4 rejected the CPU's own skip).
+- Series names in the draft cards and sheets were sometimes shown wrong; now always the character's series.
+
+### Under the hood
+- Seven patch-on-patch scripts replaced by ES modules (`src/`); every prompt is pinned by a regression fixture captured from v0.6.4.
+- Saved language, history, customizer and offline portraits carry over from v0.6.x.
+
 ## v0.6.4 — Father localization hotfix
 
 ### Character localization
