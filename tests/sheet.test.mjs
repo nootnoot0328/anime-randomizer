@@ -78,3 +78,14 @@ test("caps lengths and drops an empty signature", () => {
   assert.equal(r.sheet.name.length, 60);
   assert.equal(r.sheet.signature, null);
 });
+
+test("the copy-paste version asks for the same sheet as readable text, not JSON", () => {
+  const p = buildSheetPrompt({ mode: "partner", modeLabel: "Partner", lang: "zh", traits, format: "text" });
+  assert.match(p, /Use exactly this layout:/);
+  assert.match(p, /NAME \(new, not a source character's name\) — TITLE/);
+  assert.match(p, /Write everything in Simplified Chinese\./);
+  assert.doesNotMatch(p, /JSON/);
+  // same content rules as the in-app call
+  assert.match(p, /Never quote or closely paraphrase/);
+  assert.match(p, /not just be listed: Intelligence, Romance, Weapon\./);
+});

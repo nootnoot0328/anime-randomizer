@@ -9,7 +9,7 @@ import { traitIcon } from "../icons.js";
 import { screen, actions, go, openSheet, sheetHead, closeSheet, copyText, confirmSheet } from "../shell.js";
 import * as F from "../../game/fusion.js";
 import { aiConfigured } from "../../ai/referee.js";
-import { bringToLife, cancelSheet, rewritesLeft } from "../../ai/sheet.js";
+import { bringToLife, cancelSheet, rewritesLeft, sheetPromptFor } from "../../ai/sheet.js";
 import { attributes } from "../../game/cpu.js";
 
 /* ---------------------------------------------------------------- setup */
@@ -116,11 +116,11 @@ function sheetPanel(g) {
   if (sh.status === "error") {
     const fix = ["badKey", "noProvider", "scope"].includes(sh.code);
     return `<section class="ref-card error" data-key="sheet-error">${icon("info", "err-ic")}<h3>${esc(t("sheetError_" + (sh.code || "server")))}</h3>${sh.detail && !["unreadable", "scope"].includes(sh.code) ? `<p class="hint">${esc(sh.detail)}</p>` : ""}
-      <div class="row-actions"><button class="btn primary" ${act("sheet.make")}>${icon("refresh")}<span>${esc(t("tryAgain"))}</span></button>${fix ? `<button class="btn ghost" ${act("sheet.setup")}>${esc(t("openSettings"))}</button>` : ""}</div></section>`;
+      <div class="row-actions"><button class="btn primary" ${act("sheet.make")}>${icon("refresh")}<span>${esc(t("tryAgain"))}</span></button>${fix ? `<button class="btn ghost" ${act("sheet.setup")}>${esc(t("openSettings"))}</button>` : `<button class="btn ghost" ${act("sheet.copy")}>${icon("copy")}<span>${esc(t("copyStoryShort"))}</span></button>`}</div></section>`;
   }
   if (!aiConfigured()) {
     return `<section class="ref-card setup" data-key="sheet-setup">${icon("sparkles", "big-ic")}<h3>${esc(t("sheetSetupTitle"))}</h3><p>${esc(t("sheetSetupBody"))}</p>
-      <div class="row-actions"><button class="btn primary" ${act("sheet.setup")}>${esc(t("setUp"))}</button></div></section>`;
+      <div class="row-actions"><button class="btn primary" ${act("sheet.setup")}>${esc(t("setUp"))}</button><button class="btn ghost" ${act("sheet.copy")}>${icon("copy")}<span>${esc(t("copyStoryShort"))}</span></button></div></section>`;
   }
   return `<section class="ref-card ready" data-key="sheet-ready"><button class="call-btn" ${act("sheet.make")}>${icon("sparkles")}<span><strong>${esc(t("bringToLife"))}</strong><small>${esc(t("bringToLifeSub"))}</small></span></button></section>`;
 }
@@ -186,7 +186,8 @@ function resultView(g, { first }) {
           ${d && !loading ? (left > 0 ? `<button class="btn ghost" ${act("sheet.rewrite")}>${icon("refresh")}<span>${esc(t("rewriteLeft", { n: left }))}</span></button>` : `<span class="btn done-pill muted">${esc(t("rewriteUsed"))}</span>`) : ""}
           ${g.fromHistory ? "" : `<button class="btn ghost" ${act("fusion.again")}>${icon("refresh")}<span>${esc(t("playAgain"))}</span></button>`}
         </div>
-        <p class="hint center">${esc(t("copyPromptHint"))}</p>
+        ${d ? "" : `<button class="btn ghost" ${act("sheet.copy")}>${icon("copy")}<span>${esc(t("copyStoryPrompt"))}</span></button>`}
+        <p class="hint center">${esc(t("copyPromptHint"))}${d ? "" : " " + esc(t("copyStoryHint"))}</p>
       </div></div>`;
 }
 
@@ -208,6 +209,7 @@ actions({
   "fusion.again": () => go("setup", { dir: "back" }),
   "sheet.make": () => bringToLife(current()),
   "sheet.cancel": () => cancelSheet(),
+  "sheet.copy": () => { const g = current(); if (g) copyText(sheetPromptFor(g, STATE.lang, "text"), t("copyStoryPrompt")); },
   "sheet.setup": () => go("settings", { section: "ai" }),
   "sheet.rewrite": async () => {
     const g = current(); if (!g?.sheet?.data || rewritesLeft(g) <= 0) return;

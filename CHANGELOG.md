@@ -8,6 +8,7 @@
 - The non-visual traits (Intelligence, Romance, Motive, Loyalty…) must shape the backstory or dialogue, not just be listed. The AI writes new text only: no quoted lines or retold plots from the source shows.
 - Written in the app's language (English, Chinese or Japanese) and saved with the fusion. Generating a sheet saves the fusion automatically, because an AI call is never thrown away.
 - **One rewrite per character**, so a single fusion can't use up the day's AI allowance. A failed rewrite keeps the current version and isn't counted.
+- **Copy story prompt** as a backup: the same request as readable text, to paste into any chatbot when the Worker isn't set up, is out of calls, or fails.
 - **Without AI** the screen still works: each trait now has an icon, and Power, Fighting Ability and Intelligence show real 0–10 bars from the computer's ratings. Traits without ratings get no made-up numbers.
 
 ### History

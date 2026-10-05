@@ -25,7 +25,7 @@ export const STORY_DIRECTION = {
 /**
  * @param {{mode:string, modeLabel:string, lang:string, traits:{trait:string, name:string, series:string}[]}} input
  */
-export function buildSheetPrompt({ mode, modeLabel, lang, traits }) {
+export function buildSheetPrompt({ mode, modeLabel, lang, traits, format = "json" }) {
   const language = LANGUAGE_NAME[lang] || "English";
   const lines = traits.map(x => `- ${x.trait}: ${x.name} (${x.series || "unknown series"})`).join("\n");
   const inner = traits.map(x => x.trait).filter(tr => !VISUAL_TRAITS.includes(tr));
@@ -46,9 +46,13 @@ Rules:
 ${inner.length ? `- These traits must visibly shape the backstory or dialogue, not just be listed: ${inner.join(", ")}.\n` : ""}- Write new text. Never quote or closely paraphrase lines from the source works, and do not retell their plots.
 - If you do not recognise a source character, use only what their name and series make obvious and keep that trait line general instead of inventing details.
 - Suitable for a general audience.
-- Write every string value in ${language}.
+- ${format === "text" ? "Write everything" : "Write every string value"} in ${language}.
 
-Reply with ONE JSON object and nothing else (no markdown fences, no text before or after):
+${format === "text" ? textFormat(length) : jsonFormat(length)}Keep the whole reply under 400 words.`;
+}
+
+function jsonFormat(length) {
+  return `Reply with ONE JSON object and nothing else (no markdown fences, no text before or after):
 {
   "name": "a new name that fits the theme, not a source character's name",
   "title": "an epithet, at most 5 words",
@@ -59,7 +63,20 @@ Reply with ONE JSON object and nothing else (no markdown fences, no text before 
   "signature": { "name": "their signature move or habit", "text": "1 sentence: what it looks like" }
 }
 
-"traits" has one entry per listed trait, in the same order. Keep the whole reply under 400 words.`;
+"traits" has one entry per listed trait, in the same order. `;
+}
+// for pasting into any chatbot when the in-app AI isn't available: same content, readable layout
+function textFormat(length) {
+  return `Use exactly this layout:
+
+NAME (new, not a source character's name) — TITLE (an epithet, at most 5 words)
+SUMMARY: 2 sentences, who they are at a glance.
+BACKSTORY: 2 or 3 short paragraphs, ${length}.
+TRAITS: one line per listed trait, in the same order, as "Trait: at most 10 words".
+IN THEIR WORDS: 2 or 3 things they would say, each under 20 words.
+SIGNATURE: the name of their signature move or habit, then 1 sentence on what it looks like.
+
+`;
 }
 
 const str = (v, max) => (typeof v === "string" ? v.trim().replace(/^["“「]+|["”」]+$/g, "").trim().slice(0, max) : "");

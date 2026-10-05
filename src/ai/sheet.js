@@ -11,9 +11,9 @@ import { buildSheetPrompt, parseSheet } from "./sheet-format.js";
 export const SHEET_TASK = "anime-fusion-sheet";
 export const MAX_REWRITES = 1;
 
-export function sheetPromptFor(g, l = lang()) {
+export function sheetPromptFor(g, l = lang(), format = "json") {
   return buildSheetPrompt({
-    mode: g.mode, modeLabel: t(g.mode, {}, "en"), lang: l,
+    mode: g.mode, modeLabel: t(g.mode, {}, "en"), lang: l, format,
     traits: g.assignments.map(a => ({ trait: a.trait, name: promptCharacterName(a.character, l), series: promptSeriesName(a.character, l) })),
   });
 }
