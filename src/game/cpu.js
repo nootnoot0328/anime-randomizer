@@ -166,6 +166,11 @@ function expectedLater(unseen, remaining, role, contested = true) {
   const rank = contested ? 3 : 1;
   return s[Math.min(s.length - 1, Math.floor(s.length * rank / (remaining + 1)))];
 }
+/** Where the computer puts a card it won. Casual sometimes drops it in a random open role. */
+export function auctionPlaceRole(c, openRoles, unseen, remaining, difficulty = "strategic", rng = Math.random) {
+  if (difficulty === "casual" && rng() < 0.25) return openRoles[Math.floor(rng() * openRoles.length)];
+  return auctionRoleFor(c, openRoles, unseen, remaining).role;
+}
 /** Best open role for c by gain over what that role would get later. */
 export function auctionRoleFor(c, openRoles, unseen, remaining, contested = true) {
   let best = null;
@@ -195,7 +200,7 @@ export function auctionValue({ c, me, opp, unseen, remaining, difficulty = "stra
   m = Math.min(3, Math.max(0, m));
   const casual = difficulty === "casual";
   let wtp = (me.budget / open.length) * m;
-  if (casual) wtp *= 0.55 + rng() * 0.9;
+  if (casual) wtp *= 0.4 + rng() * 1.2; // at $20 a role is worth ~$4, so casual needs wide noise to play differently
   const reserve = casual && rng() < 0.15 ? 0 : open.length - 1;
   return Math.max(0, Math.min(me.budget - reserve, Math.round(wtp)));
 }

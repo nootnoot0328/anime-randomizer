@@ -36,16 +36,16 @@ test("open bidding: must beat the current bid, can't exceed your money, passing 
   assert.equal(pk.lot.toAct, 1); // player 1 opens the first card
   assert.equal(A.placeBid(pk, 2, 5).reason, "not-your-turn");
   assert.equal(A.placeBid(pk, 1, 0).reason, "too-low");
-  assert.equal(A.placeBid(pk, 1, 101).reason, "no-money");
-  assert.equal(A.placeBid(pk, 1, 10).ok, true);
-  assert.equal(A.placeBid(pk, 2, 10).reason, "too-low"); // no ties
-  assert.equal(A.placeBid(pk, 2, 12).ok, true);
+  assert.equal(A.placeBid(pk, 1, 21).reason, "no-money");
+  assert.equal(A.placeBid(pk, 1, 3).ok, true);
+  assert.equal(A.placeBid(pk, 2, 3).reason, "too-low"); // no ties
+  assert.equal(A.placeBid(pk, 2, 5).ok, true);
   const c = pk.lot.c;
   assert.deepEqual(A.pass(pk, 1), { ok: true, result: "won" });
-  assert.deepEqual(pk.lot.won, { player: 2, price: 12 });
+  assert.deepEqual(pk.lot.won, { player: 2, price: 5 });
   assert.equal(pk.turn, 2); // the winner places the card
   assert.equal(A.awardRole(pk, roles[0]).ok, true);
-  assert.equal(pk.p2.budget, 88); assert.equal(pk.p2.team[0].character.id, c.id);
+  assert.equal(pk.p2.budget, 15); assert.equal(A.START_BUDGET, 20); assert.equal(pk.p2.team[0].character.id, c.id);
   assert.equal(pk.lot.toAct, 2); // the opener alternates: player 2 opens card 2
 });
 
@@ -58,8 +58,8 @@ test("both passing with no bid: the card goes unsold and is gone", () => {
 });
 
 test("bidding the other player's whole budget wins at once", () => {
-  const pk = match(); pk.p2.budget = 20;
-  assert.deepEqual(A.placeBid(pk, 1, 20), { ok: true, won: true });
+  const pk = match(); pk.p2.budget = 8;
+  assert.deepEqual(A.placeBid(pk, 1, 8), { ok: true, won: true });
   assert.equal(pk.lot.won.player, 1);
 });
 
@@ -68,9 +68,9 @@ test("a full or broke player is out; the other gets each card at $1, take it or 
   pk.p2.budget = 0; // broke
   A.openLot(pk); // re-deal under the new state
   assert.equal(pk.lot.solo, 1);
-  assert.deepEqual(A.placeBid(pk, 1, 50), { ok: true, won: true });
+  assert.deepEqual(A.placeBid(pk, 1, 9), { ok: true, won: true });
   assert.equal(pk.lot.won.price, 1);
-  A.awardRole(pk, roles[0]); assert.equal(pk.p1.budget, 99);
+  A.awardRole(pk, roles[0]); assert.equal(pk.p1.budget, 19);
   assert.equal(A.pass(pk, 1).result, "unsold"); // solo pass = unsold
 });
 
@@ -83,14 +83,14 @@ test("the auction ends when both are out or the cards run out; empty roles stay 
 
 /* ---------------------------------------------------------------- computer */
 const ch = id => R.getCharacter(id);
-const side = (budget = 100, team = []) => ({ seriesId: "onepiece", roles: [...roles], team, budget });
+const side = (budget = 20, team = []) => ({ seriesId: "onepiece", roles: [...roles], team, budget });
 
 test("computer pays more for a better fit, keeps $1 for each other open role, and never bids above its limit", () => {
   const unseen = pool.filter(c => !["onepiece-shanks", "onepiece-carrot"].includes(c.id));
   const star = C.auctionValue({ c: ch("onepiece-shanks"), me: side(), opp: side(), unseen, remaining: 12 });
   const weak = C.auctionValue({ c: ch("onepiece-carrot"), me: side(), opp: side(), unseen, remaining: 12 });
   assert.ok(star > weak, `star ${star} > weak ${weak}`);
-  assert.ok(star <= 96, "keeps $4 for the other 4 roles");
+  assert.ok(star <= 16, "keeps $4 for the other 4 roles");
   const lot = { c: ch("onepiece-shanks"), bid: star, leader: 1, solo: null };
   assert.deepEqual(C.decideAuction({ lot, me: side(), opp: side(), unseen, remaining: 12 }), { action: "pass" });
   const open = C.decideAuction({ lot: { ...lot, bid: 0, leader: null }, me: side(), opp: side(), unseen, remaining: 12 });
@@ -99,9 +99,9 @@ test("computer pays more for a better fit, keeps $1 for each other open role, an
 
 test("computer spends everything on its last role, and takes $1 leftovers it needs", () => {
   const filled = roles.slice(0, 4).map(r => ({ role: r, character: ch("onepiece-nami"), price: 1 }));
-  const v = C.auctionValue({ c: ch("onepiece-kaido"), me: side(30, filled), opp: side(), unseen: pool, remaining: 3 });
-  assert.ok(v > 10 && v <= 30);
-  const solo = C.decideAuction({ lot: { c: ch("onepiece-usopp"), bid: 0, solo: 2 }, me: side(30, filled), opp: side(0), unseen: pool, remaining: 0 });
+  const v = C.auctionValue({ c: ch("onepiece-kaido"), me: side(9, filled), opp: side(), unseen: pool, remaining: 3 });
+  assert.ok(v > 4 && v <= 9, `last role ${v}`);
+  const solo = C.decideAuction({ lot: { c: ch("onepiece-usopp"), bid: 0, solo: 2 }, me: side(9, filled), opp: side(0), unseen: pool, remaining: 0 });
   assert.deepEqual(solo, { action: "bid", amount: 1 });
 });
 
@@ -115,7 +115,7 @@ test("simulated auctions: strategic beats casual and a never-bid player, and tea
     const bots = { 1: b1, 2: b2 }; A.openLot(pk);
     for (let guard = 0; !pk.ended && guard < 500; guard++) {
       const lot = pk.lot, unseen = A.unseenPool(pk, pl), remaining = pk.deck.length;
-      if (lot.won) { const n = lot.won.player; A.awardRole(pk, C.auctionRoleFor(lot.c, A.openRolesOf(pk[`p${n}`]), unseen, remaining).role); continue; }
+      if (lot.won) { const n = lot.won.player; A.awardRole(pk, C.auctionPlaceRole(lot.c, A.openRolesOf(pk[`p${n}`]), unseen, remaining, bots[n].diff, rng)); continue; }
       const n = lot.toAct, b = bots[n], me = pk[`p${n}`], opp = pk[`p${n === 1 ? 2 : 1}`];
       if (b.passive) { lot.solo ? A.placeBid(pk, n, 1) : A.pass(pk, n); continue; }
       lot.cache = lot.cache || {};
@@ -138,8 +138,8 @@ test("simulated auctions: strategic beats casual and a never-bid player, and tea
     return { win: wins / games, empty: empty / games };
   };
   const vsCasual = rate(bot("strategic"), bot("casual")), vsPassive = rate(bot("strategic"), passive);
-  assert.ok(vsCasual.win > 0.55, `strategic vs casual ${vsCasual.win}`);
-  assert.ok(vsPassive.win > 0.7, `strategic vs never-bid ${vsPassive.win}`);
+  assert.ok(vsCasual.win > 0.6, `strategic vs casual ${vsCasual.win}`);
+  assert.ok(vsPassive.win > 0.65, `strategic vs never-bid ${vsPassive.win}`);
   assert.ok(vsCasual.empty < 0.2, `strategic leaves roles empty ${vsCasual.empty}`);
 });
 

@@ -5,7 +5,7 @@ A static anime character game for phones, hosted on GitHub Pages. No build step,
 - **Character fusion:** Trait Draft (pick one of two, choose which trait to inherit) and Quick Randomizer, across 10 scenarios. Copies an image-generator prompt for the finished character.
 - **Team battles:** Random PK (six roles, one skip each) and $100 Budget PK (five roles, one sale, may finish early), local 2-player or vs a Casual/Strategic computer.
 - **AI referee:** judges finished battles and adds live commentary through your own Cloudflare Worker (optional; the copy-paste judge prompt still works without it).
-- **Auction PK:** bid for characters one hidden card at a time with $100 each, against a friend or the computer.
+- **Auction PK:** bid for characters one hidden card at a time with $20 each, against a friend or the computer.
 - **AI character sheets:** "Bring them to life" turns a finished fusion into a named character with a backstory, dialogue and a signature move (same Worker, optional).
 - English, Simplified Chinese and Japanese.
 

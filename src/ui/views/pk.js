@@ -74,21 +74,22 @@ function candidate(c, i, pk, { disabled = false, keyed = false } = {}) {
     ${avatar(c, "av-cand")}<span class="cand-text"><strong>${esc(displayName(c))}</strong>${budget ? `<span class="price t${price}">$${price}</span>` : `<small>${esc(charSeries(c))}</small>`}</span></button>`;
 }
 const canStillBid = p => p.team.length < p.roles.length && p.budget >= 1;
-/** Bid buttons: +1, +5, +10 over the current bid and all-in, within this player's money. */
+/** Bid buttons: +1, +2, +5 over the current bid and all-in, within this player's money. */
 export function bidOptions(pk) {
   const lot = pk.lot, n = lot.toAct, money = pk[`p${n}`].budget, min = minNextBid(pk);
   if (lot.solo) return [1];
-  return [...new Set([min, (lot.bid || 0) + 5, (lot.bid || 0) + 10, money])].filter(v => v >= min && v <= money).sort((a, b) => a - b);
+  return [...new Set([min, (lot.bid || 0) + 2, (lot.bid || 0) + 5, money])].filter(v => v >= min && v <= money).sort((a, b) => a - b);
 }
 function lotStatus(pk) {
   const lot = pk.lot, who = n => P.pkPlayerLabel(n, pk);
   if (lot.won) return `<div class="lot-status won p${lot.won.player}">${icon("gavel")}<span>${esc(t("auctionWon", { name: who(lot.won.player), n: lot.won.price }))}</span></div>`;
   if (lot.solo) return `<div class="lot-status">${icon("info")}<span>${esc(t("auctionSolo", { name: who(lot.solo) }))}</span></div>`;
   if (lot.bid) return `<div class="lot-status bid p${lot.leader}"><b>$${lot.bid}</b><span>${esc(t("auctionLeads", { name: who(lot.leader) }))}</span></div>`;
-  return `<div class="lot-status">${icon("gavel")}<span>${esc(t("auctionNoBids"))}</span></div>`;
+  const passer = lot.passed.find(n => n !== lot.toAct);
+  return `<div class="lot-status">${icon("gavel")}<span>${esc(passer ? t("auctionOtherPassed", { name: who(passer) }) : t("auctionNoBids"))}</span></div>`;
 }
 function lastActionLine(pk) {
-  const a = pk.lastAction; if (!a || Date.now() - a.at > 6000 || a.type === "placed" || pk.lot?.won) return "";
+  const a = pk.lastAction; if (!a || Date.now() - a.at > 6000 || a.type === "placed" || pk.lot?.won || (a.type === "pass" && !pk.lot?.bid)) return "";
   const who = P.pkPlayerLabel(a.player, pk);
   return `<p class="last-action p${a.player}" data-key="last-${a.at}">${esc(a.type === "bid" ? t("auctionDidBid", { name: who, n: a.amount }) : t("auctionDidPass", { name: who }))}</p>`;
 }
@@ -103,7 +104,7 @@ function auctionBoard(pk) {
   const cpu = P.isCPUTurn(), lot = pk.lot;
   if (!lot) return `<div class="board auction"><div class="teams">${teamPanel(pk, 1)}${teamPanel(pk, 2)}</div></div>`;
   const actor = lot.won ? lot.won.player : lot.toAct, p = pk[`p${actor}`];
-  const hint = cpu ? t("computerThinking") : lot.won ? t("auctionPlaceHint") : lot.solo ? t("auctionSoloHint") : t("auctionHint");
+  const hint = cpu ? t("computerThinking") : lot.won ? t("auctionPlaceHint") : lot.solo ? t("auctionSoloHint") : lot.bid ? t("auctionHint") : t("auctionHintOpen");
   const turnbar = `<div class="turnbar p${actor}${cpu ? " thinking" : ""}" data-key="turnbar"><span class="turn-dot"></span><div class="turn-text"><strong>${esc(t("turnOf", { name: P.pkPlayerLabel(actor) }))} · <b class="money">$${p.budget}</b></strong><small>${esc(hint)}</small></div></div>`;
   let controls = "";
   if (!cpu && lot.won) {

@@ -3,9 +3,9 @@
 ## v1.5.0 — Auction PK
 
 ### New mode: Auction PK (Random and Budget PK stay as they are)
-- Both players get $100 and the same five roles from one series. **15 cards** come up one at a time in a **hidden order** (10 roles + 5 spares, one form per character).
-- **Open bidding:** the opener alternates each card; players take turns to bid or pass. Each bid must beat the last, so there are no ties. Passing hands the card to whoever leads. Bid buttons: +$1, +$5, +$10 and All in.
-- **Both pass with no bid:** the card goes unsold and is gone.
+- Both players get **$20** and the same five roles from one series (Budget PK stays at $100). **15 cards** come up one at a time in a **hidden order** (10 roles + 5 spares, one form per character).
+- **Open bidding:** the opener alternates each card; players take turns to bid or pass. Each bid must beat the last, so there are no ties. Passing hands the card to whoever leads. Bid buttons: +$1, +$2, +$5 and All in.
+- **Both pass with no bid:** the card goes unsold and is gone. The screen says so before you pass, and tells the second player when the first has passed.
 - **Out of the auction** when your team is full or your money is gone. The other player then gets each card for $1, or passes.
 - **Money runs out = you play with what you have.** Empty roles stay empty and count against you in the verdict, as in Budget PK.
 - No market-value hints during bidding.
@@ -14,7 +14,7 @@
 ### Computer bidder
 - Values each card by how much better it fills its best open role than what's likely to come later, and bids up to its per-role budget scaled by that. Keeps $1 back for each other open role and pays more when cards run short. Casual adds noise and sometimes forgets the reserve.
 - It never sees the hidden order: it reasons from the characters it hasn't seen yet and how many cards are left.
-- Simulated across all 29 series: strategic beats casual about 65% of the time and beats a player who never bids about 84%, and its teams fill.
+- Simulated across all 29 series at $20: strategic beats casual about 70% of the time and a player who never bids about 75–80%, and its teams fill. Casual adds wide noise and sometimes places a card in a random role, so it stays clearly beatable at $20.
 
 ### Why 15 cards
 - With the whole roster in the deck, a player who never bid ended up with stars for $1 once the other team was full, so money stopped mattering. With 5 spares, waiting for bargains leaves you with empty roles.

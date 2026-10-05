@@ -4,7 +4,7 @@
 import { STATE } from "../core/state.js";
 import { app } from "../core/app.js";
 import { t, displayName, roleLabel } from "../core/i18n.js";
-import { decideRandom, decideBudget, decideAuction, auctionValue, auctionRoleFor } from "./cpu.js";
+import { decideRandom, decideBudget, decideAuction, auctionValue, auctionPlaceRole } from "./cpu.js";
 import * as A from "./auction.js";
 import { allSeries, getSeries, pkCharacters, roleSet, budgetRoleSet, characterPrice } from "../core/roster.js";
 import { saveBattle } from "../core/history.js";
@@ -151,8 +151,8 @@ function cpuAuctionTurn(pk) {
   const lot = pk.lot; if (!lot) { pk.cpuThinking = false; return; }
   const me = pk.p2, opp = pk.p1, unseen = A.unseenPool(pk, auctionPool(pk)), remaining = pk.deck.length;
   if (lot.won) {
-    const fit = auctionRoleFor(lot.c, A.openRolesOf(me), unseen, remaining);
-    return afterAuctionAction(pk, A.awardRole(pk, fit.role), { player: 2, type: "placed", role: fit.role, c: lot.c, price: lot.won.price });
+    const role = auctionPlaceRole(lot.c, A.openRolesOf(me), unseen, remaining, pk.difficulty);
+    return afterAuctionAction(pk, A.awardRole(pk, role), { player: 2, type: "placed", role, c: lot.c, price: lot.won.price });
   }
   // the limit is worked out once per card, so casual's noise doesn't flip-flop within a lot
   if (lot.cpuWtp === undefined) lot.cpuWtp = lot.solo ? null : auctionValue({ c: lot.c, me, opp, unseen, remaining, difficulty: pk.difficulty });

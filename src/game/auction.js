@@ -2,7 +2,7 @@
 // whole flow can be unit-tested and simulated. pk.js wraps these for the screen and the CPU.
 //
 // Rules
-// - Both players start with $100 and the same 5 roles. The deck is 15 cards (10 roles + 5 spares)
+// - Both players start with $20 and the same 5 roles. The deck is 15 cards (10 roles + 5 spares)
 //   drawn at random from one series, one form per character, in a hidden order. A small deck
 //   makes passing costly: with only 5 spares, a player who waits for bargains ends up with
 //   empty roles. (With the whole roster, a player who never bid got stars for $1 at the end.)
@@ -14,7 +14,7 @@
 //   each card is offered to them at $1: take it or pass.
 // - The auction ends when both players are out or the cards run out. Empty roles stay empty.
 
-export const START_BUDGET = 100;
+export const START_BUDGET = 20;
 export const MIN_BID = 1;
 export const SPARE_CARDS = 5;
 
