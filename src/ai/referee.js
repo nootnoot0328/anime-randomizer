@@ -65,6 +65,31 @@ export function draftedNames(pk, l) {
 }
 export function matchupCount(pk) { return Math.min(5, pk.p1.roles.length, pk.p2.roles.length); }
 
+/**
+ * One call to the Worker's /ai route with the game key. Shared by the referee and the
+ * character sheet. Never throws.
+ * @returns {Promise<{ok:true, data:object} | {ok:false, code:string, detail?:string}>}
+ */
+export async function postAI({ task, prompt, maxTokens, ctl = new AbortController(), timeoutMs = TIMEOUT_MS }) {
+  const timer = setTimeout(() => ctl.abort(), timeoutMs);
+  try {
+    const r = await fetch(base(STATE.ai.url) + "/ai", {
+      method: "POST", signal: ctl.signal, cache: "no-store",
+      headers: { Authorization: "Bearer " + STATE.ai.key, "Content-Type": "application/json" },
+      body: JSON.stringify({ task, prompt, maxTokens }),
+    });
+    let data = null; try { data = await r.json(); } catch { }
+    if (!r.ok) {
+      const code = r.status === 401 ? "badKey" : r.status === 429 ? "limit" : r.status === 403 ? "scope" : r.status === 501 ? "noProvider" : "server";
+      return { ok: false, code, detail: data?.error || String(r.status) };
+    }
+    return { ok: true, data: data || {} };
+  } catch (e) {
+    return { ok: false, code: e?.name === "AbortError" ? (ctl.cancelled ? "cancelled" : "timeout") : "offline" };
+  } finally { clearTimeout(timer); }
+}
+export const usageOf = data => (data?.used && data?.limit ? { used: data.used, limit: data.limit } : null);
+
 let inflight = null;
 export async function judge(pk = STATE.pk) {
   if (!pk || inflight) return;
@@ -75,30 +100,19 @@ export async function judge(pk = STATE.pk) {
   app.render();
   const prompt = buildPKJudgePrompt(pk, l, "json");
   const ctl = new AbortController(); inflight = ctl;
-  const timer = setTimeout(() => ctl.abort(), TIMEOUT_MS);
   try {
-    const r = await fetch(base(STATE.ai.url) + "/ai", {
-      method: "POST", signal: ctl.signal, cache: "no-store",
-      headers: { Authorization: "Bearer " + STATE.ai.key, "Content-Type": "application/json" },
-      body: JSON.stringify({ task: TASK, prompt, maxTokens: 2000 }),
-    });
-    let data = null; try { data = await r.json(); } catch { }
-    if (!r.ok) {
-      const code = r.status === 401 ? "badKey" : r.status === 429 ? "limit" : r.status === 403 ? "scope" : r.status === 501 ? "noProvider" : "server";
-      pk.referee = { status: "error", code, detail: data?.error || String(r.status), lang: l };
-      return;
-    }
-    const parsed = parseVerdict(data?.text || "", { names: draftedNames(pk, l), matchupCount: matchupCount(pk) });
-    if (!parsed.ok) { pk.referee = { status: "error", code: "unreadable", detail: parsed.reason, raw: String(data?.text || "").slice(0, 4000), lang: l }; return; }
-    pk.referee = { status: "done", verdict: parsed.verdict, lang: l, model: data.model || null, provider: data.provider || null, at: new Date().toISOString(), fresh: true, usage: data.used && data.limit ? { used: data.used, limit: data.limit } : null };
+    const res = await postAI({ task: TASK, prompt, maxTokens: 2000, ctl });
+    if (!res.ok) { pk.referee = { status: "error", code: res.code, detail: res.detail, lang: l }; return; }
+    const data = res.data;
+    const parsed = parseVerdict(data.text || "", { names: draftedNames(pk, l), matchupCount: matchupCount(pk) });
+    if (!parsed.ok) { pk.referee = { status: "error", code: "unreadable", detail: parsed.reason, raw: String(data.text || "").slice(0, 4000), lang: l }; return; }
+    pk.referee = { status: "done", verdict: parsed.verdict, lang: l, model: data.model || null, provider: data.provider || null, at: new Date().toISOString(), fresh: true, usage: usageOf(data) };
     if (pk.historyId) attachVerdict(pk.historyId, { verdict: parsed.verdict, lang: l, model: pk.referee.model, at: pk.referee.at });
     app.haptic("success");
     // the commentary plays out once; after that the report shows everything at rest
     const ref = pk.referee; setTimeout(() => { ref.fresh = false; }, (parsed.verdict.commentary.length * 0.9 + 3) * 1000);
-  } catch (e) {
-    pk.referee = { status: "error", code: e?.name === "AbortError" ? (ctl.cancelled ? "cancelled" : "timeout") : "offline", lang: l };
   } finally {
-    clearTimeout(timer); inflight = null;
+    inflight = null;
     app.render();
   }
 }

@@ -2,7 +2,7 @@
 // players keep their language, history, customizer and form choices.
 import { readJSON } from "./util.js";
 
-export const VERSION = "1.3.0";
+export const VERSION = "1.4.0";
 
 export const KEYS = {
   lang: "af_lang",
@@ -28,6 +28,7 @@ export const STATE = {
   genderFilter: "all", poolMode: "repeat",
   // games
   game: null, quickReveal: null, quickRunId: 0, resultSaved: false,
+  viewFusion: null, viewBattle: null,
   pk: null, pkSetup: { kind: "random", p1: null, p2: null, pool: null, opponent: "local", difficulty: "strategic" },
   // screens
   librarySeriesId: null, gallerySearch: "", historyFilter: "all", historyOpen: null, settingsReturn: "home",

@@ -3,7 +3,7 @@ import { t, traitLabel, displayName, displaySeries, secondaryName, roleLabel } f
 import { attributes, bestRoles } from "../../game/cpu.js";
 import { roleSet } from "../../core/roster.js";
 import { getCharacter, getSeries, resolveCharacter, allSeries, applyCharacterPhases, characterPrice, phaseOptionsFor } from "../../core/roster.js";
-import { entryType, battleFromEntry, deleteEntry } from "../../core/history.js";
+import { entryType, battleFromEntry, fusionFromEntry, deleteEntry } from "../../core/history.js";
 const normalizeName = s => globalThis.AnimeFusionLogic.normalizeName(s);
 import { esc, icon, act, avatar, seg, emptyState } from "../parts.js";
 import { screen, actions, inputs, go, confirmSheet, openSheet, sheetHead, render } from "../shell.js";
@@ -19,7 +19,8 @@ function fusionCard(h) {
     if (c) name = displayName(c);
     return `<div class="h-row">${c ? avatar(c, "av-xs") : `<span class="av av-xs av-empty"></span>`}<small>${esc(traitLabel(a.trait))}</small><b>${esc(name)}</b></div>`;
   }).join("");
-  return `<article class="h-card fusion" data-key="${esc(h.id)}"><header>${icon(h.kind === "quick" ? "bolt" : "fusion", "h-ic")}<div><strong>${esc(t(h.mode))}</strong><small>${esc(new Date(h.date).toLocaleString(STATE.lang === "zh" ? "zh-CN" : STATE.lang))}</small></div><button class="icon-btn sm" ${act("history.delete", h.id)} aria-label="${esc(t("deleteEntry"))}">${icon("trash")}</button></header><div class="h-rows">${rows}</div></article>`;
+  const sheet = h.sheet?.data, when = new Date(h.date).toLocaleString(STATE.lang === "zh" ? "zh-CN" : STATE.lang);
+  return `<article class="h-card fusion${sheet ? " has-sheet" : ""}" data-key="${esc(h.id)}" role="button" tabindex="0" ${act("history.openFusion", h.id)}><header>${icon(sheet ? "sparkles" : h.kind === "quick" ? "bolt" : "fusion", "h-ic")}<div><strong>${esc(sheet ? sheet.name : t(h.mode))}</strong><small>${esc(sheet ? `${t(h.mode)}${sheet.title ? " · " + sheet.title : ""}` : when)}</small></div><button class="icon-btn sm" ${act("history.delete", h.id)} aria-label="${esc(t("deleteEntry"))}">${icon("trash")}</button></header><div class="h-rows">${rows}</div></article>`;
 }
 function battleCard(h) {
   const s1 = getSeries(h.p1.seriesId), s2 = getSeries(h.p2.seriesId), v = h.referee?.verdict, pk = { opponent: h.opponent };
@@ -41,6 +42,7 @@ screen("history", {
 });
 actions({
   "history.filter": v => { STATE.historyFilter = ["fusion", "battle"].includes(v) ? v : "all"; render(); },
+  "history.openFusion": id => { const h = STATE.history.find(x => x.id === id); if (!h) return; STATE.viewFusion = fusionFromEntry(h); go("fusionview"); },
   "history.open": id => { const h = STATE.history.find(x => x.id === id); if (!h) return; STATE.viewBattle = battleFromEntry(h); go("battle"); },
   "history.delete": async id => { if (await confirmSheet({ title: t("deleteEntry"), body: t("deleteBody"), ok: t("deleteEntry"), danger: true })) { deleteEntry(id); render(); } },
   "history.play": () => go("home", { dir: "tab" }),

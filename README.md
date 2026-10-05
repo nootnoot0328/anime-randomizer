@@ -5,6 +5,7 @@ A static anime character game for phones, hosted on GitHub Pages. No build step,
 - **Character fusion:** Trait Draft (pick one of two, choose which trait to inherit) and Quick Randomizer, across 10 scenarios. Copies an image-generator prompt for the finished character.
 - **Team battles:** Random PK (six roles, one skip each) and $100 Budget PK (five roles, one sale, may finish early), local 2-player or vs a Casual/Strategic computer.
 - **AI referee:** judges finished battles and adds live commentary through your own Cloudflare Worker (optional; the copy-paste judge prompt still works without it).
+- **AI character sheets:** "Bring them to life" turns a finished fusion into a named character with a backstory, dialogue and a signature move (same Worker, optional).
 - English, Simplified Chinese and Japanese.
 
 ## Run locally
@@ -22,7 +23,8 @@ logic.js              small pure helpers shared with tests (version compare, shu
 src/main.js           boot: load data, restore state, render
 src/core/             state, i18n, roster/forms/prices, history, portraits, prompt builders
 src/game/             fusion.js (draft + quick), pk.js (random + budget), cpu.js (computer opponent)
-src/ai/               referee.js (Worker client), format.js (answer contract + parser)
+src/ai/               referee.js (Worker client), format.js (answer contract + parser),
+                      sheet.js + sheet-format.js (character sheet prompt, parser, saving)
 src/ui/               shell (routing, sheets, toasts), morph (in-place DOM updates), views/*
 src/data/             game data, character ratings (attributes.js) and strings (strings.js = v0.6 set, strings-v1.js = added in v1)
 data/                 roster, portrait manifests
@@ -33,7 +35,7 @@ Screens re-render by **morphing** the existing DOM rather than replacing it, so 
 
 ## AI referee
 
-GitHub Pages can't keep a secret, so the game never holds an AI provider key. It calls the Setpoint Worker (`nootnoot0328/setpoints`, Worker 1.4.0+) with a separate **`GAME_KEY`** that can only request match verdicts (text only, its own daily cap, `GAME_AI_DAILY_LIMIT`, default 40). It cannot read Setpoint data. Setup steps are in `setpoints/worker/README.md`. In the game: **Settings → AI referee**, paste the Worker address and the game key, tap **Test & save**. The test spends no AI call, and it refuses to save Setpoint's `APP_KEY`.
+GitHub Pages can't keep a secret, so the game never holds an AI provider key. It calls the Setpoint Worker (`nootnoot0328/setpoints`, Worker 1.4.0+, 1.5.0+ for character sheets) with a separate **`GAME_KEY`** that can only request match verdicts and character sheets (text only, its own daily cap, `GAME_AI_DAILY_LIMIT`, default 40). It cannot read Setpoint data. Setup steps are in `setpoints/worker/README.md`. In the game: **Settings → AI referee**, paste the Worker address and the game key, tap **Test & save**. The test spends no AI call, and it refuses to save Setpoint's `APP_KEY`.
 
 How a verdict is produced:
 
@@ -42,6 +44,8 @@ How a verdict is produced:
 3. A valid verdict is stored with the match in History and shown from then on. **It is final**: there is no re-judge button, so a result can't be re-rolled until someone likes it. A failed call can be retried.
 
 The verdict is still an AI opinion, and the same teams can get a different answer from a fresh call. Storing the first valid verdict is what makes each match's result stable.
+
+Character sheets work differently: they're creative rather than a result, so each character allows **one rewrite** (a failed rewrite keeps the current sheet and isn't counted). Sheets share the game key's daily limit with the referee.
 
 ## Portrait workflow
 
@@ -85,6 +89,7 @@ npm test
 
 - `tests/prompts.test.mjs`: every fusion, judge and battle-art prompt matches what v0.6.4 produced for 66 captured games (3 languages, random + budget).
 - `tests/game.test.mjs`: draft/budget/CPU rules, referee answer parsing, history, data and string completeness.
+- `tests/sheet.test.mjs`: character sheet prompt contract and parser.
 - `tests/cpu.test.mjs`: rating coverage and range, canon sanity checks (healers, strategists), and computer decisions, including a seeded simulation against the v1.0.0 behaviour.
 - `tests/logic.test.mjs`: helpers, roster data and version/import-map consistency.
 

@@ -23,6 +23,7 @@ export const ROUTES = {
   pksetup: { tab: "home", parent: "home" },
   pk: { tab: "home", parent: "home" },
   battle: { tab: "history", parent: "history" },
+  fusionview: { tab: "history", parent: "history" },
   settings: { tab: null, parent: null },
 };
 const VIEWS = {}, TITLES = {}, LEAVE = {}, ACTIONS = {}, INPUTS = {};

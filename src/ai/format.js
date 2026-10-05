@@ -38,7 +38,7 @@ ${betrayal ? "- Include at least one \"betrayal\" beat describing how a traitor 
 
 /* ---------------------------------------------------------------- parsing */
 
-function extractJSON(text) {
+export function extractJSON(text) {
   if (typeof text !== "string") return null;
   const cleaned = text.replace(/```(?:json)?/gi, "");
   const start = cleaned.indexOf("{");

@@ -31,10 +31,32 @@ export function saveFusion(game) {
   if (STATE.history.some(h => entryType(h) === "fusion" && h.signature === sig)) return "duplicate";
   STATE.history.unshift({
     id: uuid(), type: "fusion", date: new Date().toISOString(), mode: game.mode, kind: game.kind, signature: sig, scenario: game.promptScenario ?? null,
+    sheet: storedSheet(game.sheet),
     assignments: game.assignments.map(a => ({ trait: a.trait, charId: a.character.id, name: a.character.name_en || a.character.name, name_zh: a.character.name_zh || null, name_ja: a.character.name_ja || null, phaseKey: a.character.phaseKey || null, seriesId: a.character.seriesId || null, series: a.character.series_en || a.character.series || "" })),
   });
   persist();
   return "saved";
+}
+
+/** The part of a character sheet worth keeping (not loading/error state). */
+export function storedSheet(sh) {
+  return sh?.data ? { data: sh.data, rewrites: sh.rewrites || 0, lang: sh.lang || null, model: sh.model || null, at: sh.at || null } : null;
+}
+export function findFusion(game) {
+  const sig = resultSignature(game?.assignments || []);
+  return STATE.history.find(h => entryType(h) === "fusion" && h.signature === sig) || null;
+}
+/** Save the sheet with its fusion, saving the fusion first if needed (a sheet costs an AI call, so it is never thrown away). */
+export function attachSheet(game) {
+  if (!findFusion(game)) saveFusion(game);
+  const h = findFusion(game); if (!h) return false;
+  h.sheet = storedSheet(game.sheet); persist(); return true;
+}
+/** Rebuild a finished fusion from History so the result screen can show it again. */
+export function fusionFromEntry(h) {
+  const assignments = (h.assignments || []).map(a => ({ trait: a.trait, character: resolveCharacter(a.charId, a.phaseKey) || { id: a.charId, name: a.name, name_en: a.name, name_zh: a.name_zh, name_ja: a.name_ja, seriesId: a.seriesId, series: a.series } }));
+  const sheet = h.sheet?.data ? { status: "done", ...h.sheet } : null;
+  return { kind: h.kind || "standard", mode: h.mode, promptScenario: h.scenario ?? 0, assignments, remaining: [], total: assignments.length, skips: 0, sheet, fromHistory: true, historyId: h.id };
 }
 
 /* ---- battles ---- */

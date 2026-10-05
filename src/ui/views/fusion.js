@@ -5,8 +5,12 @@ import { allSeries, selectedPool, applyGenderFilter, excludedUnknownCount, chara
 import { buildFusionPrompt } from "../../core/prompts.js";
 import { isFusionSaved } from "../../core/history.js";
 import { esc, icon, act, avatar, seg, chip, sectionHead } from "../parts.js";
-import { screen, actions, go, openSheet, sheetHead, closeSheet, copyText } from "../shell.js";
+import { traitIcon } from "../icons.js";
+import { screen, actions, go, openSheet, sheetHead, closeSheet, copyText, confirmSheet } from "../shell.js";
 import * as F from "../../game/fusion.js";
+import { aiConfigured } from "../../ai/referee.js";
+import { bringToLife, cancelSheet, rewritesLeft } from "../../ai/sheet.js";
+import { attributes } from "../../game/cpu.js";
 
 /* ---------------------------------------------------------------- setup */
 function seriesTile(s) {
@@ -97,24 +101,94 @@ screen("quickreveal", {
 });
 
 /* ---------------------------------------------------------------- result */
-screen("result", {
-  title: () => t("complete"),
-  render: ({ first }) => {
-    const g = STATE.game; if (!g || !g.assignments) return `<div class="empty">${esc(t("noGame"))}</div>`;
-    const saved = STATE.resultSaved || isFusionSaved(g);
+const SHEET_LOADING = ["sheetLoading1", "sheetLoading2", "sheetLoading3", "sheetLoading4"];
+// traits the computer already rates, shown as real bars (no invented numbers for the rest)
+const RATED = { Power: "power", "Fighting Ability": "power", Intelligence: "intel" };
+
+function sheetPanel(g) {
+  const sh = g.sheet || {};
+  if (sh.status === "loading") {
+    return `<section class="ref-card loading" data-key="sheet-loading"><div class="whistle">${icon("sparkles")}</div><h3>${esc(t("sheetThinking"))}</h3>
+      <p class="cycler">${SHEET_LOADING.map((k, i) => `<span style="--i:${i}">${esc(t(k))}</span>`).join("")}</p>
+      <div class="skeleton"><i></i><i></i><i></i></div><button class="btn ghost sm" ${act("sheet.cancel")}>${esc(t("cancel"))}</button></section>`;
+  }
+  if (sh.data) return "";
+  if (sh.status === "error") {
+    const fix = ["badKey", "noProvider", "scope"].includes(sh.code);
+    return `<section class="ref-card error" data-key="sheet-error">${icon("info", "err-ic")}<h3>${esc(t("sheetError_" + (sh.code || "server")))}</h3>${sh.detail && !["unreadable", "scope"].includes(sh.code) ? `<p class="hint">${esc(sh.detail)}</p>` : ""}
+      <div class="row-actions"><button class="btn primary" ${act("sheet.make")}>${icon("refresh")}<span>${esc(t("tryAgain"))}</span></button>${fix ? `<button class="btn ghost" ${act("sheet.setup")}>${esc(t("openSettings"))}</button>` : ""}</div></section>`;
+  }
+  if (!aiConfigured()) {
+    return `<section class="ref-card setup" data-key="sheet-setup">${icon("sparkles", "big-ic")}<h3>${esc(t("sheetSetupTitle"))}</h3><p>${esc(t("sheetSetupBody"))}</p>
+      <div class="row-actions"><button class="btn primary" ${act("sheet.setup")}>${esc(t("setUp"))}</button></div></section>`;
+  }
+  return `<section class="ref-card ready" data-key="sheet-ready"><button class="call-btn" ${act("sheet.make")}>${icon("sparkles")}<span><strong>${esc(t("bringToLife"))}</strong><small>${esc(t("bringToLifeSub"))}</small></span></button></section>`;
+}
+
+function idCard(g) {
+  const sh = g.sheet, d = sh.data;
+  const meta = [t("sheetSaved"), sh.lang && sh.lang !== STATE.lang ? t("writtenIn_" + sh.lang) : ""].filter(Boolean).join(" · ");
+  return `<section class="id-card${sh.fresh ? " fresh" : ""}" data-key="id-card">
+    <div class="eyebrow">${esc(t(g.mode))}</div>
+    <h1>${esc(d.name)}</h1>${d.title ? `<p class="id-title">${esc(d.title)}</p>` : ""}
+    ${d.summary ? `<p class="id-summary">${esc(d.summary)}</p>` : ""}
+    <p class="final-note">${icon("check")}<span>${esc(meta)}</span></p>
+    ${sh.error ? `<p class="final-note warn">${icon("info")}<span>${esc(t("rewriteFailed"))} ${esc(t("sheetError_" + sh.error))}</span></p>` : ""}
+  </section>`;
+}
+
+function storyBlocks(g) {
+  const d = g.sheet.data; let out = "";
+  if (d.backstory.length) out += `<section class="story" data-key="story"><div class="ref-label">${icon("scroll")}<span>${esc(t("backstory"))}</span></div>${d.backstory.map(p => `<p>${esc(p)}</p>`).join("")}</section>`;
+  if (d.dialogue.length) out += `<section class="voice" data-key="voice"><div class="ref-label">${icon("quote")}<span>${esc(t("inTheirWords"))}</span></div>${d.dialogue.map((q, i) => `<blockquote style="--d:${i * 0.15}s">${esc(q)}</blockquote>`).join("")}</section>`;
+  if (d.signature) out += `<section class="signature" data-key="signature"><div class="ref-label">${icon("bolt")}<span>${esc(t("signatureMove"))}</span></div><div class="sig-card"><strong>${esc(d.signature.name)}</strong>${d.signature.text ? `<p>${esc(d.signature.text)}</p>` : ""}</div></section>`;
+  return out;
+}
+
+function traitRows(g) {
+  const lines = g.sheet?.data?.traits || {};
+  return `<div class="sheet-list">${g.assignments.map(a => {
+    const line = lines[a.trait];
+    return `<div class="trait-row${line ? " has-line" : ""}">${avatar(a.character, "av-md")}<span class="tr-text"><small>${traitIcon(a.trait, "tr-ic")}${esc(traitLabel(a.trait))}</small><strong>${esc(displayName(a.character))}</strong><em>${esc(displaySeries(getSeries(a.character.seriesId) || a.character))}</em>${line ? `<p class="tr-line">${esc(line)}</p>` : ""}</span></div>`;
+  }).join("")}</div>`;
+}
+
+function ratingsBlock(g) {
+  const rows = g.assignments.filter(a => RATED[a.trait]);
+  if (!rows.length) return "";
+  return `<section class="ratings" data-key="ratings"><div class="ref-label">${icon("cpu")}<span>${esc(t("ratings"))}</span></div>
+    ${rows.map(a => { const v = attributes(a.character)[RATED[a.trait]] ?? 0; return `<div class="rate-row"><span class="rate-name">${traitIcon(a.trait, "tr-ic")}${esc(traitLabel(a.trait))}<small>${esc(t("fromName", { name: displayName(a.character) }))}</small></span><span class="rate-bar"><i style="width:${Math.max(0, Math.min(10, v)) * 10}%"></i></span><b>${v}/10</b></div>`; }).join("")}
+    <p class="hint">${esc(t("ratingsNote"))}</p></section>`;
+}
+
+/** The fusion on screen: the one just played, or one reopened from History. */
+const current = () => (STATE.screen === "fusionview" ? STATE.viewFusion : STATE.game);
+
+screen("result", { title: () => t("complete"), render: ctx => resultView(STATE.game, ctx) });
+screen("fusionview", { title: () => STATE.viewFusion?.sheet?.data?.name || t(STATE.viewFusion?.mode || "fusions"), render: ctx => resultView(STATE.viewFusion, ctx) });
+
+function resultView(g, { first }) {
+    if (!g || !g.assignments) return `<div class="empty">${esc(t("noGame"))}</div>`;
+    const saved = g.fromHistory || STATE.resultSaved || isFusionSaved(g);
+    const sh = g.sheet, d = sh?.data, loading = sh?.status === "loading";
+    const left = rewritesLeft(g);
     return `<div class="result${first ? " stagger" : ""}">
-      <section class="result-hero"><span class="burst">${icon(g.kind === "quick" ? "bolt" : "sparkles")}</span><div class="eyebrow">${esc(t(g.mode))}</div><h1>${esc(t("complete"))}</h1></section>
-      <div class="sheet-list">${g.assignments.map(a => `<div class="trait-row">${avatar(a.character, "av-md")}<span class="tr-text"><small>${esc(traitLabel(a.trait))}</small><strong>${esc(displayName(a.character))}</strong><em>${esc(displaySeries(getSeries(a.character.seriesId) || a.character))}</em></span></div>`).join("")}</div>
+      ${d && !loading ? idCard(g) : `<section class="result-hero"><span class="burst">${icon(g.kind === "quick" ? "bolt" : "sparkles")}</span><div class="eyebrow">${esc(t(g.mode))}</div><h1>${esc(t("complete"))}</h1></section>`}
+      ${sheetPanel(g)}
+      ${d && !loading ? storyBlocks(g) : ""}
+      ${d && !loading ? `<div class="ref-label traits-label">${icon("fusion")}<span>${esc(t("traitSources"))}</span></div>` : ""}
+      ${traitRows(g)}
+      ${ratingsBlock(g)}
       <div class="stack-actions">
-        <button class="btn primary lg" ${act("fusion.copy")}>${icon("image")}<span>${esc(t("copyPrompt"))}</span></button>
+        <button class="btn ${d ? "secondary" : "primary"} lg" ${act("fusion.copy")}>${icon("image")}<span>${esc(t("copyPrompt"))}</span></button>
         <div class="row-actions">
           ${saved ? `<span class="btn done-pill">${icon("check")}<span>${esc(t("saved"))}</span></span>` : `<button class="btn secondary" ${act("fusion.save")}>${icon("save")}<span>${esc(t("saveHistory"))}</span></button>`}
-          <button class="btn ghost" ${act("fusion.again")}>${icon("refresh")}<span>${esc(t("playAgain"))}</span></button>
+          ${d && !loading ? (left > 0 ? `<button class="btn ghost" ${act("sheet.rewrite")}>${icon("refresh")}<span>${esc(t("rewriteLeft", { n: left }))}</span></button>` : `<span class="btn done-pill muted">${esc(t("rewriteUsed"))}</span>`) : ""}
+          ${g.fromHistory ? "" : `<button class="btn ghost" ${act("fusion.again")}>${icon("refresh")}<span>${esc(t("playAgain"))}</span></button>`}
         </div>
         <p class="hint center">${esc(t("copyPromptHint"))}</p>
       </div></div>`;
-  },
-});
+}
 
 actions({
   "fusion.kind": v => F.setSetupKind(v),
@@ -129,7 +203,14 @@ actions({
   "fusion.choose": v => { const c = F.chooseCharacter(v); if (c) openTraitSheet(c); },
   "fusion.assign": v => { F.assignTrait(v); closeSheet(); },
   "fusion.skip": () => F.skipRound(),
-  "fusion.copy": () => { const g = STATE.game; copyText(buildFusionPrompt(g.assignments, g.mode, g.promptScenario, STATE.lang), t("imagePrompt")); },
+  "fusion.copy": () => { const g = current(); copyText(buildFusionPrompt(g.assignments, g.mode, g.promptScenario, STATE.lang), t("imagePrompt")); },
   "fusion.save": () => F.saveResult(),
   "fusion.again": () => go("setup", { dir: "back" }),
+  "sheet.make": () => bringToLife(current()),
+  "sheet.cancel": () => cancelSheet(),
+  "sheet.setup": () => go("settings", { section: "ai" }),
+  "sheet.rewrite": async () => {
+    const g = current(); if (!g?.sheet?.data || rewritesLeft(g) <= 0) return;
+    if (await confirmSheet({ title: t("rewriteTitle"), body: t("rewriteBody"), ok: t("rewrite") })) bringToLife(g, { rewrite: true });
+  },
 });

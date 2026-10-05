@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.4.0 — Bring them to life: AI character sheets
+
+### Character sheet (result screen)
+- New **Bring them to life** button after a fusion. One AI call writes the character's **name and title, a 2-sentence summary, a short backstory, one line per trait, 2–3 lines of dialogue and a signature move**.
+- The story follows the theme: Villain and Final Boss build on Motive, Partner on Romance and how you met, Isekai on death and rebirth, Mentor on the student they lost, and so on.
+- The non-visual traits (Intelligence, Romance, Motive, Loyalty…) must shape the backstory or dialogue, not just be listed. The AI writes new text only: no quoted lines or retold plots from the source shows.
+- Written in the app's language (English, Chinese or Japanese) and saved with the fusion. Generating a sheet saves the fusion automatically, because an AI call is never thrown away.
+- **One rewrite per character**, so a single fusion can't use up the day's AI allowance. A failed rewrite keeps the current version and isn't counted.
+- **Without AI** the screen still works: each trait now has an icon, and Power, Fighting Ability and Intelligence show real 0–10 bars from the computer's ratings. Traits without ratings get no made-up numbers.
+
+### History
+- Fusion cards open again, showing the full sheet. Cards with a sheet show the character's name and title.
+
+### Setup
+- Needs **Setpoint Worker 1.5.0**, which allows the game key to use the new `anime-fusion-sheet` task. Worker 1.4.0 still judges battles; for sheets the app says to update the Worker. Sheets and the referee share `GAME_AI_DAILY_LIMIT` (default 40 a day).
+
+### Notes
+- The trait icons are placeholder line icons until the pixel-art set exists.
+- Not yet tested against a real model, only a mock Worker. Check tone, length and accuracy on lesser-known characters in the first few real sheets.
+
 ## v1.3.0 — Five new series and 275 more characters
 
 ### New series (each with 6 themed PK roles, a battlefield, computer ratings and prices)

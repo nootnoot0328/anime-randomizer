@@ -91,6 +91,20 @@ test("saved fusions are de-duplicated and keep their scenario", () => {
   assert.equal(H.saveFusion(g), "saved"); assert.equal(H.saveFusion(g), "duplicate");
   assert.equal(STATE.history[0].type, "fusion"); assert.equal(STATE.history[0].scenario, 2);
 });
+test("a character sheet saves its fusion, survives a reopen from History, and keeps the rewrite count", () => {
+  STATE.history = [];
+  const gojo = R.getCharacter("jjk-satoru-gojo"), l = R.getCharacter("deathnote-l-lawliet");
+  const data = { name: "Kael", title: "", summary: "s", backstory: ["b"], traits: { Intelligence: "sharp" }, dialogue: [], signature: null };
+  const g = { kind: "standard", mode: "villain", promptScenario: 1, assignments: [{ trait: "Hair", character: gojo }, { trait: "Intelligence", character: l }], sheet: { status: "done", data, rewrites: 1, lang: "en", fresh: true } };
+  assert.equal(H.attachSheet(g), true); // not saved yet: the sheet saves the fusion first
+  assert.equal(STATE.history.length, 1);
+  const h = STATE.history[0];
+  assert.deepEqual(h.sheet, { data, rewrites: 1, lang: "en", model: null, at: null }); // no loading/fresh state stored
+  const back = H.fusionFromEntry(h);
+  assert.equal(back.fromHistory, true); assert.equal(back.sheet.status, "done"); assert.equal(back.sheet.rewrites, 1);
+  assert.equal(back.assignments[1].character.id, "deathnote-l-lawliet");
+  assert.equal(H.resultSignature(back.assignments), h.signature); // a rewrite from History updates the same entry
+});
 
 /* ---------------------------------------------------------------- PK */
 function newMatch(kind, setup = {}) {
