@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T04:13:03.587Z",
+  "generatedAt": "2026-10-05T04:31:19.263Z",
   "series": {
     "onepiece": {
       "mediaIds": [
@@ -401,11 +401,23 @@
       "score": 100,
       "source": "series"
     },
+    "onepiece-monkey-d-garp": {
+      "anilistId": 8064,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b8064-dPltKaZ8RAsj.jpg",
+      "score": 100,
+      "source": "override"
+    },
     "onepiece-borsalino": {
       "anilistId": 21093,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b21093-Pc4kOjUn3ZkZ.png",
       "score": 100,
       "source": "global"
+    },
+    "onepiece-monkey-d-dragon": {
+      "anilistId": 4884,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b4884-iBn6FzQ2ESLC.png",
+      "score": 100,
+      "source": "override"
     },
     "onepiece-enel": {
       "anilistId": 1541,
@@ -844,6 +856,18 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b289584-KndGudJZm5Ik.jpg",
       "score": 100,
       "source": "series"
+    },
+    "jjk-hiromi-higuruma": {
+      "anilistId": 248818,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b248818-G9R6TqqElpvG.png",
+      "score": 100,
+      "source": "override"
+    },
+    "jjk-hana-kurusu": {
+      "anilistId": 220724,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b220724-PiTAVLDqbWQn.png",
+      "score": 100,
+      "source": "override"
     },
     "jjk-noritoshi-kamo": {
       "anilistId": 157866,
@@ -1469,6 +1493,30 @@
       "score": 100,
       "source": "override"
     },
+    "chainsawman-darkness-devil": {
+      "anilistId": 212321,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b212321-sReZKv8a1zaL.png",
+      "score": 100,
+      "source": "override"
+    },
+    "chainsawman-gun-devil": {
+      "anilistId": 208942,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b208942-xAA6MWq0eLVg.png",
+      "score": 100,
+      "source": "override"
+    },
+    "chainsawman-fumiko-mifune": {
+      "anilistId": 311954,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b311954-UZrETT038ijt.png",
+      "score": 100,
+      "source": "override"
+    },
+    "chainsawman-haruka-iseumi": {
+      "anilistId": 294718,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b294718-GZnza1AmHXHd.jpg",
+      "score": 100,
+      "source": "override"
+    },
     "spyfamily-loid-forger": {
       "anilistId": 138101,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b138101-7NCB0Md8zA6G.png",
@@ -1768,6 +1816,42 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b316985-YkCeSIfDF7U1.png",
       "score": 100,
       "source": "global"
+    },
+    "frieren-macht": {
+      "anilistId": 300778,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b300778-kvoUHowLjexj.png",
+      "score": 100,
+      "source": "override"
+    },
+    "frieren-solitar": {
+      "anilistId": 321976,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b321976-G5ClUxZpATHC.png",
+      "score": 100,
+      "source": "override"
+    },
+    "frieren-qual": {
+      "anilistId": 315278,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b315278-PKRDf4IJJ1GK.png",
+      "score": 100,
+      "source": "override"
+    },
+    "frieren-linie": {
+      "anilistId": 316986,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b316986-spmwGktNwX3W.png",
+      "score": 100,
+      "source": "override"
+    },
+    "frieren-draht": {
+      "anilistId": 316987,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b316987-QDp2A6SoHsee.png",
+      "score": 100,
+      "source": "override"
+    },
+    "frieren-ehre": {
+      "anilistId": 321718,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b321718-MV9ZCxtNdOpJ.png",
+      "score": 100,
+      "source": "override"
     },
     "aot-eren-yeager": {
       "anilistId": 40882,
@@ -2861,6 +2945,12 @@
       "score": 100,
       "source": "series"
     },
+    "onepunchman-psykos": {
+      "anilistId": 165607,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b165607-JTY8yaLUax5L.png",
+      "score": 100,
+      "source": "override"
+    },
     "onepunchman-elder-centipede": {
       "anilistId": 209311,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b209311-lxtztbIKkYVf.png",
@@ -3383,6 +3473,24 @@
       "score": 100,
       "source": "series"
     },
+    "jojo-kars": {
+      "anilistId": 21966,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n21966-ZvYmd1Dwp613.png",
+      "score": 100,
+      "source": "override"
+    },
+    "jojo-wamuu": {
+      "anilistId": 21965,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b21965-waQaIDkSC77a.png",
+      "score": 100,
+      "source": "override"
+    },
+    "jojo-esidisi": {
+      "anilistId": 21964,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b21964-nA0cw9XBwitK.png",
+      "score": 100,
+      "source": "override"
+    },
     "jojo-vanilla-ice": {
       "anilistId": 76658,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b76658-ZOj7gr6EfN52.jpg",
@@ -3400,6 +3508,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b16557-Kw9mRwSaq6ut.png",
       "score": 100,
       "source": "series"
+    },
+    "jojo-robert-e-o-speedwagon": {
+      "anilistId": 21938,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n21938-7iTMOJ4i6ET8.png",
+      "score": 100,
+      "source": "override"
     },
     "fairytail-natsu-dragneel": {
       "anilistId": 5187,
@@ -3748,6 +3862,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b184546-7auQqtPuhlUO.png",
       "score": 100,
       "source": "series"
+    },
+    "sololeveling-sung-jinah": {
+      "anilistId": 138791,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b138791-IngjgBQqGMWc.png",
+      "score": 100,
+      "source": "override"
     },
     "mobpsycho-shigeo-kageyama": {
       "anilistId": 89616,
@@ -5272,6 +5392,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1111-UhmlFtRFrnWa.png",
       "score": 100,
       "source": "series"
+    },
+    "codegeass-kallen-kouzuki": {
+      "anilistId": 558,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b558-8tSMZ4a0LWrn.jpg",
+      "score": 100,
+      "source": "override"
     },
     "codegeass-nunnally-lamperouge": {
       "anilistId": 1110,
