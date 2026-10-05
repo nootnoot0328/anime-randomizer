@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T01:20:27.587Z",
+  "generatedAt": "2026-10-05T03:57:53.743Z",
   "series": {
     "onepiece": {
       "mediaIds": [
@@ -155,6 +155,38 @@
         105310,
         114236,
         149118
+      ]
+    },
+    "sevendeadlysins": {
+      "mediaIds": [
+        154197,
+        99539,
+        108928
+      ]
+    },
+    "tensura": {
+      "mediaIds": [
+        101280,
+        108511,
+        156822
+      ]
+    },
+    "rezero": {
+      "mediaIds": [
+        21355,
+        108632,
+        163134
+      ]
+    },
+    "deathnote": {
+      "mediaIds": [
+        1535
+      ]
+    },
+    "codegeass": {
+      "mediaIds": [
+        1575,
+        2904
       ]
     }
   },
@@ -363,6 +395,48 @@
       "score": 100,
       "source": "global"
     },
+    "onepiece-marshall-d-teach": {
+      "anilistId": 3331,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b3331-7ZJDc4BNv9Yp.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "onepiece-borsalino": {
+      "anilistId": 21093,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b21093-Pc4kOjUn3ZkZ.png",
+      "score": 100,
+      "source": "global"
+    },
+    "onepiece-enel": {
+      "anilistId": 1541,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1541-6c8RouunoL88.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "onepiece-rob-lucci": {
+      "anilistId": 5677,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b5677-ZrZunVe7Kq5P.png",
+      "score": 100,
+      "source": "series"
+    },
+    "onepiece-smoker": {
+      "anilistId": 2753,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b2753-Y2ja8Pl6PRs0.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "onepiece-bartholomew-kuma": {
+      "anilistId": 7453,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b7453-c3MArieFBs9w.png",
+      "score": 100,
+      "source": "series"
+    },
+    "onepiece-nefertari-vivi": {
+      "anilistId": 726,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b726-DqAIpscMuYYx.png",
+      "score": 100,
+      "source": "series"
+    },
     "naruto-naruto-uzumaki": {
       "anilistId": 17,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b17-phjcWCkRuIhu.png",
@@ -549,6 +623,54 @@
       "score": 100,
       "source": "series"
     },
+    "naruto-kaguya-ootsutsuki": {
+      "anilistId": 126069,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b126069-CYxn8C4AHwiD.png",
+      "score": 100,
+      "source": "global"
+    },
+    "naruto-kurama": {
+      "anilistId": 7407,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b7407-D8MYzhbuy8zu.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "naruto-hiruzen-sarutobi": {
+      "anilistId": 7571,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n7571-fKldLuBWUtCO.png",
+      "score": 100,
+      "source": "series"
+    },
+    "naruto-kisame-hoshigaki": {
+      "anilistId": 2672,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/2672-oxbHx8n3N7WY.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "naruto-kakuzu": {
+      "anilistId": 3178,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b3178-fCqs5wyV0dlJ.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "naruto-hidan": {
+      "anilistId": 2792,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b2792-lyvtbiT4COp0.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "naruto-yamato": {
+      "anilistId": 2006,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b2006-FTCz2Eu3cXsI.png",
+      "score": 100,
+      "source": "series"
+    },
+    "naruto-asuma-sarutobi": {
+      "anilistId": 4775,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b4775-skviHvjIQHiE.png",
+      "score": 100,
+      "source": "series"
+    },
     "jjk-satoru-gojo": {
       "anilistId": 127691,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b127691-9zqh1xpIubn7.png",
@@ -714,6 +836,42 @@
     "jjk-riko-amanai": {
       "anilistId": 203015,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b203015-ez2Io1gxIQOP.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "jjk-kenjaku": {
+      "anilistId": 289584,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b289584-KndGudJZm5Ik.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "jjk-noritoshi-kamo": {
+      "anilistId": 157866,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b157866-UWDtYBoG71PD.png",
+      "score": 100,
+      "source": "series"
+    },
+    "jjk-masamichi-yaga": {
+      "anilistId": 189237,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b189237-ZxNJwVPL8DvW.png",
+      "score": 100,
+      "source": "series"
+    },
+    "jjk-takuma-ino": {
+      "anilistId": 157865,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b157865-X9ENX9OzWevS.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "jjk-ui-ui": {
+      "anilistId": 217290,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b217290-dEovi2HxGOnV.png",
+      "score": 100,
+      "source": "series"
+    },
+    "jjk-momo-nishimiya": {
+      "anilistId": 157868,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b157868-Ui2Wht3M6tlM.png",
       "score": 100,
       "source": "series"
     },
@@ -897,6 +1055,60 @@
       "score": 100,
       "source": "series"
     },
+    "bleach-ichibe-hyousube": {
+      "anilistId": 74359,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b74359-ruMPBJV92Ncr.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "bleach-isshin-kurosaki": {
+      "anilistId": 2553,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b2553-tDUlab4F0lFJ.png",
+      "score": 100,
+      "source": "series"
+    },
+    "bleach-coyote-starrk": {
+      "anilistId": 3212,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b3212-F5qZe4NWlZq9.png",
+      "score": 100,
+      "source": "series"
+    },
+    "bleach-kaname-tousen": {
+      "anilistId": 1085,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/1085.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "bleach-yasutora-sado": {
+      "anilistId": 575,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/575.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "bleach-izuru-kira": {
+      "anilistId": 1093,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1093-QmEOUj6fXYOK.png",
+      "score": 100,
+      "source": "series"
+    },
+    "bleach-ikkaku-madarame": {
+      "anilistId": 1151,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1151-izBrO6oWMvDv.png",
+      "score": 100,
+      "source": "series"
+    },
+    "bleach-yachiru-kusajishi": {
+      "anilistId": 910,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b910-cAC9g4i208Ou.png",
+      "score": 100,
+      "source": "series"
+    },
+    "bleach-hanatarou-yamada": {
+      "anilistId": 2161,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b2161-DyKLTXn1hkcL.png",
+      "score": 100,
+      "source": "series"
+    },
     "demonslayer-tanjiro-kamado": {
       "anilistId": 126071,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b126071-BTNEc1nRIv68.png",
@@ -1056,6 +1268,54 @@
     "demonslayer-yushiro": {
       "anilistId": 138846,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b138846-i8frJEl8baly.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "demonslayer-kagaya-ubuyashiki": {
+      "anilistId": 137808,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b137808-4yA8XQUDrAho.png",
+      "score": 100,
+      "source": "series"
+    },
+    "demonslayer-sakonji-urokodaki": {
+      "anilistId": 137773,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b137773-N4O52f73dJKZ.png",
+      "score": 100,
+      "source": "series"
+    },
+    "demonslayer-sabito": {
+      "anilistId": 137809,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b137809-6Tkle99lCBl8.png",
+      "score": 100,
+      "source": "series"
+    },
+    "demonslayer-makomo": {
+      "anilistId": 137806,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b137806-43Lqae34Vzqu.png",
+      "score": 100,
+      "source": "series"
+    },
+    "demonslayer-nakime": {
+      "anilistId": 139736,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b139736-CrfqAqlktDTP.png",
+      "score": 100,
+      "source": "series"
+    },
+    "demonslayer-rui": {
+      "anilistId": 139739,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b139739-BP0eUt2P9pRv.png",
+      "score": 100,
+      "source": "series"
+    },
+    "demonslayer-enmu": {
+      "anilistId": 139737,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b139737-1YaFT0Xvxwaz.png",
+      "score": 100,
+      "source": "series"
+    },
+    "demonslayer-kaigaku": {
+      "anilistId": 165862,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b165862-G9PpuvlEsfdN.jpg",
       "score": 100,
       "source": "series"
     },
@@ -1659,6 +1919,48 @@
       "score": 100,
       "source": "series"
     },
+    "aot-grisha-yeager": {
+      "anilistId": 62477,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b62477-3AHBGul9bXK8.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "aot-uri-reiss": {
+      "anilistId": 127570,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/127570-b7zpa6DSq2iA.png",
+      "score": 100,
+      "source": "series"
+    },
+    "aot-dot-pixis": {
+      "anilistId": 62485,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b62485-I0U5Cat3z65K.png",
+      "score": 100,
+      "source": "series"
+    },
+    "aot-theo-magath": {
+      "anilistId": 131763,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131763-YNYd9scK4Den.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "aot-mike-zacharias": {
+      "anilistId": 71119,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/71119.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "aot-rod-reiss": {
+      "anilistId": 127360,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/127360-UgSpq6e0DAYz.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "aot-hannes": {
+      "anilistId": 46492,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b46492-5kRaMLDCVD0B.jpg",
+      "score": 100,
+      "source": "series"
+    },
     "mha-izuku-midoriya": {
       "anilistId": 89028,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b89028-8w1I9o1ISHMg.png",
@@ -1815,6 +2117,48 @@
       "score": 100,
       "source": "override"
     },
+    "mha-all-for-one": {
+      "anilistId": 125956,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/125956-jzhb8Z4peLb8.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "mha-star-and-stripe": {
+      "anilistId": 254809,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b254809-vQXZtYhNZqqb.jpg",
+      "score": 82.5,
+      "source": "series"
+    },
+    "mha-kai-chisaki": {
+      "anilistId": 126357,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/126357-d5wTLYqKchRv.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "mha-recovery-girl": {
+      "anilistId": 157655,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b157655-OOLn8kPUegMw.jpg",
+      "score": 76.67,
+      "source": "series"
+    },
+    "mha-eri": {
+      "anilistId": 126093,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/126093-1SuOurVJnRla.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "mha-lady-nagant": {
+      "anilistId": 225724,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b225724-5rFhG41RpHF2.png",
+      "score": 76.67,
+      "source": "series"
+    },
+    "mha-gran-torino": {
+      "anilistId": 127428,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/127428-CRQhdmFk9I8a.jpg",
+      "score": 76.67,
+      "source": "series"
+    },
     "hunterxhunter-gon-freecss": {
       "anilistId": 30,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b30-lyFExKyDhefc.jpg",
@@ -1962,6 +2306,42 @@
     "hunterxhunter-komugi": {
       "anilistId": 14313,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/14313-J4CtnaAZidUe.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "hunterxhunter-menthuthuyoupi": {
+      "anilistId": 43953,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/43953.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "hunterxhunter-shaiapouf": {
+      "anilistId": 41135,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n41135-tTO36i1YAA5L.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "hunterxhunter-razor": {
+      "anilistId": 22518,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b22518-uoFnMXlU3kAo.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "hunterxhunter-uvogin": {
+      "anilistId": 5836,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/5836.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "hunterxhunter-phinks-magcub": {
+      "anilistId": 5834,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n5834-s3A4bR8IX01p.png",
+      "score": 100,
+      "source": "series"
+    },
+    "hunterxhunter-nobunaga-hazama": {
+      "anilistId": 5831,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n5831-COYqtVagw99J.png",
       "score": 100,
       "source": "series"
     },
@@ -2115,6 +2495,36 @@
       "score": 100,
       "source": "series"
     },
+    "fma-tim-marcoh": {
+      "anilistId": 10956,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n10956-kIbRRBTTFUN1.png",
+      "score": 100,
+      "source": "series"
+    },
+    "fma-grumman": {
+      "anilistId": 15531,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n15531-ibDxEMsxkrzT.png",
+      "score": 100,
+      "source": "series"
+    },
+    "fma-kain-fuery": {
+      "anilistId": 5705,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b5705-Aoe00iZYSbS1.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "fma-heymans-breda": {
+      "anilistId": 16648,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b16648-fJ18o1PPtBYk.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "fma-vato-falman": {
+      "anilistId": 5706,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b5706-Hh6Su6NIGGT0.jpg",
+      "score": 100,
+      "source": "series"
+    },
     "blackclover-asta": {
       "anilistId": 123285,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b123285-tKijiuQErDS0.png",
@@ -2262,6 +2672,36 @@
     "blackclover-william-vangeance": {
       "anilistId": 124441,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b124441-nggzgZExhb1w.png",
+      "score": 100,
+      "source": "series"
+    },
+    "blackclover-lumiere-silvamillion-clover": {
+      "anilistId": 158550,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b158550-m0UtbUtvW2ra.png",
+      "score": 100,
+      "source": "series"
+    },
+    "blackclover-dante-zogratis": {
+      "anilistId": 163782,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b163782-lbNzUCyy4lk0.png",
+      "score": 100,
+      "source": "series"
+    },
+    "blackclover-vanica-zogratis": {
+      "anilistId": 168300,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b168300-xpKqucVqnd7j.png",
+      "score": 100,
+      "source": "series"
+    },
+    "blackclover-zenon-zogratis": {
+      "anilistId": 167952,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b167952-Giy7Os8XrOKM.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "blackclover-patry": {
+      "anilistId": 174451,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b174451-le3VXzW3q04a.jpg",
       "score": 100,
       "source": "series"
     },
@@ -2415,6 +2855,30 @@
       "score": 100,
       "source": "series"
     },
+    "onepunchman-orochi": {
+      "anilistId": 126979,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b126979-7UVXqbF8XxD2.png",
+      "score": 100,
+      "source": "series"
+    },
+    "onepunchman-elder-centipede": {
+      "anilistId": 209311,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b209311-lxtztbIKkYVf.png",
+      "score": 100,
+      "source": "series"
+    },
+    "onepunchman-gouketsu": {
+      "anilistId": 327339,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b327339-WpYfdaJVXy0w.png",
+      "score": 100,
+      "source": "series"
+    },
+    "onepunchman-suiryu": {
+      "anilistId": 132939,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b132939-DLMpET3S5YG6.png",
+      "score": 100,
+      "source": "series"
+    },
     "dragonball-goku": {
       "anilistId": 246,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/246-wsRRr6z1kii8.png",
@@ -2556,6 +3020,36 @@
     "dragonball-zamasu": {
       "anilistId": 126882,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/126882-NQ14AE5TZCCr.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "dragonball-toppo": {
+      "anilistId": 130282,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n130282-DyPDybbJKEAc.png",
+      "score": 100,
+      "source": "series"
+    },
+    "dragonball-android-16": {
+      "anilistId": 2099,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/2099.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "dragonball-tien-shinhan": {
+      "anilistId": 5499,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b5499-Cn9kTD2J9dU5.png",
+      "score": 100,
+      "source": "series"
+    },
+    "dragonball-yamcha": {
+      "anilistId": 4014,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b4014-of2ONLvA7T8p.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "dragonball-dende": {
+      "anilistId": 6273,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/6273.jpg",
       "score": 100,
       "source": "series"
     },
@@ -2709,6 +3203,36 @@
       "score": 100,
       "source": "global"
     },
+    "sao-cardinal": {
+      "anilistId": 123199,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b123199-lfDRm9MJrznY.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sao-selka-zuberg": {
+      "anilistId": 127688,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n127688-jkLuuyhKfTS6.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sao-nobuyuki-sugou": {
+      "anilistId": 71581,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b71581-FHV6DGAjL6vX.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sao-death-gun": {
+      "anilistId": 70685,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b70685-gujlpmSzLQLm.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sao-kuradeel": {
+      "anilistId": 66327,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/66327.jpg",
+      "score": 100,
+      "source": "series"
+    },
     "jojo-jonathan-joestar": {
       "anilistId": 8087,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b8087-GTrObHQvujB5.png",
@@ -2856,6 +3380,24 @@
     "jojo-yoshikage-kira": {
       "anilistId": 12055,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b12055-eCEkIVV4qoCu.png",
+      "score": 100,
+      "source": "series"
+    },
+    "jojo-vanilla-ice": {
+      "anilistId": 76658,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b76658-ZOj7gr6EfN52.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "jojo-muhammad-avdol": {
+      "anilistId": 8946,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b8946-BumWgNGkPP9W.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "jojo-hol-horse": {
+      "anilistId": 16557,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b16557-Kw9mRwSaq6ut.png",
       "score": 100,
       "source": "series"
     },
@@ -3009,6 +3551,36 @@
       "score": 100,
       "source": "series"
     },
+    "fairytail-makarov-dreyar": {
+      "anilistId": 5333,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/5333.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "fairytail-irene-belserion": {
+      "anilistId": 129635,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b129635-5Gq5tyFpjI00.jpg",
+      "score": 100,
+      "source": "global"
+    },
+    "fairytail-larcade-dragneel": {
+      "anilistId": 131379,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131379-xhheIu8J6lZJ.png",
+      "score": 100,
+      "source": "global"
+    },
+    "fairytail-brandish": {
+      "anilistId": 128149,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b128149-ttaSqfPepayI.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "fairytail-chelia-blendy": {
+      "anilistId": 64723,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b64723-owB2deCp4qYR.jpg",
+      "score": 100,
+      "source": "series"
+    },
     "sololeveling-sung-jinwoo": {
       "anilistId": 129928,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b129928-BCEjVaP0AQSw.png",
@@ -3158,6 +3730,24 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b184555-NMCZb01p2Aqp.png",
       "score": 100,
       "source": "override"
+    },
+    "sololeveling-tusk": {
+      "anilistId": 184957,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b184957-b9X1TeiuteqR.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sololeveling-iron": {
+      "anilistId": 184956,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b184956-uy2dOVHacMsf.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sololeveling-kaisel": {
+      "anilistId": 184546,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b184546-7auQqtPuhlUO.png",
+      "score": 100,
+      "source": "series"
     },
     "mobpsycho-shigeo-kageyama": {
       "anilistId": 89616,
@@ -3456,6 +4046,42 @@
     "tokyoghoul-nimura-furuta": {
       "anilistId": 126031,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b126031-3tBpl6tvYwaZ.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tokyoghoul-kichimura-washuu": {
+      "anilistId": 241552,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b241552-YUPUxpI8L3jL.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tokyoghoul-kuki-urie": {
+      "anilistId": 88935,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88935-AtMsL0lEmeK6.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tokyoghoul-hairu-ihei": {
+      "anilistId": 90234,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90234-56Qw3D3nmV2A.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tokyoghoul-tooru-mutsuki": {
+      "anilistId": 88886,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n88886-bGodL2ANji2m.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tokyoghoul-saiko-yonebayashi": {
+      "anilistId": 88872,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88872-uhlmoT4vBxE3.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tokyoghoul-ginshi-shirazu": {
+      "anilistId": 88887,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88887-XjY2i5Jhkwl1.jpg",
       "score": 100,
       "source": "series"
     },
@@ -3906,6 +4532,894 @@
     "fireforce-konro-sagamiya": {
       "anilistId": 130852,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b130852-aT7x3aoIkmOv.png",
+      "score": 100,
+      "source": "series"
+    },
+    "fireforce-dragon": {
+      "anilistId": 198950,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b198950-AIv6MZSZ87OW.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "fireforce-kurono": {
+      "anilistId": 180506,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b180506-rrRt6Mku3IFx.png",
+      "score": 65,
+      "source": "series"
+    },
+    "fireforce-rekka-hoshimiya": {
+      "anilistId": 130789,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b130789-LWUWKnST7XP2.png",
+      "score": 100,
+      "source": "series"
+    },
+    "fireforce-nataku-son": {
+      "anilistId": 190921,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b190921-lGbolm0h0SLC.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-meliodas": {
+      "anilistId": 72921,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b72921-XDHNd1wflN6P.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-elizabeth-liones": {
+      "anilistId": 72923,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b72923-Hidpb955mwMW.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-hawk": {
+      "anilistId": 86683,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n86683-ZXPoLZnKqNtx.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-diane": {
+      "anilistId": 74653,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b74653-XpMcsLVZBnkZ.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-ban": {
+      "anilistId": 77605,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b77605-NrjhQwZwgJ3l.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-king": {
+      "anilistId": 83801,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b83801-52RnDXQDZ1I7.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-gowther": {
+      "anilistId": 88823,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88823-Oppzl2h6OhO8.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-merlin": {
+      "anilistId": 89180,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b89180-rN6OVPki8h3V.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-escanor": {
+      "anilistId": 90202,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90202-1H7FIX2hDmYd.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-gilthunder": {
+      "anilistId": 74285,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b74285-qGwNsXKYRPcC.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-howzer": {
+      "anilistId": 86685,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/86685-EVUJUHwElo95.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-griamore": {
+      "anilistId": 86703,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n86703-wzusHoQ4ZFQN.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-hendrickson": {
+      "anilistId": 86679,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/86679-18WrlrOgWcq8.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-dreyfus": {
+      "anilistId": 86677,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/86677-TVr1h1HFTZ43.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-zeldris": {
+      "anilistId": 131559,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131559-MmROAidOkGqL.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-estarossa": {
+      "anilistId": 126851,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b126851-m1Vyj4V0IHNo.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-derieri": {
+      "anilistId": 131566,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131566-2v1OVoEuhaiA.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-monspeet": {
+      "anilistId": 131572,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n131572-WUWdiWoYR3eX.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-galand": {
+      "anilistId": 131571,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131571-CQBpyMbZaxfO.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-melascula": {
+      "anilistId": 126466,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b126466-0BGdVrZnXGRB.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-grayroad": {
+      "anilistId": 131563,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n131563-kXt16TGlk1em.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-fraudrin": {
+      "anilistId": 131562,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n131562-a14b9mySNWkd.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-gloxinia": {
+      "anilistId": 131558,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131558-IwQOc0wLQ7Ey.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-drole": {
+      "anilistId": 131568,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n131568-PJn3LRI6y8Fx.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-chandler": {
+      "anilistId": 199213,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b199213-aTYBMryXXTlv.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-cusack": {
+      "anilistId": 199211,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b199211-rUbCSKdkm2pj.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-arthur-pendragon": {
+      "anilistId": 122210,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b122210-l6g1EMCf5NdE.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-elaine": {
+      "anilistId": 86681,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/86681-6kx3mfwNhraK.png",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-jericho": {
+      "anilistId": 86699,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/86699-oRLKbh6x7ijB.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-ludociel": {
+      "anilistId": 132237,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b132237-ZEOkunHCyEJa.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "sevendeadlysins-demon-king": {
+      "anilistId": 131847,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131847-VxEP7hxpRBQf.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-rimuru-tempest": {
+      "anilistId": 123962,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b123962-eL9yGV0NLMF7.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-veldora-tempest": {
+      "anilistId": 128034,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b128034-Gg5MrpTFNSv8.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-milim-nava": {
+      "anilistId": 128036,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b128036-lW0dxNwerqw4.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-benimaru": {
+      "anilistId": 128038,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b128038-VgVcqf6NDGJ5.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-shuna": {
+      "anilistId": 128040,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b128040-QOhtFHgfOT5O.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-shion": {
+      "anilistId": 128033,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b128033-fLbTgW4M2yj3.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-souei": {
+      "anilistId": 128039,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b128039-cce4njbCcb2M.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-hakurou": {
+      "anilistId": 131043,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131043-AyEdKg1Xkjrd.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-gobta": {
+      "anilistId": 129350,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b129350-qF2RlaSXb8Ro.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-ranga": {
+      "anilistId": 128035,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b128035-7r8BX1tt8BKg.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-diablo": {
+      "anilistId": 131033,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131033-0LguIALHCBEH.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-shizue-izawa": {
+      "anilistId": 128037,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b128037-kJ3HzX4s4iDl.png",
+      "score": 76.67,
+      "source": "series"
+    },
+    "tensura-geld": {
+      "anilistId": 133522,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b133522-CkNIcvE1JJ08.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-gabiru": {
+      "anilistId": 131041,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131041-MKPEBzVY1XPh.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-treyni": {
+      "anilistId": 132729,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n132729-wTAcZIkmMZak.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-kaijin": {
+      "anilistId": 129915,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b129915-09RUrdTUgymf.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-hinata-sakaguchi": {
+      "anilistId": 131042,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131042-ve0zpRm1ZzCp.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-clayman": {
+      "anilistId": 131052,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131052-hbVYgUsI5ahb.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-guy-crimson": {
+      "anilistId": 131048,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131048-uC7YdMAMSyzg.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-leon-cromwell": {
+      "anilistId": 131047,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131047-K8yFHSBShVsA.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-ramiris": {
+      "anilistId": 131034,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n131034-Xb6oPnWAbpZq.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-carrion": {
+      "anilistId": 131044,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131044-3sj6sca7crtJ.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-frey": {
+      "anilistId": 131038,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131038-vlB4CIRZAiA3.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-luminous-valentine": {
+      "anilistId": 131037,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131037-yhL267K48BA4.png",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-gazel-dwargo": {
+      "anilistId": 132727,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b132727-UOo3FuMJBV3i.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-masayuki-honjou": {
+      "anilistId": 226057,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b226057-T4ztKbBOI59f.jpg",
+      "score": 76.67,
+      "source": "series"
+    },
+    "tensura-yuuki-kagurazaka": {
+      "anilistId": 132755,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b132755-Q0GIMZO5UtGu.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "tensura-rigurd": {
+      "anilistId": 129348,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b129348-uWQXM503laJT.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-subaru-natsuki": {
+      "anilistId": 88573,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88573-F8yMTK9GhnTA.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-emilia": {
+      "anilistId": 88572,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88572-IzTwXEHSobRs.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-rem": {
+      "anilistId": 88575,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88575-Ayu8UPDA8NS6.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-ram": {
+      "anilistId": 88576,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88576-NWkotUiJ3mK3.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-beatrice": {
+      "anilistId": 90181,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90181-wRPm0OEaucmw.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-puck": {
+      "anilistId": 90187,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90187-xJXlD84KXl3t.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-roswaal-l-mathers": {
+      "anilistId": 90182,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90182-Ho0NS06tc6NL.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-felt": {
+      "anilistId": 88574,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88574-Hau8t0GlMvhp.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-reinhard-van-astrea": {
+      "anilistId": 88577,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88577-nrwzPBVwqAfO.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-crusch-karsten": {
+      "anilistId": 90185,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90185-FR9JHyNe5038.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-felix-argyle": {
+      "anilistId": 90184,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90184-o1ZFF6osCZX7.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-wilhelm-van-astrea": {
+      "anilistId": 90179,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90179-dBqDPUn2i7dM.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-priscilla-barielle": {
+      "anilistId": 90186,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90186-yr2PT4gI2qa3.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-aldebaran": {
+      "anilistId": 90178,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90178-olaN8k9RJRxo.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-anastasia-hoshin": {
+      "anilistId": 90177,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90177-K1XztcZqHl3c.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-julius-juukulius": {
+      "anilistId": 90183,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90183-LWx59kSa5Vjl.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-otto-suwen": {
+      "anilistId": 124110,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b124110-Gfr3IYI6FwqE.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-garfiel-tinsel": {
+      "anilistId": 133847,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b133847-8I2Pjoz232vS.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-petelgeuse-romanee-conti": {
+      "anilistId": 90170,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90170-sHsO9ojQDLa3.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-regulus-corneas": {
+      "anilistId": 174098,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b174098-8xjd9vK1KmkP.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-sirius-romanee-conti": {
+      "anilistId": 175579,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b175579-1J47sd32LEpW.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-capella-emerada-lugunica": {
+      "anilistId": 175581,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b175581-boju9L7bFkvi.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-echidna": {
+      "anilistId": 129330,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b129330-ZUtYw4n7N0uH.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-elsa-granhiert": {
+      "anilistId": 90180,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b90180-YXbXfcSlalav.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-frederica-baumann": {
+      "anilistId": 143378,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b143378-1pXqjZho4dhz.png",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-meili-portroute": {
+      "anilistId": 175577,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b175577-lUNPAV3Gujl3.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-petra-leyte": {
+      "anilistId": 141858,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b141858-wO0Uj6o4OpUI.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "rezero-satella": {
+      "anilistId": 88572,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b88572-IzTwXEHSobRs.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-light-yagami": {
+      "anilistId": 80,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b80-26EhwSsSqQ50.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-l-lawliet": {
+      "anilistId": 71,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b71-1W4panC53vfs.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-misa-amane": {
+      "anilistId": 835,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b835-CiZa8y2z2gCz.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-near": {
+      "anilistId": 464,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n464-6KeJpU6g7Hwj.jpg",
+      "score": 65,
+      "source": "series"
+    },
+    "deathnote-mello": {
+      "anilistId": 463,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b463-QBLeLf6XxVg6.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-ryuk": {
+      "anilistId": 75,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b75-IkEpzO21LgFy.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-rem": {
+      "anilistId": 1905,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n1905-9GfCvLFKNRLR.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-soichiro-yagami": {
+      "anilistId": 1927,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1927-iaIWrFITyeJw.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-touta-matsuda": {
+      "anilistId": 1906,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n1906-JCWKEGGook3Z.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-shuuichi-aizawa": {
+      "anilistId": 3767,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n3767-pSbmazo2I7ZD.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-kanzou-mogi": {
+      "anilistId": 3766,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n3766-xMCG0Vajfe2z.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-hideki-ide": {
+      "anilistId": 20002,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b20002-9GCrfzo30BDk.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-hirokazu-ukita": {
+      "anilistId": 17555,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n17555-bRedmqb33U5T.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-watari": {
+      "anilistId": 2179,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n2179-qF49l5qEurt5.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-naomi-misora": {
+      "anilistId": 4959,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b4959-DKXw1VYrvael.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-raye-penber": {
+      "anilistId": 7044,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n7044-DjU28vbo11bb.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-kiyomi-takada": {
+      "anilistId": 3765,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n3765-XmrhzN7qO27e.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-teru-mikami": {
+      "anilistId": 1904,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n1904-xKw2NgiE6VbU.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-kyousuke-higuchi": {
+      "anilistId": 1928,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n1928-u4ybFpwCKqg2.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-sayu-yagami": {
+      "anilistId": 8135,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n8135-UgvqHuoMyZy5.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-halle-lidner": {
+      "anilistId": 3769,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n3769-QJUZtTvWhOJt.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-stephen-gevanni": {
+      "anilistId": 3770,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n3770-tvFv3ulGAmjt.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-anthony-rester": {
+      "anilistId": 23514,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n23514-xhkKhgd0S5RJ.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-wedy": {
+      "anilistId": 1933,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n1933-WNDtxqOr1d51.png",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-aiber": {
+      "anilistId": 1932,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n1932-eeWL3KSOTlVx.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-sidoh": {
+      "anilistId": 2402,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/2402.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-matt": {
+      "anilistId": 2730,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n2730-SNbfxShpg90k.png",
+      "score": 65,
+      "source": "series"
+    },
+    "deathnote-roger-ruvie": {
+      "anilistId": 144332,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b144332-jGiPlxo9Egqv.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "deathnote-rod-ross": {
+      "anilistId": 37996,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n37996-BJqJlAXww2qD.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-lelouch-lamperouge": {
+      "anilistId": 417,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b417-gVLmIJu9phcK.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-suzaku-kururugi": {
+      "anilistId": 559,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b559-KRvTdc6zdCuU.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-cc": {
+      "anilistId": 1111,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1111-UhmlFtRFrnWa.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-nunnally-lamperouge": {
+      "anilistId": 1110,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1110-TSlN2WkhDJ1T.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-euphemia-li-britannia": {
+      "anilistId": 1114,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1114-rjYGsn8O6ZhE.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-cornelia-li-britannia": {
+      "anilistId": 797,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b797-lrtrQEESbWVa.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-schneizel-el-britannia": {
+      "anilistId": 1710,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1710-GA8qDtSsY4jN.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-charles-zi-britannia": {
+      "anilistId": 5610,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b5610-TuH7RZiCqQBd.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-vv": {
+      "anilistId": 1808,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1808-IHQQbhkvQC0o.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-jeremiah-gottwald": {
+      "anilistId": 1113,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1113-HxXUV4z4jhvZ.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-lloyd-asplund": {
+      "anilistId": 1130,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1130-0yBifno91R4e.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-cecile-croomy": {
+      "anilistId": 1131,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1131-8B8jxeFXEzld.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-rolo-lamperouge": {
+      "anilistId": 7771,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b7771-yhQaoU3IXYk0.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-shirley-fenette": {
+      "anilistId": 1120,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1120-hjOjinw5j4FE.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-milly-ashford": {
+      "anilistId": 1121,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1121-Y3ye9sw1u3Eh.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-kaname-ougi": {
+      "anilistId": 1115,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1115-0g7vZJssfj6x.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-kyoushirou-toudou": {
+      "anilistId": 1119,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/1119.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-kaguya-sumeragi": {
+      "anilistId": 1865,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/1865-14xoLeBKilHb.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-li-xingke": {
+      "anilistId": 11166,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b11166-FLEJh0viRLwm.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-bismarck-waldstein": {
+      "anilistId": 16132,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/16132.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-gino-weinberg": {
+      "anilistId": 11474,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/11474.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-anya-alstreim": {
+      "anilistId": 11476,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b11476-EIlWnOmgLnwL.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-diethard-ried": {
+      "anilistId": 1126,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1126-7sR8ZeQoJT30.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-villetta-nu": {
+      "anilistId": 1117,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1117-Zc6IwzGMj4Qy.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-rakshata-chawla": {
+      "anilistId": 1863,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1863-R3qPRdbXmLJ5.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-sayoko-shinozaki": {
+      "anilistId": 1807,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/1807.jpg",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-clovis-la-britannia": {
+      "anilistId": 1128,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b1128-RudkRo8wmn6a.png",
+      "score": 100,
+      "source": "series"
+    },
+    "codegeass-marianne-vi-britannia": {
+      "anilistId": 1129,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/1129.jpg",
       "score": 100,
       "source": "series"
     }
