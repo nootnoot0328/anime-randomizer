@@ -28,13 +28,13 @@ jobs:
         run: cat portrait-report.md >> "$GITHUB_STEP_SUMMARY"
       - name: Commit portrait manifest if changed
         run: |
-          if git diff --quiet -- data/portraits.json; then
+          if git diff --quiet -- data/portraits.json && git diff --quiet -- data/portrait-review.json 2>/dev/null && git ls-files --error-unmatch data/portrait-review.json >/dev/null 2>&1; then
             echo "No portrait changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/portraits.json
+          git add data/portraits.json data/portrait-review.json
           git commit -m "chore: refresh portrait manifest"
           git pull --rebase origin "$GITHUB_REF_NAME"
           git push origin "HEAD:$GITHUB_REF_NAME"

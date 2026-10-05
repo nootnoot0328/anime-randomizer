@@ -36,7 +36,7 @@ async function fetchCharacter(id){
   return (await gql(q,{id}))?.Character||null;
 }
 async function searchCharacter(search){
-  const q=`query($search:String!){Character(search:$search){id name{full native alternative} image{large medium} media(page:1,perPage:50){nodes{id type}}}}`;
+  const q=`query($search:String!){Character(search:$search){id name{full native alternative} image{large medium} media(page:1,perPage:50){nodes{id type title{romaji}}}}}`;
   return (await gql(q,{search}))?.Character||null;
 }
 function altMatchScore(c,node){
@@ -67,6 +67,17 @@ async function fallbackCharacter(c,mediaIds){
 }
 const output={generatedAt:new Date().toISOString(),series:{},chars:{}};
 const unmatched=[],low=[];
+// Machine-readable review file (committed by the workflow) so misses can be fixed with
+// reviewed overrides without reading CI logs: top AniList candidates per unmatched character.
+const review={generatedAt:null,unmatched:[],low:[]};
+const brief=(n,score)=>({anilistId:n.id,full:n.name?.full||'',native:n.name?.native||'',alternative:(n.name?.alternative||[]).filter(Boolean).slice(0,4),score:Number((score??0).toFixed(1))});
+async function reviewSearch(c,mediaIds){
+  const out=[];
+  for(const search of [c.name_en,c.name_ja].filter((x,i,a)=>x&&a.indexOf(x)===i)){
+    try{const hit=await searchCharacter(search);if(hit)out.push({search,...brief(hit,altMatchScore(c,hit)),inSeries:belongsToSeries(hit,mediaIds),media:(hit.media?.nodes||[]).slice(0,3).map(m=>`${m.type}:${m.title?.romaji||m.id}`)});}catch(e){out.push({search,error:e.message});}
+  }
+  return out;
+}
 for(const series of roster){
   const mediaIds=[],candidateMap=new Map();
   const needsCandidates=series.chars.some(c=>{
@@ -92,11 +103,13 @@ for(const series of roster){
     if(existing.chars?.[c.id]){output.chars[c.id]=existing.chars[c.id];continue;}
     const ranked=candidates.map(n=>({n,score:altMatchScore(c,n),source:'series'})).sort((a,b)=>b.score-a.score);let best=ranked[0];
     if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){const fb=await fallbackCharacter(c,mediaIds);if(fb)best=fb;}
-    if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){unmatched.push(`${c.id} (${c.name_en})`);continue;}
+    if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){unmatched.push(`${c.id} (${c.name_en})`);review.unmatched.push({id:c.id,name_en:c.name_en,name_ja:c.name_ja,seriesTop:ranked.slice(0,3).map(x=>brief(x.n,x.score)),global:await reviewSearch(c,mediaIds)});continue;}
     output.chars[c.id]={anilistId:best.n.id,url:best.n.image.large||best.n.image.medium,score:Number(best.score.toFixed(2)),source:best.source};
-    if(best.score<70)low.push(`${c.id} (${c.name_en}) -> ${best.n.name.full} [${best.score.toFixed(1)}]`);
+    if(best.score<70){low.push(`${c.id} (${c.name_en}) -> ${best.n.name.full} [${best.score.toFixed(1)}]`);review.low.push({id:c.id,name_en:c.name_en,matched:brief(best.n,best.score)});}
   }
 }
 await fs.writeFile(path.join(root,'data/portraits.json'),JSON.stringify(output,null,2)+'\n','utf8');
+review.generatedAt=output.generatedAt;
+await fs.writeFile(path.join(root,'data/portrait-review.json'),JSON.stringify(review,null,2)+'\n','utf8');
 const report=[`# Portrait resolver report`,``,`Generated: ${output.generatedAt}`,``,`Resolved: ${Object.keys(output.chars).length}`,`Unmatched: ${unmatched.length}`,`Low-score (<70): ${low.length}`,``,`## Unmatched`,...(unmatched.length?unmatched.map(x=>`- ${x}`):['- None']),``,`## Low-score matches`,...(low.length?low.map(x=>`- ${x}`):['- None'])].join('\n');
 console.log(report);
