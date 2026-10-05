@@ -155,7 +155,7 @@ body.no-tabs .tabbar{transform:translateY(110%);opacity:0;pointer-events:none}
 .mode-text strong{font-size:16.5px;font-weight:800;line-height:1.25}
 .mode-text small{color:var(--muted);font-size:13px;line-height:1.4}
 .mode-go{color:var(--faint);position:relative;z-index:1}
-.tone-violet{--tone:var(--violet)}.tone-blue{--tone:var(--blue)}.tone-rose{--tone:var(--rose)}.tone-green{--tone:var(--green)}
+.tone-gold{--tone:var(--gold)}.tone-violet{--tone:var(--violet)}.tone-blue{--tone:var(--blue)}.tone-rose{--tone:var(--rose)}.tone-green{--tone:var(--green)}
 .resume-card{position:relative;display:grid;grid-template-columns:44px 1fr 20px;align-items:center;gap:12px;width:100%;margin-top:14px;padding:14px 14px 18px;text-align:left;border-radius:var(--r-lg);background:var(--surface-2);border:1px solid var(--line-2);overflow:hidden;animation:rise .5s var(--ease) both}
 .resume-card small{display:block;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}
 .resume-card strong{display:block;font-size:15.5px;margin-top:2px}
@@ -570,6 +570,38 @@ body.no-tabs .tabbar{transform:translateY(110%);opacity:0;pointer-events:none}
 .h-card.fusion{cursor:pointer}
 .h-card.fusion:active{transform:scale(.985)}
 .h-card.has-sheet .h-ic{color:var(--accent)}
+
+/* ---------------------------------------------------------------- auction (v1.5) */
+.badge.new{display:inline-block;margin-left:8px;padding:2px 7px;border-radius:99px;vertical-align:2px;background:var(--gold);color:#1a1200;font-size:10px;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.board.auction{display:grid;gap:12px}
+.lot{display:grid;gap:10px;padding:14px;border-radius:var(--r-lg);background:linear-gradient(170deg,rgba(251,191,36,.10),var(--surface) 50%);border:1px solid rgba(251,191,36,.28);animation:lotIn .45s var(--bounce) both}
+.lot-meta{display:flex;justify-content:space-between;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.lot-card{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:14px}
+.lot-card .av-portrait{width:96px;height:120px;border-radius:16px;font-size:26px}
+.lot-name{display:grid;gap:4px;min-width:0}
+.lot-name strong{font-size:20px;font-weight:900;line-height:1.2;overflow-wrap:anywhere}
+.lot-name small{color:var(--muted);font-size:13px}
+.lot-status{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-md);background:var(--surface-2);font-size:14px;font-weight:700;color:var(--muted)}
+.lot-status .ic{width:18px;height:18px;flex:none}
+.lot-status.bid{color:var(--text)}
+.lot-status.bid b{font-size:22px;font-weight:900;font-variant-numeric:tabular-nums}
+.lot-status.p1,.last-action.p1{--pc:var(--p1)}.lot-status.p2,.last-action.p2{--pc:var(--p2)}
+.lot-status.bid,.lot-status.won{background:color-mix(in srgb,var(--pc) 14%,var(--surface-2));border:1px solid color-mix(in srgb,var(--pc) 40%,transparent)}
+.lot-status.bid b,.lot-status.won{color:var(--pc)}
+.lot-status.won{animation:settle .5s var(--bounce)}
+.last-action{margin:-2px 2px 0;font-size:12.5px;font-weight:700;color:var(--pc);animation:fadeIn .3s}
+.lot-controls{display:grid;gap:8px}
+.bid-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.bid-btn.wide{grid-column:1/-1;min-height:44px}
+.bid-btn{min-height:48px;font-size:16px;font-weight:900;font-variant-numeric:tabular-nums}
+.btn.allin{background:linear-gradient(135deg,#fbbf24,#fb923c);color:#1a1200;border:0}
+.lot-log{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.lot-log li{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:6px 10px;border-radius:var(--r-sm);background:var(--surface);border:1px solid var(--line);font-size:13px}
+.lot-log li span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lot-log li b{font-size:12px;font-weight:800}
+.lot-log li.p1 b{color:var(--p1)}.lot-log li.p2 b{color:var(--p2)}.lot-log li.unsold b{color:var(--faint)}
+.rules{margin:0;padding-left:18px;display:grid;gap:6px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+@keyframes lotIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
 
 /* ---------------------------------------------------------------- motion */
 .stagger>*,.stagger .mode-list>*{animation:rise .5s var(--ease) both}

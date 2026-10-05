@@ -150,3 +150,72 @@ export function decideBudget({ pool, team, openRoles, budget, sellUsed, difficul
   const first = [...plan.picks].sort((a, b) => b.price - a.price || roleScore(b.character, b.role) - roleScore(a.character, a.role))[0];
   return { action: "buy", character: first.character, role: first.role };
 }
+
+/* ---------------------------------------------------------------- Auction PK */
+// The computer never sees the hidden deck order. It knows which characters it hasn't seen yet
+// (`unseen`) and how many cards are still to come (`remaining`), and estimates from those.
+
+/**
+ * What a role is likely to end up with if we don't buy now: the expected 3rd-best fit among the
+ * cards still to come (the other player takes some of the best), or the best when uncontested.
+ * Order statistic of a random draw of `remaining` cards from `unseen`, read off the sorted scores.
+ */
+function expectedLater(unseen, remaining, role, contested = true) {
+  if (!unseen.length || remaining <= 0) return 0;
+  const s = unseen.map(c => roleScore(c, role)).sort((a, b) => b - a);
+  const rank = contested ? 3 : 1;
+  return s[Math.min(s.length - 1, Math.floor(s.length * rank / (remaining + 1)))];
+}
+/** Best open role for c by gain over what that role would get later. */
+export function auctionRoleFor(c, openRoles, unseen, remaining, contested = true) {
+  let best = null;
+  for (const role of openRoles) {
+    const gain = roleScore(c, role) - expectedLater(unseen, remaining, role, contested);
+    if (!best || gain > best.gain) best = { role, gain };
+  }
+  return best;
+}
+
+/**
+ * The most the computer will pay for this card.
+ *   per-slot budget × (1 + 0.4 × gain), where gain = how much better c fills its best open role
+ *   than what that role would likely get later. Keeps $1 for each other open role so it can
+ *   still pick up leftovers, and pays more when cards are running out.
+ * Casual: the same estimate with a lot of noise, and sometimes forgets to keep a reserve.
+ */
+export function auctionValue({ c, me, opp, unseen, remaining, difficulty = "strategic", rng = Math.random }) {
+  const open = me.roles.filter(r => !me.team.some(x => x.role === r));
+  if (!open.length || me.budget < 1) return 0;
+  const oppOpen = opp.roles.filter(r => !opp.team.some(x => x.role === r)).length;
+  const fit = auctionRoleFor(c, open, unseen, remaining);
+  const scarce = remaining < open.length + oppOpen;
+  let m = 1 + 0.4 * fit.gain;
+  if (scarce) m = Math.max(m, 1) * 1.3;
+  else if (fit.gain < -1) return 0; // clearly worse than what's likely to come
+  m = Math.min(3, Math.max(0, m));
+  const casual = difficulty === "casual";
+  let wtp = (me.budget / open.length) * m;
+  if (casual) wtp *= 0.55 + rng() * 0.9;
+  const reserve = casual && rng() < 0.15 ? 0 : open.length - 1;
+  return Math.max(0, Math.min(me.budget - reserve, Math.round(wtp)));
+}
+
+/**
+ * One bidding decision on the current lot. Pass `wtp` to reuse the limit worked out at the
+ * start of the lot (keeps casual's noise consistent within one card).
+ * @returns {{action:"bid", amount:number} | {action:"pass"}}
+ */
+export function decideAuction({ lot, me, opp, unseen, remaining, difficulty = "strategic", rng = Math.random, wtp = null }) {
+  const open = me.roles.filter(r => !me.team.some(x => x.role === r));
+  if (lot.solo) {
+    // uncontested at $1: take it unless something clearly better for that role is likely to come
+    const fit = auctionRoleFor(lot.c, open, unseen, remaining, false);
+    const take = remaining < open.length || fit.gain > -1.5 || (difficulty === "casual" && rng() < 0.5);
+    return take ? { action: "bid", amount: 1 } : { action: "pass" };
+  }
+  if (wtp === null) wtp = auctionValue({ c: lot.c, me, opp, unseen, remaining, difficulty, rng });
+  if (wtp <= lot.bid || wtp < 1) return { action: "pass" };
+  if (!lot.bid) return { action: "bid", amount: Math.max(1, Math.round(wtp * (difficulty === "casual" ? 0.5 : 0.35))) };
+  const gap = wtp - lot.bid, step = gap > 12 ? 5 : gap > 4 ? 2 : 1;
+  return { action: "bid", amount: Math.min(wtp, lot.bid + step) };
+}

@@ -9,7 +9,7 @@ export const BEATS = ["opening", "clash", "turning-point", "betrayal", "endgame"
 /** Output contract appended after the shared judging rules. */
 export function refereeFormat(pk, l) {
   const language = LANGUAGE_NAME[l] || "English";
-  const betrayal = pk?.kind !== "budget";
+  const betrayal = pk?.kind !== "budget" && pk?.kind !== "auction";
   return `You are now both the REFEREE and the live COMMENTATOR for this match.
 Decide the result with the rules above first, then narrate a battle that is consistent with that result.
 

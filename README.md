@@ -5,6 +5,7 @@ A static anime character game for phones, hosted on GitHub Pages. No build step,
 - **Character fusion:** Trait Draft (pick one of two, choose which trait to inherit) and Quick Randomizer, across 10 scenarios. Copies an image-generator prompt for the finished character.
 - **Team battles:** Random PK (six roles, one skip each) and $100 Budget PK (five roles, one sale, may finish early), local 2-player or vs a Casual/Strategic computer.
 - **AI referee:** judges finished battles and adds live commentary through your own Cloudflare Worker (optional; the copy-paste judge prompt still works without it).
+- **Auction PK:** bid for characters one hidden card at a time with $100 each, against a friend or the computer.
 - **AI character sheets:** "Bring them to life" turns a finished fusion into a named character with a backstory, dialogue and a signature move (same Worker, optional).
 - English, Simplified Chinese and Japanese.
 
@@ -90,6 +91,7 @@ npm test
 - `tests/prompts.test.mjs`: every fusion, judge and battle-art prompt matches what v0.6.4 produced for 66 captured games (3 languages, random + budget).
 - `tests/game.test.mjs`: draft/budget/CPU rules, referee answer parsing, history, data and string completeness.
 - `tests/sheet.test.mjs`: character sheet prompt contract and parser.
+- `tests/auction.test.mjs`: auction rules, the computer bidder and a simulated tournament across every series.
 - `tests/cpu.test.mjs`: rating coverage and range, canon sanity checks (healers, strategists), and computer decisions, including a seeded simulation against the v1.0.0 behaviour.
 - `tests/logic.test.mjs`: helpers, roster data and version/import-map consistency.
 

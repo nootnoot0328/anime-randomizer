@@ -71,9 +71,9 @@ function refereePanel(pk) {
 export function battleReport(pk, { first } = {}) {
   const field = BATTLEFIELDS[pk.battlefieldSeriesId], fieldSeries = getSeries(pk.battlefieldSeriesId);
   const s1 = getSeries(pk.p1.seriesId), s2 = getSeries(pk.p2.seriesId), v = pk.referee?.verdict;
-  const banner = (n, s) => `<div class="fo-team p${n}${v && v.winner === n ? " won" : v && v.winner && v.winner !== n ? " lost" : ""}"><span class="team-dot"></span><strong>${esc(pkPlayerLabel(n, pk))}</strong><small>${esc(displaySeries(s))}</small>${pk.kind === "budget" ? `<em>$${pk[`p${n}`].budget ?? 0} ${esc(t("remainingBudget"))}</em>` : ""}</div>`;
+  const banner = (n, s) => `<div class="fo-team p${n}${v && v.winner === n ? " won" : v && v.winner && v.winner !== n ? " lost" : ""}"><span class="team-dot"></span><strong>${esc(pkPlayerLabel(n, pk))}</strong><small>${esc(displaySeries(s))}</small>${pk.kind === "budget" || pk.kind === "auction" ? `<em>$${pk[`p${n}`].budget ?? 0} ${esc(t("remainingBudget"))}</em>` : ""}</div>`;
   return `<div class="report${first ? " stagger" : ""}">
-    <section class="faceoff" data-key="faceoff"><div class="eyebrow">${esc(t(pk.kind === "budget" ? "budgetPK" : "randomPK"))}</div>
+    <section class="faceoff" data-key="faceoff"><div class="eyebrow">${esc(t(pk.kind === "budget" ? "budgetPK" : pk.kind === "auction" ? "auctionPK" : "randomPK"))}</div>
       <div class="fo-row">${banner(1, s1)}<span class="fo-vs">VS</span>${banner(2, s2)}</div>
       ${field ? `<details class="field"><summary>${icon("globe")}<span>${esc(t("battlefield"))}: ${esc(displaySeries(fieldSeries))}</span></summary><p>${esc(field[STATE.lang] || field.en)}</p></details>` : ""}
     </section>
