@@ -200,3 +200,21 @@ test("a stored verdict is attached to the saved battle", () => {
   const back = H.battleFromEntry(STATE.history.find(h => h.id === pk.historyId));
   assert.equal(back.referee.verdict.winner, 1); assert.equal(back.p1.team.length, 6); assert.ok(back.fromHistory);
 });
+
+/* ---------------------------------------------------------------- v1.2 appearance split */
+test("Appearance is split into Hair, Face, Outfit and Physique in every scenario that had it", async () => {
+  const { MODES, TRAIT_LABELS } = await import("../src/data/game.js");
+  const LOOK = ["Hair", "Face", "Outfit", "Physique"];
+  for (const [mode, traits] of Object.entries(MODES)) {
+    assert.ok(!traits.includes("Appearance") && !traits.includes("Body"), `${mode} still has Appearance/Body`);
+    assert.equal(new Set(traits).size, traits.length, `${mode} has duplicate traits`);
+    if (traits.some(t => LOOK.includes(t))) for (const t of LOOK) assert.ok(traits.includes(t), `${mode} is missing ${t}`);
+  }
+  for (const t of ["Appearance", "Body", ...LOOK]) assert.ok(TRAIT_LABELS[t]?.zh && TRAIT_LABELS[t]?.ja, `${t} keeps its labels for old history`);
+});
+test("saved trait picks from before v1.2 are converted, not lost", () => {
+  assert.deepEqual(F.migrateTraits(["Appearance", "Body", "Cooking"], "partner"), ["Hair", "Face", "Outfit", "Physique", "Cooking"]);
+  assert.deepEqual(F.migrateTraits(["Hair", "Appearance"], "partner"), ["Hair", "Face", "Outfit", "Physique"], "no duplicates");
+  assert.deepEqual(F.migrateTraits(["Appearance", "Army"], "villain"), ["Hair", "Face", "Outfit", "Physique", "Army"]);
+  assert.deepEqual(F.migrateTraits(["Appearance", "Nonsense"], "bestfriend"), [], "traits a scenario doesn't have are dropped");
+});

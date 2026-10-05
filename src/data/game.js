@@ -1,9 +1,12 @@
 // Generated from the running v0.6.4 app (all patch layers applied), then maintained by hand.
+// v1.2: "Appearance" is split into Hair, Face, Outfit and Physique ("Body" merged into Physique).
+// TRAIT_LABELS keeps the old names so saved history still reads correctly.
 export const MODES = {
  "partner": [
-  "Appearance",
   "Hair",
-  "Body",
+  "Face",
+  "Outfit",
+  "Physique",
   "Personality",
   "Intelligence",
   "Humour",
@@ -29,7 +32,10 @@ export const MODES = {
   "Special Ability"
  ],
  "villain": [
-  "Appearance",
+  "Hair",
+  "Face",
+  "Outfit",
+  "Physique",
   "Personality",
   "Motive",
   "Intelligence",
@@ -53,7 +59,10 @@ export const MODES = {
   "Luck"
  ],
  "rival": [
-  "Appearance",
+  "Hair",
+  "Face",
+  "Outfit",
+  "Physique",
   "Personality",
   "Intelligence",
   "Power",
@@ -65,7 +74,10 @@ export const MODES = {
   "Special Ability"
  ],
  "mentor": [
-  "Appearance",
+  "Hair",
+  "Face",
+  "Outfit",
+  "Physique",
   "Personality",
   "Intelligence",
   "Power",
@@ -77,7 +89,10 @@ export const MODES = {
   "Special Ability"
  ],
  "finalboss": [
-  "Appearance",
+  "Hair",
+  "Face",
+  "Outfit",
+  "Physique",
   "Personality",
   "Motive",
   "Intelligence",
@@ -102,7 +117,10 @@ export const MODES = {
   "Occupation"
  ],
  "adventureparty": [
-  "Appearance",
+  "Hair",
+  "Face",
+  "Outfit",
+  "Physique",
   "Personality",
   "Intelligence",
   "Power",
@@ -116,7 +134,10 @@ export const MODES = {
   "Luck"
  ],
  "roommate": [
-  "Appearance",
+  "Hair",
+  "Face",
+  "Outfit",
+  "Physique",
   "Personality",
   "Intelligence",
   "Humour",

@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.2.0 — Appearance split into four traits
+
+### Trait Draft & Quick Randomizer
+- "Appearance" is now four separate traits: **Hair, Face, Outfit and Physique**, in Partner, Villain, Rival, Mentor, Final Boss, Adventure Party and Roommate. Protagonist and Isekai already used them.
+- Partner's separate "Body" trait is merged into Physique, so there's no duplicate body slot.
+- Saved setups convert automatically: if Appearance was ticked, all four new traits are ticked; Body becomes Physique. Old History entries still show "Appearance" as they were saved.
+- Those scenarios gain 1–3 rounds (e.g. Villain 10 → 13 traits). Untick any you don't want; the choice is remembered.
+
 ## v1.1.0 — A computer opponent that knows the characters
 
 ### Computer opponent

@@ -9,6 +9,13 @@ import { selectedPool, characterIdentityCount, allSeries } from "../core/roster.
 import { saveFusion } from "../core/history.js";
 
 /* ---- customizer memory (same storage shape as v0.6.x) ---- */
+// Saved trait picks from before v1.2: "Appearance" becomes the four look traits, "Body" becomes Physique.
+const RENAMED = { Appearance: ["Hair", "Face", "Outfit", "Physique"], Body: ["Physique"] };
+export function migrateTraits(list, mode) {
+  const out = [];
+  for (const tr of list || []) for (const x of RENAMED[tr] || [tr]) if (MODES[mode].includes(x) && !out.includes(x)) out.push(x);
+  return out;
+}
 let CUSTOMIZER = { traitsByMode: {} };
 export function restoreCustomizer() {
   const saved = readJSON(KEYS.customizer, null);
@@ -17,8 +24,9 @@ export function restoreCustomizer() {
   if (CUSTOMIZER.mode && MODES[CUSTOMIZER.mode]) STATE.selectedMode = CUSTOMIZER.mode;
   if (["all", "male", "female"].includes(CUSTOMIZER.genderFilter)) STATE.genderFilter = CUSTOMIZER.genderFilter;
   if (["repeat", "discard"].includes(CUSTOMIZER.poolMode)) STATE.poolMode = CUSTOMIZER.poolMode;
+  for (const [mode, list] of Object.entries(CUSTOMIZER.traitsByMode || {})) if (MODES[mode] && Array.isArray(list)) CUSTOMIZER.traitsByMode[mode] = migrateTraits(list, mode);
   const traits = CUSTOMIZER.traitsByMode?.[STATE.selectedMode];
-  STATE.selectedTraits = new Set(Array.isArray(traits) ? traits.filter(x => MODES[STATE.selectedMode].includes(x)) : MODES[STATE.selectedMode]);
+  STATE.selectedTraits = new Set(Array.isArray(traits) ? traits : MODES[STATE.selectedMode]);
 }
 function saveCustomizer() {
   CUSTOMIZER.seriesIds = [...STATE.selectedSeries];

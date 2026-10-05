@@ -1,4 +1,4 @@
-# Anime Fusion v1.1.0
+# Anime Fusion v1.2.0
 
 A static anime character game for phones, hosted on GitHub Pages. No build step, no runtime dependencies.
 
