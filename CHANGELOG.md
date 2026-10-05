@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.1.0 — A computer opponent that knows the characters
+
+### Computer opponent
+- Every character now has ratings the computer reasons with: power, leadership, durability, healing and strategy (0–10), plus overrides for verified forms. 628 characters in `src/data/attributes.js`, one editable line each.
+- **Strategic** fills roles by fit, matching how the AI referee judges: real healers go to the healer slot, strategists to strategy, and the traitor slot goes to whoever does the least damage when they betray. It saves its skip for pairs that are clearly worse than what's left.
+- **Budget (Strategic)** plans a full $100 lineup before every purchase, buys the most contested piece of the plan first, and uses its one sale when selling back a bad fit makes a clearly better lineup affordable.
+- **Casual** uses the same judgement with deliberate noise and the odd careless role, so it's beatable but no longer random.
+- The computer's picks, skips and sales are announced, and each Gallery character card shows its ratings and best roles.
+
+### Measured (simulated drafts, all 24 series)
+- When a real healer is offered, Strategic slots one as healer 97% of the time (v1.0.0: 6% overall).
+- Average power of its traitor fell from 6.9 to 4.2; leader-slot leadership rose from 5.4 to 7.6, tank-slot durability from 5.9 to 8.0.
+
 ## v1.0.0 — AI referee, app redesign, rebuilt codebase
 
 ### AI referee and commentator

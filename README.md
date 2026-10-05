@@ -1,4 +1,4 @@
-# Anime Fusion v1.0.0
+# Anime Fusion v1.1.0
 
 A static anime character game for phones, hosted on GitHub Pages. No build step, no runtime dependencies.
 
@@ -21,10 +21,10 @@ styles.css            all styles; motion respects prefers-reduced-motion
 logic.js              small pure helpers shared with tests (version compare, shuffle, PK pool rules)
 src/main.js           boot: load data, restore state, render
 src/core/             state, i18n, roster/forms/prices, history, portraits, prompt builders
-src/game/             fusion.js (draft + quick), pk.js (random + budget + CPU)
+src/game/             fusion.js (draft + quick), pk.js (random + budget), cpu.js (computer opponent)
 src/ai/               referee.js (Worker client), format.js (answer contract + parser)
 src/ui/               shell (routing, sheets, toasts), morph (in-place DOM updates), views/*
-src/data/             game data and strings (strings.js = v0.6 set, strings-v1.js = added in v1)
+src/data/             game data, character ratings (attributes.js) and strings (strings.js = v0.6 set, strings-v1.js = added in v1)
 data/                 roster, portrait manifests
 tests/                node --test suites; fixtures/prompts-v0.6.4.json pins every prompt
 ```
@@ -73,6 +73,10 @@ Overrides are applied before fuzzy matching. The resolver prints unmatched chara
 
 Built-in cards use the URLs in `data/portraits.json` immediately. Settings → Portraits can optionally fetch those URLs and store Blob copies under `builtin:<charId>` in IndexedDB. If CORS prevents a Blob download, the app continues to use the remote URL.
 
+## Computer opponent
+
+`src/game/cpu.js` scores every (character, role) pair from the ratings in `src/data/attributes.js`, weighting power against the skill the role needs, the way the AI referee judges role execution. The traitor slot is scored inversely: the weaker the traitor, the less they hurt their own team. Ratings are judgement calls. To change how the computer sees someone, edit their line; the Gallery card shows the result.
+
 ## Tests
 
 ```bash
@@ -81,6 +85,7 @@ npm test
 
 - `tests/prompts.test.mjs`: every fusion, judge and battle-art prompt matches what v0.6.4 produced for 66 captured games (3 languages, random + budget).
 - `tests/game.test.mjs`: draft/budget/CPU rules, referee answer parsing, history, data and string completeness.
+- `tests/cpu.test.mjs`: rating coverage and range, canon sanity checks (healers, strategists), and computer decisions, including a seeded simulation against the v1.0.0 behaviour.
 - `tests/logic.test.mjs`: helpers, roster data and version/import-map consistency.
 
 ## Releasing

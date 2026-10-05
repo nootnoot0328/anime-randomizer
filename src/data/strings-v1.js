@@ -1,6 +1,7 @@
 // Strings added in v1.0 (the v0.6.x set lives in strings.js). Looked up first by t().
 export const STRINGS_V1 = {
   en: {
+    cpuPicked: "Computer: {name} → {role}", cpuSkipped: "Computer skipped that pair", cpuSold: "Computer sold {name}", attrPower: "Power", attrLead: "Leadership", attrTank: "Durability", attrHeal: "Healing", attrIntel: "Strategy", cpuRatings: "Computer ratings", cpuRatingsNote: "How the computer opponent sizes up this character. Judgement calls, not canon stats.", bestRoles: "Best roles",
     play: "Play", back: "Back", tryAgain: "Try again", clear: "Clear", show: "Show", on: "On", off: "Off", setUp: "Set up", openSettings: "Open settings",
     selectAll: "Select all", clearAll: "Clear all", noGame: "Nothing in progress here.",
     fusionSection: "Character fusion", continueGame: "Continue", traitsProgress: "{n} of {total} traits chosen", turnOf: "{name}'s turn",
@@ -41,6 +42,7 @@ export const STRINGS_V1 = {
     portraits: "Portraits", savedOnDevice: "Saved on this device",
   },
   zh: {
+    cpuPicked: "电脑：{name} → {role}", cpuSkipped: "电脑跳过了这一组", cpuSold: "电脑卖出了{name}", attrPower: "战力", attrLead: "领导力", attrTank: "耐久", attrHeal: "治疗", attrIntel: "谋略", cpuRatings: "电脑评分", cpuRatingsNote: "电脑对手如何评估这个角色。属于主观判断，并非官方数值。", bestRoles: "最适合的定位",
     play: "游戏", back: "返回", tryAgain: "重试", clear: "清除", show: "显示", on: "已开启", off: "未开启", setUp: "去设置", openSettings: "打开设置",
     selectAll: "全选", clearAll: "全部取消", noGame: "这里暂时没有进行中的内容。",
     fusionSection: "角色融合", continueGame: "继续", traitsProgress: "已选 {n}/{total} 项特质", turnOf: "轮到{name}",
@@ -81,6 +83,7 @@ export const STRINGS_V1 = {
     portraits: "角色肖像", savedOnDevice: "已保存在本设备",
   },
   ja: {
+    cpuPicked: "コンピューター：{name} → {role}", cpuSkipped: "コンピューターは候補をスキップしました", cpuSold: "コンピューターが{name}を売却しました", attrPower: "戦闘力", attrLead: "統率力", attrTank: "耐久力", attrHeal: "回復", attrIntel: "戦略", cpuRatings: "コンピューターの評価", cpuRatingsNote: "コンピューター対戦相手がこのキャラをどう評価しているか。公式データではなく主観的な判断です。", bestRoles: "得意な役割",
     play: "プレイ", back: "戻る", tryAgain: "再試行", clear: "クリア", show: "表示", on: "オン", off: "オフ", setUp: "設定する", openSettings: "設定を開く",
     selectAll: "すべて選択", clearAll: "すべて解除", noGame: "進行中のものはありません。",
     fusionSection: "キャラ融合", continueGame: "続きから", traitsProgress: "{total} 個中 {n} 個の特性を決定", turnOf: "{name}のターン",

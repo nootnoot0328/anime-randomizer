@@ -2,7 +2,8 @@
 // may finish early). Local 2-player or VS Computer. Ported from v0.6.4 pk-v2.js.
 import { STATE } from "../core/state.js";
 import { app } from "../core/app.js";
-import { t, displayName } from "../core/i18n.js";
+import { t, displayName, roleLabel } from "../core/i18n.js";
+import { decideRandom, decideBudget } from "./cpu.js";
 import { allSeries, getSeries, pkCharacters, roleSet, budgetRoleSet, characterPrice } from "../core/roster.js";
 import { saveBattle } from "../core/history.js";
 
@@ -96,30 +97,27 @@ function scheduleCPUTurn(delay = 650) {
 function cpuTakeTurn() {
   const pk = STATE.pk; if (!isCPUTurn() || pk.revealing || pkComplete()) return;
   const roles = openRoles(2); if (!roles.length) { pk.cpuThinking = false; return; }
+  const commit = (character, role, index) => {
+    pk.selectedIndex = index; app.render();
+    pk.cpuTimer = setTimeout(() => {
+      if (STATE.pk !== pk || !isCPUTurn()) return;
+      pk.cpuLast = { id: character.id, role };
+      assignPKCharacter(role, character);
+      app.toast(t("cpuPicked", { name: displayName(character), role: roleLabel(role) }));
+    }, 420);
+  };
   if (pk.kind === "random") {
     const pair = pk.pair || []; if (!pair.length) { pk.cpuThinking = false; rollPKPair(); return; }
-    if (pk.difficulty === "strategic" && pk.skips[2] && Math.max(...pair.map(characterPrice)) <= 10 && pkPool(2).length > pair.length + 1) { pk.cpuThinking = false; skipPKPair(true); return; }
-    const best = pk.difficulty === "casual" ? Math.floor(Math.random() * pair.length) : pair.map((c, i) => ({ i, score: characterPrice(c) + Math.random() })).sort((a, b) => b.score - a.score)[0].i;
-    const role = pk.difficulty === "casual" ? roles[Math.floor(Math.random() * roles.length)] : roles[0], character = pair[best];
-    pk.selectedIndex = best; app.render();
-    pk.cpuTimer = setTimeout(() => { if (STATE.pk === pk && isCPUTurn()) assignPKCharacter(role, character); }, 320);
-    return;
+    const d = decideRandom({ pair, openRoles: roles, pool: pkPool(2), difficulty: pk.difficulty, canSkip: Boolean(pk.skips[2]) });
+    if (d.action === "skip") { pk.cpuThinking = false; app.toast(t("cpuSkipped")); skipPKPair(true); return; }
+    return commit(pair[d.index], d.role, d.index);
   }
-  const p = pk.p2, pool = budgetPool(), affordable = pool.filter(c => characterPrice(c) <= p.budget);
-  if (!affordable.length) {
-    if (!p.sellUsed && p.team.length) { const sold = [...p.team].sort((a, b) => b.price - a.price)[0]; sellBudgetCharacter(2, sold.role, true); pk.cpuThinking = false; scheduleCPUTurn(420); return; }
-    pk.cpuThinking = false; finishBudgetTeam(true); return;
-  }
-  let character;
-  if (pk.difficulty === "casual") character = affordable[Math.floor(Math.random() * affordable.length)];
-  else {
-    const remaining = roles.length - 1, minPrice = Math.min(...pool.map(characterPrice), 5);
-    const safe = affordable.filter(c => p.budget - characterPrice(c) >= remaining * minPrice), choices = (safe.length ? safe : affordable).sort((a, b) => characterPrice(b) - characterPrice(a));
-    const top = choices.filter(c => characterPrice(c) === characterPrice(choices[0])); character = top[Math.floor(Math.random() * top.length)];
-  }
-  const index = pool.findIndex(c => c.id === character.id && c.phaseKey === character.phaseKey), role = pk.difficulty === "casual" ? roles[Math.floor(Math.random() * roles.length)] : roles[0];
-  pk.selectedIndex = index; app.render();
-  pk.cpuTimer = setTimeout(() => { if (STATE.pk === pk && isCPUTurn()) assignPKCharacter(role, character); }, 320);
+  const p = pk.p2, pool = budgetPool();
+  const d = decideBudget({ pool, team: p.team, openRoles: roles, budget: p.budget, sellUsed: p.sellUsed, difficulty: pk.difficulty, price: characterPrice });
+  if (d.action === "sell") { const sold = p.team.find(x => x.role === d.role); sellBudgetCharacter(2, d.role, true); pk.cpuThinking = false; if (sold) app.toast(t("cpuSold", { name: displayName(sold.character) })); scheduleCPUTurn(700); return; }
+  if (d.action === "finish" || !p.team.length && d.action !== "buy") { pk.cpuThinking = false; if (p.team.length) finishBudgetTeam(true); else pk.ended = true; return; }
+  const index = pool.findIndex(c => c.id === d.character.id && c.phaseKey === d.character.phaseKey);
+  commit(d.character, d.role, index);
 }
 
 /* ---- Random PK pairs ---- */

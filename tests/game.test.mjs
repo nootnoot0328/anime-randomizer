@@ -138,20 +138,27 @@ test("random PK alternates turns, never repeats a character and ends after 12 pi
   assert.equal(new Set(ids).size, ids.length);
   assert.ok([pk.p1.seriesId, pk.p2.seriesId].includes(pk.battlefieldSeriesId), "battlefield is one of the two home series");
 });
-test("strategic CPU uses its skip on a cheap pair instead of freezing (v0.6.4 bug)", async () => {
-  const pk = newMatch("random", { opponent: "cpu", p1: "naruto", p2: "onepiece" });
+test("CPU turn always progresses through the real game loop: picks by fit, and its skip works (v0.6.4 froze)", async () => {
+  const { roleKind } = await import("../src/game/cpu.js");
+  // (a) two weak cards with every role open: a weak card is a good traitor or navigator, so it picks
+  let pk = newMatch("random", { opponent: "cpu", p1: "naruto", p2: "onepiece" });
   STATE.screen = "pk";
-  const cheap = P.pkPool(2).filter(c => R.characterPrice(c) <= 10);
-  assert.ok(cheap.length >= 2, "One Piece has two $10 characters");
-  pk.turn = 2; pk.pair = cheap.slice(0, 2); pk.revealing = false;
+  const weak = ["onepiece-usopp", "onepiece-nami"].map(id => P.pkPool(2).find(c => c.id === id));
+  pk.turn = 2; pk.pair = weak; pk.revealing = false;
+  P.resumePK(); await wait(1600); P.cancelPKTimers();
+  assert.equal(pk.p2.team.length, 1, "CPU picked");
+  assert.ok(["traitor", "intel"].includes(roleKind(pk.p2.team[0].role)), `put ${pk.p2.team[0].character.name_en} in ${pk.p2.team[0].role}`);
+  assert.equal(pk.turn, 1, "turn passed back");
+  // (b) same weak pair when only Captain and Shield Fighter are left: it spends its skip (the path that froze in v0.6.4)
+  pk = newMatch("random", { opponent: "cpu", p1: "naruto", p2: "onepiece" });
+  STATE.screen = "pk";
+  const filler = P.pkPool(2).filter(c => !weak.some(w => w.id === c.id)).slice(0, 4);
+  pk.p2.roles.filter(r => !["lead", "tank"].includes(roleKind(r))).forEach((r, i) => { pk.p2.team.push({ role: r, character: filler[i], price: 0 }); pk.used.add(filler[i].id); });
+  pk.turn = 2; pk.pair = weak; pk.revealing = false;
   const before = pk.pair.map(c => c.id).join();
-  P.resumePK();
-  await wait(2600);
-  P.cancelPKTimers();
-  const progressed = pk.skips[2] === 0 || pk.p2.team.length === 1;
-  assert.ok(progressed, "CPU skipped or picked");
+  P.resumePK(); await wait(2600); P.cancelPKTimers();
   assert.equal(pk.skips[2], 0, "the strategic CPU spent its skip");
-  assert.notEqual(pk.pair.map(c => c.id).join(), before, "a new pair was drawn");
+  assert.ok(pk.p2.team.length === 5 || pk.pair.map(c => c.id).join() !== before, "and kept playing");
 });
 test("a human can't act during the CPU's turn", () => {
   const pk = newMatch("random", { opponent: "cpu" });
