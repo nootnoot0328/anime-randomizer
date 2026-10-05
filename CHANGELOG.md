@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.3.0 — Five new series and 275 more characters
+
+### New series (each with 6 themed PK roles, a battlefield, computer ratings and prices)
+- **The Seven Deadly Sins** (31), **That Time I Got Reincarnated as a Slime** (29), **Re:Zero** (28), **Death Note** (29), **Code Geass** (29).
+
+### Existing series
+- Missing headliners added to 20 series (129 characters), e.g. Blackbeard, Garp, Kizaru and Dragon (One Piece); Kaguya, Kurama and Hiruzen (Naruto); Kenjaku and Higuruma (JJK); Ichibe and Isshin (Bleach); Vegito, Gogeta and Dende (Dragon Ball); All For One, Recovery Girl and Eri (My Hero Academia).
+- Roster: 29 series, 903 characters (was 24 and 628).
+
+### Notes
+- Portraits for new characters are fetched by the Resolve portraits workflow; anyone it can't match shows coloured initials until an override is added in `data/portrait-overrides.json`.
+- All additions are in `scripts/roster-additions-v1.3.py`, one reviewable row per character (names, gender, ratings, price).
+
 ## v1.2.0 — Appearance split into four traits
 
 ### Trait Draft & Quick Randomizer

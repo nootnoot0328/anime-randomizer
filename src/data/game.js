@@ -952,6 +952,46 @@ export const ROLE_SETS = {
   "fireforce:healer",
   "fireforce:strategist",
   "fireforce:traitor"
+ ],
+ "sevendeadlysins": [
+  "sevendeadlysins:leader",
+  "sevendeadlysins:deputy",
+  "sevendeadlysins:tanker",
+  "sevendeadlysins:healer",
+  "sevendeadlysins:strategist",
+  "sevendeadlysins:traitor"
+ ],
+ "tensura": [
+  "tensura:leader",
+  "tensura:deputy",
+  "tensura:tanker",
+  "tensura:healer",
+  "tensura:strategist",
+  "tensura:traitor"
+ ],
+ "rezero": [
+  "rezero:leader",
+  "rezero:deputy",
+  "rezero:tanker",
+  "rezero:healer",
+  "rezero:strategist",
+  "rezero:traitor"
+ ],
+ "deathnote": [
+  "deathnote:leader",
+  "deathnote:deputy",
+  "deathnote:tanker",
+  "deathnote:healer",
+  "deathnote:strategist",
+  "deathnote:traitor"
+ ],
+ "codegeass": [
+  "codegeass:leader",
+  "codegeass:deputy",
+  "codegeass:tanker",
+  "codegeass:healer",
+  "codegeass:strategist",
+  "codegeass:traitor"
  ]
 };
 
@@ -1787,6 +1827,156 @@ export const ROLE_LABELS = {
   "en": "White-Clad Defector",
   "zh": "白衣人叛徒",
   "ja": "白装束の離反者"
+ },
+ "sevendeadlysins:leader": {
+  "en": "Sins Captain",
+  "zh": "七大罪团长",
+  "ja": "七つの大罪団長"
+ },
+ "sevendeadlysins:deputy": {
+  "en": "Holy Knight Champion",
+  "zh": "圣骑士精英",
+  "ja": "聖騎士の精鋭"
+ },
+ "sevendeadlysins:tanker": {
+  "en": "Giant Vanguard",
+  "zh": "巨人族前锋",
+  "ja": "巨人族の前衛"
+ },
+ "sevendeadlysins:healer": {
+  "en": "Druid Healer",
+  "zh": "德鲁伊治疗者",
+  "ja": "ドルイドの治癒役"
+ },
+ "sevendeadlysins:strategist": {
+  "en": "Grand Magician",
+  "zh": "大魔术师",
+  "ja": "大魔術士"
+ },
+ "sevendeadlysins:traitor": {
+  "en": "Ten Commandments Spy",
+  "zh": "十戒内应",
+  "ja": "十戒の内通者"
+ },
+ "tensura:leader": {
+  "en": "Demon Lord",
+  "zh": "魔王",
+  "ja": "魔王"
+ },
+ "tensura:deputy": {
+  "en": "Samurai General",
+  "zh": "侍大将",
+  "ja": "侍大将"
+ },
+ "tensura:tanker": {
+  "en": "Royal Guard",
+  "zh": "近卫",
+  "ja": "近衛"
+ },
+ "tensura:healer": {
+  "en": "Shrine Maiden Healer",
+  "zh": "巫女治疗师",
+  "ja": "巫女の治癒役"
+ },
+ "tensura:strategist": {
+  "en": "Chief Strategist",
+  "zh": "军师",
+  "ja": "軍師"
+ },
+ "tensura:traitor": {
+  "en": "Rival Lord's Spy",
+  "zh": "敌对魔王的间谍",
+  "ja": "敵対魔王の間者"
+ },
+ "rezero:leader": {
+  "en": "Royal Candidate",
+  "zh": "王选候补者",
+  "ja": "王選候補者"
+ },
+ "rezero:deputy": {
+  "en": "Sworn Knight",
+  "zh": "誓约骑士",
+  "ja": "誓いの騎士"
+ },
+ "rezero:tanker": {
+  "en": "Vanguard",
+  "zh": "前锋",
+  "ja": "前衛"
+ },
+ "rezero:healer": {
+  "en": "Healer",
+  "zh": "治疗术士",
+  "ja": "治癒術師"
+ },
+ "rezero:strategist": {
+  "en": "Strategist",
+  "zh": "军师",
+  "ja": "参謀"
+ },
+ "rezero:traitor": {
+  "en": "Witch Cult Archbishop",
+  "zh": "魔女教大罪司教",
+  "ja": "魔女教大罪司教"
+ },
+ "deathnote:leader": {
+  "en": "Task Force Chief",
+  "zh": "搜查本部部长",
+  "ja": "捜査本部長"
+ },
+ "deathnote:deputy": {
+  "en": "Lead Detective",
+  "zh": "首席侦探",
+  "ja": "主任探偵"
+ },
+ "deathnote:tanker": {
+  "en": "Bodyguard",
+  "zh": "保镖",
+  "ja": "ボディガード"
+ },
+ "deathnote:healer": {
+  "en": "Field Support",
+  "zh": "后方支援",
+  "ja": "後方支援"
+ },
+ "deathnote:strategist": {
+  "en": "Mastermind",
+  "zh": "幕后军师",
+  "ja": "黒幕の頭脳"
+ },
+ "deathnote:traitor": {
+  "en": "Kira Sympathizer",
+  "zh": "奇拉信徒",
+  "ja": "キラ信者"
+ },
+ "codegeass:leader": {
+  "en": "Commander",
+  "zh": "总司令",
+  "ja": "総司令"
+ },
+ "codegeass:deputy": {
+  "en": "Knight of Zero",
+  "zh": "零之骑士",
+  "ja": "ゼロの騎士"
+ },
+ "codegeass:tanker": {
+  "en": "Knightmare Ace",
+  "zh": "王牌骑士机驾驶员",
+  "ja": "ナイトメアのエース"
+ },
+ "codegeass:healer": {
+  "en": "Field Engineer",
+  "zh": "后勤技术员",
+  "ja": "整備技術者"
+ },
+ "codegeass:strategist": {
+  "en": "Tactician",
+  "zh": "战术参谋",
+  "ja": "戦術参謀"
+ },
+ "codegeass:traitor": {
+  "en": "Double Agent",
+  "zh": "双面间谍",
+  "ja": "二重スパイ"
  }
 };
 
@@ -1798,7 +1988,11 @@ export const PRICE_TIERS = {
   "aot-marcel-galliard",
   "dragonball-master-roshi",
   "dandadan-taro",
-  "dandadan-hana"
+  "dandadan-hana",
+  "rezero-petra-leyte",
+  "deathnote-sayu-yagami",
+  "codegeass-shirley-fenette",
+  "sololeveling-sung-jinah"
  ],
  "10": [
   "onepiece-usopp",
@@ -1817,7 +2011,29 @@ export const PRICE_TIERS = {
   "fairytail-happy",
   "sololeveling-yoo-jinho",
   "mobpsycho-arataka-reigen",
-  "dandadan-chiquitita"
+  "dandadan-chiquitita",
+  "sevendeadlysins-hawk",
+  "sevendeadlysins-jericho",
+  "tensura-gobta",
+  "tensura-kaijin",
+  "tensura-masayuki-honjou",
+  "tensura-rigurd",
+  "rezero-felt",
+  "rezero-otto-suwen",
+  "deathnote-touta-matsuda",
+  "deathnote-hirokazu-ukita",
+  "codegeass-milly-ashford",
+  "codegeass-clovis-la-britannia",
+  "onepiece-nefertari-vivi",
+  "jjk-momo-nishimiya",
+  "bleach-hanatarou-yamada",
+  "demonslayer-makomo",
+  "aot-hannes",
+  "fma-kain-fuery",
+  "dragonball-yamcha",
+  "dragonball-dende",
+  "sao-kuradeel",
+  "jojo-robert-e-o-speedwagon"
  ],
  "25": [
   "onepiece-roronoa-zoro",
@@ -1859,7 +2075,50 @@ export const PRICE_TIERS = {
   "dandadan-momo-ayase",
   "dandadan-ken-takakura",
   "kaijuno8-gen-narumi",
-  "fireforce-sho-kusakabe"
+  "fireforce-sho-kusakabe",
+  "sevendeadlysins-ban",
+  "sevendeadlysins-merlin",
+  "sevendeadlysins-zeldris",
+  "sevendeadlysins-estarossa",
+  "sevendeadlysins-ludociel",
+  "tensura-diablo",
+  "tensura-leon-cromwell",
+  "tensura-luminous-valentine",
+  "rezero-subaru-natsuki",
+  "rezero-emilia",
+  "rezero-puck",
+  "rezero-roswaal-l-mathers",
+  "rezero-regulus-corneas",
+  "rezero-echidna",
+  "deathnote-near",
+  "deathnote-mello",
+  "deathnote-ryuk",
+  "codegeass-cc",
+  "codegeass-kallen-kouzuki",
+  "codegeass-schneizel-el-britannia",
+  "codegeass-charles-zi-britannia",
+  "onepiece-monkey-d-garp",
+  "onepiece-borsalino",
+  "onepiece-monkey-d-dragon",
+  "naruto-kurama",
+  "naruto-hiruzen-sarutobi",
+  "jjk-kenjaku",
+  "bleach-ichibe-hyousube",
+  "chainsawman-gun-devil",
+  "frieren-macht",
+  "mha-star-and-stripe",
+  "hunterxhunter-menthuthuyoupi",
+  "blackclover-lumiere-silvamillion-clover",
+  "onepunchman-orochi",
+  "onepunchman-psykos",
+  "dragonball-gotenks",
+  "jojo-kars",
+  "fairytail-makarov-dreyar",
+  "fairytail-irene-belserion",
+  "fairytail-august",
+  "sololeveling-kamish",
+  "tokyoghoul-kichimura-washuu",
+  "fireforce-dragon"
  ],
  "30": [
   "onepiece-monkey-d-luffy",
@@ -1901,7 +2160,27 @@ export const PRICE_TIERS = {
   "kaijuno8-kafka-hibino",
   "kaijuno8-kaiju-no-9",
   "fireforce-shinra-kusakabe",
-  "fireforce-benimaru-shinmon"
+  "fireforce-benimaru-shinmon",
+  "sevendeadlysins-meliodas",
+  "sevendeadlysins-escanor",
+  "sevendeadlysins-demon-king",
+  "tensura-rimuru-tempest",
+  "tensura-veldora-tempest",
+  "tensura-milim-nava",
+  "tensura-guy-crimson",
+  "rezero-reinhard-van-astrea",
+  "rezero-satella",
+  "deathnote-light-yagami",
+  "deathnote-l-lawliet",
+  "codegeass-lelouch-lamperouge",
+  "codegeass-suzaku-kururugi",
+  "onepiece-marshall-d-teach",
+  "naruto-kaguya-ootsutsuki",
+  "chainsawman-darkness-devil",
+  "mha-all-for-one",
+  "blackclover-lucius-zogratis",
+  "dragonball-vegito",
+  "dragonball-gogeta"
  ]
 };
 
@@ -2025,5 +2304,30 @@ export const BATTLEFIELDS = {
   "en": "The Tokyo Empire's industrial district during an Adolla flare, with cathedral engines, rail lines and blue-black flames.",
   "zh": "安德拉爆发时的东京皇国工业区，教会式引擎、铁路与蓝黑火焰交织。",
   "ja": "アドラの炎が噴き出す東京皇国工業区。聖堂型機関、鉄路、青黒い炎が交錯する。"
+ },
+ "sevendeadlysins": {
+  "en": "Camelot's ruined capital beneath a blood-red sky, with the Ten Commandments' dark pillars rising and the Boar Hat tavern toppled nearby.",
+  "zh": "血红天空下崩毁的卡美洛王都，十戒的黑暗巨柱林立，豚之帽亭倒塌在一旁。",
+  "ja": "血のように赤い空の下、崩壊したキャメロット王都。十戒の黒い柱がそびえ、豚の帽子亭が倒れている。"
+ },
+ "tensura": {
+  "en": "The Tempest capital during a demon lord invasion, with goblin streets, layered magic barriers and the Forest of Jura beyond the walls.",
+  "zh": "魔王入侵中的魔物之国坦派斯特首都，哥布林街道与多重魔法结界，城墙外是朱拉大森林。",
+  "ja": "魔王の侵攻を受けるテンペストの首都。ゴブリンの街並みと幾重もの魔法結界、城壁の外にはジュラの大森林。"
+ },
+ "rezero": {
+  "en": "The Roswaal mansion and its forest at night during a Witch Cult assault, with the Sanctuary's tomb glowing in the distance.",
+  "zh": "魔女教夜袭中的罗兹瓦尔宅邸与周边森林，远处圣域的墓所散发微光。",
+  "ja": "魔女教の夜襲を受けるロズワール邸と周囲の森。遠くに聖域の墓所が淡く光る。"
+ },
+ "deathnote": {
+  "en": "The Kira task-force headquarters in Tokyo at night, with walls of surveillance screens, rain-slicked rooftops and the Yellow Box warehouse below.",
+  "zh": "夜晚东京的奇拉搜查本部，满墙监控屏幕，雨湿的天台与下方的黄色仓库。",
+  "ja": "夜の東京、キラ捜査本部。壁一面の監視モニター、雨に濡れた屋上、眼下にはYB倉庫。"
+ },
+ "codegeass": {
+  "en": "The Tokyo Settlement during the Black Rebellion, with Knightmare Frames clashing in the streets, Ashford Academy nearby and Britannian airships overhead.",
+  "zh": "黑色叛乱中的东京租界，骑士机在街头激战，阿什弗德学园就在附近，布里塔尼亚浮游舰掠过天际。",
+  "ja": "ブラックリベリオン中のトウキョウ租界。街路でナイトメアフレームが激突し、アッシュフォード学園の上空をブリタニアの浮遊航空艦が飛ぶ。"
  }
 };

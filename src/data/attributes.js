@@ -50,6 +50,15 @@ kuzan 8.5 6 7 0 6
 sakazuki 9 8 8 0 6
 bartolomeo 6 4 9 2 3
 kozuki-oden 9 9 7 0 5
+marshall-d-teach 9 8 8 0 7
+monkey-d-garp 9 8 8 0 5
+borsalino 9 6 7 0 6
+monkey-d-dragon 9 10 7 0 8
+enel 8 7 6 0 5
+rob-lucci 8 6 7 0 6
+smoker 7 7 7 0 6
+bartholomew-kuma 8.5 6 9 3 6
+nefertari-vivi 3 8 2 1 6
 `,
 naruto: `
 naruto-uzumaki 8.5 9 8 5 5
@@ -84,6 +93,14 @@ kabuto-yakushi 8 5 7 9 9
 deidara 7 4 3 0 5
 sasori 6.5 4 5 0 7
 nagato 8.5 8 5 4 8
+kaguya-ootsutsuki 10 7 9 0 6
+kurama 9.5 5 10 4 6
+hiruzen-sarutobi 8 9 6 0 9
+kisame-hoshigaki 8 5 9 0 6
+kakuzu 7.5 4 9 0 6
+hidan 6.5 3 9 0 2
+yamato 7 6 8 1 6
+asuma-sarutobi 6.5 7 5 0 6
 `,
 jjk: `
 satoru-gojo 9.5 8 10 2 8
@@ -114,6 +131,14 @@ naoya-zenin 6.5 4 4 0 5
 kokichi-muta 5 3 5 0 8
 uraume 7.5 4 5 0 6
 riko-amanai 0.5 2 1 0 2
+kenjaku 9 9 7 0 10
+hiromi-higuruma 8 6 5 0 9
+hana-kurusu 7 4 5 5 4
+noritoshi-kamo 6 6 5 2 6
+masamichi-yaga 6 8 5 0 6
+takuma-ino 5.5 4 5 0 5
+ui-ui 5 2 3 4 6
+momo-nishimiya 4.5 3 3 0 6
 `,
 bleach: `
 ichigo-kurosaki 9 7 8 1 4
@@ -146,6 +171,15 @@ jugram-haschwalth 8.5 7 8 1 8
 bambietta-basterbine 6.5 4 4 0 3
 askin-nakk-le-vaar 8 5 9 0 8
 senjumaru-shutara 8.5 7 6 2 9
+ichibe-hyousube 9.5 9 8 0 9
+isshin-kurosaki 8.5 7 7 2 6
+coyote-starrk 8.5 5 6 0 6
+kaname-tousen 7.5 6 6 0 7
+yasutora-sado 6.5 4 8 0 4
+izuru-kira 6 5 4 5 6
+ikkaku-madarame 6.5 4 6 0 3
+yachiru-kusajishi 6 3 5 0 2
+hanatarou-yamada 2 2 3 8 4
 `,
 demonslayer: `
 tanjiro-kamado 7 7 6 0 6
@@ -175,6 +209,14 @@ hantengu 8 4 9 0 6
 gyokko 7 3 6 0 4
 tamayo 3 5 5 9 10
 yushiro 4 3 5 3 7
+kagaya-ubuyashiki 0.5 10 1 0 9
+sakonji-urokodaki 6.5 6 5 1 7
+sabito 6 5 5 0 5
+makomo 4.5 3 3 0 5
+nakime 7 3 6 0 8
+rui 7 5 7 0 5
+enmu 7 4 6 0 7
+kaigaku 7.5 3 6 0 4
 `,
 chainsawman: `
 denji 7 3 9 0 2
@@ -202,6 +244,10 @@ violence-fiend 6.5 3 6 0 3
 princi 6 4 5 3 6
 cosmo 6 2 4 0 2
 long 6 3 5 0 3
+darkness-devil 9.5 4 9 0 6
+gun-devil 9 3 8 0 4
+fumiko-mifune 6 4 4 0 7
+haruka-iseumi 5 4 4 0 4
 `,
 spyfamily: `
 loid-forger 6 7 4 3 10
@@ -256,6 +302,12 @@ genau 7 6 5 0 6
 kraft 7.5 5 8 4 7
 sein 5.5 5 5 9 6
 lugner 7.5 5 5 0 6
+macht 9 6 7 0 8
+solitar 8.5 4 6 0 8
+qual 8 5 5 0 7
+linie 7 3 5 0 5
+draht 6.5 3 4 0 4
+ehre 6 4 4 0 5
 `,
 aot: `
 eren-yeager 9 7 8 0 5
@@ -283,6 +335,13 @@ petra-ral 4 4 3 0 4
 floch-forster 4 6 3 0 5
 onyankopon 2 4 2 1 6
 yelena 4 6 3 0 7
+grisha-yeager 7 6 6 6 7
+uri-reiss 8 8 6 0 6
+dot-pixis 3 9 3 0 9
+theo-magath 4 8 4 0 8
+mike-zacharias 6 6 5 0 6
+rod-reiss 4 6 6 0 5
+hannes 3 5 4 0 4
 `,
 mha: `
 izuku-midoriya 8.5 8 6 0 8
@@ -311,6 +370,13 @@ mina-ashido 5 4 3 0 3
 hitoshi-shinso 5 3 3 0 7
 twice 6.5 3 4 0 4
 stain 6.5 6 5 0 6
+all-for-one 9.5 9 8 2 10
+star-and-stripe 9 9 7 0 7
+kai-chisaki 7.5 7 7 8 8
+recovery-girl 0.5 6 1 10 6
+eri 2 2 2 10 3
+lady-nagant 7 4 5 0 7
+gran-torino 6.5 6 5 0 7
 `,
 hunterxhunter: `
 gon-freecss 7.5 5 6 0 3
@@ -338,6 +404,12 @@ shoot-mcmahon 6.5 4 5 0 5
 morel-mackernasey 7 7 6 0 8
 pakunoda 5 4 4 0 8
 komugi 0.5 2 2 0 9
+menthuthuyoupi 9 3 9 0 2
+shaiapouf 8.5 4 6 3 9
+razor 8 6 7 0 6
+uvogin 7.5 4 9 0 2
+phinks-magcub 7.5 3 6 0 4
+nobunaga-hazama 7 4 5 0 4
 `,
 fma: `
 edward-elric 7.5 7 5 1 9
@@ -365,6 +437,11 @@ solf-j-kimblee 7.5 4 5 0 8
 father 10 9 10 2 10
 buccaneer 6 5 7 0 4
 jean-havoc 4 4 3 0 5
+tim-marcoh 3 4 3 8 8
+grumman 3 8 3 0 9
+kain-fuery 2 3 2 0 6
+heymans-breda 3 4 3 0 7
+vato-falman 2.5 3 3 0 7
 `,
 blackclover: `
 asta 8.5 7 7 0 3
@@ -392,6 +469,12 @@ henry-legolant 6 3 9 2 4
 rill-boismortier 7.5 6 5 0 7
 dorothy-unsworth 8 6 6 0 8
 william-vangeance 8 8 7 6 8
+lucius-zogratis 10 9 8 6 10
+lumiere-silvamillion-clover 9 9 7 3 8
+dante-zogratis 8.5 5 9 0 5
+vanica-zogratis 8.5 3 7 0 3
+zenon-zogratis 8.5 6 7 0 6
+patry 8 7 6 2 7
 `,
 onepunchman: `
 saitama 10 4 10 0 3
@@ -419,6 +502,11 @@ pig-god 6.5 2 9 2 2
 superalloy-darkshine 7.5 3 10 0 2
 lord-boros 9.5 7 9 0 5
 carnage-kabuto 7 2 8 0 2
+orochi 9 7 9 0 3
+psykos 8.5 7 6 0 9
+elder-centipede 8.5 2 9 0 2
+gouketsu 8 5 8 0 3
+suiryu 7 4 6 0 4
 `,
 dragonball: `
 goku 10 7 8 0 5
@@ -447,6 +535,14 @@ hit 9 4 6 0 8
 goku-black 9.5 7 8 1 8
 zamasu 8.5 7 10 6 8
 kefla 9 4 7 0 3
+vegito 10 6 9 0 7
+gogeta 10 6 9 0 7
+gotenks 9 3 6 0 2
+toppo 9 7 8 0 5
+android-16 7.5 3 8 0 5
+tien-shinhan 7 5 5 0 6
+yamcha 5 4 4 0 4
+dende 1 4 2 10 5
 `,
 sao: `
 kirito 8 7 6 0 7
@@ -474,6 +570,11 @@ gabriel-miller 8.5 7 8 0 8
 vassago-casals 6.5 5 5 0 6
 sheyta-synthesis-twelve 7.5 4 5 0 5
 iskahn 7 8 6 0 4
+cardinal 7.5 6 5 6 10
+selka-zuberg 3 3 2 7 5
+nobuyuki-sugou 4 6 4 0 7
+death-gun 5 4 3 0 7
+kuradeel 4 3 4 0 3
 `,
 jojo: `
 jonathan-joestar 6 7 7 4 5
@@ -501,6 +602,13 @@ narciso-anasui 6.5 3 5 2 6
 ermes-costello 6 4 5 0 5
 foo-fighters 5.5 3 6 6 7
 yoshikage-kira 7.5 5 6 0 9
+kars 9 7 9 0 8
+wamuu 8.5 5 8 0 6
+esidisi 8 5 8 0 6
+vanilla-ice 8 3 7 0 3
+muhammad-avdol 6.5 6 5 0 7
+hol-horse 5 3 3 0 5
+robert-e-o-speedwagon 2 7 3 2 6
 `,
 fairytail: `
 natsu-dragneel 8.5 7 7 0 3
@@ -528,6 +636,12 @@ gildarts-clive 9 7 7 0 6
 ultear-milkovich 8 6 6 4 8
 minerva-orland 7.5 7 6 0 7
 kagura-mikazuchi 7.5 6 6 0 5
+makarov-dreyar 8.5 10 8 0 7
+irene-belserion 9.5 7 8 0 8
+august 9.5 7 8 0 8
+larcade-dragneel 9 5 7 0 6
+brandish 8.5 4 6 0 6
+chelia-blendy 6.5 3 4 9 4
 `,
 sololeveling: `
 sung-jinwoo 10 9 8 3 8
@@ -555,6 +669,11 @@ hwang-dongsuk 5 5 4 0 4
 kim-chul 5.5 4 7 0 3
 lim-taegyu 6.5 5 4 0 6
 ma-dongwook 6.5 6 5 0 5
+kamish 9.5 5 9 0 5
+tusk 8 5 6 0 7
+iron 7 3 9 0 2
+kaisel 7.5 3 6 0 4
+sung-jinah 0.5 3 1 0 4
 `,
 mobpsycho: `
 shigeo-kageyama 9.5 4 8 3 4
@@ -609,6 +728,12 @@ kurona-yasuhisa 6.5 3 6 0 4
 nashiro-yasuhisa 6.5 3 6 0 4
 karren-von-rosewald 6.5 5 5 0 5
 nimura-furuta 8 6 6 0 9
+kichimura-washuu 8 8 6 0 9
+kuki-urie 7.5 6 6 0 7
+hairu-ihei 7 3 4 0 4
+tooru-mutsuki 6.5 3 5 0 5
+saiko-yonebayashi 6 3 5 0 5
+ginshi-shirazu 6 5 5 0 3
 `,
 dandadan: `
 momo-ayase 7 6 6 2 6
@@ -690,6 +815,166 @@ assault 6 3 6 0 3
 ogun-montgomery 6.5 4 5 0 4
 karim-flam 7 6 5 2 6
 konro-sagamiya 7 6 5 0 5
+dragon 9 3 8 0 3
+kurono 7.5 4 6 0 6
+rekka-hoshimiya 7 5 5 0 4
+nataku-son 7 2 5 0 2
+`,
+sevendeadlysins: `
+meliodas 9.5 9 8 0 7
+elizabeth-liones 5 6 3 10 5
+hawk 2 4 6 0 3
+diane 8 5 9 1 4
+ban 8.5 5 10 3 5
+king 8.5 6 6 3 6
+gowther 7.5 4 5 3 9
+merlin 9 7 6 6 10
+escanor 9.5 7 8 0 4
+gilthunder 7 6 5 0 5
+howzer 6.5 5 5 0 4
+griamore 6 4 9 0 3
+hendrickson 7.5 6 6 0 7
+dreyfus 7.5 7 6 0 5
+zeldris 9 8 8 0 7
+estarossa 9 6 8 0 6
+derieri 8 4 7 0 3
+monspeet 8 5 6 0 8
+galand 8 4 9 0 3
+melascula 7.5 4 6 0 6
+grayroad 7.5 3 8 0 6
+fraudrin 8 5 7 0 7
+gloxinia 8 6 6 4 6
+drole 8 6 9 0 5
+chandler 8.5 4 7 0 7
+cusack 8.5 5 6 0 7
+arthur-pendragon 7.5 8 6 0 6
+elaine 5.5 4 4 7 5
+jericho 5.5 4 4 0 4
+ludociel 9 8 7 2 7
+demon-king 10 9 9 0 8
+`,
+tensura: `
+rimuru-tempest 10 10 9 8 10
+veldora-tempest 10 5 10 0 4
+milim-nava 10 6 9 0 5
+benimaru 8.5 9 7 0 8
+shuna 5.5 5 4 9 8
+shion 8 4 8 0 2
+souei 7.5 5 5 0 9
+hakurou 8 6 6 0 8
+gobta 5 4 5 0 3
+ranga 7.5 4 7 0 4
+diablo 9.5 7 8 2 10
+shizue-izawa 6.5 5 5 0 6
+geld 8 7 10 0 5
+gabiru 6 5 6 0 3
+treyni 6.5 4 5 5 6
+kaijin 3 4 4 0 6
+hinata-sakaguchi 8.5 8 6 4 9
+clayman 7 6 5 0 8
+guy-crimson 10 9 9 0 9
+leon-cromwell 9 7 7 0 8
+ramiris 4 4 7 2 5
+carrion 8 7 7 0 5
+frey 8 6 6 0 7
+luminous-valentine 9.5 8 8 7 8
+gazel-dwargo 8 9 7 0 8
+masayuki-honjou 3 6 6 0 3
+yuuki-kagurazaka 8 7 6 0 10
+testarossa 9 6 7 0 9
+rigurd 3 7 5 0 5
+`,
+rezero: `
+subaru-natsuki 2 7 4 2 9
+emilia 8 7 6 7 4
+rem 7 4 6 6 5
+ram 6.5 5 4 2 8
+beatrice 7.5 4 7 3 9
+puck 9 4 7 0 6
+roswaal-l-mathers 9 7 6 3 10
+felt 4 6 3 0 5
+reinhard-van-astrea 10 7 10 1 6
+crusch-karsten 7 9 5 0 7
+felix-argyle 4 3 3 10 7
+wilhelm-van-astrea 8 6 6 0 7
+priscilla-barielle 7.5 9 6 0 8
+aldebaran 7.5 4 8 0 8
+anastasia-hoshin 3 8 3 0 10
+julius-juukulius 8 7 6 0 6
+otto-suwen 3 4 3 0 8
+garfiel-tinsel 7.5 4 8 0 3
+petelgeuse-romanee-conti 7 6 7 0 5
+regulus-corneas 9 5 10 0 4
+sirius-romanee-conti 7.5 4 6 0 4
+capella-emerada-lugunica 8 5 9 4 6
+echidna 8.5 6 5 3 10
+elsa-granhiert 7.5 3 8 0 5
+frederica-baumann 6 4 6 0 5
+meili-portroute 5 3 4 0 6
+petra-leyte 0.5 2 1 0 3
+satella 10 4 10 0 3
+`,
+deathnote: `
+light-yagami 6 9 3 0 10
+l-lawliet 3 8 3 0 10
+misa-amane 5 3 2 0 4
+near 2 8 2 0 10
+mello 4 7 3 0 9
+ryuk 7 2 9 0 5
+rem 7 3 8 0 6
+soichiro-yagami 2.5 8 4 0 6
+touta-matsuda 2.5 3 3 0 4
+shuuichi-aizawa 2.5 6 4 0 6
+kanzou-mogi 3 4 6 0 5
+hideki-ide 2.5 4 4 0 5
+hirokazu-ukita 2.5 3 3 0 3
+watari 3 5 3 2 8
+naomi-misora 4 5 3 0 9
+raye-penber 3 4 3 0 6
+kiyomi-takada 3 5 2 0 7
+teru-mikami 5 5 2 0 8
+kyousuke-higuchi 5 4 2 0 4
+sayu-yagami 0.5 2 1 0 3
+halle-lidner 4 5 4 0 7
+stephen-gevanni 3 4 3 0 8
+anthony-rester 3.5 6 4 0 6
+wedy 3 3 2 0 8
+aiber 3 4 3 0 7
+sidoh 6 2 8 0 2
+matt 2.5 2 2 0 7
+roger-ruvie 1 6 1 2 5
+rod-ross 3 6 4 0 5
+`,
+codegeass: `
+lelouch-lamperouge 5 10 2 0 10
+suzaku-kururugi 8.5 6 8 0 5
+cc 4 4 10 0 7
+kallen-kouzuki 8 6 7 0 5
+nunnally-lamperouge 2 7 1 0 7
+euphemia-li-britannia 1 8 1 2 4
+cornelia-li-britannia 7.5 9 6 0 8
+schneizel-el-britannia 5 10 3 0 10
+charles-zi-britannia 6 9 9 0 8
+vv 3 5 9 0 6
+jeremiah-gottwald 8 5 8 0 4
+lloyd-asplund 2 4 2 3 9
+cecile-croomy 2 4 2 6 7
+rolo-lamperouge 7 3 4 0 7
+shirley-fenette 1 3 1 1 3
+milly-ashford 1 7 1 1 6
+kaname-ougi 3 6 4 0 4
+kyoushirou-toudou 7.5 7 6 0 8
+kaguya-sumeragi 1 7 1 0 7
+li-xingke 8 8 6 0 8
+bismarck-waldstein 8.5 7 7 0 7
+gino-weinberg 7.5 5 6 0 5
+anya-alstreim 7.5 3 6 0 5
+diethard-ried 2 5 1 0 9
+villetta-nu 6 5 5 0 5
+rakshata-chawla 2 5 2 5 9
+sayoko-shinozaki 6.5 3 5 2 6
+clovis-la-britannia 2 6 2 0 4
+marianne-vi-britannia 7.5 7 5 0 7
 `,
 };
 

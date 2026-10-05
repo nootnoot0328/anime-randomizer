@@ -2,7 +2,7 @@
 // players keep their language, history, customizer and form choices.
 import { readJSON } from "./util.js";
 
-export const VERSION = "1.2.0";
+export const VERSION = "1.3.0";
 
 export const KEYS = {
   lang: "af_lang",
