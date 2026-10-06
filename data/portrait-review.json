@@ -1,48 +1,6 @@
 {
-  "generatedAt": "2026-10-06T02:52:46.109Z",
+  "generatedAt": "2026-10-06T03:00:34.606Z",
   "unmatched": [
-    {
-      "id": "blackclover-lucius-zogratis",
-      "name_en": "Lucius Zogratis",
-      "name_ja": "ルシウス・ゾグラティス",
-      "seriesTop": [
-        {
-          "anilistId": 163782,
-          "full": "Dante Zogratis",
-          "native": "ダンテ・ゾグラティス",
-          "alternative": [],
-          "score": 23.3
-        },
-        {
-          "anilistId": 167952,
-          "full": "Zenon Zogratis",
-          "native": "ゼノン・ゾグラティス",
-          "alternative": [
-            "Zeno"
-          ],
-          "score": 23.3
-        },
-        {
-          "anilistId": 168300,
-          "full": "Vanica Zogratis",
-          "native": "ヴァニカ・ゾグラティス",
-          "alternative": [
-            "Vanika"
-          ],
-          "score": 23.3
-        }
-      ],
-      "global": [
-        {
-          "search": "Lucius Zogratis",
-          "error": "AniList HTTP 404"
-        },
-        {
-          "search": "ルシウス・ゾグラティス",
-          "error": "AniList HTTP 404"
-        }
-      ]
-    },
     {
       "id": "dragonball-kefla",
       "name_en": "Kefla",
@@ -82,16 +40,7 @@
           "score": 0
         }
       ],
-      "global": [
-        {
-          "search": "Kefla",
-          "error": "AniList HTTP 404"
-        },
-        {
-          "search": "ケフラ",
-          "error": "AniList HTTP 404"
-        }
-      ]
+      "global": []
     },
     {
       "id": "dragonball-vegito",
@@ -132,16 +81,7 @@
           "score": 0
         }
       ],
-      "global": [
-        {
-          "search": "Vegito",
-          "error": "AniList HTTP 404"
-        },
-        {
-          "search": "ベジット",
-          "error": "AniList HTTP 404"
-        }
-      ]
+      "global": []
     },
     {
       "id": "dragonball-gogeta",
@@ -182,16 +122,7 @@
           "score": 0
         }
       ],
-      "global": [
-        {
-          "search": "Gogeta",
-          "error": "AniList HTTP 404"
-        },
-        {
-          "search": "ゴジータ",
-          "error": "AniList HTTP 404"
-        }
-      ]
+      "global": []
     },
     {
       "id": "dragonball-gotenks",
@@ -232,211 +163,7 @@
           "score": 0
         }
       ],
-      "global": [
-        {
-          "search": "Gotenks",
-          "error": "AniList HTTP 404"
-        },
-        {
-          "search": "ゴテンクス",
-          "error": "AniList HTTP 404"
-        }
-      ]
-    },
-    {
-      "id": "fairytail-august",
-      "name_en": "August",
-      "name_ja": "オーガスト",
-      "seriesTop": [
-        {
-          "anilistId": 5186,
-          "full": "Lucy Heartfilia",
-          "native": "ルーシィ・ハートフィリア",
-          "alternative": [
-            "Luigi",
-            "Lu-chan",
-            "Blondie"
-          ],
-          "score": 0
-        },
-        {
-          "anilistId": 5187,
-          "full": "Natsu Dragneel",
-          "native": "ナツ・ドラグニル",
-          "alternative": [
-            "Salamander (サラマンダー)",
-            "Dragon Slayer"
-          ],
-          "score": 0
-        },
-        {
-          "anilistId": 5188,
-          "full": "Happy",
-          "native": "ハッピー",
-          "alternative": [],
-          "score": 0
-        }
-      ],
-      "global": [
-        {
-          "search": "August",
-          "anilistId": 298961,
-          "full": "August Stilza",
-          "native": "オーガスト・スティルザ",
-          "alternative": [],
-          "score": 65,
-          "inSeries": false,
-          "media": [
-            "MANGA:Gachiakuta",
-            "ANIME:Gachiakuta"
-          ]
-        },
-        {
-          "search": "オーガスト",
-          "anilistId": 298961,
-          "full": "August Stilza",
-          "native": "オーガスト・スティルザ",
-          "alternative": [],
-          "score": 65,
-          "inSeries": false,
-          "media": [
-            "MANGA:Gachiakuta",
-            "ANIME:Gachiakuta"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "sololeveling-kamish",
-      "name_en": "Kamish",
-      "name_ja": "カミッシュ",
-      "seriesTop": [
-        {
-          "anilistId": 129928,
-          "full": "Jin-U Seong",
-          "native": "성진우",
-          "alternative": [
-            "Sung Jin-Woo",
-            "Shun Mizushino (水篠旬)",
-            "World's Weakest Hunter",
-            "The Weakest Hunter of All Mankind"
-          ],
-          "score": 0
-        },
-        {
-          "anilistId": 136074,
-          "full": "Ju-Hui Lee",
-          "native": "이주희",
-          "alternative": [
-            "Lee Joohee",
-            "Lee Ju-Hee",
-            "Eri Mizuki (観月絵里)"
-          ],
-          "score": 0
-        },
-        {
-          "anilistId": 136076,
-          "full": "Jin-Ho Yu",
-          "native": "유진호",
-          "alternative": [
-            "Kenta Morobishi (諸菱賢太)",
-            "Yoo Jin-Ho"
-          ],
-          "score": 0
-        }
-      ],
-      "global": [
-        {
-          "search": "Kamish",
-          "anilistId": 88413,
-          "full": "Rize Kamishiro",
-          "native": "神代利世",
-          "alternative": [
-            "Binge Eater"
-          ],
-          "score": 30,
-          "inSeries": false,
-          "media": [
-            "ANIME:Tokyo Ghoul",
-            "MANGA:Tokyo Ghoul",
-            "MANGA:Tokyo Ghoul:re"
-          ]
-        },
-        {
-          "search": "カミッシュ",
-          "error": "AniList HTTP 404"
-        }
-      ]
-    },
-    {
-      "id": "tensura-testarossa",
-      "name_en": "Testarossa",
-      "name_ja": "テスタロッサ",
-      "seriesTop": [
-        {
-          "anilistId": 123962,
-          "full": "Rimuru Tempest",
-          "native": "リムル・テンペスト",
-          "alternative": [
-            "Satoru Mikami (三上悟)",
-            "Slime-san",
-            "Sensei",
-            "Milord"
-          ],
-          "score": 0
-        },
-        {
-          "anilistId": 128033,
-          "full": "Shion",
-          "native": "シオン",
-          "alternative": [
-            "Samurai",
-            "Tyrant",
-            "Immortal",
-            "Legendary Ogre Goddess At Digging Up Sweet Potatoes"
-          ],
-          "score": 0
-        },
-        {
-          "anilistId": 128034,
-          "full": "Veldora Tempest",
-          "native": "ヴェルドラ＝テンペスト",
-          "alternative": [
-            "Storm Dragon"
-          ],
-          "score": 0
-        }
-      ],
-      "global": [
-        {
-          "search": "Testarossa",
-          "anilistId": 1896,
-          "full": "Fate Testarossa",
-          "native": "フェイト・テスタロッサ",
-          "alternative": [],
-          "score": 65,
-          "inSeries": false,
-          "media": [
-            "ANIME:Mahou Shoujo Lyrical Nanoha",
-            "ANIME:Mahou Shoujo Lyrical Nanoha A's",
-            "ANIME:Mahou Shoujo Lyrical Nanoha StrikerS"
-          ]
-        },
-        {
-          "search": "テスタロッサ",
-          "anilistId": 1896,
-          "full": "Fate Testarossa",
-          "native": "フェイト・テスタロッサ",
-          "alternative": [],
-          "score": 65,
-          "inSeries": false,
-          "media": [
-            "ANIME:Mahou Shoujo Lyrical Nanoha",
-            "ANIME:Mahou Shoujo Lyrical Nanoha A's",
-            "ANIME:Mahou Shoujo Lyrical Nanoha StrikerS"
-          ]
-        }
-      ]
+      "global": []
     }
   ],
   "low": []

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T02:52:46.109Z",
+  "generatedAt": "2026-10-06T03:00:34.606Z",
   "series": {
     "onepiece": {
       "mediaIds": [
@@ -2759,6 +2759,12 @@
       "score": 100,
       "source": "series"
     },
+    "blackclover-lucius-zogratis": {
+      "anilistId": 319876,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b319876-9du75W1DNMzG.png",
+      "score": 80,
+      "source": "global"
+    },
     "blackclover-lumiere-silvamillion-clover": {
       "anilistId": 158550,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b158550-m0UtbUtvW2ra.png",
@@ -3677,6 +3683,12 @@
       "score": 100,
       "source": "global"
     },
+    "fairytail-august": {
+      "anilistId": 131113,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/n131113-ulgiCu8kvW2h.jpg",
+      "score": 100,
+      "source": "global"
+    },
     "fairytail-larcade-dragneel": {
       "anilistId": 131379,
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131379-xhheIu8J6lZJ.png",
@@ -3844,6 +3856,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b184555-NMCZb01p2Aqp.png",
       "score": 100,
       "source": "override"
+    },
+    "sololeveling-kamish": {
+      "anilistId": 209182,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b209182-PUuu7rpNh0Us.jpg",
+      "score": 100,
+      "source": "global"
     },
     "sololeveling-tusk": {
       "anilistId": 184957,
@@ -5026,6 +5044,12 @@
       "url": "https://s4.anilist.co/file/anilistcdn/character/large/b132755-Q0GIMZO5UtGu.jpg",
       "score": 100,
       "source": "series"
+    },
+    "tensura-testarossa": {
+      "anilistId": 131039,
+      "url": "https://s4.anilist.co/file/anilistcdn/character/large/b131039-vhn56I9S1Fq2.png",
+      "score": 100,
+      "source": "global"
     },
     "tensura-rigurd": {
       "anilistId": 129348,
