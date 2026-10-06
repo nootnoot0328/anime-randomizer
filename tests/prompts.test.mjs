@@ -43,3 +43,16 @@ test("referee prompt keeps every judging rule and only swaps the answer format",
     assert.ok(head.length > 0);
   }
 });
+test("Chinese and Japanese referee prompts list characters by their own-language names and forbid switching to English", () => {
+  const ids = ["bleach-yhwach", "onepiece-kaido", "jojo-dio-brando", "chainsawman-pochita", "frieren-aura"];
+  const mk = (id, role) => ({ role, character: resolveCharacter(id), price: 15 });
+  const pk = { kind: "budget", opponent: "local", battlefieldSeriesId: "bleach",
+    p1: { seriesId: "bleach", roles: ["Leader", "Co-Leader", "Tanker"], team: [mk(ids[0], "Leader"), mk(ids[1], "Co-Leader"), mk(ids[2], "Tanker")] },
+    p2: { seriesId: "bleach", roles: ["Leader", "Co-Leader", "Tanker"], team: [mk(ids[3], "Leader"), mk(ids[4], "Co-Leader")] } };
+  const zh = buildPKJudgePrompt(pk, "zh", "json");
+  for (const name of ["友哈巴赫", "凯多", "迪奥·布兰度", "波奇塔", "阿乌拉"]) assert.ok(zh.includes(name), name);
+  for (const name of ["Yhwach", "Kaido", "Dio Brando", "Pochita", "Aura"]) assert.ok(!zh.includes(name), "English name leaked: " + name);
+  assert.match(zh, /never switch to English or romanized names/);
+  assert.match(buildPKJudgePrompt(pk, "ja", "json"), /Japanese names shown in the team lists/);
+  assert.doesNotMatch(buildPKJudgePrompt(pk, "en", "json"), /never switch to English/);
+});

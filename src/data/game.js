@@ -665,7 +665,7 @@ export const CHARACTER_PHASES = {
   {
    "key": "awakened",
    "en": "Awakened / All For One",
-   "zh": "觉醒后·AFO融合",
+   "zh": "觉醒后·与AFO融合",
    "ja": "覚醒後・AFO融合"
   }
  ],
@@ -753,7 +753,7 @@ export const CHARACTER_PHASES = {
   {
    "key": "alicization",
    "en": "Alicization",
-   "zh": "Alicization 时期",
+   "zh": "爱丽丝篇",
    "ja": "アリシゼーション編"
   }
  ]

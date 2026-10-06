@@ -46,7 +46,7 @@ Rules:
 ${inner.length ? `- These traits must visibly shape the backstory or dialogue, not just be listed: ${inner.join(", ")}.\n` : ""}- Write new text. Never quote or closely paraphrase lines from the source works, and do not retell their plots.
 - If you do not recognise a source character, use only what their name and series make obvious and keep that trait line general instead of inventing details.
 - Suitable for a general audience.
-- ${format === "text" ? "Write everything" : "Write every string value"} in ${language}.
+- ${format === "text" ? "Write everything" : "Write every string value"} in ${language}.${lang === "zh" || lang === "ja" ? `\n- When a trait line names a source character, use the ${language} name exactly as listed above; never switch to English or romanized names.` : ""}
 
 ${format === "text" ? textFormat(length) : jsonFormat(length)}Keep the whole reply under 400 words.`;
 }

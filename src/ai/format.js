@@ -13,7 +13,7 @@ export function refereeFormat(pk, l) {
   return `You are now both the REFEREE and the live COMMENTATOR for this match.
 Decide the result with the rules above first, then narrate a battle that is consistent with that result.
 
-Reply with ONE JSON object and nothing else (no markdown fences, no text before or after). Write every string value in ${language}. Use character names exactly as they appear in the team lists.
+Reply with ONE JSON object and nothing else (no markdown fences, no text before or after). Write every string value in ${language}. Use character names exactly as they appear in the team lists.${l === "zh" || l === "ja" ? ` Always call characters by the ${language} names shown in the team lists, also inside "why", "note" and "commentary"; never switch to English or romanized names.` : ""}
 
 {
   "winner": 1 | 2 | 0,                       // 0 means draw
