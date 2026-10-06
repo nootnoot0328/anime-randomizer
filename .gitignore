@@ -1,0 +1,3 @@
+# local Cloudflare dev server files
+.wrangler/
+node_modules/
