@@ -60,6 +60,10 @@ function refereePanel(pk) {
     return `<section class="ref-card error" data-key="ref-error">${icon("info", "err-ic")}<h3>${esc(t("refError_" + (ref.code || "server")))}</h3>${ref.detail && ref.code !== "unreadable" ? `<p class="hint">${esc(ref.detail)}</p>` : ""}
       <div class="row-actions"><button class="btn primary" ${act("battle.judge")}>${icon("refresh")}<span>${esc(t("tryAgain"))}</span></button>${ref.code === "badKey" || ref.code === "noProvider" ? `<button class="btn ghost" ${act("battle.setup")}>${esc(t("openSettings"))}</button>` : ""}</div></section>`;
   }
+  if (pk.opponent === "online" && pk.me === 2 && !pk.fromHistory) {
+    return `<section class="ref-card setup" data-key="ref-online">${icon("whistle", "big-ic")}<h3>${esc(t("onlineRefereeTitle"))}</h3><p>${esc(t("onlineRefereeBody"))}</p>
+      <div class="row-actions"><button class="btn ghost" ${act("battle.copyJudge")}>${icon("copy")}<span>${esc(t("copyJudgeShort"))}</span></button></div></section>`;
+  }
   if (!aiConfigured()) {
     return `<section class="ref-card setup" data-key="ref-setup">${icon("whistle", "big-ic")}<h3>${esc(t("refSetupTitle"))}</h3><p>${esc(t("refSetupBody"))}</p>
       <div class="row-actions"><button class="btn primary" ${act("battle.setup")}>${esc(t("setUp"))}</button><button class="btn ghost" ${act("battle.copyJudge")}>${icon("copy")}<span>${esc(t("copyJudgeShort"))}</span></button></div></section>`;
@@ -80,7 +84,9 @@ export function battleReport(pk, { first } = {}) {
     ${refereePanel(pk)}
     <section class="card matchups" data-key="matchups"><div class="sec-head"><div><h2>${esc(t("roleMatchups"))}</h2></div></div>${matchupRows(pk, v)}</section>
     <div class="stack-actions" data-key="actions">
-      ${pk.fromHistory ? "" : `<div class="row-actions"><button class="btn primary" ${act("battle.rematch")}>${icon("refresh")}<span>${esc(t("rematch"))}</span></button><button class="btn secondary" ${act("battle.new")}>${icon("swords")}<span>${esc(t("newMatch"))}</span></button></div>`}
+      ${pk.fromHistory ? "" : pk.opponent === "online" && pk.me === 2
+        ? `<p class="hint center">${esc(t("onlineHostDecides"))}</p><div class="row-actions"><button class="btn ghost" ${act("online.leave")}>${icon("x")}<span>${esc(t("leaveRoom"))}</span></button></div>`
+        : `<div class="row-actions"><button class="btn primary" ${act("battle.rematch")}>${icon("refresh")}<span>${esc(t("rematch"))}</span></button><button class="btn secondary" ${act("battle.new")}>${icon("swords")}<span>${esc(t("newMatch"))}</span></button></div>`}
       <div class="row-actions"><button class="btn ghost" ${act("battle.copyJudge")}>${icon("copy")}<span>${esc(t("copyJudgeShort"))}</span></button><button class="btn ghost" ${act("battle.copyImage")}>${icon("image")}<span>${esc(t("copyArtShort"))}</span></button></div>
       ${pk.fromHistory ? `<button class="btn ghost danger-text" ${act("battle.delete")}>${icon("trash")}<span>${esc(t("deleteEntry"))}</span></button>` : ""}
     </div></div>`;

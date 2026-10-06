@@ -1,0 +1,48 @@
+name: Deploy rooms server
+# Deploys rooms/ (the online-play Worker) to your Cloudflare account.
+# One-time setup: repo Settings → Secrets and variables → Actions → add
+#   CLOUDFLARE_API_TOKEN   (Cloudflare → My Profile → API Tokens → "Edit Cloudflare Workers" template)
+#   CLOUDFLARE_ACCOUNT_ID  (Cloudflare dashboard → Workers & Pages → Account ID on the right)
+# Then run it from the Actions tab ("Run workflow"). It also runs when rooms/ changes on main.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [rooms/**]
+permissions:
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check secrets
+        id: secrets
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$TOKEN" ] && [ -n "$ACCOUNT" ]; then echo "ready=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          echo "ready=false" >> "$GITHUB_OUTPUT"
+          MSG="Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as repository secrets (see rooms/README.md)."
+          # a manual run should fail loudly; an automatic run after a merge just skips until you're set up
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then echo "::error::$MSG"; exit 1; fi
+          echo "::notice::Skipped deploy. $MSG"
+      - uses: actions/setup-node@v4
+        if: steps.secrets.outputs.ready == 'true'
+        with:
+          node-version: '20'
+      - name: Deploy
+        if: steps.secrets.outputs.ready == 'true'
+        working-directory: rooms
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 deploy | tee deploy.log
+      - name: Show the server address
+        if: steps.secrets.outputs.ready == 'true'
+        working-directory: rooms
+        run: |
+          URL=$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' deploy.log | head -1)
+          echo "### Rooms server deployed" >> "$GITHUB_STEP_SUMMARY"
+          echo "Paste this into Anime Fusion → Settings → Online play: **${URL}**" >> "$GITHUB_STEP_SUMMARY"

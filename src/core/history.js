@@ -63,7 +63,7 @@ export function fusionFromEntry(h) {
 const snapTeam = p => ({ seriesId: p.seriesId, roles: [...p.roles], team: p.team.map(x => ({ role: x.role, id: x.character.id, phaseKey: x.character.phaseKey || null, price: x.price || 0 })), budget: p.budget ?? null });
 export function saveBattle(pk) {
   const entry = {
-    id: uuid(), type: "battle", date: new Date().toISOString(), kind: pk.kind, opponent: pk.opponent, difficulty: pk.difficulty,
+    id: uuid(), type: "battle", date: new Date().toISOString(), kind: pk.kind, opponent: pk.opponent, me: pk.me || 1, difficulty: pk.difficulty,
     battlefieldSeriesId: pk.battlefieldSeriesId, p1: snapTeam(pk.p1), p2: snapTeam(pk.p2), referee: null,
   };
   STATE.history.unshift(entry);
@@ -78,5 +78,5 @@ export function deleteEntry(id) { STATE.history = STATE.history.filter(h => h.id
 /** Rebuild a playable-looking match object from a saved battle. */
 export function battleFromEntry(h) {
   const team = t => ({ seriesId: t.seriesId, roles: t.roles, budget: t.budget, team: t.team.map(x => ({ role: x.role, character: resolveCharacter(x.id, x.phaseKey), price: x.price })).filter(x => x.character) });
-  return { kind: h.kind, opponent: h.opponent, difficulty: h.difficulty, battlefieldSeriesId: h.battlefieldSeriesId, p1: team(h.p1), p2: team(h.p2), historyId: h.id, referee: h.referee || null, ended: true, fromHistory: true };
+  return { kind: h.kind, opponent: h.opponent, me: h.me || 1, difficulty: h.difficulty, battlefieldSeriesId: h.battlefieldSeriesId, p1: team(h.p1), p2: team(h.p2), historyId: h.id, referee: h.referee || null, ended: true, fromHistory: true };
 }

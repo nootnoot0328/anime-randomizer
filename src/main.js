@@ -5,6 +5,7 @@ import "./ui/views/pk.js";
 import "./ui/views/battle.js";
 import "./ui/views/library.js";
 import "./ui/views/settings.js";
+import "./ui/views/online.js";
 import { STATE, VERSION } from "./core/state.js";
 import { app } from "./core/app.js";
 import { t } from "./core/i18n.js";
@@ -16,6 +17,7 @@ import { eligibleSeries } from "./game/pk.js";
 import { aiConfigured, judge } from "./ai/referee.js";
 import { wireEvents, render, toast } from "./ui/shell.js";
 import { checkVersion } from "./ui/version.js";
+import { joinFromURL, resumeHostSession } from "./online/room.js";
 
 // When a match ends the referee steps in on its own (if it's set up).
 app.matchComplete = pk => { if (aiConfigured() && !pk.referee?.verdict) setTimeout(() => { if (STATE.pk === pk) judge(pk); }, 700); };
@@ -34,6 +36,8 @@ async function boot() {
     const list = eligibleSeries();
     STATE.pkSetup = { ...STATE.pkSetup, p1: list[0]?.id || null, p2: list[1]?.id || list[0]?.id || null, pool: list[0]?.id || null };
     STATE.ready = true;
+    // a friend opening a shared room link goes straight to the room; a host who reloaded reconnects quietly
+    if (joinFromURL()) STATE.screen = "room"; else resumeHostSession();
     render();
     document.body.classList.add("ready");
     const v = await checkVersion();

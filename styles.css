@@ -604,6 +604,23 @@ body.no-tabs .tabbar{transform:translateY(110%);opacity:0;pointer-events:none}
 .rules{margin:0;padding-left:18px;display:grid;gap:6px;font-size:13.5px;line-height:1.5;color:var(--muted)}
 @keyframes lotIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
 
+/* ---------------------------------------------------------------- online play (v1.6) */
+.room{display:grid;gap:12px}
+.room-hero{display:grid;justify-items:center;gap:10px;padding:20px 16px;text-align:center;border-radius:var(--r-lg);background:linear-gradient(165deg,rgba(96,165,250,.16),var(--surface) 60%);border:1px solid rgba(96,165,250,.32)}
+.room-hero p{color:var(--muted);font-size:14px;max-width:30em}
+.room-hero p.bad{color:var(--bad)}
+.room-hero .row-actions{width:100%}
+.room-code{display:flex;gap:6px}
+.room-code span{display:grid;place-items:center;width:46px;height:56px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line-2);font-size:28px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:0}
+.room-people{display:grid;gap:10px}
+.person{display:grid;grid-template-columns:12px auto 1fr;align-items:center;gap:10px}
+.person small{justify-self:end;color:var(--muted);font-size:13px;text-align:right}
+.presence-dot{width:10px;height:10px;border-radius:99px;background:var(--faint);box-shadow:0 0 0 3px rgba(255,255,255,.05)}
+.presence-dot.on{background:var(--good);box-shadow:0 0 0 3px rgba(52,211,153,.18);animation:breathe 2.4s ease-in-out infinite}
+.online-banner{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--r-md);background:rgba(96,165,250,.10);border:1px solid rgba(96,165,250,.28);font-size:13px;font-weight:700;color:var(--accent-2)}
+.online-banner .ic{width:16px;height:16px;flex:none}
+.online-banner.warn{background:rgba(251,191,36,.10);border-color:rgba(251,191,36,.35);color:var(--gold)}
+
 /* ---------------------------------------------------------------- motion */
 .stagger>*,.stagger .mode-list>*{animation:rise .5s var(--ease) both}
 .stagger>*:nth-child(2){animation-delay:.04s}.stagger>*:nth-child(3){animation-delay:.08s}.stagger>*:nth-child(4){animation-delay:.12s}.stagger>*:nth-child(5){animation-delay:.16s}.stagger>*:nth-child(6){animation-delay:.2s}.stagger>*:nth-child(7){animation-delay:.24s}.stagger>*:nth-child(n+8){animation-delay:.28s}

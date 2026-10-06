@@ -4,7 +4,7 @@ import { getSeries } from "../../core/roster.js";
 import { esc, icon, act } from "../parts.js";
 import { screen, actions, go } from "../shell.js";
 import { openSetup, fusionInProgress } from "../../game/fusion.js";
-import { openPKSetup, pkInProgress, resumePK, pkPlayerLabel } from "../../game/pk.js";
+import { openPKSetup, pkInProgress, resumePK, pkPlayerLabel, turnLabel } from "../../game/pk.js";
 import { aiConfigured } from "../../ai/referee.js";
 import { rollDraftPair } from "../../game/fusion.js";
 
@@ -16,10 +16,14 @@ function resumeCard() {
     const g = STATE.game, done = g.assignments.length;
     return `<button class="resume-card" ${act("home.resumeDraft")}><span class="resume-ic tone-violet">${icon("fusion")}</span><span><small>${esc(t("continueGame"))}</small><strong>${esc(t("standard"))}</strong><em>${esc(t("traitsProgress", { n: done, total: g.total || done + g.remaining.length }))}</em></span><span class="resume-bar" style="--p:${(done / (g.total || 1)) * 100}%"></span>${icon("chevron")}</button>`;
   }
+  if (STATE.online && !(pkInProgress() && STATE.pk?.opponent === "online")) {
+    const o = STATE.online;
+    return `<button class="resume-card" ${act("home.room")}><span class="resume-ic tone-blue">${icon("users")}</span><span><small>${esc(t("onlineMatch"))}</small><strong>${esc(t("roomCode"))} ${esc(o.code)}</strong><em>${esc(t((o.role === "host" ? o.presence.guest : o.presence.host) ? "friendJoined" : "friendWaiting"))}</em></span>${icon("chevron")}</button>`;
+  }
   if (pkInProgress()) {
     const pk = STATE.pk, s1 = getSeries(pk.p1.seriesId), s2 = getSeries(pk.p2.seriesId);
     const filled = pk.p1.team.length + pk.p2.team.length, total = pk.p1.roles.length + pk.p2.roles.length;
-    return `<button class="resume-card" ${act("home.resumePK")}><span class="resume-ic tone-rose">${icon(pk.kind === "budget" ? "coin" : pk.kind === "auction" ? "gavel" : "swords")}</span><span><small>${esc(t("continueGame"))}</small><strong>${esc(displaySeries(s1))} <i>vs</i> ${esc(displaySeries(s2))}</strong><em>${esc(t("turnOf", { name: pkPlayerLabel(pk.turn) }))} · ${filled}/${total}</em></span><span class="resume-bar" style="--p:${(filled / total) * 100}%"></span>${icon("chevron")}</button>`;
+    return `<button class="resume-card" ${act("home.resumePK")}><span class="resume-ic tone-rose">${icon(pk.kind === "budget" ? "coin" : pk.kind === "auction" ? "gavel" : "swords")}</span><span><small>${esc(t("continueGame"))}</small><strong>${esc(displaySeries(s1))} <i>vs</i> ${esc(displaySeries(s2))}</strong><em>${esc(turnLabel(pk.turn))} · ${filled}/${total}</em></span><span class="resume-bar" style="--p:${(filled / total) * 100}%"></span>${icon("chevron")}</button>`;
   }
   return "";
 }
@@ -50,4 +54,5 @@ actions({
   "home.ai": () => go("settings", { section: "ai" }),
   "home.resumeDraft": () => { go("draft"); const g = STATE.game; if (g && !g.revealing && !g.left) rollDraftPair(); },
   "home.resumePK": () => resumePK(),
+  "home.room": () => go("room"),
 });

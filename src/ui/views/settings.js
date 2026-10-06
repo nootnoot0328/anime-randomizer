@@ -4,6 +4,7 @@ import { allSeries } from "../../core/roster.js";
 import { esc, icon, act, seg } from "../parts.js";
 import { screen, actions, inputs, render, openSheet, sheetHead, closeSheet, confirmSheet, toast } from "../shell.js";
 import { aiConfigured, saveAIConfig, clearAIConfig, testConnection } from "../../ai/referee.js";
+import { onlineServer, saveOnlineServer, clearOnlineServer, testServer } from "../../online/room.js";
 import { savePortraitsOffline, resetBuiltinPortraits, refreshStorageEstimate, offlineCount } from "../../core/images.js";
 
 let offlineSaved = null;
@@ -30,6 +31,21 @@ function aiBlock() {
     <details class="explain"><summary>${esc(t("aiPrivacyTitle"))}</summary><p>${esc(t("aiPrivacyBody"))}</p></details>
   </section>`;
 }
+const onlineDraft = { url: null, test: null };
+function onlineBlock() {
+  const saved = onlineServer(), url = onlineDraft.url ?? saved, tst = onlineDraft.test;
+  const status = tst?.pending ? `<div class="status pending"><span class="spinner"></span>${esc(t("testing"))}</div>`
+    : tst ? `<div class="status ${tst.ok ? "ok" : "bad"}">${icon(tst.ok ? "check" : "info")}<span>${esc(t("onlineTest_" + tst.code, { v: tst.detail || "" }))}</span></div>`
+    : saved ? `<div class="status ok">${icon("check")}<span>${esc(t("onlineReady"))}</span></div>` : "";
+  return `<section class="card" id="online" data-key="online">
+    <div class="sec-head"><div><h2>${icon("users")} ${esc(t("onlinePlay"))}</h2><p>${esc(t("onlineExplain"))}</p></div><span class="pill ${saved ? "on" : ""}">${esc(t(saved ? "on" : "off"))}</span></div>
+    <label class="field-label" for="onlineUrl">${esc(t("roomsServer"))}</label>
+    <input class="input" id="onlineUrl" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://anime-fusion-rooms.<you>.workers.dev" value="${esc(url)}" data-input="settings.onlineUrl">
+    <p class="hint">${esc(t("roomsServerHint"))}</p>
+    ${status}
+    <div class="row-actions"><button class="btn primary" ${act("settings.onlineSave")} ${tst?.pending ? 'aria-disabled="true"' : ""}>${icon("wifi")}<span>${esc(t("testAndSave"))}</span></button>${saved ? `<button class="btn ghost" ${act("settings.onlineClear")}>${esc(t("disconnect"))}</button>` : ""}</div>
+  </section>`;
+}
 screen("settings", {
   title: () => t("settings"),
   render: ({ first }) => {
@@ -42,6 +58,7 @@ screen("settings", {
       <section class="card" data-key="lang"><div class="sec-head"><div><h2>${icon("globe")} ${esc(t("language"))}</h2></div></div>
         ${seg([{ v: "en", label: "English" }, { v: "zh", label: "简体中文" }, { v: "ja", label: "日本語" }], STATE.lang, "settings.lang")}</section>
       ${aiBlock()}
+      ${onlineBlock()}
       <section class="card" data-key="portraits"><div class="sec-head"><div><h2>${icon("image")} ${esc(t("portraits"))}</h2><p>${esc(t("settingsAniListNote"))}</p></div></div>
         <div class="meter-row"><span>${esc(t("savedOnDevice"))}</span><span class="mono">${offlineSaved ?? "…"}</span></div>
         ${storageBlock()}
@@ -87,11 +104,21 @@ actions({
     render();
   },
   "settings.aiClear": async () => { if (await confirmSheet({ title: t("disconnect"), body: t("disconnectBody"), ok: t("disconnect"), danger: true })) { clearAIConfig(); draft.url = draft.key = null; render(); } },
+  "settings.onlineSave": async () => {
+    const url = onlineDraft.url ?? onlineServer();
+    onlineDraft.test = { pending: true }; render();
+    const r = await testServer(url);
+    onlineDraft.test = r;
+    if (r.ok) { saveOnlineServer(url); onlineDraft.url = null; toast(t("onlineReady"), "check"); }
+    render();
+  },
+  "settings.onlineClear": async () => { if (await confirmSheet({ title: t("disconnect"), ok: t("disconnect"), danger: true })) { clearOnlineServer(); onlineDraft.url = null; onlineDraft.test = null; render(); } },
   "settings.offline": () => openOfflineSheet(),
   "settings.reset": async () => { if (await confirmSheet({ title: t("resetOffline"), ok: t("resetOffline"), danger: true })) { await resetBuiltinPortraits(); offlineSaved = await offlineCount(); toast(t("imageCacheCleared"), "check"); render(); } },
   "settings.refresh": () => { if (STATE.versionInfo.latest) location.replace(`${location.pathname}?v=${encodeURIComponent(STATE.versionInfo.latest)}`); },
 });
 inputs({
+  "settings.onlineUrl": v => { onlineDraft.url = v; if (onlineDraft.test && !onlineDraft.test.pending) onlineDraft.test = null; },
   "settings.url": v => { draft.url = v; if (STATE.aiTest && !STATE.aiTest.pending) STATE.aiTest = null; },
   "settings.key": v => { draft.key = v; if (STATE.aiTest && !STATE.aiTest.pending) STATE.aiTest = null; },
 });

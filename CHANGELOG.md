@@ -1,5 +1,31 @@
 # Changelog
 
+## v1.6.0 — Online play, correct names, fair prices
+
+### Play a friend on their own phone
+- New **Online friend** opponent for Random, Budget and Auction PK. The host opens a room and shares a link; the friend just opens it, with nothing to set up.
+- The host's phone runs the match; the friend's moves are checked with the same rules. The friend never receives hidden information such as the auction deck order.
+- Phones that drop (screen locked, bad signal) reconnect and get the board back. A host who reloads the page gets the match back too.
+- The AI referee runs on the host's phone, and the verdict appears on both. The friend's phone saves the match to its own History.
+- Needs the small **rooms server** in `rooms/` (Cloudflare Durable Objects, free plan), deployed by the new *Deploy rooms server* GitHub action. Setup steps are in `rooms/README.md`.
+
+### Names in three languages
+- **318 name fixes.** About 230 Chinese names were the English name, Japanese kana or Japanese character forms; they now have Simplified Chinese names. A few Japanese typos are fixed too (Whitebeard's name used the kanji 二 instead of the katakana ニ). Each fix is one line in `scripts/fix-names-v1.6.py`, with transliterations marked.
+- **The AI referee now answers with Chinese names in Chinese** (and Japanese in Japanese). The main cause was the English names in the Chinese data; the referee and character-sheet prompts also now say not to switch to English.
+- Santa Claus (Chainsaw Man) moved to the male group.
+
+### Balance
+- **Budget PK prices come from the ratings.** Value = 70% best-role fit + 30% raw power, priced by rank within the series: $30 / $25 / $20 / $15 / $10 / $5. Forms have their own prices (Gear 5 Luffy costs more than pre-timeskip Luffy).
+  - Before: 79% of characters cost $15, 66 top characters (Whis, Cell, Itachi, Unohana…) cost $15 or less, and $100 bought 99% of the best possible team, so the budget forced no choices.
+  - Now: $100 buys about 93% and you use the whole budget.
+  - Change a rating and the price follows. `PRICE_OVERRIDES` in `game.js` pins a price by hand.
+- The Budget computer no longer leaves a role empty to afford a fourth star.
+- **Budget PK finishes a team automatically** when its player can't afford anyone left (no need to tap Finish with $0).
+- Portraits found for August, Kamish, Testarossa and Lucius Zogratis. AniList has no entries for Vegito, Gogeta, Gotenks or Kefla, so they keep their initials.
+
+### Fixes
+- A finished Random PK match is now marked ended like the other modes.
+
 ## v1.5.0 — Auction PK
 
 ### New mode: Auction PK (Random and Budget PK stay as they are)

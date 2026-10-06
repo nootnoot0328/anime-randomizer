@@ -2,11 +2,13 @@ import { STATE } from "../../core/state.js";
 import { t, charSeries, displayName, displaySeries, roleLabel } from "../../core/i18n.js";
 import { getSeries, pkCharacters, characterPrice, roleSet, budgetRoleSet, isTraitorRole } from "../../core/roster.js";
 import { esc, icon, act, avatar, seg, sectionHead } from "../parts.js";
-import { screen, actions, inputs, openSheet, sheetHead, closeSheet, confirmSheet, render } from "../shell.js";
+import { screen, actions, inputs, openSheet, sheetHead, closeSheet, confirmSheet, render, go } from "../shell.js";
 import * as P from "../../game/pk.js";
 import { battleReport } from "./battle.js";
 import { cardsLeft, minNextBid } from "../../game/auction.js";
 import { getCharacter } from "../../core/roster.js";
+import { openOnlineRoom } from "./online.js";
+import { onlineConfigured } from "../../online/room.js";
 
 export const kindTitle = kind => (kind === "budget" ? "budgetPK" : kind === "auction" ? "auctionPK" : "randomPK");
 const kindDesc = kind => (kind === "budget" ? "budgetPKDesc" : kind === "auction" ? "auctionPKDesc" : "pkDesc");
@@ -24,9 +26,10 @@ function rolePreview(seriesId, budget) {
 screen("pksetup", {
   title: () => t(kindTitle(STATE.pkSetup.kind)),
   render: ({ first }) => {
-    const ps = STATE.pkSetup, cpu = ps.opponent === "cpu", budget = P.isSharedKind(ps.kind), req = P.pkSetupRequirement();
+    const ps = STATE.pkSetup, cpu = ps.opponent === "cpu", online = ps.opponent === "online", budget = P.isSharedKind(ps.kind), req = P.pkSetupRequirement();
     const opponent = `<section class="card">${sectionHead(t("matchType"))}
-      ${seg([{ v: "local", label: t("localPlayers"), icon: "user" }, { v: "cpu", label: t("vsComputer"), icon: "cpu" }], ps.opponent, "pk.opponent")}
+      ${seg([{ v: "local", label: t("localPlayersShort"), icon: "user" }, { v: "cpu", label: t("vsComputerShort"), icon: "cpu" }, { v: "online", label: t("onlineFriend"), icon: "users" }], ps.opponent, "pk.opponent")}
+      ${online ? `<p class="hint">${esc(t(onlineConfigured() ? "onlineSetupHint" : "onlineNeedsServer"))}</p>${onlineConfigured() ? "" : `<div class="row-actions"><button class="btn secondary" ${act("pk.onlineSettings")}>${esc(t("setUp"))}</button></div>`}` : ""}
       ${cpu ? `<label class="field-label">${esc(t("difficulty"))}</label>${seg([{ v: "casual", label: t("casualCPU") }, { v: "strategic", label: t("strategicCPU") }], ps.difficulty === "casual" ? "casual" : "strategic", "pk.difficulty")}` : ""}</section>`;
     let body;
     if (budget) {
@@ -42,7 +45,7 @@ screen("pksetup", {
     return `<div class="pksetup${first ? " stagger" : ""}">
       ${seg([{ v: "random", label: t("pkKindRandom"), icon: "swords" }, { v: "budget", label: t("pkKindBudget"), icon: "coin" }, { v: "auction", label: t("pkKindAuction"), icon: "gavel" }], ps.kind, "pk.kind", "seg-lg")}
       <p class="lede">${esc(t(kindDesc(ps.kind)))}</p>${opponent}${body}</div>
-      <div class="dock"><div class="dock-info"><strong>${esc(t(kindTitle(ps.kind)))}</strong><small>${esc(t(cpu ? "vsComputer" : "localPlayers"))}</small></div><button class="btn primary" ${act("pk.start")} ${req.ok ? "" : 'aria-disabled="true"'}>${icon("swords")}<span>${esc(t("beginPK"))}</span></button></div>`;
+      <div class="dock"><div class="dock-info"><strong>${esc(t(kindTitle(ps.kind)))}</strong><small>${esc(t(cpu ? "vsComputer" : online ? "onlineFriend" : "localPlayers"))}</small></div><button class="btn primary" ${act("pk.start")} ${req.ok ? "" : 'aria-disabled="true"'}>${icon(online ? "users" : "swords")}<span>${esc(t(online ? "openRoom" : "beginPK"))}</span></button></div>`;
   },
 });
 
@@ -51,11 +54,11 @@ function slot(pk, n, role, active) {
   const p = pk[`p${n}`], hit = p.team.find(x => x.role === role), traitor = isTraitorRole(role) ? " traitor" : "";
   const just = pk.justFilled && pk.justFilled.player === n && pk.justFilled.role === role && Date.now() - pk.justFilled.at < 900 ? " pop" : "";
   if (!hit) {
-    const open = active && !P.isCPUTurn();
+    const open = active && !P.isWaiting();
     const selected = open && pk.selectedIndex !== null;
     return `<div class="slot empty${traitor}${open ? " droppable" : ""}${selected ? " ready" : ""}" data-key="${esc(role)}" data-slot data-player="${n}" data-role="${esc(role)}" ${open ? `role="button" tabindex="0" ${act("pk.slot", `${n}|${role}`)}` : ""}><span class="slot-role">${esc(roleLabel(role))}</span><span class="slot-plus">${icon("plus")}</span></div>`;
   }
-  const canSell = pk.kind === "budget" && active && !p.sellUsed && !P.isCPUTurn();
+  const canSell = pk.kind === "budget" && active && !p.sellUsed && !P.isWaiting();
   return `<div class="slot filled${traitor}${just}${canSell ? " sellable" : ""}" data-key="${esc(role)}" data-slot data-player="${n}" data-role="${esc(role)}"${canSell ? ` role="button" tabindex="0" aria-label="${esc(t("sellCharacter"))} ${esc(displayName(hit.character))}" ${act("pk.sell", `${n}|${role}`)}` : ""}>${avatar(hit.character, "av-slot")}<span class="slot-role">${esc(roleLabel(role))}</span><strong class="slot-name">${esc(displayName(hit.character))}</strong>${P.isSharedKind(pk.kind) ? `<span class="slot-price">$${hit.price}</span>` : ""}</div>`;
 }
 export function teamPanel(pk, n, { live = true } = {}) {
@@ -72,6 +75,16 @@ function candidate(c, i, pk, { disabled = false, keyed = false } = {}) {
   const key = keyed ? `${c.id}::${c.phaseKey || ""}` : `cand${i}`;
   return `<button class="cand${sel ? " on" : ""}${disabled ? " off" : ""}${pk.revealing ? " shuffling" : ""}" data-key="${esc(key)}" data-cand="${i}" ${budget ? "" : "data-drag"} ${act("pk.pick", i)} ${disabled ? 'aria-disabled="true"' : ""}>
     ${avatar(c, "av-cand")}<span class="cand-text"><strong>${esc(displayName(c))}</strong>${budget ? `<span class="price t${price}">$${price}</span>` : `<small>${esc(charSeries(c))}</small>`}</span></button>`;
+}
+/** "Computer is choosing…" or, online, "Waiting for your friend…". */
+function waitingText() { return P.isRemoteTurn() ? t("waitingForFriendMove") : t("computerThinking"); }
+/** Online: say so when the other phone has dropped off. */
+function onlineBanner(pk) {
+  const o = STATE.online; if (!P.isOnline(pk) || !o) return "";
+  const otherIn = o.role === "host" ? o.presence.guest : o.presence.host;
+  if (o.status !== "open") return `<div class="online-banner warn" data-key="ob">${icon("wifi")}<span>${esc(t("onlineReconnecting"))}</span></div>`;
+  if (!otherIn) return `<div class="online-banner warn" data-key="ob">${icon("wifi")}<span>${esc(t("friendDropped"))}</span></div>`;
+  return `<div class="online-banner" data-key="ob">${icon("users")}<span>${esc(t("onlineRoomLine", { code: o.code }))}</span></div>`;
 }
 const canStillBid = p => p.team.length < p.roles.length && p.budget >= 1;
 /** Bid buttons: +1, +2, +5 over the current bid and all-in, within this player's money. */
@@ -101,11 +114,11 @@ function auctionLog(pk) {
   return rows ? `<div class="mini-label" data-key="log-label">${esc(t("auctionRecent"))}</div><ul class="lot-log" data-key="log">${rows}</ul>` : "";
 }
 function auctionBoard(pk) {
-  const cpu = P.isCPUTurn(), lot = pk.lot;
+  const cpu = P.isWaiting(), lot = pk.lot;
   if (!lot) return `<div class="board auction"><div class="teams">${teamPanel(pk, 1)}${teamPanel(pk, 2)}</div></div>`;
   const actor = lot.won ? lot.won.player : lot.toAct, p = pk[`p${actor}`];
-  const hint = cpu ? t("computerThinking") : lot.won ? t("auctionPlaceHint") : lot.solo ? t("auctionSoloHint") : lot.bid ? t("auctionHint") : t("auctionHintOpen");
-  const turnbar = `<div class="turnbar p${actor}${cpu ? " thinking" : ""}" data-key="turnbar"><span class="turn-dot"></span><div class="turn-text"><strong>${esc(t("turnOf", { name: P.pkPlayerLabel(actor) }))} · <b class="money">$${p.budget}</b></strong><small>${esc(hint)}</small></div></div>`;
+  const hint = cpu ? waitingText() : lot.won ? t("auctionPlaceHint") : lot.solo ? t("auctionSoloHint") : lot.bid ? t("auctionHint") : t("auctionHintOpen");
+  const turnbar = `<div class="turnbar p${actor}${cpu ? " thinking" : ""}" data-key="turnbar"><span class="turn-dot"></span><div class="turn-text"><strong>${esc(P.turnLabel(actor))} · <b class="money">$${p.budget}</b></strong><small>${esc(hint)}</small></div></div>`;
   let controls = "";
   if (!cpu && lot.won) {
     controls = `<div class="lot-controls"><div class="mini-label">${esc(t("auctionChooseRole", { name: displayName(lot.c) }))}</div><div class="trait-grid">${P.openRoles(actor).map(r => `<button class="trait-btn" ${act("auction.place", r)}>${esc(roleLabel(r))}</button>`).join("")}</div></div>`;
@@ -115,7 +128,7 @@ function auctionBoard(pk) {
       <button class="btn ghost" ${act("auction.pass")}>${esc(t("auctionPass"))}</button></div>`;
   }
   const left = cardsLeft(pk);
-  return `<div class="board auction">${turnbar}
+  return `<div class="board auction">${onlineBanner(pk)}${turnbar}
     <section class="lot" data-key="lot-${pk.lotNumber}">
       <div class="lot-meta"><span>${esc(t("auctionCardOf", { n: pk.lotNumber, total: pk.deckSize }))}</span><span>${esc(t("auctionLeft", { n: Math.max(0, left - 1) }))}</span></div>
       <div class="lot-card">${avatar(lot.c, "av-portrait")}<div class="lot-name"><strong>${esc(displayName(lot.c))}</strong><small>${esc(charSeries(lot.c))}</small></div></div>
@@ -125,13 +138,13 @@ function auctionBoard(pk) {
     ${auctionLog(pk)}</div>`;
 }
 function board() {
-  const pk = STATE.pk, cpu = P.isCPUTurn(), p = pk[`p${pk.turn}`];
+  const pk = STATE.pk, cpu = P.isWaiting(), p = pk[`p${pk.turn}`];
   if (pk.kind === "auction") return auctionBoard(pk);
   const actionsHtml = pk.kind === "random"
     ? `<button class="btn ghost sm" ${act("pk.skip")} ${cpu || pk.revealing || !pk.skips[pk.turn] ? 'aria-disabled="true"' : ""}>${icon("refresh")}<span>${esc(pk.skips[pk.turn] ? t("skipPair") : t("skipUsed"))}</span></button>`
     : `<button class="btn ghost sm" ${act("pk.finish")} ${cpu || !p.team.length ? 'aria-disabled="true"' : ""}>${icon("flag")}<span>${esc(t("finishTeam"))}</span></button>`;
-  const hint = cpu ? t("computerThinking") : pk.kind === "random" ? t("hintRandom") : (p.sellUsed ? t("hintBudgetSold") : t("hintBudget"));
-  const turnbar = `<div class="turnbar p${pk.turn}${cpu ? " thinking" : ""}" data-key="turnbar"><span class="turn-dot"></span><div class="turn-text"><strong>${esc(t("turnOf", { name: P.pkPlayerLabel(pk.turn) }))}${pk.kind === "budget" ? ` · <b class="money">$${p.budget}</b>` : ""}</strong><small>${esc(hint)}</small></div>${actionsHtml}</div>`;
+  const hint = cpu ? waitingText() : pk.kind === "random" ? t("hintRandom") : (p.sellUsed ? t("hintBudgetSold") : t("hintBudget"));
+  const turnbar = `<div class="turnbar p${pk.turn}${cpu ? " thinking" : ""}" data-key="turnbar"><span class="turn-dot"></span><div class="turn-text"><strong>${esc(P.turnLabel(pk.turn))}${pk.kind === "budget" ? ` · <b class="money">$${p.budget}</b>` : ""}</strong><small>${esc(hint)}</small></div>${actionsHtml}</div>`;
   let tray;
   if (pk.kind === "random") {
     const pair = pk.pair || [];
@@ -141,13 +154,14 @@ function board() {
     const pool = P.budgetPool();
     tray = `<div class="mini-label" data-key="pool-label">${esc(t("sharedRoster"))} · ${pool.length}</div><div class="budget-grid" data-key="tray">${pool.map((c, i) => candidate(c, i, pk, { disabled: cpu || !P.budgetCanBuy(c), keyed: true })).join("")}</div>`;
   }
-  return `<div class="board ${pk.kind}">${turnbar}<div class="teams">${teamPanel(pk, 1)}${teamPanel(pk, 2)}</div>${tray}</div>`;
+  return `<div class="board ${pk.kind}">${onlineBanner(pk)}${turnbar}<div class="teams">${teamPanel(pk, 1)}${teamPanel(pk, 2)}</div>${tray}</div>`;
 }
 screen("pk", {
   title: () => t(kindTitle(STATE.pk?.kind)),
   hideTabs: () => P.pkInProgress() && STATE.screen === "pk",
   render: ctx => {
     const pk = STATE.pk; if (!pk) return `<div class="empty">${esc(t("noGame"))}</div>`;
+    if (pk.needsPair && !pk.revealing && !P.isGuest(pk)) { pk.needsPair = false; setTimeout(() => P.rollPKPair(), 0); }
     return P.pkOver(pk) ? battleReport(pk, ctx) : board();
   },
   leave: () => { P.cancelPKTimers(); closeSheet(true); },
@@ -167,7 +181,7 @@ function openRoleSheet(i) {
 let drag = null, suppressClickUntil = 0;
 function onPointerDown(e) {
   const card = e.target.closest("[data-drag]"); if (!card || e.button > 0) return;
-  const pk = STATE.pk; if (!pk || pk.revealing || P.isCPUTurn()) return;
+  const pk = STATE.pk; if (!pk || pk.revealing || P.isWaiting()) return;
   drag = { i: Number(card.dataset.cand), x: e.clientX, y: e.clientY, card, ghost: null, moved: false, id: e.pointerId };
 }
 function onPointerMove(e) {
@@ -208,12 +222,13 @@ actions({
   "auction.bid": v => P.auctionBid(Number(v)),
   "auction.pass": () => P.auctionPass(),
   "auction.place": v => P.auctionPlace(v),
-  "pk.opponent": v => P.updatePKSetup("opponent", v === "cpu" ? "cpu" : "local"),
+  "pk.opponent": v => P.updatePKSetup("opponent", ["cpu", "online"].includes(v) ? v : "local"),
+  "pk.onlineSettings": () => go("settings", { section: "online" }),
   "pk.difficulty": v => P.updatePKSetup("difficulty", v === "casual" ? "casual" : "strategic"),
-  "pk.start": () => P.startPK(),
+  "pk.start": () => (STATE.pkSetup.opponent === "online" ? openOnlineRoom() : P.startPK()),
   "pk.pick": v => {
     if (Date.now() < suppressClickUntil) return;
-    const i = Number(v), pk = STATE.pk; if (!pk || pk.revealing || P.isCPUTurn()) return;
+    const i = Number(v), pk = STATE.pk; if (!pk || pk.revealing || P.isWaiting()) return;
     pk.selectedIndex = i; render();
     openRoleSheet(i);
   },

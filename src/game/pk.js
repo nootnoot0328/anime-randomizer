@@ -6,6 +6,7 @@ import { app } from "../core/app.js";
 import { t, displayName, roleLabel } from "../core/i18n.js";
 import { decideRandom, decideBudget, decideAuction, auctionValue, auctionPlaceRole } from "./cpu.js";
 import * as A from "./auction.js";
+import { cardKey } from "../online/sync.js";
 import { allSeries, getSeries, pkCharacters, roleSet, budgetRoleSet, characterPrice } from "../core/roster.js";
 import { saveBattle } from "../core/history.js";
 
@@ -49,7 +50,7 @@ function pickBattlefield(pk) {
   pk.battlefieldSeriesId = ids.length > 1 && ids[0] !== ids[1] ? ids[Math.floor(Math.random() * 2)] : ids[0];
 }
 function baseMatch(kind) {
-  return { kind, opponent: STATE.pkSetup.opponent || "local", difficulty: STATE.pkSetup.difficulty || "strategic", turn: 1, used: new Set(), cpuTimer: null, cpuThinking: false, selectedIndex: null, ended: false, historyId: null, referee: null, justFilled: null };
+  return { matchId: Math.random().toString(36).slice(2, 10), me: 1, kind, opponent: STATE.pkSetup.opponent || "local", difficulty: STATE.pkSetup.difficulty || "strategic", turn: 1, used: new Set(), cpuTimer: null, cpuThinking: false, selectedIndex: null, ended: false, historyId: null, referee: null, justFilled: null };
 }
 export function startPK() {
   const ps = STATE.pkSetup, eligible = eligibleSeries();
@@ -94,7 +95,28 @@ export function rematch() {
 /* ---- turn state ---- */
 export function pkPool(player) { const pk = STATE.pk, p = pk[`p${player}`]; return pkCharacters(getSeries(p.seriesId)?.chars || []).filter(c => !pk.used.has(c.id)); }
 export function isCPUTurn() { return Boolean(STATE.pk?.opponent === "cpu" && STATE.pk.turn === 2 && !STATE.pk.ended); }
-export function pkPlayerLabel(n, pk = STATE.pk) { return n === 2 && pk?.opponent === "cpu" ? t("computer") : t(`player${n}`); }
+
+/* ---- online (a friend on another phone; see src/online) ---- */
+export const isOnline = (pk = STATE.pk) => pk?.opponent === "online";
+/** Which player this phone controls: the host is player 1, the friend player 2. */
+export const myPlayer = (pk = STATE.pk) => pk?.me || (STATE.online?.role === "guest" ? 2 : 1);
+export const isGuest = (pk = STATE.pk) => isOnline(pk) && myPlayer(pk) === 2;
+/** It's the friend's move (on this phone, controls are locked). */
+export function isRemoteTurn(pk = STATE.pk) { return Boolean(isOnline(pk) && !pk.ended && pk.turn !== myPlayer(pk)); }
+/** This phone must wait: the computer or the friend is moving. */
+export function isWaiting(pk = STATE.pk) { return isCPUTurn() || isRemoteTurn(pk); }
+/** On the friend's phone a move is sent to the host instead of being played locally. */
+function sendIfGuest(action) { if (!isGuest()) return false; app.sendAction(action); return true; }
+
+/** "Player 1's turn", or online "Your turn" (avoids "You's turn"). */
+export function turnLabel(n, pk = STATE.pk) {
+  return pk?.opponent === "online" && n === myPlayer(pk) ? t("yourTurn") : t("turnOf", { name: pkPlayerLabel(n, pk) });
+}
+export function pkPlayerLabel(n, pk = STATE.pk) {
+  if (n === 2 && pk?.opponent === "cpu") return t("computer");
+  if (pk?.opponent === "online") return n === myPlayer(pk) ? t("you") : t("friend");
+  return t(`player${n}`);
+}
 export function budgetPlayerDone(p) { return Boolean(p.finished || p.team.length >= p.roles.length); }
 export function pkComplete(pk = STATE.pk) {
   if (!pk) return false;
@@ -169,18 +191,24 @@ function afterAuctionAction(pk, res, action) {
   app.render();
   scheduleCPUTurn(action.type === "placed" ? 900 : 700);
 }
-export function auctionBid(amount) {
+export function auctionBid(amount, remote = false) {
   const pk = STATE.pk; if (!pk || pk.kind !== "auction" || isCPUTurn()) return;
+  if (!remote && sendIfGuest({ type: "bid", amount })) return;
+  if (!remote && isRemoteTurn()) return;
   const n = pk.lot?.toAct, res = A.placeBid(pk, n, amount);
   if (!res.ok) { if (res.reason === "no-money") app.toast(t("auctionNoMoney")); return; }
   afterAuctionAction(pk, res, { player: n, type: "bid", amount: pk.lot.bid });
 }
-export function auctionPass() {
+export function auctionPass(remote = false) {
   const pk = STATE.pk; if (!pk || pk.kind !== "auction" || isCPUTurn()) return;
+  if (!remote && sendIfGuest({ type: "pass" })) return;
+  if (!remote && isRemoteTurn()) return;
   const n = pk.lot?.toAct; afterAuctionAction(pk, A.pass(pk, n), { player: n, type: "pass" });
 }
-export function auctionPlace(role) {
+export function auctionPlace(role, remote = false) {
   const pk = STATE.pk; if (!pk || pk.kind !== "auction" || isCPUTurn() || !pk.lot?.won) return;
+  if (!remote && sendIfGuest({ type: "place", role })) return;
+  if (!remote && isRemoteTurn()) return;
   const { player, price } = pk.lot.won, c = pk.lot.c;
   afterAuctionAction(pk, A.awardRole(pk, role), { player, type: "placed", role, c, price });
 }
@@ -202,6 +230,8 @@ export function rollPKPair() {
 export function skipPKPair(byCPU = false) {
   const pk = STATE.pk; if (!pk || pk.kind !== "random" || pk.revealing || !pk.skips[pk.turn]) return;
   if (isCPUTurn() && !byCPU) return;
+  if (!byCPU && sendIfGuest({ type: "skip" })) return;
+  if (!byCPU && isRemoteTurn()) return;
   const skipped = new Set((pk.pair || []).map(c => c.id)), fresh = pkPool(pk.turn).filter(c => !skipped.has(c.id));
   pk.skips[pk.turn] = 0; pk.pair = []; pk.selectedIndex = null;
   if (fresh.length >= 2) {
@@ -218,14 +248,15 @@ export function skipPKPair(byCPU = false) {
 
 /* ---- picking ---- */
 export function selectPKCandidate(i) {
-  const pk = STATE.pk; if (!pk || pk.revealing || isCPUTurn()) return false;
+  const pk = STATE.pk; if (!pk || pk.revealing || isWaiting()) return false;
   pk.selectedIndex = pk.selectedIndex === i ? null : i; app.render();
   return pk.selectedIndex !== null;
 }
 export function assignSelectedPKRole(player, role) {
-  const pk = STATE.pk; if (!pk || player !== pk.turn || isCPUTurn()) return;
+  const pk = STATE.pk; if (!pk || player !== pk.turn || isWaiting()) return;
   const c = selectedPKCharacter(); if (!c) return;
   if (pk.kind === "budget" && !budgetCanBuy(c)) return app.toast(t("budgetRule"));
+  if (sendIfGuest({ type: "assign", key: cardKey(c), role })) { pk.selectedIndex = null; app.render(); return; }
   assignPKCharacter(role, c);
 }
 export function assignPKCharacter(role, c) {
@@ -239,6 +270,8 @@ export function assignPKCharacter(role, c) {
   const other = pk.turn === 1 ? 2 : 1;
   if (pk.kind === "budget") {
     if (p.team.length >= p.roles.length) p.finished = true;
+    // nothing left this player can afford: their team is done (no need to tap Finish)
+    else if (!pkPool(current).some(x => characterPrice(x) <= p.budget)) { p.finished = true; app.toast(t("budgetAutoFinished", { name: pkPlayerLabel(current) })); }
     if (!budgetPlayerDone(pk[`p${other}`])) pk.turn = other;
     if (budgetPlayerDone(pk.p1) && budgetPlayerDone(pk.p2)) pk.ended = true;
   } else if (pk[`p${other}`].team.length < pk[`p${other}`].roles.length) pk.turn = other;
@@ -250,6 +283,8 @@ export function sellBudgetCharacter(player, role, byCPU = false) {
   const pk = STATE.pk, p = pk?.[`p${player}`];
   if (!pk || pk.kind !== "budget" || player !== pk.turn || p.sellUsed || p.finished) return;
   if (isCPUTurn() && !byCPU) return;
+  if (!byCPU && sendIfGuest({ type: "sell", role })) return;
+  if (!byCPU && isRemoteTurn()) return;
   const index = p.team.findIndex(x => x.role === role); if (index < 0) return;
   const [sold] = p.team.splice(index, 1); p.budget += sold.price; pk.used.delete(sold.character.id); p.sellUsed = true; pk.selectedIndex = null;
   app.toast(`${displayName(sold.character)} +$${sold.price}`); app.render();
@@ -258,6 +293,8 @@ export function finishBudgetTeam(byCPU = false) {
   const pk = STATE.pk, p = pk?.[`p${pk?.turn}`];
   if (!pk || pk.kind !== "budget" || !p || budgetPlayerDone(p)) return;
   if (isCPUTurn() && !byCPU) return;
+  if (!byCPU && sendIfGuest({ type: "finish" })) return;
+  if (!byCPU && isRemoteTurn()) return;
   if (!p.team.length) return app.toast(t("pickBeforeFinish"));
   p.finished = true; pk.selectedIndex = null; pk.cpuThinking = false; pk.cpuTimer = null;
   const other = pk.turn === 1 ? 2 : 1;
@@ -265,10 +302,36 @@ export function finishBudgetTeam(byCPU = false) {
   if (pkOver()) return finishMatch();
   app.render(); scheduleCPUTurn();
 }
+/**
+ * Host: play a move the friend sent. Only accepted on the friend's turn, using the same rules
+ * as a local move. Returns true if it was applied.
+ */
+export function applyRemoteAction(a) {
+  const pk = STATE.pk;
+  if (!pk || !isOnline(pk) || isGuest(pk) || pk.ended || pk.turn !== 2 || !a || typeof a !== "object") return false;
+  const before = JSON.stringify([pk.turn, pk.p1.team.length, pk.p2.team.length, pk.lot?.bid, pk.lot?.toAct, pk.lotNumber, pk.p2.sellUsed, pk.p2.finished, pk.skips?.[2]]);
+  switch (a.type) {
+    case "assign": {
+      const list = candidates(), i = list.findIndex(c => cardKey(c) === a.key);
+      if (i < 0 || pk.revealing || !openRoles(2).includes(a.role)) return false;
+      if (pk.kind === "budget" && !budgetCanBuy(list[i])) return false;
+      pk.selectedIndex = i; assignPKCharacter(a.role, list[i]); break;
+    }
+    case "skip": skipPKPair(true); break;
+    case "sell": sellBudgetCharacter(2, a.role, true); break;
+    case "finish": finishBudgetTeam(true); break;
+    case "bid": auctionBid(Number(a.amount), true); break;
+    case "pass": auctionPass(true); break;
+    case "place": auctionPlace(a.role, true); break;
+    default: return false;
+  }
+  return before !== JSON.stringify([pk.turn, pk.p1.team.length, pk.p2.team.length, pk.lot?.bid, pk.lot?.toAct, pk.lotNumber, pk.p2.sellUsed, pk.p2.finished, pk.skips?.[2]]);
+}
 export function endPKEarly() { if (!STATE.pk || pkOver()) return; STATE.pk.ended = true; finishMatch(); }
 
 function finishMatch() {
   const pk = STATE.pk;
+  pk.ended = true; // every mode says so explicitly (the friend's phone and History rely on it)
   cancelPKTimers();
   if (!pk.historyId) pk.historyId = saveBattle(pk);
   app.matchComplete(pk);
@@ -286,5 +349,13 @@ export function resumePK() {
   app.go("pk");
   if (pkOver()) return;
   if (pk.kind === "random" && (!pk.pair || pk.pair.length < 2)) rollPKPair(); else scheduleCPUTurn(400);
+}
+/** Host after recovering a match from the room (page reload): pick up where it left off. */
+export function afterRestore() {
+  const pk = STATE.pk; if (!pk || pkOver(pk)) return;
+  // a reload mid-shuffle saved "shuffling", but no shuffle is running any more
+  pk.revealing = false; pk.revealTimer = null; pk.cpuTimer = null;
+  // the pair is drawn when the draft screen opens (the shuffle stops itself off-screen)
+  if (pk.kind === "random" && (!pk.pair || pk.pair.length < 2)) pk.needsPair = true;
 }
 export function pkInProgress() { return Boolean(STATE.pk && !STATE.pk.fromHistory && !pkOver()); }

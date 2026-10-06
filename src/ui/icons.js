@@ -31,6 +31,7 @@ const P = {
   user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
   cpu: '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
   flag: '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  share: '<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/>',
   gavel: '<path d="M14 4l6 6M11 7l6 6M12.5 5.5l-6 6 4 4 6-6"/><path d="M8.5 13.5L3 19l2 2 5.5-5.5M13 21h8"/>',
   // trait icons (placeholders until the pixel set exists)
   hair: '<path d="M5 20c0-9 2-15 7-15s7 6 7 15"/><path d="M8 9c2 1 5 1 8-1M9 5c-1 3-1 6 0 9M15 5c1 3 1 6 0 9"/>',

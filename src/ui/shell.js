@@ -24,6 +24,7 @@ export const ROUTES = {
   pk: { tab: "home", parent: "home" },
   battle: { tab: "history", parent: "history" },
   fusionview: { tab: "history", parent: "history" },
+  room: { tab: "home", parent: "home" },
   settings: { tab: null, parent: null },
 };
 const VIEWS = {}, TITLES = {}, LEAVE = {}, ACTIONS = {}, INPUTS = {};
@@ -82,6 +83,7 @@ export function render() {
   document.querySelectorAll("[data-i18n]").forEach(n => { const s = t(n.dataset.i18n); if (n.textContent !== s) n.textContent = s; });
   document.documentElement.lang = STATE.lang === "zh" ? "zh-Hans" : STATE.lang;
   backBtn.setAttribute("aria-label", t("back")); document.getElementById("settingsBtn").setAttribute("aria-label", t("settings"));
+  app.afterRender();
 }
 function animateIn(el, dir) {
   if (reducedMotion() || !el.animate) return;
