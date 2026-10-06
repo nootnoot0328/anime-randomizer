@@ -88,8 +88,10 @@ export function decideRandom({ pair, openRoles, pool, difficulty = "strategic", 
 
 /**
  * Budget PK planner: the best full lineup for the remaining roles within the budget
- * (beam search; each character used once). Unfillable roles stay empty (worth 0).
+ * (beam search; each character used once). An empty role costs EMPTY_ROLE_COST: the referee
+ * treats it as one fighter down plus a missing function, so it's worse than a cheap pick.
  */
+export const EMPTY_ROLE_COST = 3;
 export function planBudget(pool, openRoles, budget, price, beam = 160) {
   let states = [{ value: 0, money: budget, picks: [], used: new Set() }];
   // fill the most selective roles first (biggest spread between best and typical fit)
@@ -97,7 +99,7 @@ export function planBudget(pool, openRoles, budget, price, beam = 160) {
   for (const role of order) {
     const next = [];
     for (const s of states) {
-      next.push({ ...s, picks: [...s.picks] }); // leave empty
+      next.push({ ...s, value: s.value - EMPTY_ROLE_COST, picks: [...s.picks] }); // leave empty: one fighter down and a role missing
       for (const c of pool) {
         const p = price(c);
         if (p > s.money || s.used.has(c.id)) continue;

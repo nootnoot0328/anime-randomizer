@@ -226,5 +226,49 @@
   },
   "codegeass-kallen-kouzuki": {
     "anilistCharacterId": 558
+  },
+  "dragonball-vegito": {
+    "search": [
+      "Vegetto",
+      "Vegito"
+    ]
+  },
+  "dragonball-gogeta": {
+    "search": [
+      "Gogeta"
+    ]
+  },
+  "dragonball-gotenks": {
+    "search": [
+      "Gotenks"
+    ]
+  },
+  "dragonball-kefla": {
+    "search": [
+      "Kefla",
+      "Kefura"
+    ]
+  },
+  "sololeveling-kamish": {
+    "search": [
+      "Kamish",
+      "Kamisch"
+    ]
+  },
+  "tensura-testarossa": {
+    "search": [
+      "Testarossa"
+    ]
+  },
+  "fairytail-august": {
+    "search": [
+      "August"
+    ]
+  },
+  "blackclover-lucius-zogratis": {
+    "search": [
+      "Lucius Zogratis",
+      "Lucius"
+    ]
   }
 }

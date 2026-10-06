@@ -431,7 +431,9 @@ def main():
 
     game_p = ROOT / "src/data/game.js"
     src = game_p.read_text()
-    for name, update in (("ROLE_SETS", None), ("ROLE_LABELS", None), ("BATTLEFIELDS", None), ("PRICE_TIERS", None)):
+    # PRICE_TIERS was retired in v1.6: prices are computed from ratings (core/roster.js), so the
+    # price column in the rows above is kept only as a record and is no longer written.
+    for name, update in (("ROLE_SETS", None), ("ROLE_LABELS", None), ("BATTLEFIELDS", None)):
         m, obj = load_js_object(src, name)
         if name == "ROLE_SETS":
             for s in NEW_SERIES: obj.setdefault(s["id"], [f'{s["id"]}:{k}' for k, *_ in s["roles"]])

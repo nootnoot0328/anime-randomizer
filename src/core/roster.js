@@ -1,17 +1,15 @@
 // Roster, pools, character forms (phases), prices and PK role sets.
 // Pure functions over STATE; no DOM.
-import { CHARACTER_PHASES, PRICE_TIERS, ROLE_SETS } from "../data/game.js";
+import { CHARACTER_PHASES, PRICE_OVERRIDES, ROLE_SETS } from "../data/game.js";
+import { roleScore, attributes } from "../game/cpu.js";
 import { STATE } from "./state.js";
-
-const PRICE_BY_ID = new Map();
-for (const [price, ids] of Object.entries(PRICE_TIERS)) ids.forEach(id => PRICE_BY_ID.set(id, Number(price)));
 
 export function setRoster(roster) {
   STATE.builtin = roster.map(s => ({
     ...s, name: s.name_en,
     chars: (s.chars || []).map(c => ({ ...c, name: c.name_en, series: s.name_en, series_en: s.name_en, series_ja: s.name_ja, series_zh: s.name_zh, seriesId: s.id })),
   }));
-  CHAR_INDEX = null;
+  CHAR_INDEX = null; SERIES_VALUES.clear();
 }
 let CHAR_INDEX = null;
 export function allSeries() { return STATE.builtin; }
@@ -64,7 +62,37 @@ export function excludedUnknownCount(ids = STATE.selectedSeries) {
 }
 
 /* ---- PK --------------------------------------------------------------- */
-export function characterPrice(c) { return PRICE_BY_ID.get(c?.id) ?? 15; }
+/*
+ * Budget PK prices come from the computer's ratings, so they stay consistent with how the
+ * computer and the referee judge role fit:
+ *   value = 0.7 × best fit for one of their series' five Budget roles + 0.3 × raw power (0–10)
+ *           (role fit is what the referee judges first, but it also says raw power matters;
+ *            without the power term a top healer outpriced Sukuna)
+ *   price = their rank by value within their own series (Budget PK is played inside one series):
+ *           top 7% $30 · next to 17% $25 · to 35% $20 · to 65% $15 · to 90% $10 · rest $5
+ * Forms are priced on their own ratings. Edit a rating in attributes.js and the price follows;
+ * PRICE_OVERRIDES in game.js pins a price by hand when a rating can't capture it.
+ */
+export const PRICE_BANDS = [[0.07, 30], [0.17, 25], [0.35, 20], [0.65, 15], [0.90, 10], [Infinity, 5]];
+const SERIES_VALUES = new Map();
+export function characterValue(c) {
+  const roles = budgetRoleSet(c.seriesId);
+  return 0.7 * Math.max(...roles.map(r => roleScore(c, r))) + 0.3 * attributes(c).power;
+}
+function seriesValues(seriesId) {
+  const pool = pkCharacters(getSeries(seriesId)?.chars || []);
+  const key = `${seriesId}:${pool.length}`;
+  if (!SERIES_VALUES.has(key)) SERIES_VALUES.set(key, pool.map(characterValue));
+  return SERIES_VALUES.get(key);
+}
+export function characterPrice(c) {
+  if (!c) return 15;
+  const pinned = PRICE_OVERRIDES[c.phaseKey ? `${c.id}:${c.phaseKey}` : c.id] ?? PRICE_OVERRIDES[c.id];
+  if (pinned) return pinned;
+  const values = seriesValues(c.seriesId); if (!values.length) return 15;
+  const v = characterValue(c), above = values.filter(x => x > v + 1e-9).length;
+  return PRICE_BANDS.find(([cut]) => above / values.length < cut)[1];
+}
 /** PK ignores the fusion gender filter (as in v0.6.x) but still uses verified forms. */
 export function pkCharacters(chars) { return applyCharacterPhases(chars); }
 export function roleSet(seriesId) { return ROLE_SETS[seriesId] || ["Leader", "Co-Leader", "Tanker", "Healer", "Strategist", "Traitor"]; }

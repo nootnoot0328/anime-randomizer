@@ -35,31 +35,43 @@ async function fetchCharacter(id){
   const q=`query($id:Int!){Character(id:$id){id name{full native alternative} image{large medium}}}`;
   return (await gql(q,{id}))?.Character||null;
 }
-async function searchCharacter(search){
-  const q=`query($search:String!){Character(search:$search){id name{full native alternative} image{large medium} media(page:1,perPage:50){nodes{id type title{romaji}}}}}`;
-  return (await gql(q,{search}))?.Character||null;
+// Top 10 matches, not just the first: "August" first finds Gachiakuta's August Stilza, while
+// Fairy Tail's August is further down.
+async function searchCharacters(search){
+  const q=`query($search:String!){Page(page:1,perPage:10){characters(search:$search){id name{full native alternative} image{large medium} media(page:1,perPage:25){nodes{id type title{romaji english}}}}}}`;
+  return (await gql(q,{search}))?.Page?.characters||[];
 }
 function altMatchScore(c,node){
   let best=matchScore(c,node);
   for(const alt of node?.name?.alternative||[])best=Math.max(best,matchScore(c,{name:{full:alt,native:node?.name?.native||''}}));
   return best;
 }
-function belongsToSeries(node,mediaIds){
-  return (node?.media?.nodes||[]).some(m=>m?.type==='ANIME'&&mediaIds.includes(m.id));
+// In the franchise if one of its anime is the series' resolved anime, or if any of its media
+// (anime, film or manga) is titled after the franchise. The title check lets in characters who
+// only appear in films or the manga (Dragon Ball fusions, Black Clover's Lucius), which the
+// TV series' character list doesn't have. The name must still score >= 70.
+function franchiseKeys(series){return [...(series.anilistSearch||[]),series.name_en].filter(Boolean).map(x=>x.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()).filter(x=>x.length>=4);}
+function belongsToSeries(node,mediaIds,keys=[]){
+  return (node?.media?.nodes||[]).some(m=>{
+    if(m?.type==='ANIME'&&mediaIds.includes(m.id))return true;
+    const titles=[m?.title?.romaji,m?.title?.english].filter(Boolean).map(t=>t.toLowerCase().replace(/[^a-z0-9]+/g,' '));
+    return keys.some(k=>titles.some(t=>t.includes(k)));
+  });
 }
-async function fallbackCharacter(c,mediaIds){
-  const searches=[c.name_en,c.name_ja].filter((x,i,a)=>x&&a.indexOf(x)===i);
+const searchTerms=c=>[c.name_en,c.name_ja,...(overrides[c.id]?.search||[])].filter((x,i,a)=>x&&a.indexOf(x)===i);
+async function fallbackCharacter(c,mediaIds,keys){
   let best=null;
-  for(const search of searches){
+  for(const search of searchTerms(c)){
     try{
-      const hit=await searchCharacter(search);if(!hit)continue;
-      const score=altMatchScore(c,hit);
-      // A matching alias alone is unsafe: unrelated characters can share the same
-      // name (for example, Chainsaw Man's Yoru and Tower of God's "Yoru" alias).
-      // Require an anime from the selected franchise; manga-only characters need
-      // an explicit, reviewed override.
-      if(score>=70&&belongsToSeries(hit,mediaIds)&&(hit.image?.large||hit.image?.medium)){
-        if(!best||score>best.score)best={n:hit,score,source:'global'};
+      for(const hit of await searchCharacters(search)){
+        // A matching name alone is unsafe: unrelated characters share names (Chainsaw Man's
+        // Yoru vs Tower of God's "Yoru"), so the hit must also belong to this franchise.
+        // Search aliases from portrait-overrides.json count as a name match.
+        const alias=(overrides[c.id]?.search||[]).some(a=>[hit.name?.full,hit.name?.native,...(hit.name?.alternative||[])].includes(a));
+        const score=alias?Math.max(80,altMatchScore(c,hit)):altMatchScore(c,hit);
+        if(score>=70&&belongsToSeries(hit,mediaIds,keys)&&(hit.image?.large||hit.image?.medium)){
+          if(!best||score>best.score)best={n:hit,score,source:'global'};
+        }
       }
     }catch(e){console.error(`global ${c.id} (${search}): ${e.message}`);}
   }
@@ -71,15 +83,15 @@ const unmatched=[],low=[];
 // reviewed overrides without reading CI logs: top AniList candidates per unmatched character.
 const review={generatedAt:null,unmatched:[],low:[]};
 const brief=(n,score)=>({anilistId:n.id,full:n.name?.full||'',native:n.name?.native||'',alternative:(n.name?.alternative||[]).filter(Boolean).slice(0,4),score:Number((score??0).toFixed(1))});
-async function reviewSearch(c,mediaIds){
+async function reviewSearch(c,mediaIds,keys){
   const out=[];
-  for(const search of [c.name_en,c.name_ja].filter((x,i,a)=>x&&a.indexOf(x)===i)){
-    try{const hit=await searchCharacter(search);if(hit)out.push({search,...brief(hit,altMatchScore(c,hit)),inSeries:belongsToSeries(hit,mediaIds),media:(hit.media?.nodes||[]).slice(0,3).map(m=>`${m.type}:${m.title?.romaji||m.id}`)});}catch(e){out.push({search,error:e.message});}
+  for(const search of searchTerms(c)){
+    try{for(const hit of (await searchCharacters(search)).slice(0,3))out.push({search,...brief(hit,altMatchScore(c,hit)),inSeries:belongsToSeries(hit,mediaIds,keys),media:(hit.media?.nodes||[]).slice(0,3).map(m=>`${m.type}:${m.title?.romaji||m.id}`)});}catch(e){out.push({search,error:e.message});}
   }
   return out;
 }
 for(const series of roster){
-  const mediaIds=[],candidateMap=new Map();
+  const mediaIds=[],candidateMap=new Map(),keys=franchiseKeys(series);
   const needsCandidates=series.chars.some(c=>{
     const ov=overrides[c.id];
     return !ov?.skip&&!ov?.url&&!ov?.anilistCharacterId&&!existing.chars?.[c.id];
@@ -102,8 +114,8 @@ for(const series of roster){
     }
     if(existing.chars?.[c.id]){output.chars[c.id]=existing.chars[c.id];continue;}
     const ranked=candidates.map(n=>({n,score:altMatchScore(c,n),source:'series'})).sort((a,b)=>b.score-a.score);let best=ranked[0];
-    if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){const fb=await fallbackCharacter(c,mediaIds);if(fb)best=fb;}
-    if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){unmatched.push(`${c.id} (${c.name_en})`);review.unmatched.push({id:c.id,name_en:c.name_en,name_ja:c.name_ja,seriesTop:ranked.slice(0,3).map(x=>brief(x.n,x.score)),global:await reviewSearch(c,mediaIds)});continue;}
+    if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){const fb=await fallbackCharacter(c,mediaIds,keys);if(fb)best=fb;}
+    if(!best||best.score<55||!(best.n.image?.large||best.n.image?.medium)){unmatched.push(`${c.id} (${c.name_en})`);review.unmatched.push({id:c.id,name_en:c.name_en,name_ja:c.name_ja,seriesTop:ranked.slice(0,3).map(x=>brief(x.n,x.score)),global:await reviewSearch(c,mediaIds,keys)});continue;}
     output.chars[c.id]={anilistId:best.n.id,url:best.n.image.large||best.n.image.medium,score:Number(best.score.toFixed(2)),source:best.source};
     if(best.score<70){low.push(`${c.id} (${c.name_en}) -> ${best.n.name.full} [${best.score.toFixed(1)}]`);review.low.push({id:c.id,name_en:c.name_en,matched:brief(best.n,best.score)});}
   }

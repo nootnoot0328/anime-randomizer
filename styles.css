@@ -336,6 +336,7 @@ body.no-tabs .tabbar{transform:translateY(110%);opacity:0;pointer-events:none}
 .price{display:inline-flex;align-items:center;padding:2px 7px;border-radius:99px;font-size:11px;font-weight:900;background:rgba(10,12,18,.8);color:var(--good);border:1px solid rgba(52,211,153,.35)}
 .price.t30{color:var(--gold);border-color:rgba(251,191,36,.5)}
 .price.t25{color:#f0abfc;border-color:rgba(240,171,252,.45)}
+.price.t20{color:#7dd3fc;border-color:rgba(125,211,252,.45)}
 .price.t10,.price.t5{color:var(--muted);border-color:var(--line-2)}
 .drag-ghost{position:fixed;left:0;top:0;z-index:100;pointer-events:none;opacity:.95;box-shadow:0 24px 50px rgba(0,0,0,.6);border-color:var(--accent);transition:none}
 
