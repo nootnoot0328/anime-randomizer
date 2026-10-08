@@ -67,7 +67,7 @@ export async function openOnlineRoom() {
 actions({
   "online.share": async () => {
     const url = joinLink();
-    if (navigator.share) { try { await navigator.share({ title: "Anime Fusion", text: t("shareText", { code: STATE.online.code }), url }); return; } catch (e) { if (e?.name === "AbortError") return; } }
+    if (navigator.share) { try { await navigator.share({ title: "AniVerse", text: t("shareText", { code: STATE.online.code }), url }); return; } catch (e) { if (e?.name === "AbortError") return; } }
     copyText(url, t("copyLink"), t("linkCopied"));
   },
   "online.copy": () => copyText(joinLink(), t("copyLink"), t("linkCopied")),

@@ -5,6 +5,7 @@ import { allSeries, selectedPool, applyGenderFilter, excludedUnknownCount, chara
 import { buildFusionPrompt } from "../../core/prompts.js";
 import { isFusionSaved } from "../../core/history.js";
 import { esc, icon, act, avatar, seg, chip, sectionHead } from "../parts.js";
+import { infoDot } from "../charinfo.js";
 import { traitIcon } from "../icons.js";
 import { screen, actions, go, openSheet, sheetHead, closeSheet, copyText, confirmSheet } from "../shell.js";
 import * as F from "../../game/fusion.js";
@@ -56,7 +57,7 @@ function bigCard(c, side, g) {
   if (!c) return `<div class="pick-card ghost"></div>`;
   const sub = secondaryName(c);
   return `<button class="pick-card${g.revealing ? " shuffling" : ""}${g.settled ? " settled" : ""}" ${act("fusion.choose", side)} ${g.revealing ? 'aria-disabled="true"' : ""}>
-    <span class="pick-art">${avatar(c, "av-fill")}</span>
+    <span class="pick-art">${avatar(c, "av-fill")}</span>${g.revealing ? "" : infoDot(c)}
     <span class="pick-meta"><strong>${esc(displayName(c))}</strong><small>${esc(charSeries(c))}${sub ? ` · ${esc(sub)}` : ""}</small></span></button>`;
 }
 screen("draft", {

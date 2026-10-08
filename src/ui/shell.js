@@ -75,7 +75,7 @@ export function render() {
   const backBtn = document.getElementById("backBtn");
   backBtn.classList.toggle("is-hidden", !route.parent && name !== "settings");
   const title = document.getElementById("topTitle"), text = (TITLES[name] || (() => ""))();
-  if (title.dataset.text !== text) { title.dataset.text = text; title.innerHTML = text ? `<span class="tt">${esc(text)}</span>` : `<span class="brand"><i class="brand-dot"></i>ANIME FUSION</span>`; }
+  if (title.dataset.text !== text) { title.dataset.text = text; title.innerHTML = text ? `<span class="tt">${esc(text)}</span>` : `<span class="brand"><img class="brand-mark" src="assets/brand/mark.png" alt="" width="22" height="22"><span>AniVerse</span></span>`; }
   document.getElementById("settingsBtn").classList.toggle("is-hidden", name === "settings");
   const hideTabs = route.game || (typeof route.hideTabs === "function" ? route.hideTabs() : false);
   document.body.classList.toggle("no-tabs", Boolean(hideTabs));

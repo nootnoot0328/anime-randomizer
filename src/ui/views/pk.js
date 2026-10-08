@@ -2,6 +2,7 @@ import { STATE } from "../../core/state.js";
 import { t, charSeries, displayName, displaySeries, roleLabel } from "../../core/i18n.js";
 import { getSeries, pkCharacters, characterPrice, roleSet, budgetRoleSet, isTraitorRole } from "../../core/roster.js";
 import { esc, icon, act, avatar, seg, sectionHead } from "../parts.js";
+import { infoDot } from "../charinfo.js";
 import { screen, actions, inputs, openSheet, sheetHead, closeSheet, confirmSheet, render, go } from "../shell.js";
 import * as P from "../../game/pk.js";
 import { battleReport } from "./battle.js";
@@ -74,7 +75,7 @@ function candidate(c, i, pk, { disabled = false, keyed = false } = {}) {
   const sel = pk.selectedIndex === i, budget = pk.kind === "budget", price = characterPrice(c);
   const key = keyed ? `${c.id}::${c.phaseKey || ""}` : `cand${i}`;
   return `<button class="cand${sel ? " on" : ""}${disabled ? " off" : ""}${pk.revealing ? " shuffling" : ""}" data-key="${esc(key)}" data-cand="${i}" ${budget ? "" : "data-drag"} ${act("pk.pick", i)} ${disabled ? 'aria-disabled="true"' : ""}>
-    ${avatar(c, "av-cand")}<span class="cand-text"><strong>${esc(displayName(c))}</strong>${budget ? `<span class="price t${price}">$${price}</span>` : `<small>${esc(charSeries(c))}</small>`}</span></button>`;
+    ${pk.revealing ? "" : infoDot(c)}${avatar(c, "av-cand")}<span class="cand-text"><strong>${esc(displayName(c))}</strong>${budget ? `<span class="price t${price}">$${price}</span>` : `<small>${esc(charSeries(c))}</small>`}</span></button>`;
 }
 /** "Computer is choosing…" or, online, "Waiting for your friend…". */
 function waitingText() { return P.isRemoteTurn() ? t("waitingForFriendMove") : t("computerThinking"); }
@@ -131,7 +132,7 @@ function auctionBoard(pk) {
   return `<div class="board auction">${onlineBanner(pk)}${turnbar}
     <section class="lot" data-key="lot-${pk.lotNumber}">
       <div class="lot-meta"><span>${esc(t("auctionCardOf", { n: pk.lotNumber, total: pk.deckSize }))}</span><span>${esc(t("auctionLeft", { n: Math.max(0, left - 1) }))}</span></div>
-      <div class="lot-card">${avatar(lot.c, "av-portrait")}<div class="lot-name"><strong>${esc(displayName(lot.c))}</strong><small>${esc(charSeries(lot.c))}</small></div></div>
+      <div class="lot-card">${infoDot(lot.c)}${avatar(lot.c, "av-portrait")}<div class="lot-name"><strong>${esc(displayName(lot.c))}</strong><small>${esc(charSeries(lot.c))}</small></div></div>
       ${lotStatus(pk)}${lastActionLine(pk)}${controls}
     </section>
     <div class="teams">${teamPanel(pk, 1)}${teamPanel(pk, 2)}</div>
@@ -180,7 +181,7 @@ function openRoleSheet(i) {
 /* drag a Random PK candidate onto an open slot (touch or mouse) */
 let drag = null, suppressClickUntil = 0;
 function onPointerDown(e) {
-  const card = e.target.closest("[data-drag]"); if (!card || e.button > 0) return;
+  const card = e.target.closest("[data-drag]"); if (!card || e.button > 0 || e.target.closest(".info-dot")) return;
   const pk = STATE.pk; if (!pk || pk.revealing || P.isWaiting()) return;
   drag = { i: Number(card.dataset.cand), x: e.clientX, y: e.clientY, card, ghost: null, moved: false, id: e.pointerId };
 }
