@@ -1,13 +1,12 @@
 import { STATE } from "../../core/state.js";
 import { t, traitLabel, displayName, displaySeries, secondaryName, roleLabel } from "../../core/i18n.js";
-import { attributes, bestRoles } from "../../game/cpu.js";
-import { roleSet } from "../../core/roster.js";
-import { getCharacter, getSeries, resolveCharacter, allSeries, applyCharacterPhases, characterPrice, phaseOptionsFor } from "../../core/roster.js";
+import { getCharacter, getSeries, resolveCharacter, allSeries, applyCharacterPhases } from "../../core/roster.js";
 import { entryType, battleFromEntry, fusionFromEntry, deleteEntry } from "../../core/history.js";
 const normalizeName = s => globalThis.AnimeFusionLogic.normalizeName(s);
 import { esc, icon, act, avatar, seg, emptyState } from "../parts.js";
 import { screen, actions, inputs, go, confirmSheet, openSheet, sheetHead, render } from "../shell.js";
 import { pkPlayerLabel } from "../../game/pk.js";
+import { openCharacterInfo } from "../charinfo.js";
 
 /* ---------------------------------------------------------------- history */
 function fusionCard(h) {
@@ -76,25 +75,9 @@ screen("serieslibrary", {
     return `<div class="gallery"><p class="lede">${esc(t("charCount", { n: chars.length }))}</p><div class="char-grid">${chars.map(charTile).join("")}</div></div>`;
   },
 });
-function ratingsBlock(c) {
-  const a = attributes(c), rows = [["power", "attrPower"], ["lead", "attrLead"], ["tank", "attrTank"], ["heal", "attrHeal"], ["intel", "attrIntel"]];
-  const best = bestRoles(c, roleSet(c.seriesId)).slice(0, 2).map(r => roleLabel(r));
-  return `<section class="ratings"><div class="ratings-head"><strong>${esc(t("cpuRatings"))}</strong><small>${esc(t("cpuRatingsNote"))}</small></div>
-    ${rows.map(([k, label]) => `<div class="rating"><span>${esc(t(label))}</span><div class="meter thin"><i style="width:${a[k] * 10}%"></i></div><b class="mono">${a[k]}</b></div>`).join("")}
-    <div class="best-roles"><small>${esc(t("bestRoles"))}</small>${best.map(r => `<span class="chip static">${esc(r)}</span>`).join("")}</div></section>`;
-}
-function characterSheet(c) {
-  const forms = phaseOptionsFor(getCharacter(c.id));
-  openSheet(`${sheetHead(displayName(c), displaySeries(getSeries(c.seriesId)))}
-    <div class="char-sheet">${avatar(c, "av-portrait")}
-      <dl><div><dt>English</dt><dd>${esc(c.name_en || "—")}</dd></div><div><dt>中文</dt><dd>${esc(c.name_zh || "—")}</dd></div><div><dt>日本語</dt><dd>${esc(c.name_ja || "—")}</dd></div>
-      <div><dt>${esc(t("budgetPK"))}</dt><dd><span class="price t${characterPrice(c)}">$${characterPrice(c)}</span></dd></div>
-      ${forms ? `<div><dt>${esc(t("characterPhases"))}</dt><dd>${forms.map(f => esc(f[STATE.lang] || f.en)).join(" · ")}</dd></div>` : ""}</dl>
-      ${ratingsBlock(c)}</div>`);
-}
 actions({
   "gallery.series": id => { STATE.librarySeriesId = id; go("serieslibrary"); },
   "gallery.clear": () => { STATE.gallerySearch = ""; render(); document.getElementById("gallerySearch")?.focus(); },
-  "gallery.char": v => { const [id, ph] = v.split("|"); const c = resolveCharacter(id, ph || null); if (c) characterSheet(c); },
+  "gallery.char": v => { const [id, ph] = v.split("|"); const c = resolveCharacter(id, ph || null); if (c) openCharacterInfo(c); },
 });
 inputs({ "gallery.search": v => { STATE.gallerySearch = v; render(); } });

@@ -1,4 +1,4 @@
-# Anime Fusion v1.3.0
+# AniVerse v1.7.0
 
 A static anime character game for phones, hosted on GitHub Pages. No build step, no runtime dependencies.
 

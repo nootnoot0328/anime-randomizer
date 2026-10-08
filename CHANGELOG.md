@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.7.0 — AniVerse, character cards, a referee that agrees with itself
+
+### AniVerse
+- The app is now **AniVerse** ("Anime worlds. Together."): new name, top-bar mark, browser icon and home-screen icon. Saved history, settings and online rooms carry over (storage keys and server names are unchanged).
+
+### Know who you're picking
+- Every card you pick from (Trait Draft, Random PK, Budget PK, Auction) has an **(i)**. Tap it for a one-line bio, stats (power, leadership, durability, healing, strategy), best roles, price and forms. Tapping (i) never picks or bids.
+- Bios for all 903 characters in English, Chinese and Japanese, written spoiler-light. They load on first use (~120 KB per language).
+
+### Referee
+- Each role row now names the winning character; the app works out the side from that name, so the arrow can no longer point the other way from the note. The MVP is placed on the team that drafted them.
+- The referee calls sides "<leader>'s team" instead of Player/Team 1/2, so the text reads right on both phones.
+- Told not to translate or invent names (e.g. Law → 律) and not to guess ability names it isn't sure of.
+
 ## v1.6.0 — Online play, correct names, fair prices
 
 ### Play a friend on their own phone
