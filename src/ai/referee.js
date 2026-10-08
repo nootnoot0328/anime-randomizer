@@ -63,6 +63,14 @@ export async function testConnection(url, key) {
 export function draftedNames(pk, l) {
   return [...pk.p1.team, ...pk.p2.team].map(x => promptCharacterName(x.character, l));
 }
+/** The two names on each role row, as the prompt lists them (null for an empty slot). */
+export function matchupRows(pk, l) {
+  return Array.from({ length: matchupCount(pk) }, (_, i) => [1, 2].map(n => {
+    const p = pk[`p${n}`], x = p.team.find(s => s.role === p.roles[i]);
+    return x ? promptCharacterName(x.character, l) : null;
+  }));
+}
+const sideNames = (pk, l) => ({ 1: pk.p1.team.map(x => promptCharacterName(x.character, l)), 2: pk.p2.team.map(x => promptCharacterName(x.character, l)) });
 export function matchupCount(pk) { return Math.min(5, pk.p1.roles.length, pk.p2.roles.length); }
 
 /**
@@ -104,7 +112,7 @@ export async function judge(pk = STATE.pk) {
     const res = await postAI({ task: TASK, prompt, maxTokens: 2000, ctl });
     if (!res.ok) { pk.referee = { status: "error", code: res.code, detail: res.detail, lang: l }; return; }
     const data = res.data;
-    const parsed = parseVerdict(data.text || "", { names: draftedNames(pk, l), matchupCount: matchupCount(pk) });
+    const parsed = parseVerdict(data.text || "", { names: draftedNames(pk, l), matchupCount: matchupCount(pk), rows: matchupRows(pk, l), sides: sideNames(pk, l) });
     if (!parsed.ok) { pk.referee = { status: "error", code: "unreadable", detail: parsed.reason, raw: String(data.text || "").slice(0, 4000), lang: l }; return; }
     pk.referee = { status: "done", verdict: parsed.verdict, lang: l, model: data.model || null, provider: data.provider || null, at: new Date().toISOString(), fresh: true, usage: usageOf(data) };
     if (pk.historyId) attachVerdict(pk.historyId, { verdict: parsed.verdict, lang: l, model: pk.referee.model, at: pk.referee.at });
